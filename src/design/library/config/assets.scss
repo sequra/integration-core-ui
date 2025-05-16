@@ -1,0 +1,4 @@
+@function sq-get-assets-root() {
+  $assets: '../../../../design/assets' !default;
+  @return $assets;
+}

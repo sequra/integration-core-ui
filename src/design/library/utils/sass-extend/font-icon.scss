@@ -1,0 +1,67 @@
+@use "sass:math";
+
+//noinspection SassScssResolvedByNameOnly
+@function sq-get-icon-font-property($key, $font: base) {
+  @if ($font == null) {
+    $font: base;
+  }
+  $icon-fonts: sq-get-config-icon-fonts();
+  $font-properties: sq-get-map-value($icon-fonts, $font);
+  @return sq-get-map-value($font-properties, $key);
+}
+
+//noinspection SassScssResolvedByNameOnly
+@function sq-get-font-icon-content($key, $font: base) {
+  $map: sq-get-icon-font-content-map($font);
+  $content: sq-get-map-value($map, $key);
+  @return $content;
+}
+
+@mixin sq-font-icon($key: empty, $sq-font-size: null, $font: base) {
+  @if ($sq-font-size == null or $sq-font-size == default) {
+    $sq-font-size: 16px;
+  }
+
+  //--font properties --
+  $font-family: sq-get-icon-font-property(font-family, $font);
+  $line-height: sq-get-icon-font-property(line-height, $font);
+  $font-weight: sq-get-icon-font-property(font-weight, $font);
+
+  font-family: $font-family;
+  @if ($key != empty) {
+    content: sq-get-font-icon-content($key, $font);
+  }
+
+  line-height: $line-height;
+  @if ($font-weight) {
+    font-weight: $font-weight;
+  }
+  font-size: $sq-font-size;
+}
+
+@mixin sq-font-icon--content($key: empty, $font: base) {
+  $content: ' ';
+  @if ($key != empty) {
+    $content: sq-get-font-icon-content($key, $font);
+  }
+
+  @if ($content != null and $content != '') {
+    content: $content;
+  }
+}
+
+@mixin sq-font-icon--centered($width: null, $height: null, $sq-font-size: null) {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @if ($width) {
+    width: $width;
+  }
+  @if ($height) {
+    height: $height;
+  }
+  @if ($sq-font-size) {
+    font-size: $sq-font-size;
+  }
+}

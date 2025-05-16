@@ -1,0 +1,27 @@
+//noinspection SassScssResolvedByNameOnly
+@mixin sq-page-footer {
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  z-index: 10;
+  padding: 6px 19px;
+  margin-top: -52px;
+  background: $sq-color--white;
+
+  .sqp-actions {
+    display: flex;
+    gap: 8px;
+
+    .sq-button {
+      @include font-weight--regular;
+    }
+  }
+
+  @include sq-screen--narrow {
+    padding: 14px;
+  }
+}

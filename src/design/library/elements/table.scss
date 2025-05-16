@@ -1,0 +1,42 @@
+//noinspection SassScssResolvedByNameOnly
+table {
+  width: 100%;
+  border-collapse: collapse;
+
+  thead tr th {
+    border-bottom: 1px solid $sq-color--grey-20;
+  }
+
+  tr {
+    &:not(:last-of-type) {
+      td {
+        border-bottom: 1px solid $sq-color--grey-20;
+      }
+    }
+
+    th, td {
+      text-align: center;
+      padding: 14px;
+
+      &.sqm--left-aligned {
+        text-align: left;
+      }
+
+      &.sqm--blue-text {
+        color: $sq-color--blue-40;
+      }
+    }
+
+    td {
+      @include font-weight--regular()
+    }
+
+    td:last-of-type {
+      white-space: nowrap;
+    }
+
+    th {
+      @include font-weight--semi-bold()
+    }
+  }
+}

@@ -1,0 +1,16 @@
+//noinspection SassScssResolvedByNameOnly
+@mixin sqp-page-heading {
+  margin-bottom: 21px;
+
+  .sqp-page-title {
+    @include font-weight--semi-bold;
+    margin-bottom: 12px;
+    font-size: $sq-font-size--page-title;
+    color: $sq-color--black;
+  }
+
+  .sqp-page-description {
+    font-size: $sq-font-size--page-description;
+    color: $sq-color--black;
+  }
+}

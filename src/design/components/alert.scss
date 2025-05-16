@@ -1,0 +1,88 @@
+//noinspection SassScssResolvedByNameOnly
+@mixin sq-alert {
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  padding: 24px 19px 24px 24px;
+  border-radius: 4px;
+
+  &.sqs--closed {
+    display: none;
+  }
+
+  .sqp-alert-title {
+    display: flex;
+    align-items: flex-start;
+
+    font-size: $sq-font-size--main;
+    line-height: 21px;
+
+    &:before {
+      position: relative;
+      top: 3px;
+    }
+  }
+
+  .sqp-message {
+    display: flex;
+    flex-direction: column;
+
+    .sqp-message-title {
+      @include font-weight--semi-bold();
+    }
+  }
+
+  .sq-button {
+    padding: 7px;
+    border: none;
+
+    span {
+      &:before {
+        display: flex;
+        @include sq-font-icon(times, 7px);
+        color: inherit;
+      }
+    }
+  }
+
+  &.sqt--success {
+    background-color: $sq-color--green-20;
+    color: $sq-color--green-60;
+
+    .sqp-alert-title {
+      gap: 18px;
+
+      &:before {
+        @include sq-font-icon(checkmark, 11px);
+        top: 5px;
+      }
+    }
+  }
+
+  &.sqt--warning {
+    background-color: $sq-color--background-warning;
+    color: $sq-color--orange-60;
+
+    .sqp-alert-title {
+      gap: 17px;
+
+      &:before {
+        @include sq-font-icon(notification, 13px);
+      }
+    }
+  }
+
+  &.sqt--error {
+    background-color: $sq-color--background-error-box;
+    color: $sq-color--error-text;
+
+    .sqp-alert-title {
+      gap: 16px;
+
+      &:before {
+        @include sq-font-icon(triangle, 15px);
+      }
+    }
+  }
+}

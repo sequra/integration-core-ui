@@ -1,0 +1,63 @@
+//noinspection SassScssResolvedByNameOnly
+.sq-table-container {
+  overflow-x: auto;
+  width: 100%;
+  margin: 0;
+  padding: 24px;
+  border: 1px solid $sq-color--grey-20;
+  border-radius: 6px;
+  font-size: 13px;
+
+  @include sq-screen--narrow-medium {
+    padding: 0;
+  }
+
+  table {
+    min-width: 780px;
+
+    .sqm--text-left {
+      text-align: left;
+    }
+  }
+
+  table tr {
+    .sq-button {
+      font-size: inherit;
+      display: inline-flex;
+      align-items: center;
+      column-gap: 8px;
+    }
+  }
+
+  .sqp-payment-method-header-cell {
+    width: 50%;
+  }
+
+  .sqp-payment-method-cell {
+    display: flex;
+    align-items: center;
+    column-gap: 8px;
+
+    svg {
+      flex-shrink: 0;
+    }
+
+    .sqp-payment-method-image {
+      width: 52px;
+      height: 52px;
+    }
+
+    .sqp-payment-method-title {
+      @include font-weight--bold;
+      margin: 0 0 3px;
+      font-size: $sq-font-size--small;
+    }
+
+    .sqp-payment-method-description {
+      font-size: $sq-font-size--small;
+      margin: 0;
+    }
+  }
+}
+
+

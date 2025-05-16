@@ -1,0 +1,112 @@
+$font-weight-type: (regular, semi-bold, bold) !default;
+
+//noinspection SassScssResolvedByNameOnly
+@function get-font-property($key, $font: base) {
+  $fonts: get-config-fonts();
+  $font-properties: sq-get-map-value($fonts, $font);
+
+  @return sq-get-map-value($font-properties, $key);
+}
+
+@function get-font-default-line-height($font:base) {
+  @if ($font == null) {
+    $font: base;
+  }
+
+  $line-height: get-font-property(line-height, $font);
+  @if ($line-height != null) {
+    @return $line-height;
+  }
+
+  @return 1;
+}
+
+@function get-font-family($font:base) {
+  @if ($font == null) {
+    $font: base;
+  }
+
+  $family: get-font-property(font-family, $font);
+  @return $family;
+}
+
+@function get-font-weight-family($font:base, $weight: null) {
+  @if ($font == null) {
+    $font: base;
+  }
+
+  @if ($weight == regular) {
+    $family: get-font-property(font-family, $font);
+    @if ($family != null) {
+      @return $family;
+    }
+  }
+
+  @if ($weight == semi-bold) {
+    $family: get-font-property(semi-bold-family, $font);
+    @if ($family != null) {
+      @return $family;
+    }
+  }
+
+  @if ($weight == bold) {
+    $family: get-font-property(bold-family, $font);
+    @if ($family != null) {
+      @return $family;
+    }
+  }
+
+  $family: get-font-property(font-family, $font);
+  @if ($family == null) {
+    $family: $font;
+  }
+  @return $family;
+}
+
+@function get-font-weight($font:base, $weight: null) {
+  @if ($font == null) {
+    $font: base;
+  }
+
+  @if ($weight == regular or $weight == null) {
+    $font-weight: get-font-property(regular-weight, $font);
+    @if ($font-weight == null) {
+      @return 400;
+    }
+    @return $font-weight;
+  }
+
+  @if ($weight == semi-bold) {
+    $font-weight: get-font-property(semi-bold-weight, $font);
+    @if ($font-weight == null) {
+      @return 600;
+    }
+    @return $font-weight;
+  }
+
+  @if ($weight == bold) {
+    $font-weight: get-font-property(bold-weight, $font);
+    @if ($font-weight == null) {
+      @return 700;
+    }
+    @return $font-weight;
+  }
+
+  @return $weight;
+}
+
+@mixin font-weight($weight, $font:base) {
+  font-weight: get-font-weight($font, $weight);
+}
+
+@mixin font-weight--regular($font:base) {
+  @include font-weight(regular, $font);
+}
+
+@mixin font-weight--semi-bold($font:base) {
+  @include font-weight(semi-bold, $font);
+}
+
+@mixin font-weight--bold($font:base) {
+  @include font-weight(bold, $font);
+}

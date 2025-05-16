@@ -1,0 +1,8 @@
+//noinspection SassScssResolvedByNameOnly
+@mixin sq-version-badge {
+  padding: 3px 8px;
+  font-size: 13px;
+  color: $sq-color--grey-60;
+  border: 1px solid $sq-color--grey-20;
+  border-radius: 15px;
+}

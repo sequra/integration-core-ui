@@ -1,0 +1,94 @@
+//noinspection SassScssResolvedByNameOnly
+.sq-modal {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  //background-color: $sq-color--background-popup;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @include sq-screen--narrow {
+    padding: 10px;
+  }
+
+  &.sqv--connection-modal {
+    height: 250px;
+    width: 600px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .sqp-modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100%;
+    width: 100%;
+    max-height: 100%;
+    height: 100%;
+    position: relative;
+    margin: 0 auto;
+    background: $sq-color--white;
+    box-shadow: 0 18px 6px rgba(0, 0, 0, 0.06);
+    border-radius: 10px;
+
+    .sqp-close-button {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      top: 15px;
+      right: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      color: $sq-color--grey-60;
+      z-index: 1;
+
+      span:before {
+        @include sq-font-icon(close);
+      }
+    }
+
+    .sqp-title {
+      @include font-weight--semi-bold;
+      color: $sq-color--sequra-black;
+      font-size: 20px;
+      text-align: left;
+      padding: 16px 40px 16px 24px;
+      width: 100%;
+    }
+
+    .sqp-body {
+      @include font-weight--regular;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding: 0 24px;
+      width: 100%;
+      height: 100%;
+      overflow: hidden auto;
+      font-size: 15px;
+
+      &.sqm--full-width {
+        padding: 20px 0;
+      }
+    }
+
+    .sqp-footer {
+      position: sticky;
+      bottom: 0;
+      padding: 24px;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      width: 100%;
+      flex-shrink: 0;
+      gap: 10px;
+    }
+  }
+}

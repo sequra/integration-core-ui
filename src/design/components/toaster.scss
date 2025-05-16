@@ -1,0 +1,55 @@
+//noinspection SassScssResolvedByNameOnly
+@mixin sq-toaster {
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  z-index: 10;
+  width: fit-content;
+  max-width: 420px;
+  padding: 12px 9px 12px 16px;
+  border-radius: 8px;
+  background-color: $sq-color--sequra-black;
+  transform: translateX(-50%);
+
+  &.sqs--closed {
+    display: none;
+  }
+
+  .sqp-toaster-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    @include font-weight--semi-bold;
+    font-size: $sq-font-size--main;
+    color: $sq-color--white;
+    line-height: 21px;
+
+    &:before {
+      @include sq-font-icon(checkmark, 9px);
+      width: 18px;
+      height: 18px;
+      background-color: $sq-color--background-check-icon;
+      border-radius: 50%;
+
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      flex-shrink: 0;
+    }
+  }
+
+  .sq-button {
+    padding: 7px;
+
+    span {
+      &:before {
+        @include sq-font-icon(times, 7px);
+        color: $sq-color--grey-60;
+      }
+    }
+  }
+}

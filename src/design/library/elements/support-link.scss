@@ -1,0 +1,21 @@
+.sq-support-link {
+  position: absolute;
+  bottom: 2rem;
+
+  .sq-support-icon {
+    width: 25px;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+
+  .sq-support-link-label {
+    vertical-align: middle;
+  }
+}
+
+.sqv--settings {
+  .sq-support-link {
+    position: fixed;
+    bottom: 2rem;
+  }
+}

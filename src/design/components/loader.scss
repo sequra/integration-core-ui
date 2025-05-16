@@ -1,0 +1,51 @@
+//noinspection SassScssResolvedByNameOnly
+@mixin sq-loader() {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  .sqp-spinner {
+    border: 3px solid rgba($sq-color--primary, 0.1);
+    border-top-color: $sq-color--primary;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    animation: loader-spin 0.8s linear infinite;
+  }
+
+  &.sqt--small {
+    .sqp-spinner {
+      border-width: 2px;
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  &.sqt--large {
+    .sqp-spinner {
+      border-width: 4px;
+      width: 48px;
+      height: 48px;
+    }
+  }
+
+  &.sqm--dark {
+    .sqp-spinner {
+      border-color: rgba($sq-color--white, 0.1);
+      border-top-color: $sq-color--white;
+    }
+  }
+
+  @keyframes loader-spin {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}

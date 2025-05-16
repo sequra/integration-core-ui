@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<!--suppress HtmlUnknownTarget -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta
+        name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <link rel="stylesheet" href="/css/design-demo.css"/>
+    <title>Design system | Demo</title>
+</head>
+<body>
+<main>
+    <h1>Elements preview</h1>
+    <section>
+        <p>This page shows UI for all used components. Check templates for common pages here:
+        </p>
+        <ul>
+            <li>
+                <a class="green" href="template-1">Onboarding page with step sidebar.</a>
+            </li>
+            <li>
+                <a class="green" href="template-2">Settings page.</a>
+            </li>
+            <li>
+                <a class="green" href="template-3">Payment methods page.</a>
+            </li>
+        </ul>
+    </section>
+    <section id="primary-buttons"></section>
+    <section id="secondary-buttons"></section>
+    <section id="other-buttons"></section>
+    <section id="radio-buttons"></section>
+    <section id="toggle-buttons"></section>
+    <section id="loaders"></section>
+    <section id="input-fields"></section>
+    <section id="modal" class="sq-page-content-wrapper"></section>
+    <section id="table" class="sqm--full-width"></section>
+    <section id="multi-item-selector"></section>
+    <section id="multi-input"></section>
+    <section id="country-selector"></section>
+    <section id="version-badge"></section>
+    <section id="store-switcher"></section>
+    <section id="page-header" class="sqm--full-width"></section>
+    <section id="page-footer" class="sqm--full-width"></section>
+    <section id="wizard-sidebar"></section>
+    <section id="settings-sidebar"></section>
+    <section id="flash-messages" class="sqm--full-width"></section>
+    <section id="toaster" class="sqm--full-width"></section>
+
+</main>
+
+//#scripts#
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        SequraFE.translations = {
+            default: '%default_translations%',
+            current: '%current_lang_translations%'
+        };
+
+        const {elementGenerator: generator, components} = SequraFE;
+
+        const primaryButtonSection = document.getElementById('primary-buttons')
+        const secondaryButtonSection = document.getElementById('secondary-buttons')
+        const otherButtonSection = document.getElementById('other-buttons')
+
+        primaryButtonSection.append(
+            generator.createElement('h1', '', 'Primary Buttons'),
+            generator.createElement('ul', '', '', null, [
+                generator.createElement('li', '', '', null, [
+                    generator.createElement('p', '', 'sq-button sqt--primary'),
+                    generator.createButton({
+                        type: "primary",
+                        label: "Default Size Button"
+                    })
+                ]),
+                generator.createElement('li', '', '', null, [
+                    generator.createElement('p', '', 'sq-button sqt--primary sqm--medium'),
+                    generator.createButton({
+                        type: "primary",
+                        size: "medium",
+                        label: "Medium Size Button"
+                    })
+                ]),
+                generator.createElement('li', '', '', null, [
+                    generator.createElement('p', '', 'sq-button sqt--primary sqm--small'),
+                    generator.createButton({
+                        type: "primary",
+                        size: "small",
+                        label: "Small Size Button"
+                    })
+                ]),
+            ]))
+
+        secondaryButtonSection.append(
+            generator.createElement('h1', '', 'Secondary Buttons'),
+            generator.createElement('ul', '', '', null, [
+                generator.createElement('li', '', '', null, [
+                    generator.createElement('p', '', 'sq-button sqt--primary'),
+                    generator.createButton({
+                        type: "secondary",
+                        label: "Default Size Button"
+                    })
+                ]),
+                generator.createElement('li', '', '', null, [
+                    generator.createElement('p', '', 'sq-button sqt--primary sqm--medium'),
+                    generator.createButton({
+                        type: "secondary",
+                        size: "medium",
+                        label: "Medium Size Button"
+                    })
+                ]),
+                generator.createElement('li', '', '', null, [
+                    generator.createElement('p', '', 'sq-button sqt--primary sqm--small'),
+                    generator.createButton({
+                        type: "secondary",
+                        size: "small",
+                        label: "Small Size Button"
+                    })
+                ]),
+            ]))
+
+        otherButtonSection.append(
+            generator.createElement('h1', '', 'Other Buttons'),
+            generator.createElement('ul', '', '', null, [
+                generator.createElement('li', '', '', null, [
+                    generator.createElement('p', '', 'sq-button sqt--danger sqm--medium'),
+                    generator.createButton({
+                        type: "danger",
+                        size: "medium",
+                        label: "Delete Button"
+                    })
+                ]),
+                generator.createElement('li', '', '', null, [
+                    generator.createElement('p', '', 'sq-button sqt--primary sqm--medium sqs--disabled'),
+                    generator.createButton({
+                        type: "primary",
+                        size: "medium",
+                        className: 'sqs--disabled',
+                        label: "Disabled Button"
+                    })
+                ])
+            ]))
+
+        const radioButtonSection = document.getElementById('radio-buttons')
+        radioButtonSection.append(
+            generator.createElement('h1', '', 'Radio Buttons'),
+            generator.createElement('ul', '', '', null, [
+                generator.createElement('li', '', '', null, [
+                    generator.createRadioGroupField({
+                        value: 'live',
+                        label: 'Would you like to use promotional components?',
+                        description: 'Would you like to use promotional components?',
+                        options: [
+                            {label: 'Radio button 1', value: 'test'},
+                            {label: 'Radio button 2', value: 'live'}
+                        ],
+                    })
+                ]),
+            ])
+        )
+
+        const toggleButtonSection = document.getElementById('toggle-buttons')
+        toggleButtonSection.append(
+            generator.createElement('h1', '', 'Toggle Buttons'),
+            generator.createElement('ul', '', '', null, [
+                generator.createElement('li', 'sqm--full-width', '', null, [
+                    generator.createToggleField({
+                        value: 'test',
+                        label: 'Would you like to use promotional components?',
+                        description: 'Would you like to use promotional components?',
+                    })
+                ]),
+            ])
+        )
+
+        const LoaderSection = document.getElementById('loaders')
+        LoaderSection.append(
+            generator.createElement('h1', '', 'Loaders'),
+            generator.createElement('ul', '', '', null, [
+                generator.createElement('li', '', '', null, [
+                    generator.createElement('p', '', 'sq-loader sqt--small'),
+                    generator.createLoader({
+                        type: "small",
+                    })
+                ]),
+                generator.createElement('li', '', '', null, [
+                    generator.createElement('p', '', 'sq-loader'),
+                    generator.createLoader({})
+                ]),
+                generator.createElement('li', '', '', null, [
+                    generator.createElement('p', '', 'sq-loader sqt--large'),
+                    generator.createLoader({
+                        type: "large",
+                    })
+                ]),
+                generator.createElement('li', 'sqv--dark', '', null, [
+                    generator.createElement('p', '', 'sq-loader sqt--large sqm--dark'),
+                    generator.createLoader({
+                        type: "large",
+                        variation: "dark"
+                    })
+                ]),
+            ])
+        )
+
+        const inputSection = document.getElementById('input-fields')
+
+        const selectOptions = [
+            {label: 'option 1', value: 'one'},
+            {label: 'option 2', value: 'two'},
+            {label: 'option 3', value: 'three'},
+            {label: 'option 4', value: 'four'},
+            {label: 'option 5', value: 'five'}
+        ];
+
+        inputSection.append(
+            generator.createElement('h1', '', 'Input Fields'),
+            generator.createElement('h2', '', 'Text inputs'),
+            generator.createElement('ul', '', '', null, [
+                generator.createElement('li', 'sqm--full-width', '', null, [
+                    generator.createTextField({
+                        name: 'test-input-field',
+                        className: 'sq-text-input',
+                        label: 'Label Top - required field',
+                        description: 'Text input field',
+                        error: 'This field is required',
+                        onChange: () => {
+                            SequraFE.validationService.validateRequiredField(document.querySelector('[name="test-input-field"]'));
+                        }
+                    })
+                ])
+            ]),
+            generator.createElement('ul', '', '', null, [
+                generator.createElement('li', 'sqm--full-width', '', null, [
+                    generator.createTextField({
+                        name: 'test-input-field-left',
+                        className: 'sq-text-input',
+                        label: 'Label Left - required field',
+                        description: 'Text input field',
+                        variation: 'label-left',
+                        error: 'This field is required',
+                        onChange: () => {
+                            SequraFE.validationService.validateRequiredField(document.querySelector('[name="test-input-field-left"]'));
+                        }
+                    })
+                ]),
+            ]),
+            generator.createElement('h2', '', 'Password inputs'),
+            generator.createElement('ul', '', '', null, [
+                generator.createElement('li', 'sqm--full-width', '', null, [
+                    generator.createPasswordField({
+                        className: 'sq-password-input',
+                        label: 'Label Top',
+                        description: 'Password input field',
+                    })
+                ]),
+            ]),
+            generator.createElement('ul', '', '', null, [
+                generator.createElement('li', 'sqm--full-width', '', null, [
+                    generator.createPasswordField({
+                        className: 'sq-password-input',
+                        label: 'Label Left',
+                        description: 'Password input field',
+                        variation: 'label-left',
+                    })
+                ]),
+            ]),
+            generator.createElement('h2', '', 'Select inputs'),
+            generator.createElement('ul', '', '', null, [
+                generator.createElement('li', 'sqm--full-width', '', null, [
+                    generator.createDropdownField({
+                        label: 'Label Top',
+                        description: 'Select input',
+                        placeholder: 'Test Placeholder',
+                        error: 'This field is mandatory',
+                        options: selectOptions,
+                        searchable: true
+                    }),
+                ]),
+            ]),
+            generator.createElement('ul', '', '', null, [
+                generator.createElement('li', 'sqm--full-width', '', null, [
+                    generator.createDropdownField({
+                        label: 'Label Left',
+                        description: 'Select input',
+                        placeholder: 'Test Placeholder',
+                        error: 'This field is mandatory',
+                        options: selectOptions,
+                        variation: "label-left"
+                    }),
+                ]),
+            ]),
+        )
+
+        const modalSection = document.getElementById('modal')
+        const modal = components.Modal.create({
+            title: `Widget Configurator`,
+            className: `sq-confirm-modal`,
+            content: null,
+            footer: true,
+            canClose: false,
+            buttons: [
+                {
+                    label: 'Cancel',
+                    type: 'cancel',
+                    size: 'medium',
+                    onClick: () => {
+                        modal.close();
+                    }
+                },
+                {
+                    type: 'secondary',
+                    size: 'medium',
+                    label: 'Confirm',
+                    onClick: () => {
+                        modal.close();
+                    }
+                }
+            ],
+        });
+        modalSection.append(
+            generator.createElement('h1', '', 'Modal'),
+            generator.createElement('ul', '', '', null, [
+                generator.createElement('li', '', '', null, [
+                    generator.createButton({
+                        type: "primary",
+                        label: "Open Modal",
+                        onClick: modal.open
+                    })
+                ]),
+            ]))
+
+        const tableSection = document.getElementById('table');
+
+        const paymentMethods = [
+            {
+                name: "Buy now, pay later",
+                description: 'Reduce the uncertainty of online shopping, And pay X days later',
+                image: 'https://picsum.photos/52/52?grayscale',
+                minimumAmount: '1.000,00 EUR',
+                maximumAmount: '5.000,00 EUR',
+                availableFrom: '12/12/2022',
+                availableTo: '12/12/2025',
+            },
+            {
+                name: "Part payment",
+                description: 'Small quotas for the consumer: from 3 to 24 months to increase the average basket and sell more',
+                image: 'https://picsum.photos/52/52?grayscale',
+                minimumAmount: '1.000,00 EUR',
+                maximumAmount: '5.000,00 EUR',
+                availableFrom: '12/12/2022',
+                availableTo: '12/12/2025',
+            }
+        ];
+
+        /** @type TableCell[] */
+        const headers = [
+            {
+                label: 'Payment methods',
+                className: 'sqp-payment-method-header-cell sqm--text-left'
+            },
+            {label: 'Minimum amount'},
+            {label: 'Maximum amount'},
+            {label: 'Available from'},
+            {label: 'Available to'},
+        ];
+
+        /** @type TableCell[][] */
+        const rows = paymentMethods.map((method) => {
+            return [
+                {
+                    className: 'sqp-payment-method-cell sqm--text-left',
+                    renderer: (cell) => {
+                        cell.prepend(
+                            generator.createElement('img', 'sqp-payment-method-image', '', {src: method.image}),
+                            generator.createElement('div', '', '', null, [
+                                generator.createElement('h3', 'sqp-payment-method-title', method.name),
+                                generator.createElement('p', 'sqp-payment-method-description', method.description)
+                            ])
+                        )
+                    }
+                },
+                {label: method.minimumAmount},
+                {label: method.maximumAmount},
+                {label: method.availableFrom},
+                {label: method.availableTo}
+            ];
+        })
+
+
+        tableSection.append(
+            generator.createElement('h1', '', 'Data Table'),
+            components.DataTable.create(headers, rows)
+        );
+
+        const multiSelectorSection = document.getElementById('multi-item-selector')
+
+        multiSelectorSection.append(
+            generator.createElement('h1', '', 'Multi Item Selector'),
+            generator.createElement('ul', '', '', null, [
+                generator.createElement('li', 'sqm--full-width', '', null, [
+                    generator.createMultiItemSelectorField({
+                        label: 'Excluded categories',
+                        description: 'The store categories in this field will not be allowed to be purchased with SeQura payment methods.',
+                        options: [
+                            {
+                                label: 'Category 1',
+                                value: 'cat1'
+                            },
+                            {
+                                label: 'Category 2',
+                                value: 'cat2'
+                            },
+                            {
+                                label: 'Category 3',
+                                value: 'cat3'
+                            },
+                            {
+                                label: 'Category 4',
+                                value: 'cat4'
+                            },
+                            {
+                                label: 'Category 5',
+                                value: 'cat5'
+                            }
+                        ]
+                    })
+                ]),
+            ]));
+
+        const multiInputField = document.getElementById('multi-input')
+
+        multiInputField.append(
+            generator.createElement('h1', '', 'Multi Input Field'),
+            generator.createElement('ul', '', '', null, [
+                generator.createElement('li', 'sqm--full-width', '', null, [
+                    generator.createMultiItemSelectorField({
+                        label: 'Excluded products',
+                        description: 'The store products in this field will not be allowed to be purchased with SeQura payment methods.',
+                        searchable: false,
+                        onChange: (value) => {
+                            console.log(value)
+                        }
+                    })
+                ]),
+            ]));
+
+        const countrySelectorSection = document.getElementById('country-selector');
+
+        countrySelectorSection.append(
+            generator.createElement('h1', '', 'Country Selector'),
+            generator.createElement('ul', '', '', null, [
+                generator.createElement('li', 'sqm--full-width', '', null, [
+                    generator.createMultiItemSelectorField({
+                        label: 'In which countries do you want to offer SeQura payment methods?',
+                        description: 'Please select countries where SeQura payment methods should be available.',
+                        value: 'o1,o2,o3',
+                        options: [
+                            {
+                                label: 'Spain',
+                                value: 'o1'
+                            },
+                            {
+                                label: 'France',
+                                value: 'o2'
+                            },
+                            {
+                                label: 'Columbia',
+                                value: 'o3'
+                            },
+                            {
+                                label: 'Serbia',
+                                value: 'o4'
+                            },
+                            {
+                                label: 'Montenegro',
+                                value: 'o5'
+                            }
+                        ]
+                    }),
+                    generator.createCountryField({
+                        countryCode: 'ES',
+                        merchantId: 'logeecom_1',
+                    }),
+                    generator.createCountryField({
+                        countryCode: 'FR',
+                        merchantId: 'logeecom_2',
+                    }),
+                    generator.createCountryField({
+                        countryCode: 'CO',
+                        merchantId: 'logeecom_3',
+                    }),
+                    generator.createCountryField({
+                        countryCode: 'IT',
+                        merchantId: 'logeecom_4',
+                    }),
+                    generator.createCountryField({
+                        countryCode: 'PT',
+                        merchantId: 'logeecom_5',
+                    }),
+                    generator.createCountryField({
+                        countryCode: 'PE',
+                        merchantId: 'logeecom_6',
+                    })
+                ]),
+            ]));
+
+        const badgeSection = document.getElementById('version-badge');
+
+        badgeSection.append(
+            generator.createElement('h1', '', 'Version Badge'),
+            generator.createElement('ul', '', '', null, [
+                generator.createElement('li', '', '', null, [
+                    generator.createVersionBadge('v1.0.0')
+                ]),
+            ]));
+
+        const storeSwitcherSection = document.getElementById('store-switcher');
+
+        storeSwitcherSection.append(
+            generator.createElement('h1', '', 'Store Switcher'),
+            generator.createElement('ul', '', '', null, [
+                generator.createElement('li', '', '', null, [
+                    generator.createStoreSwitcher({
+                        label: 'general.selectStore',
+                        value: '',
+                        options: [
+                            {
+                                label: 'Store 1',
+                                value: 'store_1'
+                            },
+                            {
+                                label: 'Long Store Name',
+                                value: 'store_2'
+                            },
+                            {
+                                label: 'Store 3',
+                                value: 'store_3'
+                            },
+                            {
+                                label: 'Store 4',
+                                value: 'store_4'
+                            },
+                            {
+                                label: 'Store 5',
+                                value: 'store_5'
+                            }
+                        ],
+                        onChange: () => {
+                        }
+                    })
+                ]),
+            ]));
+
+        const pageHeaderSection = document.getElementById('page-header');
+
+        pageHeaderSection.append(
+            generator.createElement('h1', '', 'Header'),
+            generator.createElement('ul', '', '', null, [
+                generator.createElement('li', 'sqm--full-width', '', null, [
+                    SequraFE.components.PageHeader.create(
+                        {
+                            currentVersion: 'v1.0.0.',
+                            availableVersion: '1.0.1',
+                            mode: 'live',
+                            merchantName: 'Logeecom',
+                            activeStore: 'store_1',
+                            stores: [
+                                {
+                                    label: 'Store 1',
+                                    value: 'store_1'
+                                },
+                                {
+                                    label: 'Long Store Name',
+                                    value: 'store_2'
+                                },
+                                {
+                                    label: 'Store 3',
+                                    value: 'store_3'
+                                },
+                                {
+                                    label: 'Store 4',
+                                    value: 'store_4'
+                                },
+                                {
+                                    label: 'Store 5',
+                                    value: 'store_5'
+                                }
+                            ],
+                            menuItems: [
+                                {
+                                    label: 'Payment methods',
+                                    isActive: true,
+                                    href: '#'
+                                },
+                                {
+                                    label: 'Settings',
+                                    href: '#'
+                                }
+                            ]
+                        }
+                    )
+                ]),
+            ]));
+
+        const pageFooterSection = document.getElementById('page-footer');
+
+        pageFooterSection.append(
+            generator.createElement('h1', '', 'Page Footer'),
+            generator.createElement('ul', '', '', null, [
+                generator.createElement('li', 'sqm--footer-container', '', null, [
+                    generator.createElement('div', '', '', {style: "padding: 30px 0"}),
+                    generator.createPageFooter({
+                        onCancel: () => {
+                        },
+                        onSave: () => {
+                        }
+                    })
+                ]),
+            ]));
+        const wizardSidebarSection = document.getElementById('wizard-sidebar');
+
+        wizardSidebarSection.append(
+            generator.createElement('h1', '', 'Wizard Sidebar'),
+            generator.createElement('ul', '', '', null, [
+                generator.createElement('li', '', '', null, [
+                    generator.createWizardSidebar({
+                        steps: [
+                            {
+                                label: 'Install ecommerce integration',
+                                description: 'Your integration is ready for connection.',
+                                href: '#',
+                                isCompleted: true
+                            },
+                            {
+                                label: 'Connect integration',
+                                href: '#',
+                                isCompleted: true
+                            },
+                            {
+                                label: 'Configure selling countries',
+                                href: '#',
+                                isCompleted: true
+                            },
+                            {
+                                label: 'Configure widgets',
+                                href: '#',
+                                isActive: true
+                            },
+                            {
+                                label: 'Start selling with SeQura',
+                                href: '#',
+                            }
+                        ]
+                    }),
+                ]),
+            ]));
+
+        const settingsSidebarSection = document.getElementById('settings-sidebar');
+
+        settingsSidebarSection.append(
+            generator.createElement('h1', '', 'Settings Sidebar'),
+            generator.createElement('ul', '', '', null, [
+                generator.createElement('li', '', '', null, [
+                    generator.createSettingsSidebar({
+                        links: [
+                            {
+                                icon: 'general',
+                                label: 'sidebar.generalSettings',
+                                href: '#',
+                            },
+                            {
+                                icon: 'connection',
+                                label: 'sidebar.connectionSettings',
+                                href: '#',
+                            },
+                            {
+                                icon: 'order',
+                                label: 'sidebar.orderStatusSettings',
+                                href: '#',
+                                isActive: true
+
+                            },
+                            {
+                                icon: 'widget',
+                                label: 'sidebar.widgetSettings',
+                                href: '#',
+                            }
+                        ]
+                    })
+                ]),
+            ]));
+
+        const flashMessagesSection = document.getElementById('flash-messages')
+
+        flashMessagesSection.append(
+            generator.createElement('h1', '', 'Flash Messages'),
+            generator.createElement('ul', '', '', null, [
+                generator.createElement('li', 'sqm--full-width', '', null, [
+                    generator.createElement('p', '', 'Success message'),
+                    generator.createFlashMessage('Thank you for sending the request', 'success'),
+                    generator.createElement('p', '', 'Warning message'),
+                    generator.createFlashMessage('KYC review in progress', 'warning'),
+                    generator.createElement('p', '', 'Warning message'),
+                    generator.createFlashMessage('This is an error message', 'error'),
+                    generator.createElement('p', '', 'Error message'),
+                    generator.createFlashMessage(['Store maintenance mode has been detected', 'Please note that the integration won’t work while the store is in the maintenance mode. The Storefront must be publicly available, so Sequra webhooks can reach the store.'], 'warning', 9999999999999999),
+                    generator.createElement('p', '', 'Programmatically added alert. Will disappear after 10 seconds.'),
+                    generator.createFlashMessage('This is an success message', 'success', 10000),
+                ])
+            ]))
+
+        const toasterSection = document.getElementById('toaster')
+
+        toasterSection.append(
+            generator.createElement('ul', '', '', null, [
+                generator.createElement('li', 'sqm--full-width', '', null, [
+                    generator.createToaster('Toaster will disappear after 10 seconds.', 10000)
+                ])
+            ]))
+    });
+</script>
+</body>
+</html>
