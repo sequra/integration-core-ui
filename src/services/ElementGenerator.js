@@ -22,6 +22,14 @@ if (!window.SequraFE) {
      */
 
     /**
+     * @typedef {ElementProps} FormField
+     * @property {'text' | 'number' | 'radio' |'dropdown' | 'checkbox' | 'file' | 'multiselect' | 'button' |
+     *     'buttonLink'} type
+     */
+
+    const translationService = SequraFE.translationService;
+
+    /**
      * Creates a generic HTML node element and assigns provided class and inner text.
      *
      * @param {keyof HTMLElementTagNameMap} type Represents the name of the tag
@@ -36,7 +44,7 @@ if (!window.SequraFE) {
         className && child.classList.add(...className.trim().split(' '));
         if (innerHTMLKey) {
             let params = innerHTMLKey.split('|');
-            child.innerHTML = SequraFE.translationService.translate(params[0], params.slice(1));
+            child.innerHTML = translationService.translate(params[0], params.slice(1));
         }
 
         if (properties) {
@@ -408,7 +416,7 @@ if (!window.SequraFE) {
             type: buttonType,
             size: buttonSize,
             className: '',
-            label: SequraFE.translationService.translate(buttonLabel),
+            label: translationService.translate(buttonLabel),
             onClick: onClick
         });
 
@@ -422,7 +430,7 @@ if (!window.SequraFE) {
      */
     const createButtonLinkField = ({label, text, description, href, error}) => {
         const buttonLink = createButtonLink({
-            text: SequraFE.translationService.translate(text),
+            text: translationService.translate(text),
             className: '',
             href: href
         });
@@ -516,14 +524,14 @@ if (!window.SequraFE) {
             createElement('div', 'sqp-actions', '', null, [
                 createButton({
                     className: 'sqp-cancel',
-                    type: 'form-secondary',
+                    type: 'cancel',
                     size: 'medium',
                     label: 'general.cancel',
                     onClick: onCancel
                 }),
                 createButton({
                     className: 'sqp-save',
-                    type: 'form-primary',
+                    type: 'primary',
                     size: 'medium',
                     label: 'general.saveChanges',
                     onClick: onSave
@@ -611,36 +619,7 @@ if (!window.SequraFE) {
         );
 
         return wrapper;
-    }
-
-    /**
-     * Creates a support link FAB.
-     *
-     * @returns {HTMLElement}
-     */
-    const createSupportLink = () => {
-        return createElement(
-            'a',
-            'sq-support-link',
-            '',
-            {
-                href: SequraFE.translationService.translate('supportLink.link'),
-                target: '_blank'
-            },
-            [
-                createElement(
-                    'span',
-                    'material-symbols-outlined sq-support-icon',
-                    'contact_support'
-                ),
-                createElement(
-                    'span',
-                    'sq-support-link-label',
-                    'supportLink.label'
-                )
-            ]
-        );
-    }
+    };
 
     /**
      * Creates a settings sidebar.
@@ -696,7 +675,6 @@ if (!window.SequraFE) {
         createPageHeading,
         createVersionBadge,
         createWizardSidebar,
-        createSupportLink,
         createSettingsSidebar
     };
 })();
