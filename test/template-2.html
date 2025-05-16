@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<!--suppress HtmlUnknownTarget -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta
+        name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <link rel="stylesheet" href="/css/design-demo.css"/>
+    <title>Design system | Demo</title>
+</head>
+<body>
+<main id="sq-page-wrapper"></main>
+
+//#scripts#
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        SequraFE.translations = {
+            default: '%default_translations%',
+            current: '%current_lang_translations%'
+        };
+
+        const {elementGenerator: generator, components} = SequraFE;
+
+        const modal = components.Modal.create({
+            title: `Widget Configurator`,
+            className: `sq-confirm-modal`,
+            content: null,
+            footer: true,
+            canClose: false,
+            buttons: [
+                {
+                    label: 'general.cancel',
+                    type: 'cancel',
+                    size: 'medium',
+                    onClick: () => {
+                        modal.close();
+                    }
+                },
+                {
+                    type: 'secondary',
+                    size: 'medium',
+                    label: 'general.confirm',
+                    onClick: () => {
+                        modal.close();
+                    }
+                }
+            ]
+        });
+
+        const pageWrapper = document.getElementById('sq-page-wrapper')
+
+        pageWrapper.append(
+            generator.createElement('div', 'sq-page-content-wrapper sqv--settings', '', null, [
+                SequraFE.components.PageHeader.create(
+                    {
+                        currentVersion: 'v1.0.0.',
+                        availableVersion: '1.0.1',
+                        mode: 'test',
+                        merchantName: 'Logeecom',
+                        activeStore: 'store_1',
+                        stores: [
+                            {
+                                label: 'Store 1',
+                                value: 'store_1'
+                            },
+                            {
+                                label: 'Store 2',
+                                value: 'store_2'
+                            },
+                            {
+                                label: 'Store 3',
+                                value: 'store_3'
+                            },
+                            {
+                                label: 'Store 4',
+                                value: 'store_4'
+                            },
+                            {
+                                label: 'Store 5',
+                                value: 'store_5'
+                            }
+                        ],
+                        menuItems: [
+                            {
+                                label: 'general.paymentMethods',
+                                href: '/template-3'
+                            },
+                            {
+                                label: 'general.settings',
+                                href: '#',
+                                isActive: true,
+                            }
+                        ]
+                    }
+                ),
+                generator.createElement('div', 'sq-page-content', '', null, [
+                    generator.createElement('div', 'sq-content-row', '', null, [
+                        generator.createSettingsSidebar({
+                            links: [
+                                {
+                                    icon: 'general',
+                                    label: 'sidebar.generalSettings',
+                                    href: '#',
+                                },
+                                {
+                                    icon: 'connection',
+                                    label: 'sidebar.connectionSettings',
+                                    href: '#',
+                                },
+                                {
+                                    icon: 'order',
+                                    label: 'sidebar.orderStatusSettings',
+                                    href: '#',
+                                    isActive: true
+
+                                },
+                                {
+                                    icon: 'widget',
+                                    label: 'sidebar.widgetSettings',
+                                    href: '#',
+                                }
+                            ]
+                        }),
+                        generator.createElement('main', 'sq-content', '', null, [
+                            generator.createElement('div', 'sq-content-inner', '', null, [
+                                generator.createPageHeading({
+                                    title: 'Order status settings',
+                                    text: 'Duis euismod vulputate urna, in aliquet nulla lobortis in. Integer imperdiet leo id eleifend bibendum. Nunc mattis a magna non auctor.'
+                                }),
+                                generator.createRadioGroupField({
+                                    value: 'yes',
+                                    label: 'Would you like to use promotional components?',
+                                    options: [
+                                        {label: 'Yes', value: 'yes'},
+                                        {label: 'No, thanks', value: 'no'}
+                                    ],
+                                }),
+
+                                generator.createButtonField({
+                                    className: 'sqm--block',
+                                    buttonType: 'secondary',
+                                    buttonLabel: 'Widget Configurator',
+                                    onClick: modal.open
+                                }),
+
+                                generator.createDropdownField({
+                                    label: 'Paid',
+                                    description: 'When a payment has status Paid.',
+                                    value: 'one',
+                                    options: [
+                                        {label: 'Paid', value: 'one'},
+                                        {label: 'option 2', value: 'two'},
+                                        {label: 'option 3', value: 'three'},
+                                        {label: 'option 4', value: 'four'},
+                                        {label: 'option 5', value: 'five'}
+                                    ],
+                                    variation: 'label-left'
+                                }),
+
+                                generator.createDropdownField({
+                                    label: 'In review',
+                                    description: 'When a payment has status In review.',
+                                    value: 'one',
+                                    options: [
+                                        {label: 'In Review', value: 'one'},
+                                        {label: 'option 2', value: 'two'},
+                                        {label: 'option 3', value: 'three'},
+                                        {label: 'option 4', value: 'four'},
+                                        {label: 'option 5', value: 'five'}
+                                    ],
+                                    variation: "label-left"
+                                }),
+
+                                generator.createTextField({
+                                    className: 'sq-text-input',
+                                    label: 'Username',
+                                    description: 'You can find your username in the email sent by SeQura.',
+                                    value: 'logeecom'
+                                }),
+
+                                generator.createPasswordField({
+                                    className: 'sq-password-input',
+                                    label: 'Password',
+                                    description: 'You can find your password in the email sent by SeQura..',
+                                    value: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+                                }),
+
+                                generator.createButtonField({
+                                    className: 'sqm--block',
+                                    buttonType: 'danger',
+                                    buttonLabel: 'general.disconnect'
+                                }),
+                            ]),
+                            generator.createPageFooter({
+                                onCancel: () => {
+                                },
+                                onSave: () => {
+                                }
+                            })
+                        ])
+                    ])
+                ]),
+            ]))
+    });
+</script>
+</body>
+</html>

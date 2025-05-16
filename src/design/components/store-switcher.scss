@@ -1,0 +1,28 @@
+//noinspection SassScssResolvedByNameOnly
+@mixin sq-store-switcher {
+  .sq-field-wrapper {
+    display: flex;
+    column-gap: 16px;
+    align-items: center;
+
+    &.sqm--label-left {
+      justify-content: unset;
+
+      .sqp-field-component {
+        min-width: 115px;
+        column-gap: 16px;
+      }
+    }
+
+    .sqp-field-title {
+      @include font-weight--regular;
+      color: $sq-color--grey-60;
+    }
+
+    .sqp-dropdown-button {
+      .sqs--selected {
+        color: $sq-color--grey-50;
+      }
+    }
+  }
+}

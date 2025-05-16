@@ -1,0 +1,78 @@
+//noinspection SassScssResolvedByNameOnly
+@mixin sq-settings-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 315px;
+  height: max-content;
+  padding: 20px 0;
+  background: $sq-color--white;
+  border-radius: 6px;
+
+  @include sq-screen--narrow-medium {
+    width: 100%;
+  }
+
+  .sq-sidebar-item {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+
+    transition: background .2s;
+
+    &:hover {
+      background: $sq-color--grey-10;
+    }
+
+    &.sqs--active {
+      background: $sq-color--grey-10;
+    }
+
+    .sq-sidebar-link {
+      position: relative;
+      transition: color .2s;
+      padding: 10px 20px;
+      width: 100%;
+
+      &:before {
+        position: relative;
+        display: inline-block;
+        margin-right: 8px;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      .sq-link-label {
+        display: block;
+        color: $sq-color--grey-60;
+        transition: color .2s;
+      }
+
+      &.sqm--general {
+        &:before {
+          @include sq-font-icon(general-settings);
+        }
+      }
+
+      &.sqm--connection {
+        &:before {
+          @include sq-font-icon(connection);
+        }
+      }
+
+      &.sqm--order {
+        &:before {
+          @include sq-font-icon(order-status);
+        }
+      }
+
+      &.sqm--widget {
+        &:before {
+          @include sq-font-icon(widget-settings);
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,62 @@
+/* @doc(group) { name: 'map', title: 'Map'} */
+
+
+/* @doc(function) {
+  description: 'Check if variable is map'
+}
+*/
+@function sq-is-map($var){
+  @return type-of($var) == 'map';
+}
+
+/* @doc(function) {} */
+@function sq-get-map-keys($map){
+  @if ($map == null) {
+    @return null;
+  }
+
+  @if (type-of($map) != 'map') {
+    @return null;
+  }
+
+  @return map-keys($map);
+}
+
+
+/* @doc(function) {
+  description: 'Get items from map',
+  return: 'map item value',
+}
+*/
+@function sq-get-map-value($map, $key) {
+  @if ($map == null) {
+    @return null;
+  }
+
+  @if (type-of($map) != 'map') {
+    @return null;
+  }
+
+  @if ($key == null) {
+    @return null;
+  }
+  @if map-has-key($map, $key) {
+    @return map-get($map, $key);
+  }
+  @return null;
+}
+
+/* @doc(function) {
+  description: 'Merge second map into the first map',
+  return: 'new map which is result of the merge',
+}
+*/
+@function sq-map-merge($map1, $map2) {
+  @if (sq-is-map($map2) != true){
+    @return $map1;
+  }
+  @if (sq-is-map($map1) != true){
+    @return $map2;
+  }
+  @return map-merge($map1, $map2);
+}

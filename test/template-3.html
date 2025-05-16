@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<!--suppress HtmlUnknownTarget -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta
+        name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <link rel="stylesheet" href="/css/design-demo.css"/>
+    <title>Design system | Demo</title>
+</head>
+<body>
+
+<main id="sq-page-wrapper"></main>
+
+//#scripts#
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        SequraFE.translations = {
+            default: '%default_translations%',
+            current: '%current_lang_translations%'
+        };
+
+        const {elementGenerator: generator, components} = SequraFE;
+
+        const pageWrapper = document.getElementById('sq-page-wrapper')
+
+        const paymentMethods = [
+            {
+                name: "Buy now, pay later",
+                description: 'Reduce the uncertainty of online shopping, And pay X days later',
+                minimumAmount: '1.000,00 EUR',
+                maximumAmount: '5.000,00 EUR',
+                availableFrom: '12/12/2022',
+                availableTo: '12/12/2025',
+            },
+            {
+                name: "Part payment",
+                description: 'Small quotas for the consumer: from 3 to 24 months to increase the average basket and sell more',
+                minimumAmount: '1.000,00 EUR',
+                maximumAmount: '5.000,00 EUR',
+                availableFrom: '12/12/2022',
+                availableTo: '12/12/2025',
+            },
+            {
+                name: "Buy now, pay later",
+                description: 'Reduce the uncertainty of online shopping, And pay X days later',
+                minimumAmount: '1.000,00 EUR',
+                maximumAmount: '5.000,00 EUR',
+                availableFrom: '12/12/2022',
+                availableTo: '12/12/2025',
+            },
+            {
+                name: "Part payment",
+                description: 'Small quotas for the consumer: from 3 to 24 months to increase the average basket and sell more',
+                minimumAmount: '1.000,00 EUR',
+                maximumAmount: '5.000,00 EUR',
+                availableFrom: '12/12/2022',
+                availableTo: '12/12/2025',
+            }
+        ];
+
+        /** @type TableCell[] */
+        const headers = [
+            {
+                label: 'Payment methods',
+                className: 'sqp-payment-method-header-cell sqm--text-left'
+            },
+            {label: 'Minimum amount'},
+            {label: 'Maximum amount'},
+            {label: 'Available from'},
+            {label: 'Available to'},
+        ];
+
+        /** @type TableCell[][] */
+        const rows = paymentMethods.map((method) => {
+            return [
+                {
+                    className: 'sqp-payment-method-cell sqm--text-left',
+                    renderer: (cell) => {
+                        cell.prepend(
+                            generator.createElementFromHTML(SequraFE.imagesProvider.icons.payment || ''),
+                            generator.createElement('div', '', '', null, [
+                                generator.createElement('h3', 'sqp-payment-method-title', method.name),
+                                generator.createElement('p', 'sqp-payment-method-description', method.description)
+                            ])
+                        )
+                    }
+                },
+                {label: method.minimumAmount},
+                {label: method.maximumAmount},
+                {label: method.availableFrom},
+                {label: method.availableTo}
+            ];
+        })
+
+        pageWrapper.append(
+            generator.createElement('div', 'sq-page-content-wrapper sqv--payments', '', null, [
+                SequraFE.components.PageHeader.create(
+                    {
+                        currentVersion: 'v1.0.0.',
+                        newVersion: {
+                            versionLabel: 'v1.0.1',
+                            versionUrl: 'test.html'
+                        },
+                        mode: 'live',
+                        merchantName: 'Logeecom',
+                        activeStore: 'store_1',
+                        stores: [
+                            {
+                                label: 'Store 1',
+                                value: 'store_1'
+                            },
+                            {
+                                label: 'Store 2',
+                                value: 'store_2'
+                            },
+                            {
+                                label: 'Store 3',
+                                value: 'store_3'
+                            },
+                            {
+                                label: 'Store 4',
+                                value: 'store_4'
+                            },
+                            {
+                                label: 'Store 5',
+                                value: 'store_5'
+                            }
+                        ],
+                        menuItems: [
+                            {
+                                label: 'general.paymentMethods',
+                                href: '#',
+                                isActive: true,
+                            },
+                            {
+                                label: 'general.settings',
+                                href: '/template-2'
+                            }
+                        ]
+                    }
+                ),
+                generator.createElement('div', 'sq-page-content', '', null, [
+                    generator.createElement('div', 'sq-content-row', '', null, [
+                        generator.createElement('main', 'sq-content', '', null, [
+                            generator.createElement('div', 'sq-content-inner', '', null, [
+                                generator.createElement('div', 'sq-table-heading', '', null, [
+                                    generator.createPageHeading({
+                                        title: 'Payment methods',
+                                        text: 'Mauris congue enim erat, eu dignissim nisl sollicitudin et. Nunc sed rutrum dui. Integer pharetra quam sapien, ut volutpat leo tempus ut. '
+                                    }),
+                                    generator.createDropdownField({
+                                        className: 'sqm--table-dropdown',
+                                        label: 'Countries',
+                                        description: 'Select customer country',
+                                        value: 'one',
+                                        options: [
+                                            {label: 'Spain', value: 'one'},
+                                            {label: 'option 2', value: 'two'},
+                                            {label: 'option 3', value: 'three'},
+                                            {label: 'option 4', value: 'four'},
+                                            {label: 'option 5', value: 'five'}
+                                        ],
+                                    }),
+                                ]),
+                                components.DataTable.create(headers, rows)
+                            ]),
+                        ])
+                    ])
+                ]),
+            ]))
+    });
+</script>
+</body>
+</html>

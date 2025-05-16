@@ -1,0 +1,27 @@
+/* @doc(group) { name: 'helpers', title: 'Helpers'} */
+
+/* @doc(function) {
+  description: 'Concatenate strings',
+  return: 'string that is joined from items',
+  params: {
+    $separator: 'string to use when concatenating values',
+    $items: 'item csv list to concatenate',
+  }
+}
+*/
+@function join($separator, $items...) {
+  $result: '';
+  @if ($items == null){
+    @return $result;
+  }
+
+  @each $item in $items {
+    @if ($item != null) {
+      @if ($result != '') {
+        $result: $result + $separator;
+      }
+      $result: $result + $item;
+    }
+  }
+  @return $result;
+}

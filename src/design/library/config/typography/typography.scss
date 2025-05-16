@@ -1,0 +1,22 @@
+$sq-font-size--main: 15px;
+$sq-font-size--small: 13px;
+$sq-font-size--extra-small: 11px;
+
+$sq-font-size--page-title: 24px;
+$sq-font-size--page-description: 16px;
+
+$sq-font-size--field-title: 15px;
+$sq-font-size--field-description: $sq-font-size--small;
+
+$sq-font-size--input-text: 14px;
+$sq-font-size--input-error: $sq-font-size--small;
+
+
+//noinspection SassScssResolvedByNameOnly
+h2 {
+  @include font-weight--semi-bold;
+
+  font-size: $sq-font-size--page-title;
+  line-height: 1.33;
+  margin: 12px 0;
+}

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<!--suppress HtmlUnknownTarget -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta
+        name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <link rel="stylesheet" href="/css/design-demo.css"/>
+    <title>Design system | Demo</title>
+</head>
+<body>
+
+<main id="sq-page-wrapper"></main>
+
+//#scripts#
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        SequraFE.translations = {
+            default: '%default_translations%',
+            current: '%current_lang_translations%'
+        };
+
+        const {elementGenerator: generator} = SequraFE;
+
+        const pageWrapper = document.getElementById('sq-page-wrapper')
+
+        pageWrapper.append(
+            generator.createElement('div', 'sq-page-content-wrapper sqv--onboarding', '', null, [
+                generator.createElement('div', 'sq-page-content', '', null, [
+                    generator.createElement('div', 'sq-version-header', '', null, [
+                        generator.createVersionBadge('v1.0.0')
+                    ]),
+                    generator.createElement('div', 'sq-content-row', '', null, [
+                        generator.createWizardSidebar({
+                            steps: [
+                                {
+                                    label: 'sidebar.stepOneLabel',
+                                    description: 'sidebar.stepOneDescription',
+                                    href: '#',
+                                    isCompleted: true
+                                },
+                                {
+                                    label: 'sidebar.stepTwoLabel',
+                                    href: '#',
+                                    isCompleted: true
+                                },
+                                {
+                                    label: 'sidebar.stepThreeLabel',
+                                    href: '#',
+                                    isCompleted: true
+                                },
+                                {
+                                    label: 'sidebar.stepFourLabel',
+                                    href: '#',
+                                    isActive: true
+                                },
+                                {
+                                    label: 'sidebar.stepFiveLabel',
+                                    href: '#',
+                                }
+                            ]
+                        }),
+                        generator.createElement('main', 'sq-content', '', null, [
+                            generator.createElement('div', 'sqp-content-header', '', null, [
+                                generator.createElementFromHTML(SequraFE.imagesProvider.logo || ''),
+                                generator.createStoreSwitcher({
+                                    label: 'general.selectStore',
+                                    value: 'store_1',
+                                    options: [
+                                        {
+                                            label: 'Store 1',
+                                            value: 'store_1'
+                                        },
+                                        {
+                                            label: 'Store 2',
+                                            value: 'store_2'
+                                        },
+                                        {
+                                            label: 'Store 3',
+                                            value: 'store_3'
+                                        },
+                                        {
+                                            label: 'Store 4',
+                                            value: 'store_4'
+                                        },
+                                        {
+                                            label: 'Store 5',
+                                            value: 'store_5'
+                                        }
+                                    ]
+                                })
+                            ]),
+                            generator.createPageHeading({
+                                title: 'Promotional widgets',
+                                text: 'Promotional components allows you to display promotional widgets and educational pop-ups that shows and explains which SeQura products the shopper offers and how they work, which will help the shop increase average order value and conversion rates.'
+                            }),
+                            generator.createRadioGroupField({
+                                value: 'yes',
+                                label: 'Would you like to use promotional components?',
+                                options: [
+                                    {label: 'Yes', value: 'yes'},
+                                    {label: 'No, thanks', value: 'no'}
+                                ],
+                            }),
+                            generator.createTextField({
+                                className: 'sq-text-input',
+                                label: 'Assets key',
+                                description: 'You can find your assets key in the email sent by SeQura.',
+                            }),
+                            generator.createToggleField({
+                                value: 'test',
+                                label: 'Display widget on product page',
+                                description: 'Specify whether payment method icon should be displayed to customers on the checkout.',
+                            }),
+                            generator.createButtonField({
+                                className: 'sqm--block',
+                                buttonType: 'secondary',
+                                buttonLabel: 'Widget Configurator'
+                            }),
+
+                            generator.createToggleField({
+                                value: 'test',
+                                label: 'Show installment amount in product listing ',
+                                description: 'Display installment amount on product listing page',
+                            }),
+
+                            generator.createPageHeading({
+                                title: 'Selling countries',
+                                text: 'Please select countries where you want to offer SeQura payment methods. Please make sure to add SeQura merchant ID for each selected country.'
+                            }),
+                            generator.createMultiItemSelectorField({
+                                label: 'In which countries do you want to offer SeQura payment methods?',
+                                description: 'Please select countries where SeQura payment methods should be available.',
+                                value: 'es,fr,co',
+                                options: [
+                                    {
+                                        label: 'Spain',
+                                        value: 'es'
+                                    },
+                                    {
+                                        label: 'France',
+                                        value: 'fr'
+                                    },
+                                    {
+                                        label: 'Columbia',
+                                        value: 'co'
+                                    },
+                                    {
+                                        label: 'Italy',
+                                        value: 'it'
+                                    },
+                                    {
+                                        label: 'Portugal',
+                                        value: 'pt'
+                                    },
+                                    {
+                                        label: 'Peru',
+                                        value: 'pe'
+                                    }
+                                ]
+                            }),
+                            generator.createCountryField({
+                                countryCode: 'ES',
+                                merchantId: 'logeecom_1',
+                            }),
+                            generator.createCountryField({
+                                countryCode: 'FR',
+                                merchantId: 'logeecom_2',
+                            }),
+                            generator.createCountryField({
+                                countryCode: 'CO',
+                                merchantId: 'logeecom_3',
+                            }),
+
+                            generator.createButtonField({
+                                className: 'sqm--block',
+                                buttonType: 'primary',
+                                buttonLabel: 'general.continue'
+                            })
+                        ])
+                    ])
+                ]),
+            ]))
+    });
+</script>
+</body>
+</html>

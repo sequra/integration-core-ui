@@ -1,0 +1,67 @@
+@function sq-get-config-icon-fonts() {
+  @return (
+      base: (
+          font-family: 'sq-icons',
+          line-height: 1,
+          font-weight: 500
+      )
+  );
+}
+
+//noinspection SassScssResolvedByNameOnly
+@mixin sq-config-icon-font-faces() {
+  $assets: sq-get-assets-root();
+  @include sq-config-icon-font-face--sq-icons($assets, '/fonts/sq-icons');
+}
+
+@mixin sq-config-icon-font-face--sq-icons($assets, $path) {
+  @if ($path == null) {
+    $path: '/fonts/sq-icons';
+  }
+
+  $src: $assets+$path;
+
+  /**
+   * Font face declaration for icons
+   */
+
+  @font-face {
+    font-family: 'sq-icons';
+    src: url('#{$src}/sq-icons.eot');
+    src: url('#{$src}/sq-icons.eot') format('embedded-opentype'),
+    url('#{$src}/sq-icons.ttf') format('truetype'),
+    url('#{$src}/sq-icons.woff') format('woff'),
+    url('#{$src}/sq-icons.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+  }
+}
+
+//noinspection SassScssResolvedByNameOnly
+@function sq-get-icon-font-content-map($font: base) {
+  $map: (
+      'base': (
+          'eye': '\e911',
+          'mode': '\e900',
+          'arrow-link': '\e901',
+          'arrow-right-ios': '\e906',
+          'arrow-right': '\e907',
+          'triangle': '\e908',
+          'close': '\e90a',
+          'times': '\e90b',
+          'trash': '\e90c',
+          'arrow-ios-down': '\e90d',
+          'plus': '\e90f',
+          'info': '\e910',
+          'notification': '\e919',
+          'checkmark': '\e91a',
+          'general-settings': '\e903',
+          'order-status': '\e900',
+          'widget-settings': '\e901',
+          'connection': '\e902',
+      ),
+  );
+
+  $font-map: sq-get-map-value($map, $font);
+  @return $font-map;
+}

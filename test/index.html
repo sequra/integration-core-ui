@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<!--suppress HtmlUnknownTarget -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta
+        name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <link rel="stylesheet" href="/css/design-demo.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0" />
+    <title>SeQura</title>
+</head>
+<body>
+<main id="sq-page-wrapper"></main>
+<div class="sq-page-loader sqs--hidden" id="sq-spinner">
+    <div class="sq-loader sqt--large">
+        <span class="sqp-spinner"></span>
+    </div>
+</div>
+
+//#scripts#
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const baseApiUrl = 'https://d95e17e23f81.ngrok.app';
+        SequraFE.translations = {
+            default: '%default_translations%',
+            current: '%current_lang_translations%'
+        };
+
+        SequraFE.utilities.showLoader();
+
+        const onboardingPageConfig = {
+            getConnectionDataUrl: baseApiUrl + '/connection',
+            saveConnectionDataUrl: baseApiUrl + '/connection',
+            validateConnectionDataUrl: baseApiUrl + '/connection-validation',
+            getSellingCountriesUrl: baseApiUrl + '/selling-countries',
+            getCountrySettingsUrl: baseApiUrl + '/country-configuration',
+            saveCountrySettingsUrl: baseApiUrl + '/country-configuration',
+            getWidgetSettingsUrl: baseApiUrl + '/widget-settings',
+            saveWidgetSettingsUrl: baseApiUrl + '/widget-settings',
+            getWidgetConfiguratorUrl: baseApiUrl + '/widget-configurator',
+            getPaymentMethodsUrl: baseApiUrl + '/payment-methods',
+        }
+
+        const pageConfiguration = {
+            onboarding: onboardingPageConfig,
+            settings: {
+                ...onboardingPageConfig,
+                getShopCategoriesUrl: baseApiUrl + '/categories',
+                getGeneralSettingsUrl: baseApiUrl + '/general-settings',
+                saveGeneralSettingsUrl: baseApiUrl + '/general-settings',
+                getShopOrderStatusesUrl: baseApiUrl + '/order-statuses',
+                getOrderStatusMappingSettingsUrl: baseApiUrl + '/order-status-settings',
+                saveOrderStatusMappingSettingsUrl: baseApiUrl + '/order-status-settings',
+                disconnectUrl: baseApiUrl + '/disconnect'
+            },
+            payment: {
+                getPaymentMethodsUrl: baseApiUrl + '/payment-methods',
+                getSellingCountriesUrl: baseApiUrl + '/selling-countries',
+                getCountrySettingsUrl: baseApiUrl + '/country-configuration',
+                getConnectionDataUrl: baseApiUrl + '/connection',
+                validateConnectionDataUrl: baseApiUrl + '/connection-validation',
+            }
+        };
+
+        SequraFE.state = new SequraFE.StateController({
+            storesUrl: baseApiUrl + '/stores',
+            merchantsUrl: baseApiUrl + '',
+            currentStoreUrl: baseApiUrl + '/stores/current',
+            stateUrl: baseApiUrl + '/state',
+            versionUrl: baseApiUrl + '/version',
+            shopNameUrl: baseApiUrl + '/shop-name',
+            downloadVersionUrl: 'https://logeecom.com/wp-content/uploads/2016/09/logo-white.png',
+            pageConfiguration: pageConfiguration
+        });
+
+        SequraFE.pages = {
+            onboarding: ['connect','countries', 'widgets'],
+            settings: ['general','connection','order_status','widget'],
+            payment: ['methods']
+        }
+
+        SequraFE.isPromotional = !SequraFE.pages.payment || SequraFE.pages.payment.length === 0;
+
+        SequraFE.state.display();
+        SequraFE.utilities.hideLoader();
+    });
+</script>
+</body>
+</html>

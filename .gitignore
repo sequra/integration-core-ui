@@ -1,0 +1,13 @@
+node_modules
+
+*.log
+*.zip
+
+test/resources/*
+!test/resources/**/.gitkeep
+!test/resources/favicon.ico
+
+dist/
+!dist/resources/**/.gitkeep
+!dist/resources/favicon.ico
+!dist/index.scss

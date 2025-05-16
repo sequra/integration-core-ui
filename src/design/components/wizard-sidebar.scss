@@ -1,0 +1,99 @@
+//noinspection SassScssResolvedByNameOnly
+@mixin sq-wizard-sidebar {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  max-width: 345px;
+  padding: 0 0 0 30px;
+  background: $sq-color--white;
+
+  .sqp-step {
+    position: relative;
+    margin-bottom: 16px;
+    pointer-events: none;
+
+    transition: color .2s;
+
+    &:hover {
+      text-decoration: none;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    .sq-link-description {
+      @include font-weight--regular;
+      color: $sq-color--sequra-black;
+    }
+
+    .sq-link-label {
+      @include font-weight--semi-bold;
+      display: block;
+      color: $sq-color--grey-50;
+      transition: color .2s;
+    }
+
+    &:before {
+      position: absolute;
+      top: 5px;
+      left: -22px;
+      z-index: 2;
+      width: 8px;
+      height: 8px;
+      content: '';
+      background: $sq-color--grey-50;
+      border: 2px solid $sq-color--white;
+      border-radius: 100%;
+      transition: background .2s;
+    }
+
+    &.sqs--completed {
+      &:not(:first-child):not(:last-child) {
+        pointer-events: all;
+      }
+
+      .sq-link-label {
+        color: $sq-color--sequra-black;
+      }
+
+      &:before {
+        background: $sq-color--primary;
+      }
+
+      &:after {
+        position: absolute;
+        top: 12px;
+        left: -17px;
+        z-index: 3;
+        width: 2px;
+        height: calc(100% + 12px);
+        content: '';
+        background: $sq-color--primary;
+      }
+    }
+
+    &.sqs--active {
+      .sq-link-label {
+        color: $sq-color--sequra-black;
+      }
+
+      &:before {
+        z-index: 4;
+        background: $sq-color--primary;
+      }
+
+      &:after {
+        position: absolute;
+        top: 3px;
+        left: -24px;
+        z-index: 1;
+        width: 16px;
+        height: 16px;
+        content: '';
+        background: $sq-color--primary;
+        border-radius: 100%;
+      }
+    }
+  }
+}

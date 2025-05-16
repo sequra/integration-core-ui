@@ -1,0 +1,76 @@
+//noinspection SassScssResolvedByNameOnly
+@mixin sq-button() {
+  @include font-weight--semi-bold();
+  position: relative;
+  display: inline-block;
+  padding: 12px 40px;
+  font-size: $sq-font-size--main;
+  cursor: pointer;
+
+  transition: all .2s;
+
+  border: 1px solid;
+  border-radius: 4px;
+
+  &:focus {
+    outline: none;
+  }
+
+  &.sqm--small {
+    padding: 8px;
+  }
+
+  &.sqm--medium {
+    padding: 10px 16px;
+  }
+
+  &.sqt--primary {
+    background-color: $sq-color--primary;
+    border-color: $sq-color--primary;
+    color: $sq-color--white;
+
+    &:hover, &:focus {
+      background-color: $sq-color--white;
+      color: $sq-color--primary;
+    }
+  }
+
+  &.sqt--secondary {
+    border: 1px solid $sq-color--primary;
+    background-color: $sq-color--white;
+    color: $sq-color--primary;
+
+    &:hover {
+      background-color: $sq-color--primary;
+      color: $sq-color--white;
+    }
+  }
+
+  &.sqt--cancel {
+    border-color: $sq-color--grey-20;
+    color: $sq-color--grey-60;
+
+    &:hover {
+      background-color: $sq-color--grey-20;
+    }
+  }
+
+  &.sqt--danger {
+    color: $sq-color--white;
+    background-color: $sq-color--danger;
+    border-color: $sq-color--danger;
+
+    &:hover,
+    &:focus {
+      background-color: lighten($sq-color--danger, 5%);
+      border-color: lighten($sq-color--danger, 5%);
+    }
+  }
+
+  &.sqs--disabled, &:disabled {
+    background-color: $sq-color--grey-20;
+    border-color: transparent;
+    color: $sq-color--grey-30;
+    pointer-events: none;
+  }
+}

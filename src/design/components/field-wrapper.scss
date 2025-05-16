@@ -1,0 +1,118 @@
+//noinspection SassScssResolvedByNameOnly
+@mixin sq-field-wrapper() {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 32px;
+
+  .sqp-field-title {
+    font-size: $sq-font-size--field-title;
+  }
+  .sqp-field-subtitle {
+    font-size: $sq-font-size--field-description;
+  }
+
+  .sqp-field-title {
+    @include font-weight--semi-bold;
+    margin-bottom: 4px;
+    color: $sq-color--sequra-black;
+
+    &:not(:last-child) {
+      margin-bottom: 0;
+    }
+  }
+
+  .sqp-field-subtitle {
+    display: block;
+    margin-bottom: 4px;
+    color: $sq-color--grey-70;
+  }
+
+  .sqp-field-component:invalid {
+    border: 1px solid $sq-color--red-40;
+    color: $sq-color--red-40;
+
+    + .sqp-input-error {
+      display: block;
+    }
+  }
+
+  .sqp-input-error {
+    display: none;
+    margin-top: 4px;
+    font-size: $sq-font-size--input-error;
+    color: $sq-color--red-40;
+  }
+
+  &.sqt--toggle {
+    .sqp-field-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      column-gap: 10px;
+    }
+
+    .sqp-field-subtitle {
+      padding-right: 40px;
+    }
+  }
+
+  &.sqt--checkbox {
+    .sqp-description-wrapper {
+      display: flex;
+      flex-direction: row;
+      column-gap: 8px;
+
+      &.sqt--reverse {
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+      }
+    }
+
+    .sqp-field-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      column-gap: 10px;
+    }
+
+    .sqp-field-subtitle {
+      padding-right: 40px;
+    }
+  }
+
+  &.sqs--error {
+    .sqp-field-component {
+      border: 1px solid $sq-color--red-40;
+      color: $sq-color--red-40;
+    }
+
+    .sqp-input-error {
+      display: block;
+    }
+  }
+
+  &.sqm--label-left {
+    flex-direction: row;
+    justify-content: space-between;
+
+    @include sq-screen--narrow {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .sqp-field-component {
+      min-width: 236px;
+      min-height: 39px;
+      column-gap: 32px;
+
+      @include sq-screen--narrow {
+        width: 100%;
+      }
+    }
+  }
+
+  &.sqm--block {
+    display: block;
+  }
+}
