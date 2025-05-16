@@ -45,7 +45,7 @@ if (!window.SequraFE.components) {
                     'a',
                     'sqp-download-version',
                     '',
-                    {href: newVersion.versionUrl, download: true, target: "_blank"},
+                    { href: newVersion.versionUrl, download: true, target: "_blank" },
                     [
                         generator.createElement('span', '', 'general.downloadNewVersion'),
                         generator.createElement('span', '', newVersion.versionLabel)

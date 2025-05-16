@@ -141,12 +141,6 @@ if (!window.SequraFE) {
                         description: 'generalSettings.showCheckoutAsHostedPage.description',
                         onChange: (value) => handleGeneralSettingsChange('showSeQuraCheckoutAsHostedPage', value)
                     }),
-                    generator.createToggleField({
-                        value: changedGeneralSettings.sendOrderReportsPeriodicallyToSeQura,
-                        label: 'generalSettings.sendOrderReports.label',
-                        description: 'generalSettings.sendOrderReports.description',
-                        onChange: (value) => handleGeneralSettingsChange('sendOrderReportsPeriodicallyToSeQura', value)
-                    }),
                     generator.createMultiItemSelectorField({
                         name: 'allowedIPAddresses-selector',
                         label: 'generalSettings.allowedIPAddresses.label',
