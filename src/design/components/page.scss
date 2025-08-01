@@ -1,11 +1,6 @@
 //noinspection SassScssResolvedByNameOnly
-#sequra-page {
-  width: 100%;
-
   #sq-page-wrapper {
-    display: flex;
     min-height: 100vh;
-    justify-content: flex-end;
     padding: 30px 20px 60px 30px;
     background: $sq-color--grey-10;
 
@@ -16,11 +11,7 @@
       .sq-version-header {
         position: relative;
         height: 25px;
-        margin-bottom: 126px;
-
-        @include sq-screen--narrow-medium {
-          margin-bottom: 40px;
-        }
+        margin-bottom: 40px;
       }
 
       .sq-content-row {
@@ -131,4 +122,3 @@
       padding: 0;
     }
   }
-}
