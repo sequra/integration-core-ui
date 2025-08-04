@@ -14,13 +14,13 @@ yarn install
 ## 2. Build distribution files
 
 ```
-bash yarn dist
+yarn dist
 ```
 
 This will generate all necessary UI resources in the ```dist``` directory.
 
-## 3. Content of the ```dist``` directory
-The ```dist``` directory contains:
+## 3. Content of the ```dist/resources``` directory
+The ```dist/resources``` directory contains:
 - assets/fonts files
 - css/sequra-core.css file
 - js files
