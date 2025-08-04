@@ -16,6 +16,7 @@
     "paymentMethods": "Payment methods",
     "changesSaved": "Changes saved successfully.",
     "noItemsAvailable": "No items available",
+    "and": " and ",
     "mode": {
       "test": "Sandbox mode",
       "live": "Live mode"
@@ -36,7 +37,8 @@
         "failed": "Failed to retrieve version."
       },
       "connection": {
-        "invalidUsernameOrPassword": "Invalid username or password. Validate connection data.",
+        "invalidUsernameOrPassword": "Invalid username or password. Check your connection credentials.",
+        "invalidUsernameOrPasswordForDeployment": "Invalid username or password. Check your %s connection credentials.",
         "invalidMerchantId": "Invalid merchant id.",
         "invalidEnvironment": "Invalid environment.",
         "emptyStoreId": "Empty store id.",
@@ -91,6 +93,7 @@
     "stepOneLabel": "Install ecommerce integration",
     "stepOneDescription": "Your integration is ready for connection.",
     "stepTwoLabel": "Connect integration",
+    "stepDeployments": "Select Deployment Targets",
     "stepThreeLabel": "Configure selling countries",
     "stepFourLabel": "Configure widgets",
     "stepFiveLabel": "Start selling with SeQura"
@@ -98,7 +101,6 @@
   "validation": {
     "requiredField": "This field is required.",
     "invalidField": "This field is invalid.",
-    "invalidJson": "This field contains invalid JSON.",
     "invalidIPAddress": "This field must contain only valid IP addresses.",
     "invalidJSON": "This field must be a valid JSON.",
     "invalidEmail": "This field must be a valid email.",
@@ -144,6 +146,9 @@
         "sandbox": "Sandbox"
       }
     },
+    "deployments": {
+      "manage": "Manage Deployment Targets"
+    },
     "username": {
       "label": "Username",
       "description": "You can find your username in the email sent by SeQura."
@@ -167,12 +172,20 @@
       "message": "Are you sure you want to disconnect?"
     }
   },
+  "deployments": {
+    "title": "Select Deployment Targets",
+    "description": "Please select Deployment Targets for which you want to offer SeQura payment methods",
+    "selector": {
+      "label": "In which Deployment Targets do you want to offer SeQura payment methods?",
+      "description": "Each Deployment Target serves a different group of countries."
+    }
+  },
   "countries": {
     "title": "Selling countries",
-    "description": "Please select countries where you want to offer SeQura payment methods. Please make sure to add SeQura merchant ID for each selected country.",
+    "description": "Please select countries where you want to offer SeQura payment methods.",
     "selector": {
       "label": "In which countries do you want to offer SeQura payment methods?",
-      "description": "Please select countries where SeQura payment methods should be available."
+      "description": "Please select countries where SeQura payment methods should be available. To enable additional selling countries, please contact us <a class='sq-link-button' href='https://www.sequra.com/en/contact' target='_blank'><span>here</span></a>."
     },
     "ES": {
       "label": "Spain",
@@ -212,10 +225,6 @@
         "no": "No, thanks"
       }
     },
-    "assetKey": {
-      "label": "Assets key",
-      "description": "You can find your assets key in the email sent by SeQura."
-    },
     "displayOnProductPage": {
       "label": "Display widget on product page",
       "description": "Specify whether payment method icon should be displayed to customers on the checkout."
@@ -236,13 +245,59 @@
       "label": "Show installment amount in cart page",
       "description": "Display installment amount for current cart amount on cart page"
     },
-    "teaserMessage": {
-      "label": "Teaser message",
-      "description": "Teaser message description"
-    },
     "messageBelowLimit": {
       "label": "Message below limit",
       "description": "Message below limit description"
+    },
+    "productPriceSelector": {
+      "label": "Price selector",
+      "description": "Define a CSS selector to retrieve the product price"
+    },
+    "altProductPriceSelector": {
+      "label": "Alternative price selector",
+      "description": "An alternative CSS selector to retrieve the product price for special product page layouts. Ex: variable products"
+    },
+    "altProductPriceTriggerSelector": {
+      "label": "Selector for alternative price detection",
+      "description": "A CSS selector that points an element that, when present, indicates that the alternative price selector should be used"
+    },
+    "defaultProductLocationSelector": {
+      "label": "Default widget location selector",
+      "description": "CSS selector to define the default container element for the widget"
+    },
+    "locations": {
+      "headerTitle": "Customize widgets",
+      "headerDescription": "Define alternative configuration per payment method",
+      "addRow": "Add new",
+      "removeRow": "Remove",
+      "paymentMethod": "Payment method",
+      "selector": "Location CSS selector",
+      "leaveEmptyToUseDefault": "Leave empty to use default value",
+      "showWidget": "Display widget"
+    },
+    "cartPriceSelector": {
+      "label": "Cart price selector",
+      "description": "Define a CSS selector to retrieve the cart total price"
+    },
+    "cartLocationSelector": {
+      "label": "Cart widget location selector",
+      "description": "CSS selector to define the container element for the cart widget"
+    },
+    "widgetOnCartPage": {
+      "label": "Select payment method",
+      "description": "Choose which payment method you want to display as widget on the cart page"
+    },
+    "listingPriceSelector": {
+      "label": "Product listing price selector",
+      "description": "Define a CSS selector to retrieve the product price in the listing"
+    },
+    "listingLocationSelector": {
+      "label": "Product listing widget location selector",
+      "description": "CSS selector to define the container element for the product listing widget"
+    },
+    "widgetOnListingPage": {
+      "label": "Select payment method",
+      "description": "Choose which payment method you want to display as mini-widget on the product listing page"
     }
   },
   "orderStatusSettings": {
@@ -288,9 +343,5 @@
       "label": "Excluded products",
       "description": "The store products in this field will not be allowed to be purchased with SeQura payment methods. Please enter a valid SKU for every product you would like to exclude."
     }
-  },
-  "supportLink": {
-    "label": "Need help?",
-    "link": "https://sqra.es/supportfr"
   }
 }
