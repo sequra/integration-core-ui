@@ -105,33 +105,31 @@
   .sqp-menu-items {
     display: flex;
     align-items: center;
-    column-gap: 1px;
-    padding: 0;
-    border-radius: 50px;
-    overflow: hidden;
-    background-color: #f4f4f4;
-    max-width: 300px;
-    width: 100%;
+    column-gap: 16px;
+    padding: 12px;
+    border: 1px solid #F3F2F2;
+    border-radius: 12px;
+
+    @include sq-screen--narrow-medium {
+      width: max-content;
+    }
 
     a {
-      display: flex;
-      justify-content: center;
-      flex: 1;
-      color: $sq-color--grey-45;
+      color: $sq-color--grey-60;
       font-size: $sq-font-size--input-text;
       padding: 8px;
+      border-radius: 6px;
       transition: all .2s;
 
       &:hover,
       &:focus {
-        color: #ffffff;
-        background: #1c1c1c;
-        text-decoration: none;
+        color: #01C2A3;
+        background: rgba(1, 194, 163, 0.09);
       }
 
       &.sqs--active {
-        color: #ffffff;
-        background: #1c1c1c;
+        color: #01C2A3;
+        background: rgba(1, 194, 163, 0.09);
         pointer-events: none;
       }
     }

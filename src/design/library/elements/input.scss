@@ -31,10 +31,6 @@
     color: $sq-color--grey-50;
   }
 }
-//noinspection SassScssResolvedByNameOnly
-@mixin input-text-area {
-  resize: vertical;
-}
 
 //noinspection SassScssResolvedByNameOnly
 @mixin input-password {
@@ -56,7 +52,7 @@
     height: 18px;
 
     &:before {
-      @include sq-font-icon(eye, 16px);
+      @include sq-font-icon(eye);
     }
 
     &:hover:before {
@@ -94,8 +90,8 @@
 
   [type="radio"] + span:after {
     content: "";
-    width: 15px;
-    height: 15px;
+    width: 8px;
+    height: 8px;
     border: 4px solid $sq-color-green--dark;
     position: absolute;
     top: 1px;
@@ -220,11 +216,4 @@
     flex-direction: column;
     row-gap: 6px;
   }
-}
-
-//noinspection SassScssResolvedByNameOnly
-@mixin sq-data-frame {
-  border: 1px solid $sq-color--grey-20;
-  padding: 20px;
-  border-radius: 6px;
 }
