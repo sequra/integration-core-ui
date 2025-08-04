@@ -7,13 +7,13 @@ To generate the appropriate UI files, run the following commands:
 
 ## 1. Install dependencies
 
-```
+```bash
 yarn install
 ```
 
 ## 2. Build distribution files
 
-```
+```bash
 yarn dist
 ```
 
@@ -30,7 +30,7 @@ The ```dist/resources``` directory contains:
 
 After every change to the UI source files, the next commant should be run:
 
-```
+```bash
 yarn dist
 ```
 
@@ -40,4 +40,10 @@ to regenerate the output files.
 
 Once the UI resources are generated in the `dist` directory, copy and paste them into their appropriate locations within each SeQura integration.
 
+### Magento 2 integration
 
+In the root `integration-core-ui` repository, run the following command:
+
+```bash
+cp -r dist/resources/. <sequra-magento2-repository>/view/adminhtml/web/
+```
