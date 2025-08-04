@@ -41,14 +41,14 @@ if (!window.SequraFE.components) {
      */
     const createTableRows = (tableWrapper, items) => {
         items.length &&
-        tableWrapper.querySelector('tbody').append(
-            ...items.map((item) => {
-                const row = generator.createElement('tr');
-                row.append(...item.map((cellData) => renderCell('td', cellData)));
+            tableWrapper.querySelector('tbody').append(
+                ...items.map((item) => {
+                    const row = generator.createElement('tr');
+                    row.append(...item.map((cellData) => renderCell('td', cellData)));
 
-                return row;
-            })
-        );
+                    return row;
+                })
+            );
     };
 
     /**

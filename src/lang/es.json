@@ -36,7 +36,8 @@
         "failed": "No se pudo recuperar la versión."
       },
       "connection": {
-        "invalidUsernameOrPassword": "Nombre de usuario o contraseña no válidos. Valida los datos de conexión.",
+        "invalidUsernameOrPassword": "Nombre de usuario o contraseña no válidos. Verifica las credenciales.",
+        "invalidUsernameOrPasswordForDeployment": "Nombre de usuario o contraseña no válidos. Verifica las credenciales para %s.",
         "invalidMerchantId": "ID de comerciante no válido.",
         "invalidEnvironment": "Entorno no válido.",
         "emptyStoreId": "ID de tienda vacío.",
@@ -89,6 +90,7 @@
     "orderStatusSettings": "Configuración de estado de pedido",
     "widgetSettings": "Configuración de widgets",
     "stepOneLabel": "Instalar integración de comercio electrónico",
+    "stepDeployments": "Selecciona las Instancias de Despliegue",
     "stepOneDescription": "Tu integración está lista para la conexión.",
     "stepTwoLabel": "Conectar integración",
     "stepThreeLabel": "Configurar países de venta",
@@ -143,6 +145,9 @@
         "sandbox": "Sandbox"
       }
     },
+    "deployments": {
+      "manage": "Gestionar Instancias de Despliegue"
+    },
     "username": {
       "label": "Nombre de usuario",
       "description": "Puedes encontrar tu nombre de usuario en el correo electrónico enviado por SeQura."
@@ -166,12 +171,20 @@
       "message": "¿Estás seguro de que deseas desconectarte?"
     }
   },
+  "deployments": {
+    "title": "Selecciona las Instancias de Despliegue",
+    "description": "Por favor, selecciona las Instancias de Despliegue para los que deseas ofrecer los métodos de pago de SeQura",
+    "selector": {
+      "label": "¿En cuáles Instancias de Despliegue deseas ofrecer los métodos de pago de SeQura?",
+      "description": "Cada Instancia de Despliegue sirve a un grupo diferente de países."
+    }
+  },
   "countries": {
     "title": "Países de venta",
-    "description": "Por favor, selecciona los países en los que deseas ofrecer métodos de pago de SeQura. Asegúrate de agregar la ID de comerciante de SeQura para cada país seleccionado.",
+    "description": "Por favor, selecciona los países en los que deseas ofrecer métodos de pago de SeQura.",
     "selector": {
       "label": "¿En qué países deseas ofrecer métodos de pago de SeQura?",
-      "description": "Por favor, selecciona los países en los que los métodos de pago de SeQura deberían estar disponibles."
+      "description": "Por favor, selecciona los países donde los métodos de pago de SeQura estarán disponibles. <a class='sq-link-button' href='https://www.sequra.com/es/contacto' target='_blank'><span>Contáctanos</span></a> para habilitar países adicionales."
     },
     "ES": {
       "label": "España",
@@ -211,10 +224,6 @@
         "no": "No, gracias"
       }
     },
-    "assetKey": {
-      "label": "Clave de activos",
-      "description": "Puedes encontrar tu clave de activos en el correo electrónico enviado por SeQura."
-    },
     "displayOnProductPage": {
       "label": "Mostrar widget en la página de productos",
       "description": "Especificar si el icono del método de pago debe mostrarse a los clientes en la página de pago."
@@ -234,10 +243,6 @@
     "showInCartPage": {
       "label": "Mostrar cantidad de cuota en la página de carrito",
       "description": "Mostrar la cantidad de cuota para el importe actual del carrito en la página de carrito."
-    },
-    "teaserMessage": {
-      "label": "Mensaje promocional",
-      "description": "Descripción del mensaje promocional"
     },
     "messageBelowLimit": {
       "label": "Mensaje por debajo del límite",

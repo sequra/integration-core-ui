@@ -16,6 +16,7 @@
     "paymentMethods": "Payment methods",
     "changesSaved": "Changes saved successfully.",
     "noItemsAvailable": "No items available",
+    "and": " and ",
     "mode": {
       "test": "Sandbox mode",
       "live": "Live mode"
@@ -36,7 +37,8 @@
         "failed": "Failed to retrieve version."
       },
       "connection": {
-        "invalidUsernameOrPassword": "Invalid username or password. Validate connection data.",
+        "invalidUsernameOrPassword": "Invalid username or password. Check your connection credentials.",
+        "invalidUsernameOrPasswordForDeployment": "Invalid username or password. Check your %s connection credentials.",
         "invalidMerchantId": "Invalid merchant id.",
         "invalidEnvironment": "Invalid environment.",
         "emptyStoreId": "Empty store id.",
@@ -91,6 +93,7 @@
     "stepOneLabel": "Install ecommerce integration",
     "stepOneDescription": "Your integration is ready for connection.",
     "stepTwoLabel": "Connect integration",
+    "stepDeployments": "Select Deployment Targets",
     "stepThreeLabel": "Configure selling countries",
     "stepFourLabel": "Configure widgets",
     "stepFiveLabel": "Start selling with SeQura"
@@ -143,6 +146,9 @@
         "sandbox": "Sandbox"
       }
     },
+    "deployments": {
+      "manage": "Manage Deployment Targets"
+    },
     "username": {
       "label": "Username",
       "description": "You can find your username in the email sent by SeQura."
@@ -166,12 +172,20 @@
       "message": "Are you sure you want to disconnect?"
     }
   },
+  "deployments": {
+    "title": "Select Deployment Targets",
+    "description": "Please select Deployment Targets for which you want to offer SeQura payment methods",
+    "selector": {
+      "label": "In which Deployment Targets do you want to offer SeQura payment methods?",
+      "description": "Each Deployment Target serves a different group of countries."
+    }
+  },
   "countries": {
     "title": "Selling countries",
-    "description": "Please select countries where you want to offer SeQura payment methods. Please make sure to add SeQura merchant ID for each selected country.",
+    "description": "Please select countries where you want to offer SeQura payment methods.",
     "selector": {
       "label": "In which countries do you want to offer SeQura payment methods?",
-      "description": "Please select countries where SeQura payment methods should be available."
+      "description": "Please select countries where SeQura payment methods should be available. To enable additional selling countries, please contact us <a class='sq-link-button' href='https://www.sequra.com/en/contact' target='_blank'><span>here</span></a>."
     },
     "ES": {
       "label": "Spain",
@@ -211,10 +225,6 @@
         "no": "No, thanks"
       }
     },
-    "assetKey": {
-      "label": "Assets key",
-      "description": "You can find your assets key in the email sent by SeQura."
-    },
     "displayOnProductPage": {
       "label": "Display widget on product page",
       "description": "Specify whether payment method icon should be displayed to customers on the checkout."
@@ -234,10 +244,6 @@
     "showInCartPage": {
       "label": "Show installment amount in cart page",
       "description": "Display installment amount for current cart amount on cart page"
-    },
-    "teaserMessage": {
-      "label": "Teaser message",
-      "description": "Teaser message description"
     },
     "messageBelowLimit": {
       "label": "Message below limit",
