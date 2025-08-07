@@ -115,6 +115,10 @@
 
   &.sqm--block {
     display: block;
+
+    &.sqm--bellow-frame {
+      margin-top: 30px;
+    }
   }
 
   .items{
