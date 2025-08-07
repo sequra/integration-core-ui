@@ -38,12 +38,5 @@ to regenerate the output files.
 
 ## 5. Distributing UI Resources
 
-Once the UI resources are generated in the `dist` directory, copy and paste them into their appropriate locations within each SeQura integration.
-
-### Magento 2 integration
-
-In the root `integration-core-ui` repository, run the following command:
-
-```bash
-cp -r dist/resources/. <sequra-magento2-repository>/view/adminhtml/web/
-```
+Once the UI resources are generated in the ```dist``` directory and the new code is pushed, 
+each SeQura integration contains instructions in its README file that should be followed in order to import the CORE UI resources.
