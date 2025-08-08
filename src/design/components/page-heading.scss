@@ -1,7 +1,6 @@
 //noinspection SassScssResolvedByNameOnly
 @mixin sqp-page-heading {
   margin-bottom: 21px;
-  width: 60%;
 
   .sqp-page-title {
     @include font-weight--semi-bold;
@@ -23,5 +22,14 @@
   .sqm-button {
     margin-left: auto;
     width: auto;
+
+    &.sqm--deployment {
+      width: 100%;
+
+      .sqm-button{
+        display: flex;
+        margin-left: auto;
+      }
+    }
   }
 }
