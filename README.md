@@ -38,5 +38,13 @@ to regenerate the output files.
 
 ## 5. Distributing UI Resources
 
-Once the UI resources are generated in the ```dist``` directory and the new code is pushed, 
-each SeQura integration contains instructions in its README file that should be followed in order to import the CORE UI resources.
+Once the UI resources are generated in the ```dist``` directory, the new code should be pushed.
+
+In every SeQura integration, should be added a development dependency to the ```sequra-core-admin-fe``` package:
+
+```"sequra-core-admin-fe": "github:sequra/integration-core-ui"```
+
+After adding the dependency, install or update the project's packages using the appropriate package manager (npm or yarn) to ensure that ```sequra-core-admin-fe``` is installed.
+The package will be placed in the ```node_modules``` directory.
+
+Each SeQura integration includes specific instructions in its README file that should be followed to correctly import and place the CORE UI resources.
