@@ -1343,7 +1343,7 @@ table tr th {
 .sq-heading-wrapper .sqm-button.sqm--deployment {
   width: 100%;
 }
-.sq-heading-wrapper .sqm-button.sqm--deployment .sqm-button {
+.sq-heading-wrapper .sqm-button.sqm--deployment .sq-button {
   display: flex;
   margin-left: auto;
 }
