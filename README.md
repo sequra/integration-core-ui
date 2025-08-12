@@ -8,13 +8,13 @@ To generate the appropriate UI files, run the following commands:
 ## 1. Install dependencies
 
 ```bash
-yarn install
+npm install
 ```
 
 ## 2. Build distribution files
 
 ```bash
-yarn dist
+npm run dist
 ```
 
 This will generate all necessary UI resources in the ```dist``` directory.
@@ -31,7 +31,7 @@ The ```dist/resources``` directory contains:
 After every change to the UI source files, the next commant should be run:
 
 ```bash
-yarn dist
+npm run dist
 ```
 
 to regenerate the output files.
@@ -44,7 +44,7 @@ In every SeQura integration, should be added a development dependency to the ```
 
 ```"sequra-core-admin-fe": "github:sequra/integration-core-ui"```
 
-After adding the dependency, install or update the project's packages using the appropriate package manager (npm or yarn) to ensure that ```sequra-core-admin-fe``` is installed.
+After adding the dependency, install or update the project's packages using the appropriate package manager (npm) to ensure that ```sequra-core-admin-fe``` is installed.
 The package will be placed in the ```node_modules``` directory.
 
 Each SeQura integration includes specific instructions in its README file that should be followed to correctly import and place the CORE UI resources.
