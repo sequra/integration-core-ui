@@ -28,7 +28,9 @@ The ```dist/resources``` directory contains:
 
 ## 4. Rebuilding After Changes
 
-After every change to the UI source files, the next commant should be run:
+The contents of the `dist` directory are automatically regenerated and committed to the repository on every push to any branch. This is handled by a GitHub Actions workflow, which runs `npm run dist` and commits any changes to `dist` back to the remote repository. You do not need to manually build or commit the `dist` directory when pushing changes; this process is fully automated.
+
+That said, if you want to manually trigger a rebuild of the `dist` directory after every change to the UI source files, the next command should be run:
 
 ```bash
 npm run dist
