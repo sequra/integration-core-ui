@@ -14,3 +14,22 @@
     color: $sq-color--black;
   }
 }
+
+//noinspection SassScssResolvedByNameOnly
+@mixin sq-heading-wrapper {
+  display: flex;
+
+  .sqm-button {
+    margin-left: auto;
+    width: auto;
+
+    &.sqm--deployment {
+      width: 100%;
+
+      .sq-button{
+        display: flex;
+        margin-left: auto;
+      }
+    }
+  }
+}

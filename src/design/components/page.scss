@@ -1,134 +1,124 @@
 //noinspection SassScssResolvedByNameOnly
-#sequra-page {
-  width: 100%;
+#sq-page-wrapper {
+  min-height: 100vh;
+  padding: 30px 20px 60px 30px;
+  background: $sq-color--grey-10;
 
-  #sq-page-wrapper {
-    display: flex;
-    min-height: 100vh;
-    justify-content: flex-end;
-    padding: 30px 20px 60px 30px;
-    background: $sq-color--grey-10;
+  .sq-page-content-wrapper {
+    position: relative;
+    width: 100%;
 
-    .sq-page-content-wrapper {
+    .sq-version-header {
       position: relative;
+      height: 25px;
+      margin-bottom: 40px;
+    }
+
+    .sq-content-row {
+      display: flex;
+      column-gap: 32px;
+
+      &.sqs--no-version {
+        margin-top: 126px;
+      }
+
+      @include sq-screen--narrow-medium {
+        flex-direction: column;
+        row-gap: 32px;
+      }
+    }
+
+    .sq-content {
       width: 100%;
+      padding: 0;
+      position: relative;
+      max-width: 100%;
+      background: $sq-color--white;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+      border-radius: 6px;
 
-      .sq-version-header {
-        position: relative;
-        height: 25px;
-        margin-bottom: 126px;
-
-        @include sq-screen--narrow-medium {
-          margin-bottom: 40px;
-        }
-      }
-
-      .sq-content-row {
+      .sqp-content-header {
         display: flex;
-        column-gap: 32px;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 48px;
 
-        &.sqs--no-version {
-          margin-top: 126px;
+        @include sq-screen--narrow {
+          flex-direction: column;
+          align-items: flex-start;
+          row-gap: 16px;
         }
 
-        @include sq-screen--narrow-medium {
-          flex-direction: column;
-          row-gap: 32px;
+        .sq-logo {
+          height: 40px;
+        }
+
+        .sq-store-switcher {
+          .sq-field-wrapper {
+            margin-bottom: 0;
+          }
         }
       }
+    }
+
+    &.sqv--onboarding {
+      border-radius: 6px;
+      background: $sq-color--white;
+      box-shadow: $sq-box-shadow;
+      padding: 24px;
 
       .sq-content {
-        width: 100%;
-        padding: 0;
-        position: relative;
-        max-width: 100%;
-        background: $sq-color--white;
-        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
-        border-radius: 6px;
+        max-width: 660px;
+        box-shadow: none;
+      }
+    }
 
-        .sqp-content-header {
+    &.sqv--payments {
+      .sq-content-inner {
+        padding: 44px 36px 36px;
+
+        .sq-table-heading {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          margin-bottom: 48px;
+          column-gap: 36px;
 
-          @include sq-screen--narrow {
+          @include sq-screen--narrow-medium {
             flex-direction: column;
             align-items: flex-start;
-            row-gap: 16px;
+            row-gap: 8px;
           }
 
-          .sq-logo {
-            height: 40px;
+          .sqp-page-heading {
+            max-width: 800px;
+            width: 100%;
           }
 
-          .sq-store-switcher {
-            .sq-field-wrapper {
-              margin-bottom: 0;
+          .sqm--table-dropdown {
+            max-width: 344px;
+
+            .sqp-field-title {
+              color: $sq-color--primary;
+            }
+
+            .sqp-field-subtitle {
+              color: #B1AEBA;
             }
           }
-        }
-      }
-
-      &.sqv--onboarding {
-        border-radius: 6px;
-        background: $sq-color--white;
-        box-shadow: $sq-box-shadow;
-        padding: 24px;
-
-        .sq-content {
-          max-width: 660px;
-          box-shadow: none;
-        }
-      }
-
-      &.sqv--payments {
-        .sq-content-inner {
-          padding: 44px 36px 36px;
-
-          .sq-table-heading {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            column-gap: 36px;
-
-            @include sq-screen--narrow-medium {
-              flex-direction: column;
-              align-items: flex-start;
-              row-gap: 8px;
-            }
-
-            .sqp-page-heading {
-              max-width: 800px;
-              width: 100%;
-            }
-
-            .sqm--table-dropdown {
-              max-width: 344px;
-
-              .sqp-field-title {
-                color: $sq-color--primary;
-              }
-
-              .sqp-field-subtitle {
-                color: #B1AEBA;
-              }
-            }
-          }
-        }
-      }
-
-      &.sqv--settings {
-        .sq-content-inner {
-          max-width: 835px;
-          width: 100%;
-          padding: 32px 48px 52px 48px;
         }
       }
     }
 
-    @include sq-screen--narrow {
-      padding: 0;
+    &.sqv--settings {
+      .sq-content-inner {
+        max-width: 835px;
+        width: 100%;
+        padding: 32px 48px 52px 48px;
+      }
     }
+  }
+
+  @include sq-screen--narrow {
+    padding: 0;
   }
 }

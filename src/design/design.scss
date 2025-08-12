@@ -5,6 +5,11 @@
 @import "library/config/layout";
 @import "library/elements/index";
 
+@import "../components/page-header/page-header";
+@import "../components/multi-item-selector/multi-item-selector";
+@import "../components/dropdown/dropdown";
+@import "../components/repeater-fields/repeater-fields";
+
 @include config-font-faces();
 
 @include sq-config-icon-font-faces();
@@ -35,6 +40,10 @@
 
 .sq-text-input {
   @include sq-input-field;
+}
+
+.sq-text-area {
+  @include input-text-area;
 }
 
 .sq-password {
@@ -71,8 +80,16 @@
   @include sq-country-field;
 }
 
-.sq-toaster {
-  @include sq-toaster;
+.sq-data-frame {
+  @include sq-data-frame;
+}
+
+.sq-heading-wrapper {
+  @include sq-heading-wrapper;
+}
+
+.sq-table{
+  @include sq-table;
 }
 
 .sq-alert {

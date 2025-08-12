@@ -62,6 +62,7 @@
       display: flex;
       flex-direction: row;
       column-gap: 8px;
+      margin-top: 30px;
 
       &.sqt--reverse {
         flex-direction: row-reverse;
@@ -114,5 +115,43 @@
 
   &.sqm--block {
     display: block;
+
+    &.sqm--bellow-frame {
+      margin-top: 30px;
+    }
+  }
+
+  .items{
+    display: flex;
+    align-items: center;
+    column-gap: 1px;
+    padding: 0;
+    border-radius: 50px;
+    overflow: hidden;
+    background-color: $sq-color--grey-05;
+    max-width: 300px;
+    width: 100%;
+
+    span {
+      display: flex;
+      justify-content: center;
+      flex: 1;
+      color: $sq-color--grey-45;
+      font-size: 14px;
+      padding: 8px;
+      transition: all 0.2s;
+
+      &.sqs--active {
+        color: $sq-color--white;
+        background: $sq-color--black-focus;
+      }
+
+      &:hover,
+      &:focus {
+        color: $sq-color--white;
+        background: $sq-color--black-focus;
+        text-decoration: none;
+      }
+    }
   }
 }

@@ -5,22 +5,29 @@
     "build-test-css": "sass --no-source-map ./test/index.scss ./test/resources/css/design-demo.css",
     "copy-test-js": "mkdir -p \"./test/resources/js\" && cp ./src/services/* ./src/components/**/*.js ./src/forms/*.js ./src/controllers/*.js ./test/resources/js",
     "copy-test-assets": "cp -r ./src/design/assets ./src/lang ./test/resources",
-    "build-test": "yarn build-test-css && yarn copy-test-js && yarn copy-test-assets",
-    "start": "concurrently \"nodemon --exec 'yarn build-test'\" \"nodemon ./test/app.js\"",
+    "build-test": "npm run build-test-css && npm run copy-test-js && npm run copy-test-assets",
+    "start": "concurrently \"nodemon --exec 'npm run build-test'\" \"nodemon ./test/app.js\"",
     "copy-dist-js": "cp ./src/services/* ./src/components/**/*.js ./src/controllers/*.js ./src/forms/*.js ./dist/resources/js",
     "copy-dist-assets": "cp -r ./src/design/assets ./src/lang ./dist/resources",
-    "build-dist-css": "sass --no-source-map dist/index.scss dist/resources/css/sequra-core.css",
-    "dist": "mkdir -p \"./dist/resources/js\" && yarn build-dist-css && yarn copy-dist-js && yarn copy-dist-assets && cp ./test/index.html ./dist"
+    "build-dist-css": "sass --no-source-map src/components/index.scss dist/resources/css/sequra-core.css",
+    "dist": "mkdir -p \"./dist/resources/js\" && npm run build-dist-css && npm run copy-dist-js && npm run copy-dist-assets && cp ./test/index.html ./dist"
   },
   "devDependencies": {
+    "concurrently": "^7.6.0",
     "eslint": "^8.31.0",
+    "express": "^4.18.2",
+    "live-server": "^1.2.0",
+    "nodemon": "^3.1.10",
+    "open": "^8.4.0",
     "prettier": "^2.8.1",
     "sass": "^1.57.1",
-    "serve": "^14.1.2",
-    "concurrently": "^7.6.0",
-    "express": "^4.18.2",
-    "live-server": "^1.2.2",
-    "nodemon": "^2.0.20",
-    "open": "^8.4.0"
-  }
+    "serve": "^10.0.2"
+  },
+  "files": [
+    "src",
+    "dist",
+    "package.json",
+    "README.md",
+    "LICENSE"
+  ]
 }
