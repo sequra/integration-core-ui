@@ -6,6 +6,7 @@
           font-family: $base-font-family,
           size: 18px,
           line-height: 1.5,
+          font-optical-sizing: auto,
           regular-weight: 400,
           semi-bold-weight: 600,
           bold-weight: 700,
@@ -15,44 +16,5 @@
 
 //noinspection SassScssResolvedByNameOnly
 @mixin config-font-faces() {
-  $assets: sq-get-assets-root();
-  @include config-font-face--Inter($assets, '/fonts/Inter');
-}
-
-@mixin config-font-face--Inter($assets, $path) {
-  @if ($path == null) {
-    $path: '/fonts/Inter';
-  }
-
-  $src: $assets+$path;
-
-  // Normal 400
-  @font-face {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    src: local('Inter Regular'),
-    url(#{$src}/Inter-Regular.woff2) format('woff2'),
-    url(#{$src}/Inter-Regular.woff) format('woff');
-  }
-
-  // SemiBold 600
-  @font-face {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 600;
-    src: local('Inter SemiBold'),
-    url(#{$src}/Inter-SemiBold.woff2) format('woff2'),
-    url(#{$src}/Inter-SemiBold.woff) format('woff');
-  }
-
-  // Bold 700
-  @font-face {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 700;
-    src: local('Inter Bold'),
-    url(#{$src}/Inter-Bold.woff2) format('woff2'),
-    url(#{$src}/Inter-Bold.woff) format('woff');
-  }
+  @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 }
