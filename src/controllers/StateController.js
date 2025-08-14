@@ -122,7 +122,7 @@ SequraFE.appPages = {
 
             window.addEventListener('hashchange', updateStateOnHashChange, false);
 
-            api.get(!this.getStoreId() ? configuration.currentStoreUrl : configuration.storesUrl.replace(encodeURIComponent('{storeId}'), this.getStoreId()), () => null, SequraFE.customHeader)
+            api.get(!this.getStoreId() ? configuration.currentStoreUrl : configuration.storesUrl.replace('{storeId}', this.getStoreId()), () => null, SequraFE.customHeader)
                 .then(
                     /** @param {Store|Store[]} response */
                     (response) => {
@@ -161,13 +161,13 @@ SequraFE.appPages = {
             utilities.showLoader();
 
             return Promise.all([
-                api.get(configuration.versionUrl.replace(encodeURIComponent('{storeId}'), this.getStoreId()), null, SequraFE.customHeader),
-                api.get(configuration.storesUrl.replace(encodeURIComponent('{storeId}'), this.getStoreId()), null, SequraFE.customHeader),
-                api.get(configuration.pageConfiguration.onboarding.getConnectionDataUrl.replace(encodeURIComponent('{storeId}'), this.getStoreId()), null, SequraFE.customHeader),
-                api.get(configuration.pageConfiguration.onboarding.getCountrySettingsUrl.replace(encodeURIComponent('{storeId}'), this.getStoreId()), null, SequraFE.customHeader),
-                api.get(configuration.pageConfiguration.onboarding.getWidgetSettingsUrl.replace(encodeURIComponent('{storeId}'), this.getStoreId()), null, SequraFE.customHeader),
-                api.get(configuration.pageConfiguration.onboarding.getDeploymentsUrl.replace(encodeURIComponent('{storeId}'), this.getStoreId()), null, SequraFE.customHeader),
-                api.get(configuration.pageConfiguration.onboarding.getNotConnectedDeploymentsUrl.replace(encodeURIComponent('{storeId}'), this.getStoreId()), null, SequraFE.customHeader),
+                api.get(configuration.versionUrl.replace('{storeId}', this.getStoreId()), null, SequraFE.customHeader),
+                api.get(configuration.storesUrl.replace('{storeId}', this.getStoreId()), null, SequraFE.customHeader),
+                api.get(configuration.pageConfiguration.onboarding.getConnectionDataUrl.replace('{storeId}', this.getStoreId()), null, SequraFE.customHeader),
+                api.get(configuration.pageConfiguration.onboarding.getCountrySettingsUrl.replace('{storeId}', this.getStoreId()), null, SequraFE.customHeader),
+                api.get(configuration.pageConfiguration.onboarding.getWidgetSettingsUrl.replace('{storeId}', this.getStoreId()), null, SequraFE.customHeader),
+                api.get(configuration.pageConfiguration.onboarding.getDeploymentsUrl.replace('{storeId}', this.getStoreId()), null, SequraFE.customHeader),
+                api.get(configuration.pageConfiguration.onboarding.getNotConnectedDeploymentsUrl.replace('{storeId}', this.getStoreId()), null, SequraFE.customHeader),
             ]).then(([versionRes, storesRes, connectionSettingsRes, countrySettingsRes, widgetSettingsRes, deploymentsSettingsRes, notConnectedDeployments]) => {
                 dataStore.version = versionRes;
                 dataStore.stores = storesRes;
@@ -177,7 +177,7 @@ SequraFE.appPages = {
                 dataStore.deploymentsSettings = deploymentsSettingsRes;
                 dataStore.notConnectedDeployments = notConnectedDeployments;
 
-                return api.get(configuration.stateUrl.replace(encodeURIComponent('{storeId}'), this.getStoreId()), null, SequraFE.customHeader);
+                return api.get(configuration.stateUrl.replace('{storeId}', this.getStoreId()), null, SequraFE.customHeader);
             }).then((stateRes) => {
                 if (SequraFE.state.getCredentialsChanged()) {
                     SequraFE.state.removeCredentialsChanged();
@@ -325,7 +325,7 @@ SequraFE.appPages = {
         const getControllerConfiguration = (controllerName, page) => {
             let config = utilities.cloneObject(configuration.pageConfiguration[controllerName] || {});
             Object.keys(config).forEach((key) => {
-                config[key] = config[key].replace(encodeURIComponent('{storeId}'), this.getStoreId);
+                config[key] = config[key].replace('{storeId}', this.getStoreId);
             });
             page && (config.page = page);
 

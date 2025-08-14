@@ -86,7 +86,7 @@ if (!window.SequraFE) {
                     renderer = renderWidgetSettingsForm;
                     promises = Promise.all([
                         SequraFE.state.getData('paymentMethods') ?? api.get(configuration.getPaymentMethodsUrl.replace(
-                            encodeURIComponent('{merchantId}'),
+                            '{merchantId}',
                             countrySettings[0].merchantId
                         ), null, SequraFE.customHeader),
                         SequraFE.state.getData('allAvailablePaymentMethods') ?? api.get(configuration.getAllAvailablePaymentMethodsUrl, null, SequraFE.customHeader),
