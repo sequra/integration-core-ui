@@ -1,6 +1,10 @@
 if (!window.SequraFE) {
     window.SequraFE = {};
 }
+if (!window.SequraFE.customHeader) {
+    // Init the custom header if it doesn't exist so it will be available for the controllers
+    window.SequraFE.customHeader = {};
+}
 
 /**
  * @typedef AjaxServiceType
