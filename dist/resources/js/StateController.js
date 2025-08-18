@@ -183,9 +183,9 @@ SequraFE.appPages = {
                     SequraFE.state.removeCredentialsChanged();
                 }
 
-                let page = this.getPage();
+                const page = this.getPage();
                 if (stateRes.state === SequraFE.appStates.ONBOARDING) {
-                    this.goToState(SequraFE.appStates.ONBOARDING, null, true);
+                    this.goToState(SequraFE.appStates.ONBOARDING + '-' + page, null, true);
 
                     return;
                 }
@@ -231,7 +231,7 @@ SequraFE.appPages = {
                 }
 
                 if (!page) {
-                    page = SequraFE.appPages.ONBOARDING.COUNTRIES;
+                    page = SequraFE.appPages.ONBOARDING.CONNECT;
                 }
 
                 switch (page) {
