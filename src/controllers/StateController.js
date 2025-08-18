@@ -275,14 +275,16 @@ SequraFE.appPages = {
                 return;
             }
 
-            if (
-                !dataStore.connectionSettings?.connectionData?.every(c => c.username && c.password) ||
-                dataStore.countrySettings?.length === 0 ||
-                dataStore.widgetSettings?.widgetStyles === undefined ||
-                SequraFE.state.getCredentialsChanged()
-            ) {
-                this.goToState(SequraFE.appStates.ONBOARDING, additionalConfig, true);
-
+            if(!dataStore.connectionSettings?.connectionData?.every(c => c.username && c.password) || SequraFE.state.getCredentialsChanged()){
+                this.goToState(SequraFE.appStates.ONBOARDING + '-' + SequraFE.appPages.ONBOARDING.CONNECT, additionalConfig, true);
+                return;
+            }
+            if(dataStore.countrySettings?.length === 0){
+                this.goToState(SequraFE.appStates.ONBOARDING + '-' + SequraFE.appPages.ONBOARDING.COUNTRIES, additionalConfig, true);
+                return;
+            }
+            if('undefined' === typeof dataStore.widgetSettings?.widgetStyles){
+                this.goToState(SequraFE.appStates.ONBOARDING + '-' + SequraFE.appPages.ONBOARDING.WIDGETS, additionalConfig, true);
                 return;
             }
 
