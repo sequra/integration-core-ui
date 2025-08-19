@@ -185,8 +185,9 @@ if (!window.SequraFE) {
                     {
                         className: 'sqp-payment-method-cell sqm--text-left',
                         renderer: (cell) => {
+                            const icon = method.icon ? method.icon : (SequraFE.imagesProvider.icons.payment || '');
                             cell.prepend(
-                                generator.createElementFromHTML(SequraFE.imagesProvider.icons.payment || ''),
+                                generator.createElementFromHTML(icon),
                                 generator.createElement('div', '', '', null, [
                                     generator.createElement('h3', 'sqp-payment-method-title', method.title),
                                     generator.createElement(
