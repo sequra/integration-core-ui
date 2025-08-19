@@ -84,7 +84,7 @@ if (!window.SequraFE) {
                     generator.createDropdownField({
                         label: 'orderStatusSettings.paid.label',
                         description: 'orderStatusSettings.paid.description',
-                        value: changedSettings?.orderStatusMappings?.find(
+                        value: changedSettings.find(
                             (mapping) => mapping.sequraStatus === SEQURA_STATUSES.PAID
                         )?.shopStatus || '',
                         options: getStatusOptions(),
@@ -94,7 +94,7 @@ if (!window.SequraFE) {
                     generator.createDropdownField({
                         label: 'orderStatusSettings.inReview.label',
                         description: 'orderStatusSettings.inReview.description',
-                        value: changedSettings?.orderStatusMappings?.find(
+                        value: changedSettings.find(
                             (mapping) => mapping.sequraStatus === SEQURA_STATUSES.IN_REVIEW
                         )?.shopStatus,
                         options: getStatusOptions(),
@@ -104,7 +104,7 @@ if (!window.SequraFE) {
                     generator.createDropdownField({
                         label: 'orderStatusSettings.cancelled.label',
                         description: 'orderStatusSettings.cancelled.description',
-                        value: changedSettings.orderStatusMappings?.find(
+                        value: changedSettings.find(
                             (mapping) => mapping.sequraStatus === SEQURA_STATUSES.CANCELLED
                         )?.shopStatus,
                         options: getStatusOptions(),
