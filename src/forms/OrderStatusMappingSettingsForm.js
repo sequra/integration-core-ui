@@ -79,7 +79,9 @@ if (!window.SequraFE) {
                     generator.createElement('div', 'sqp-flash-message-wrapper'),
                     generator.createPageHeading({
                         title: 'orderStatusSettings.title',
-                        text: 'orderStatusSettings.description'
+                        text: SequraFE.translationService.translate(
+                            'orderStatusSettings.description'
+                        ).replace('{shopName}', data.shopName),
                     }),
                     generator.createDropdownField({
                         label: 'orderStatusSettings.paid.label',
