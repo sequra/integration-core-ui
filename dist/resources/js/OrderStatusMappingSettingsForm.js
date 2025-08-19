@@ -16,16 +16,10 @@ if (!window.SequraFE) {
      */
 
     /**
-     * @typedef OrderStatusSettings
-     * @property {OrderStatusMapping[]} orderStatusMappings
-     * @property {boolean} informCancellationsToSequra
-     */
-
-    /**
      * Handles order status mapping settings form logic.
      *
      * @param {{
-     * orderStatusSettings: OrderStatusSettings,
+     * orderStatusSettings: OrderStatusMapping[],
      * shopOrderStatuses: ShopOrderStatus[],
      * shopName: string
      * }} data
@@ -44,7 +38,7 @@ if (!window.SequraFE) {
             CANCELLED: 'cancelled'
         }
 
-        const { elementGenerator: generator, utilities} = SequraFE;
+        const { elementGenerator: generator, utilities } = SequraFE;
         /** @type AjaxServiceType */
         const api = SequraFE.ajaxService;
         /** @type OrderStatusSettings */
@@ -64,14 +58,8 @@ if (!window.SequraFE) {
         this.render = () => {
             utilities.showLoader();
 
-            if(!activeSettings) {
-                activeSettings = utilities.cloneObject(defaultFormData);
-                activeSettings.informCancellationsToSequra =
-                    data?.orderStatusSettings?.informCancellationsToSequra ??
-                    defaultFormData.informCancellationsToSequra;
-                activeSettings.orderStatusMappings =
-                    data?.orderStatusSettings?.orderStatusMappings ??
-                    defaultFormData.orderStatusMappings;
+            if (!activeSettings) {
+                activeSettings = data?.orderStatusSettings ? data.orderStatusSettings.map((utilities.cloneObject)) : utilities.cloneObject(defaultFormData);
             }
 
             changedSettings = utilities.cloneObject(activeSettings);
@@ -123,14 +111,6 @@ if (!window.SequraFE) {
                         variation: 'label-left',
                         onChange: (value) => handleChange(SEQURA_STATUSES.CANCELLED, value)
                     }),
-                    generator.createToggleField({
-                        value: changedSettings.informCancellationsToSequra,
-                        label: 'orderStatusSettings.informCancellations.label',
-                        description: SequraFE.translationService.translate(
-                            'orderStatusSettings.informCancellations.description'
-                        ).replace('{{shopName}}', data.shopName),
-                        onChange: (value) => handleChange('informCancellationsToSequra', value)
-                    })
                 ]),
                 generator.createPageFooter({
                     onCancel: () => {
@@ -152,7 +132,7 @@ if (!window.SequraFE) {
          * @returns {[{label: string, value: string}]}
          */
         const getStatusOptions = () => {
-            const options = [{ label: "None", value: ""}];
+            const options = [{ label: "None", value: "" }];
             data.shopOrderStatuses.map((shopOrderStatus) => {
                 options.push({
                     label: shopOrderStatus.name.charAt(0).toUpperCase() + shopOrderStatus.name.slice(1),
@@ -170,14 +150,10 @@ if (!window.SequraFE) {
          * @param value
          */
         const handleChange = (name, value) => {
-            if(name === 'informCancellationsToSequra') {
-                changedSettings[name] = value;
-            } else {
-                const mapping =  changedSettings.orderStatusMappings.find((mapping) => mapping.sequraStatus === name)
-                mapping ?
-                    mapping.shopStatus = value :
-                    changedSettings.orderStatusMappings.push({shopStatus: value, sequraStatus: name});
-            }
+            const mapping = changedSettings.find((mapping) => mapping.sequraStatus === name)
+            mapping ?
+                mapping.shopStatus = value :
+                changedSettings.push({ shopStatus: value, sequraStatus: name });
 
             utilities.disableFooter(false);
         }
@@ -190,6 +166,7 @@ if (!window.SequraFE) {
             api.post(configuration.saveOrderStatusMappingSettingsUrl, changedSettings, SequraFE.customHeader)
                 .then(() => {
                     activeSettings = utilities.cloneObject(changedSettings);
+                    SequraFE.state.setData('orderStatusSettings', activeSettings);
                     utilities.disableFooter(true);
                 })
                 .finally(utilities.hideLoader);
