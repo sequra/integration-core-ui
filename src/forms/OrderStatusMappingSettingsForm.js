@@ -5,8 +5,8 @@ if (!window.SequraFE) {
 (function () {
     /**
      * @typedef ShopOrderStatus
-     * @property {string} statusId
-     * @property {string} statusName
+     * @property {string} id
+     * @property {string} name
      */
 
     /**
@@ -155,8 +155,8 @@ if (!window.SequraFE) {
             const options = [{ label: "None", value: ""}];
             data.shopOrderStatuses.map((shopOrderStatus) => {
                 options.push({
-                    label: shopOrderStatus.statusName.charAt(0).toUpperCase() + shopOrderStatus.statusName.slice(1),
-                    value: shopOrderStatus.statusId
+                    label: shopOrderStatus.name.charAt(0).toUpperCase() + shopOrderStatus.name.slice(1),
+                    value: shopOrderStatus.id
                 })
             });
 
