@@ -413,7 +413,7 @@ SequraFE.appPages = {
          * @returns {Promise<ShopName>}
          */
         this.getShopName = () => {
-            return api.get(configuration.shopNameUrl, () => {}, SequraFE.customHeader);
+            return api.get(configuration.shopNameUrl.replace('{storeId}', this.getStoreId()), () => {}, SequraFE.customHeader);
         };
 
         this.getData = (key) => {
