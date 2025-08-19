@@ -142,13 +142,22 @@ if (!window.SequraFE) {
             }
 
             if (configuration.appState === SequraFE.appStates.SETTINGS && !SequraFE.isPromotional) {
+                const {
+                    isShowCheckoutAsHostedPageFieldVisible
+                } = SequraFE.flags;
+
+                if (isShowCheckoutAsHostedPageFieldVisible) {
+                    pageInnerContent?.append(
+                        generator.createToggleField({
+                            value: changedGeneralSettings.showSeQuraCheckoutAsHostedPage,
+                            label: 'generalSettings.showCheckoutAsHostedPage.label',
+                            description: 'generalSettings.showCheckoutAsHostedPage.description',
+                            onChange: (value) => handleGeneralSettingsChange('showSeQuraCheckoutAsHostedPage', value)
+                        })
+                    );
+                }
+
                 pageInnerContent?.append(
-                    generator.createToggleField({
-                        value: changedGeneralSettings.showSeQuraCheckoutAsHostedPage,
-                        label: 'generalSettings.showCheckoutAsHostedPage.label',
-                        description: 'generalSettings.showCheckoutAsHostedPage.description',
-                        onChange: (value) => handleGeneralSettingsChange('showSeQuraCheckoutAsHostedPage', value)
-                    }),
                     generator.createMultiItemSelectorField({
                         name: 'allowedIPAddresses-selector',
                         label: 'generalSettings.allowedIPAddresses.label',
@@ -161,7 +170,7 @@ if (!window.SequraFE) {
                         label: 'generalSettings.excludedCategories.label',
                         description: 'generalSettings.excludedCategories.description',
                         value: changedGeneralSettings.excludedCategories?.join(','),
-                        options: data.shopCategories.map((category) => ({label: category.name, value: category.id})),
+                        options: data.shopCategories.map((category) => ({ label: category.name, value: category.id })),
                         onChange: (value) => handleGeneralSettingsChange('excludedCategories', value)
                     }),
                     generator.createMultiItemSelectorField({
@@ -180,7 +189,7 @@ if (!window.SequraFE) {
                     label: 'countries.selector.label',
                     description: 'countries.selector.description',
                     value: changedCountryConfiguration.map((country) => country.countryCode).join(','),
-                    options: data.sellingCountries.map((country) => ({label: country.name, value: country.code})),
+                    options: data.sellingCountries.map((country) => ({ label: country.name, value: country.code })),
                     onChange: handleCountryChange
                 })
             );
@@ -375,7 +384,7 @@ if (!window.SequraFE) {
         const handleValidationError = (results) => {
             if (results[0].reason && !results[0].reason.includes('merchantId')) {
                 SequraFE.responseService.errorHandler(
-                    {errorCode: 'general.errors.connection.invalidUsernameOrPassword'}
+                    { errorCode: 'general.errors.connection.invalidUsernameOrPassword' }
                 ).catch(() => {
                 });
 
@@ -404,10 +413,10 @@ if (!window.SequraFE) {
             const promises = [];
 
             haveGeneralSettingsChanged &&
-            promises.push(api.post(configuration.saveGeneralSettingsUrl, changedGeneralSettings, SequraFE.customHeader));
+                promises.push(api.post(configuration.saveGeneralSettingsUrl, changedGeneralSettings, SequraFE.customHeader));
 
             hasCountryConfigurationChanged &&
-            promises.push(api.post(configuration.saveCountrySettingsUrl, changedCountryConfiguration, SequraFE.customHeader));
+                promises.push(api.post(configuration.saveCountrySettingsUrl, changedCountryConfiguration, SequraFE.customHeader));
 
             Promise.all(promises)
                 .then(() => {
@@ -416,7 +425,7 @@ if (!window.SequraFE) {
                     activeCountryConfiguration = changedCountryConfiguration.map((utilities.cloneObject))
 
                     configuration.appState === SequraFE.appStates.SETTINGS &&
-                    SequraFE.state.setData('generalSettings', activeGeneralSettings);
+                        SequraFE.state.setData('generalSettings', activeGeneralSettings);
                     SequraFE.state.setData('countrySettings', activeCountryConfiguration);
 
                     haveGeneralSettingsChanged = false;

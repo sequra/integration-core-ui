@@ -2,10 +2,16 @@ if (!window.SequraFE) {
     window.SequraFE = {};
 }
 
+// Define the supported configuration capabilities.
+SequraFE.flags = {
+    isShowCheckoutAsHostedPageFieldVisible: true,
+    ...('undefined' === typeof SequraFE.flags ? {} : SequraFE.flags)
+}
+
 SequraFE.appStates = {
     ONBOARDING: 'onboarding',
     SETTINGS: 'settings',
-    PAYMENT: 'payment',
+    PAYMENT: 'payment'
 };
 
 SequraFE.appPages = {
@@ -89,7 +95,7 @@ SequraFE.appPages = {
     function StateController(configuration) {
         /** @type AjaxServiceType */
         const api = SequraFE.ajaxService;
-        const {pageControllerFactory, templateService, utilities} = SequraFE;
+        const { pageControllerFactory, templateService, utilities } = SequraFE;
 
         let currentState = '';
         let previousState = '';
@@ -275,15 +281,15 @@ SequraFE.appPages = {
                 return;
             }
 
-            if(!dataStore.connectionSettings?.connectionData?.every(c => c.username && c.password) || SequraFE.state.getCredentialsChanged()){
+            if (!dataStore.connectionSettings?.connectionData?.every(c => c.username && c.password) || SequraFE.state.getCredentialsChanged()) {
                 this.goToState(SequraFE.appStates.ONBOARDING + '-' + SequraFE.appPages.ONBOARDING.CONNECT, additionalConfig, true);
                 return;
             }
-            if(dataStore.countrySettings?.length === 0){
+            if (dataStore.countrySettings?.length === 0) {
                 this.goToState(SequraFE.appStates.ONBOARDING + '-' + SequraFE.appPages.ONBOARDING.COUNTRIES, additionalConfig, true);
                 return;
             }
-            if('undefined' === typeof dataStore.widgetSettings?.widgetStyles){
+            if ('undefined' === typeof dataStore.widgetSettings?.widgetStyles) {
                 this.goToState(SequraFE.appStates.ONBOARDING + '-' + SequraFE.appPages.ONBOARDING.WIDGETS, additionalConfig, true);
                 return;
             }
@@ -302,7 +308,7 @@ SequraFE.appPages = {
                 state = page ? controllerName + '-' + page : controllerName;
             }
 
-            const config = {storeId: this.getStoreId(), ...(additionalConfig || {})};
+            const config = { storeId: this.getStoreId(), ...(additionalConfig || {}) };
             const controller = pageControllerFactory.getInstance(
                 controllerName,
                 getControllerConfiguration(controllerName, page)
@@ -413,7 +419,7 @@ SequraFE.appPages = {
          * @returns {Promise<ShopName>}
          */
         this.getShopName = () => {
-            return api.get(configuration.shopNameUrl.replace('{storeId}', this.getStoreId()), () => {}, SequraFE.customHeader);
+            return api.get(configuration.shopNameUrl.replace('{storeId}', this.getStoreId()), () => { }, SequraFE.customHeader);
         };
 
         this.getData = (key) => {
