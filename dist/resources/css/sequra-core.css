@@ -1,6 +1,6 @@
 @charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
-html, body {
+#sequra-page {
   margin: 0;
   padding: 0;
   width: 100%;
@@ -11,16 +11,20 @@ html, body {
   -webkit-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
+  /*
+  description: 'Remove default browser button styles.'
+  */
+  /*
+    description:
+      'Fix placeholder styles (https://css-tricks.com/almanac/selectors/p/placeholder/).',
+      '(default placeholder opacity)'
+  */
 }
-
-button, a {
+#sequra-page button,
+#sequra-page a {
   cursor: pointer;
 }
-
-/*
-  description: 'Remove default browser button styles.'
-*/
-button {
+#sequra-page button {
   background: transparent;
   border: 0;
   padding: 0;
@@ -29,13 +33,15 @@ button {
   text-decoration: inherit;
   text-transform: inherit;
 }
-
-a {
+#sequra-page a {
   text-decoration: none;
   color: inherit;
 }
-
-input, textarea, select, button, a {
+#sequra-page input,
+#sequra-page textarea,
+#sequra-page select,
+#sequra-page button,
+#sequra-page a {
   font-size: inherit;
   font-family: inherit;
   line-height: inherit;
@@ -43,71 +49,110 @@ input, textarea, select, button, a {
   text-decoration: inherit;
   text-transform: inherit;
 }
-
-button, a, ul, li, div, tr, input, textarea {
+#sequra-page button,
+#sequra-page a,
+#sequra-page ul,
+#sequra-page li,
+#sequra-page div,
+#sequra-page tr,
+#sequra-page input,
+#sequra-page textarea {
   outline: none;
   box-sizing: border-box;
 }
-button:focus, button:hover, a:focus, a:hover, ul:focus, ul:hover, li:focus, li:hover, div:focus, div:hover, tr:focus, tr:hover, input:focus, input:hover, textarea:focus, textarea:hover {
+#sequra-page button:focus, #sequra-page button:hover,
+#sequra-page a:focus,
+#sequra-page a:hover,
+#sequra-page ul:focus,
+#sequra-page ul:hover,
+#sequra-page li:focus,
+#sequra-page li:hover,
+#sequra-page div:focus,
+#sequra-page div:hover,
+#sequra-page tr:focus,
+#sequra-page tr:hover,
+#sequra-page input:focus,
+#sequra-page input:hover,
+#sequra-page textarea:focus,
+#sequra-page textarea:hover {
   outline: none;
 }
-
-ul {
+#sequra-page ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
   padding-inline-start: 0;
 }
-ul > li {
+#sequra-page ul > li {
   margin: 0;
   padding: 0;
 }
-
-/*
-  description:
-    'Fix placeholder styles (https://css-tricks.com/almanac/selectors/p/placeholder/).',
-    '(default placeholder opacity)'
-*/
-input::placeholder {
+#sequra-page input::placeholder {
   opacity: 1;
 }
-input::-ms-input-placeholder {
+#sequra-page input::-ms-input-placeholder {
   opacity: 1;
 }
-input:-ms-input-placeholder {
+#sequra-page input:-ms-input-placeholder {
   opacity: 1;
 }
-
-div, p, pre, table,
-form, fieldset,
-main, header, footer, nav, section,
-ul, li, ol, dl, dt, dd,
-h1, h2, h3, h4, h5, h6,
-hr,
-article, aside, details, dialog, figcaption, figure {
+#sequra-page div,
+#sequra-page p,
+#sequra-page pre,
+#sequra-page table,
+#sequra-page form,
+#sequra-page fieldset,
+#sequra-page main,
+#sequra-page header,
+#sequra-page footer,
+#sequra-page nav,
+#sequra-page section,
+#sequra-page ul,
+#sequra-page li,
+#sequra-page ol,
+#sequra-page dl,
+#sequra-page dt,
+#sequra-page dd,
+#sequra-page h1,
+#sequra-page h2,
+#sequra-page h3,
+#sequra-page h4,
+#sequra-page h5,
+#sequra-page h6,
+#sequra-page hr,
+#sequra-page article,
+#sequra-page aside,
+#sequra-page details,
+#sequra-page dialog,
+#sequra-page figcaption,
+#sequra-page figure {
   box-sizing: border-box;
 }
-
-h1, h2, h3, h4, h5, h6, p {
+#sequra-page h1,
+#sequra-page h2,
+#sequra-page h3,
+#sequra-page h4,
+#sequra-page h5,
+#sequra-page h6,
+#sequra-page p {
   margin: 0;
   padding: 0;
   font-weight: 400;
   text-decoration: inherit;
   text-transform: inherit;
 }
-
-p a {
+#sequra-page p a {
   font-weight: normal;
 }
-
-button[disabled] {
+#sequra-page button[disabled] {
   pointer-events: none;
 }
-button[disabled] > * {
+#sequra-page button[disabled] > * {
   pointer-events: none;
 }
-
-*, *:before, *:after {
+#sequra-page *,
+#sequra-page *:before,
+#sequra-page *:after {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   text-rendering: geometricPrecision;
@@ -140,40 +185,40 @@ button[disabled] > * {
   return: 'new map which is result of the merge',
 }
 */
-h2 {
+#sequra-page h2 {
   font-weight: 600;
   font-size: 24px;
   line-height: 1.33;
   margin: 12px 0;
 }
 
-table {
+#sequra-page table {
   width: 100%;
   border-collapse: collapse;
 }
-table thead tr th {
+#sequra-page table thead tr th {
   border-bottom: 1px solid #dce0e5;
 }
-table tr:not(:last-of-type) td {
+#sequra-page table tr:not(:last-of-type) td {
   border-bottom: 1px solid #dce0e5;
 }
-table tr th, table tr td {
+#sequra-page table tr th, #sequra-page table tr td {
   text-align: center;
   padding: 14px;
 }
-table tr th.sqm--left-aligned, table tr td.sqm--left-aligned {
+#sequra-page table tr th.sqm--left-aligned, #sequra-page table tr td.sqm--left-aligned {
   text-align: left;
 }
-table tr th.sqm--blue-text, table tr td.sqm--blue-text {
+#sequra-page table tr th.sqm--blue-text, #sequra-page table tr td.sqm--blue-text {
   color: #0066ff;
 }
-table tr td {
+#sequra-page table tr td {
   font-weight: 400;
 }
-table tr td:last-of-type {
+#sequra-page table tr td:last-of-type {
   white-space: nowrap;
 }
-table tr th {
+#sequra-page table tr th {
   font-weight: 600;
 }
 
@@ -294,43 +339,43 @@ table tr th {
   color: #00C2A3;
 }
 
-body {
+#sequra-page {
   color: #000;
   background-color: #f3f6f9;
 }
-body > * {
+#sequra-page > * {
   font-family: "Inter", sans-serif;
   font-size: 15px;
   line-height: 1.4;
 }
 
-table {
+#sequra-page table {
   width: 100%;
   border-collapse: collapse;
 }
-table thead tr th {
+#sequra-page table thead tr th {
   border-bottom: 1px solid #dce0e5;
 }
-table tr:not(:last-of-type) td {
+#sequra-page table tr:not(:last-of-type) td {
   border-bottom: 1px solid #dce0e5;
 }
-table tr th, table tr td {
+#sequra-page table tr th, #sequra-page table tr td {
   text-align: center;
   padding: 14px;
 }
-table tr th.sqm--left-aligned, table tr td.sqm--left-aligned {
+#sequra-page table tr th.sqm--left-aligned, #sequra-page table tr td.sqm--left-aligned {
   text-align: left;
 }
-table tr th.sqm--blue-text, table tr td.sqm--blue-text {
+#sequra-page table tr th.sqm--blue-text, #sequra-page table tr td.sqm--blue-text {
   color: #0066ff;
 }
-table tr td {
+#sequra-page table tr td {
   font-weight: 400;
 }
-table tr td:last-of-type {
+#sequra-page table tr td:last-of-type {
   white-space: nowrap;
 }
-table tr th {
+#sequra-page table tr th {
   font-weight: 600;
 }
 
