@@ -1688,6 +1688,7 @@
   transition: color 0.2s;
 }
 .sq-wizard-sidebar .sqp-step:before {
+  box-sizing: border-box;
   position: absolute;
   top: 5px;
   left: -22px;
@@ -1707,9 +1708,11 @@
   color: #00112c;
 }
 .sq-wizard-sidebar .sqp-step.sqs--completed:before {
+  box-sizing: border-box;
   background: #00C2A3;
 }
 .sq-wizard-sidebar .sqp-step.sqs--completed:after {
+  box-sizing: border-box;
   position: absolute;
   top: 12px;
   left: -17px;
@@ -1723,10 +1726,12 @@
   color: #00112c;
 }
 .sq-wizard-sidebar .sqp-step.sqs--active:before {
+  box-sizing: border-box;
   z-index: 4;
   background: #00C2A3;
 }
 .sq-wizard-sidebar .sqp-step.sqs--active:after {
+  box-sizing: border-box;
   position: absolute;
   top: 3px;
   left: -24px;
