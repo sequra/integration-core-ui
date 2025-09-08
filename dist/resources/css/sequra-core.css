@@ -224,6 +224,7 @@
 #sq-page-wrapper {
   min-height: 100vh;
   padding: 30px 20px 60px 30px;
+  background: #f3f6f9;
 }
 #sq-page-wrapper .sq-page-content-wrapper {
   position: relative;
@@ -323,6 +324,10 @@
   #sq-page-wrapper {
     padding: 0;
   }
+}
+
+.wp-admin #sq-page-wrapper {
+  background: transparent;
 }
 
 .sqv--connect .sq-info-button {
