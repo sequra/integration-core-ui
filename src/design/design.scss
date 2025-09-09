@@ -14,103 +14,103 @@
 
 @include sq-config-icon-font-faces();
 
-.sq-button {
+#sequra-page .sq-button {
   @include sq-button;
 }
 
-.sq-store-switcher {
+#sequra-page .sq-store-switcher {
   @include sq-store-switcher;
 }
 
-.sq-page-header {
+#sequra-page .sq-page-header {
   @include sq-page-header;
 }
 
-.sqp-page-heading {
+#sequra-page .sqp-page-heading {
   @include sqp-page-heading;
 }
 
-.sq-single-select-dropdown {
+#sequra-page .sq-single-select-dropdown {
   @include sq-dropdown;
 }
 
-.sq-multi-item-selector {
+#sequra-page .sq-multi-item-selector {
   @include sq-multi-item-select;
 }
 
-.sq-text-input {
+#sequra-page .sq-text-input {
   @include sq-input-field;
 }
 
-.sq-text-area {
+#sequra-page .sq-text-area {
   @include input-text-area;
 }
 
-.sq-password {
+#sequra-page .sq-password {
   @include input-password;
 }
 
-.sq-radio-input {
+#sequra-page .sq-radio-input {
   @include sq-radio-field;
 }
 
-.sq-radio-input-group {
+#sequra-page .sq-radio-input-group {
   display: flex;
   align-items: center;
   gap: 20px;
 }
 
-.sq-loader {
+#sequra-page .sq-loader {
   @include sq-loader;
 }
 
-.sq-toggle {
+#sequra-page .sq-toggle {
   @include sq-toggle;
 }
 
-.sq-checkbox {
+#sequra-page .sq-checkbox {
   @include sq-checkbox;
 }
 
-.sq-field-wrapper {
+#sequra-page .sq-field-wrapper {
   @include sq-field-wrapper;
 }
 
-.sq-country-field-wrapper {
+#sequra-page .sq-country-field-wrapper {
   @include sq-country-field;
 }
 
-.sq-data-frame {
+#sequra-page .sq-data-frame {
   @include sq-data-frame;
 }
 
-.sq-heading-wrapper {
+#sequra-page .sq-heading-wrapper {
   @include sq-heading-wrapper;
 }
 
-.sq-table{
+#sequra-page .sq-table {
   @include sq-table;
 }
 
-.sq-alert {
+#sequra-page .sq-alert {
   @include sq-alert;
 }
 
-.sq-page-footer {
+#sequra-page .sq-page-footer {
   @include sq-page-footer;
 }
 
-.sqs--hidden {
+#sequra-page .sqs--hidden {
   // the only place to have !important. This is so we don't need to repeat this class in each component that could have
   // the hidden state.
   display: none !important;
 }
 
-.sq-version-badge {
+#sequra-page .sq-version-badge {
   @include sq-version-badge;
 }
 
-.sq-page-loader {
+#sequra-page .sq-page-loader {
   position: fixed;
   z-index: 500;
   background-color: $sq-color--background-popup;
@@ -123,14 +123,15 @@
   bottom: 0;
 }
 
-.sq-wizard-sidebar {
+#sequra-page .sq-wizard-sidebar {
   @include sq-wizard-sidebar;
 }
 
-.sq-settings-sidebar {
+#sequra-page .sq-settings-sidebar {
   @include sq-settings-sidebar;
 }
 
-* + .sqp-flash-message-wrapper, .sqp-flash-message-wrapper + * {
+#sequra-page * + .sqp-flash-message-wrapper, 
+#sequra-page .sqp-flash-message-wrapper + * {
   margin-top: 20px;
 }
