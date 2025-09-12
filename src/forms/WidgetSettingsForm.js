@@ -399,12 +399,12 @@ if (!window.SequraFE) {
                        <span class="sqp-field-subtitle">${SequraFE.translationService.translate('widgets.displayOnProductPage.description')}</span>
                     </div>
 
-                     <div class="sq-table__row-field-wrapper sq-table__row-field-wrapper--grow sq-field-wrapper">
+                     <div class="sq-table__row-field-wrapper sq-table__row-field-wrapper--grow">
                         <label class="sq-table__row-field-label">${SequraFE.translationService.translate('widgets.locations.selector')}</label>
                         <span class="sqp-field-subtitle">${SequraFE.translationService.translate('widgets.locations.leaveEmptyToUseDefault')}</span>
                         <input class="sq-table__row-field" type="text" value="${data && 'undefined' !== typeof data.selForTarget ? data.selForTarget : ''}">
                     </div>
-                    <div class="sq-table__row-field-wrapper sq-table__row-field-wrapper--grow sq-field-wrapper">
+                    <div class="sq-table__row-field-wrapper sq-table__row-field-wrapper--grow">
                     <label class="sq-table__row-field-label">${SequraFE.translationService.translate('widgets.configurator.label')}</label>
                     <span class="sqp-field-subtitle">${SequraFE.translationService.translate('widgets.configurator.description.start')}<a class="sq-link-button" href="https://live.sequracdn.com/assets/static/simulator.html" target="_blank"><span>${SequraFE.translationService.translate('widgets.configurator.description.link')}</span></a><span>${SequraFE.translationService.translate('widgets.configurator.description.end')} ${SequraFE.translationService.translate('widgets.locations.leaveEmptyToUseDefault')}</span></span>
                     <textarea class="sqp-field-component sq-text-input sq-text-area" rows="5">${data && 'undefined' !== typeof data.widgetStyles ? data.widgetStyles : ''}</textarea>
