@@ -60,7 +60,8 @@ if (!window.SequraFE) {
      * getPaymentMethodsUrl: string,
      * getAllPaymentMethodsUrl: string,
      * page: string,
-     * appState: string
+     * appState: string,
+     * configurableSelectorsForMiniWidgets: string
      * }} configuration
      * @constructor
      */
@@ -74,7 +75,8 @@ if (!window.SequraFE) {
             utilities
         } = SequraFE;
 
-        const { configurableSelectorsForMiniWidgets } = SequraFE.flags;
+        const configurableSelectorsForMiniWidgets =
+            configuration.configurableSelectorsForMiniWidgets === "true";
 
         /** @type WidgetSettings */
         let activeSettings;
