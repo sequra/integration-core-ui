@@ -5,6 +5,7 @@ if (!window.SequraFE) {
 // Define the supported configuration capabilities.
 SequraFE.flags = {
     isShowCheckoutAsHostedPageFieldVisible: true,
+    configurableSelectorsForMiniWidgets: false,
     ...('undefined' === typeof SequraFE.flags ? {} : SequraFE.flags)
 }
 
