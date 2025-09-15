@@ -80,7 +80,7 @@ if (!window.SequraFE) {
             excludedProducts: [],
             enabledForServices: false,
             allowFirstServicePaymentDelay: false,
-            allowServiceRegItems: false,
+            allowServiceRegistrationItems: false,
             defaultServicesEndDate: 'P1Y'
         };
 
@@ -205,10 +205,10 @@ if (!window.SequraFE) {
                         }),
                         generator.createToggleField({
                             className: 'sq-service-related-field',
-                            value: changedGeneralSettings.allowServiceRegItems,
-                            label: 'generalSettings.allowServiceRegItems.label',
-                            description: 'generalSettings.allowServiceRegItems.description',
-                            onChange: (value) => handleGeneralSettingsChange('allowServiceRegItems', value)
+                            value: changedGeneralSettings.allowServiceRegistrationItems,
+                            label: 'generalSettings.allowServiceRegistrationItems.label',
+                            description: 'generalSettings.allowServiceRegistrationItems.description',
+                            onChange: (value) => handleGeneralSettingsChange('allowServiceRegistrationItems', value)
                         }),
                         generator.createTextField({
                             value: changedGeneralSettings.defaultServicesEndDate,
