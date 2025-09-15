@@ -77,7 +77,11 @@ if (!window.SequraFE) {
             sendOrderReportsPeriodicallyToSeQura: false,
             allowedIPAddresses: [],
             excludedCategories: [],
-            excludedProducts: []
+            excludedProducts: [],
+            enabledForServices: false,
+            allowFirstServicePaymentDelay: false,
+            allowServiceRegItems: false,
+            defaultServicesEndDate: 'P1Y'
         };
 
         /**
@@ -179,7 +183,35 @@ if (!window.SequraFE) {
                         value: changedGeneralSettings.excludedProducts?.join(','),
                         searchable: false,
                         onChange: (value) => handleGeneralSettingsChange('excludedProducts', value)
-                    })
+                    }),
+                    generator.createToggleField({
+                        value: changedGeneralSettings.enabledForServices,
+                        label: 'generalSettings.enabledForServices.label',
+                        description: 'generalSettings.enabledForServices.description',
+                        onChange: handleEnabledForServicesChange
+                    }),
+                    generator.createToggleField({
+                        // className: 'sq-log-settings-toggle',
+                        className: 'sq-service-related-field',
+                        value: changedGeneralSettings.allowFirstServicePaymentDelay,
+                        label: 'generalSettings.allowFirstServicePaymentDelay.label',
+                        description: 'generalSettings.allowFirstServicePaymentDelay.description',
+                        onChange: (value) => handleGeneralSettingsChange('allowFirstServicePaymentDelay', value)
+                    }),
+                    generator.createToggleField({
+                        className: 'sq-service-related-field',
+                        value: changedGeneralSettings.allowServiceRegItems,
+                        label: 'generalSettings.allowServiceRegItems.label',
+                        description: 'generalSettings.allowServiceRegItems.description',
+                        onChange: (value) => handleGeneralSettingsChange('allowServiceRegItems', value)
+                    }),
+                    generator.createTextField({
+                        value: changedGeneralSettings.defaultServicesEndDate,
+                        className: 'sq-text-input sq-default-services-end-date sq-service-related-field',
+                        label: 'generalSettings.defaultServicesEndDate.label',
+                        description: 'generalSettings.defaultServicesEndDate.description',
+                        onChange: (value) => handleGeneralSettingsChange('defaultServicesEndDate', value)
+                    }),
                 )
             }
 
@@ -196,6 +228,8 @@ if (!window.SequraFE) {
 
             renderCountries();
             data.sellingCountries.length !== 0 && renderControls();
+
+            showOrHideServiceRelatedFields();
         }
 
         /**
@@ -331,24 +365,33 @@ if (!window.SequraFE) {
             disableFooter(false);
         }
 
-        /**
-         * Check if a given string is a valid IP address.
-         *
-         * @param {string} str
-         *
-         * @returns {boolean}
-         */
-        const checkIfValidIP = (str) => {
-            const regexExp = /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/gi;
+        const showOrHideServiceRelatedFields = () => {
+            const selector = '.sq-field-wrapper:has(.sq-service-related-field),.sq-field-wrapper.sq-service-related-field'
+            const hiddenClass = 'sqs--hidden';
+            document.querySelectorAll(selector).forEach((el) => {
+                if (changedGeneralSettings.enabledForServices) {
+                    el.classList.remove(hiddenClass)
+                } else {
+                    el.classList.add(hiddenClass)
+                }
+            });
+        }
 
-            return regexExp.test(str);
+        /**
+         * Handles enabledForServices changes.
+         * 
+         * @param value
+         */
+        const handleEnabledForServicesChange = (value) => {
+            handleGeneralSettingsChange('enabledForServices', value)
+            showOrHideServiceRelatedFields();
         }
 
         const areIPAddressesValid = () => {
             let hasError = false;
 
             changedGeneralSettings.allowedIPAddresses.forEach((address) => {
-                if (!checkIfValidIP(address)) {
+                if (!validator.validateIpAddress(address)) {
                     hasError = true;
                 }
             });
@@ -362,11 +405,22 @@ if (!window.SequraFE) {
             return !hasError;
         }
 
+        const isValidTimeDuration = () => {
+            const valid = validator.validateDateOrDuration(changedGeneralSettings.defaultServicesEndDate);
+            validator.validateField(
+                document.querySelector('.sq-default-services-end-date'),
+                !valid,
+                'validation.invalidTimeDuration'
+            );
+
+            return valid;
+        }
+
         /**
          * Handles saving of the form.
          */
         const handleSave = () => {
-            if (!isCountryConfigurationValid() || !areIPAddressesValid()) {
+            if (!isCountryConfigurationValid() || !areIPAddressesValid() || !isValidTimeDuration()) {
                 return;
             }
 

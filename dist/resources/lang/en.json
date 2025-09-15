@@ -335,6 +335,26 @@
     "excludedProducts": {
       "label": "Excluded products",
       "description": "The store products in this field will not be allowed to be purchased with SeQura payment methods. Please enter a valid SKU for every product you would like to exclude."
+    },
+    "enabledForServices": {
+      "label": "Enabled for services",
+      "description": "Your contract must allow selling services."
+    },
+    "allowFirstServicePaymentDelay": {
+      "label": "Allow first service payment delay",
+      "description": "Do not enable except by indication of seQura."
+    },
+    "allowServiceRegItems": {
+      "label": "Allow registration items",
+      "description": "Allows configuring part of the product price to be paid in advance as registration. Do not enable except by indication of seQura."
+    },
+    "defaultServicesEndDate": {
+      "label": "Default services end date",
+      "description": "Dates as 2017-08-31, time duration as P3M15D (3 months and 15 days). The default value for all products."
     }
+  },
+  "supportLink": {
+    "label": "Need help?",
+    "link": "https://sqra.es/supportes"
   }
 }

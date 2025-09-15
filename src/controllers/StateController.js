@@ -6,6 +6,7 @@ if (!window.SequraFE) {
 SequraFE.flags = {
     isShowCheckoutAsHostedPageFieldVisible: true,
     configurableSelectorsForMiniWidgets: false,
+    isServiceSellingAllowed: false,
     ...('undefined' === typeof SequraFE.flags ? {} : SequraFE.flags)
 }
 
