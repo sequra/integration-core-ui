@@ -114,7 +114,8 @@
     "invalidFieldValue": "Il campo deve essere impostato su \"%s\".",
     "invalidMaxValue": "Il valore massimo consentito è %s.",
     "invalidImageType": "Fornire un file in uno dei tipi di immagine supportati (PNG, JPG, SVG).",
-    "invalidImageSize": "Il file selezionato supera il limite di 10MB."
+    "invalidImageSize": "Il file selezionato supera il limite di 10MB.",
+    "invalidTimeDuration": "Questo campo deve contenere solo date come 2017-08-31 o durate come P3M15D (3 mesi e 15 giorni). Controlla ISO 8601."
   },
   "payments": {
     "title": "Metodi di pagamento",
