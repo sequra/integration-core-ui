@@ -147,7 +147,8 @@ if (!window.SequraFE) {
 
             if (configuration.appState === SequraFE.appStates.SETTINGS && !SequraFE.isPromotional) {
                 const {
-                    isShowCheckoutAsHostedPageFieldVisible
+                    isShowCheckoutAsHostedPageFieldVisible,
+                    isServiceSellingAllowed
                 } = SequraFE.flags;
 
                 if (isShowCheckoutAsHostedPageFieldVisible) {
@@ -183,36 +184,43 @@ if (!window.SequraFE) {
                         value: changedGeneralSettings.excludedProducts?.join(','),
                         searchable: false,
                         onChange: (value) => handleGeneralSettingsChange('excludedProducts', value)
-                    }),
-                    generator.createToggleField({
-                        value: changedGeneralSettings.enabledForServices,
-                        label: 'generalSettings.enabledForServices.label',
-                        description: 'generalSettings.enabledForServices.description',
-                        onChange: handleEnabledForServicesChange
-                    }),
-                    generator.createToggleField({
-                        // className: 'sq-log-settings-toggle',
-                        className: 'sq-service-related-field',
-                        value: changedGeneralSettings.allowFirstServicePaymentDelay,
-                        label: 'generalSettings.allowFirstServicePaymentDelay.label',
-                        description: 'generalSettings.allowFirstServicePaymentDelay.description',
-                        onChange: (value) => handleGeneralSettingsChange('allowFirstServicePaymentDelay', value)
-                    }),
-                    generator.createToggleField({
-                        className: 'sq-service-related-field',
-                        value: changedGeneralSettings.allowServiceRegItems,
-                        label: 'generalSettings.allowServiceRegItems.label',
-                        description: 'generalSettings.allowServiceRegItems.description',
-                        onChange: (value) => handleGeneralSettingsChange('allowServiceRegItems', value)
-                    }),
-                    generator.createTextField({
-                        value: changedGeneralSettings.defaultServicesEndDate,
-                        className: 'sq-text-input sq-default-services-end-date sq-service-related-field',
-                        label: 'generalSettings.defaultServicesEndDate.label',
-                        description: 'generalSettings.defaultServicesEndDate.description',
-                        onChange: (value) => handleGeneralSettingsChange('defaultServicesEndDate', value)
-                    }),
-                )
+                    })
+                );
+
+                if (isServiceSellingAllowed) {
+                    pageInnerContent?.append(
+                        generator.createToggleField({
+                            value: changedGeneralSettings.enabledForServices,
+                            label: 'generalSettings.enabledForServices.label',
+                            description: 'generalSettings.enabledForServices.description',
+                            onChange: handleEnabledForServicesChange
+                        }),
+                        generator.createToggleField({
+                            // className: 'sq-log-settings-toggle',
+                            className: 'sq-service-related-field',
+                            value: changedGeneralSettings.allowFirstServicePaymentDelay,
+                            label: 'generalSettings.allowFirstServicePaymentDelay.label',
+                            description: 'generalSettings.allowFirstServicePaymentDelay.description',
+                            onChange: (value) => handleGeneralSettingsChange('allowFirstServicePaymentDelay', value)
+                        }),
+                        generator.createToggleField({
+                            className: 'sq-service-related-field',
+                            value: changedGeneralSettings.allowServiceRegItems,
+                            label: 'generalSettings.allowServiceRegItems.label',
+                            description: 'generalSettings.allowServiceRegItems.description',
+                            onChange: (value) => handleGeneralSettingsChange('allowServiceRegItems', value)
+                        }),
+                        generator.createTextField({
+                            value: changedGeneralSettings.defaultServicesEndDate,
+                            className: 'sq-text-input sq-default-services-end-date sq-service-related-field',
+                            label: 'generalSettings.defaultServicesEndDate.label',
+                            description: 'generalSettings.defaultServicesEndDate.description',
+                            onChange: (value) => handleGeneralSettingsChange('defaultServicesEndDate', value)
+                        })
+                    );
+
+                    showOrHideServiceRelatedFields();
+                }
             }
 
             pageInnerContent?.append(
@@ -225,11 +233,9 @@ if (!window.SequraFE) {
                     onChange: handleCountryChange
                 })
             );
-
+            
             renderCountries();
             data.sellingCountries.length !== 0 && renderControls();
-
-            showOrHideServiceRelatedFields();
         }
 
         /**
@@ -428,34 +434,6 @@ if (!window.SequraFE) {
 
             areIPAddressesValid()
             saveChangedData();
-        }
-
-        /**
-         * Handle merchant id validation error.
-         *
-         * @param {[{isValid: boolean, reason: string|null}]} results
-         */
-        const handleValidationError = (results) => {
-            if (results[0].reason && !results[0].reason.includes('merchantId')) {
-                SequraFE.responseService.errorHandler(
-                    { errorCode: 'general.errors.connection.invalidUsernameOrPassword' }
-                ).catch(() => {
-                });
-
-                utilities.hideLoader();
-
-                return;
-            }
-
-            results.forEach((result, index) => {
-                validator.validateField(
-                    document.querySelector(`[name="country_${changedCountryConfiguration[index].countryCode}"]`),
-                    !result.isValid,
-                    'validation.invalidField'
-                );
-            });
-
-            utilities.hideLoader();
         }
 
         /**
