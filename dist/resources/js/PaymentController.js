@@ -111,17 +111,7 @@ if (!window.SequraFE) {
                                     SequraFE.state.display();
                                 }
                             },
-                            menuItems: [
-                                {
-                                    label: 'general.paymentMethods',
-                                    href: window.location.href.split('#')[0] + '#payment',
-                                    isActive: true,
-                                },
-                                {
-                                    label: 'general.settings',
-                                    href: window.location.href.split('#')[0] + '#settings'
-                                }
-                            ]
+                            menuItems: SequraFE.utilities.getMenuItems(SequraFE.appStates.PAYMENT)
                         }
                     ),
                     generator.createElement('div', 'sq-page-content', '', null, [
