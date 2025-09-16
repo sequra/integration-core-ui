@@ -222,6 +222,10 @@ tr:has(.sqm--log):hover {
     display: flex;
     align-items: center;
     gap: 1rem;
+
+    .sq-field-wrapper {
+      margin-bottom: 0!important;
+    }
   }
 
   &__selector {

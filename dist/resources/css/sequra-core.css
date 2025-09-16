@@ -1911,6 +1911,9 @@ tr:has(.sqm--log):hover {
   align-items: center;
   gap: 1rem;
 }
+.sq-datatable__search .sq-field-wrapper {
+  margin-bottom: 0 !important;
+}
 .sq-datatable__selector {
   padding: 8px 16px !important;
   color: #000 !important;
