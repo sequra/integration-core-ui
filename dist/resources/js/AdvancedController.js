@@ -94,7 +94,7 @@ if (!window.SequraFE) {
             const pageWrapper = document.getElementById('sq-page-wrapper');
 
             pageWrapper.append(
-                generator.createElement('div', 'sq-page-content-wrapper sqv--transactions', '', null, [
+                generator.createElement('div', 'sq-page-content-wrapper sqv--advanced', '', null, [
                     SequraFE.components.PageHeader.create(
                         {
                             currentVersion: version?.current,

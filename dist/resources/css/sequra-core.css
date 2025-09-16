@@ -313,12 +313,25 @@
   color: #00C2A3;
 }
 #sequra-page #sq-page-wrapper .sq-page-content-wrapper.sqv--payments .sq-content-inner .sq-table-heading .sqm--table-dropdown .sqp-field-subtitle {
-  color: #B1AEBA;
+  color: #b1aeba;
 }
 #sequra-page #sq-page-wrapper .sq-page-content-wrapper.sqv--settings .sq-content-inner {
   max-width: 835px;
   width: 100%;
   padding: 32px 48px 52px 48px;
+}
+#sequra-page #sq-page-wrapper .sq-page-content-wrapper.sqv--advanced .sq-content-inner {
+  padding: 44px 36px 36px;
+}
+#sequra-page #sq-page-wrapper .sq-page-content-wrapper.sqv--advanced .sq-content-inner .sq-table-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: 36px;
+}
+#sequra-page #sq-page-wrapper .sq-page-content-wrapper.sqv--advanced .sq-content-inner .sq-table-heading .sqp-page-heading {
+  max-width: 800px;
+  width: 100%;
 }
 @media (max-width: 767.98px) {
   #sequra-page #sq-page-wrapper {
@@ -554,14 +567,14 @@
   column-gap: 4px;
   padding: 3px 8px;
   font-size: 13px;
-  color: #EA9D56;
+  color: #ea9d56;
   border-radius: 15px;
-  border: 1px solid #B65700;
+  border: 1px solid #b65700;
   transition: all 0.2s;
 }
 #sequra-page .sq-page-header .sqp-download-version:hover, #sequra-page .sq-page-header .sqp-download-version:focus {
   color: #fff;
-  background: #EA9D56;
+  background: #ea9d56;
 }
 #sequra-page .sq-page-header .sqp-menu-items {
   display: flex;
@@ -571,8 +584,6 @@
   border-radius: 50px;
   overflow: hidden;
   background-color: #f4f4f4;
-  max-width: 300px;
-  width: 100%;
 }
 #sequra-page .sq-page-header .sqp-menu-items a {
   display: flex;
@@ -582,6 +593,7 @@
   font-size: 14px;
   padding: 8px;
   transition: all 0.2s;
+  width: 150px;
 }
 #sequra-page .sq-page-header .sqp-menu-items a:hover, #sequra-page .sq-page-header .sqp-menu-items a:focus {
   color: #ffffff;
@@ -600,11 +612,11 @@
   font-size: 13px;
 }
 #sequra-page .sq-page-header .sq-mode-badge.sqt--live {
-  color: #0ABF53;
+  color: #0abf53;
   background: rgba(10, 191, 83, 0.12);
 }
 #sequra-page .sq-page-header .sq-mode-badge.sqt--test {
-  color: #B65700;
+  color: #b65700;
   background: rgba(234, 157, 86, 0.12);
 }
 

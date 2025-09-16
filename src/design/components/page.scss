@@ -102,7 +102,7 @@
             }
 
             .sqp-field-subtitle {
-              color: #B1AEBA;
+              color: #b1aeba;
             }
           }
         }
@@ -116,6 +116,22 @@
         padding: 32px 48px 52px 48px;
       }
     }
+
+    &.sqv--advanced {
+      .sq-content-inner {
+        padding: 44px 36px 36px;
+        .sq-table-heading {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          column-gap: 36px;
+          .sqp-page-heading {
+            max-width: 800px;
+            width: 100%;
+          }
+        }
+      }
+    }
   }
 
   @include sq-screen--narrow {
@@ -124,6 +140,6 @@
 }
 // Overwrites for specific platforms
 // WordPres.
-.wp-admin #sequra-page  #sq-page-wrapper {
+.wp-admin #sequra-page #sq-page-wrapper {
   background: transparent;
 }
