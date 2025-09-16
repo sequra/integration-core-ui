@@ -1992,6 +1992,44 @@ tr:has(.sqm--log):hover {
   font-size: 13px;
   margin: 0;
 }
+#sequra-page .sq-table-container .sqp-details {
+  background-color: #f3f6f9;
+}
+#sequra-page .sq-table-container .sqp-details .sq-link-button {
+  color: #0075ff;
+  text-decoration: none;
+  display: flex;
+}
+#sequra-page .sq-table-container .sqp-details .sq-link-button::after {
+  font-family: "sq-icons";
+  content: "\e916";
+  line-height: 1;
+  font-weight: 500;
+  font-size: 6px;
+  padding: 5px 0 0 4px;
+}
+#sequra-page .sq-table-container .sqp-details-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+#sequra-page .sq-table-container .sqp-details-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+}
+#sequra-page .sq-table-container .sqp-details-info {
+  display: flex;
+  gap: 5px;
+}
+#sequra-page .sq-table-container .sqp-details-message {
+  white-space: normal;
+  text-align: justify;
+}
+#sequra-page .sq-table-container .sqp-details-label {
+  font-weight: 700;
+}
 
 #sequra-page .sq-modal {
   position: absolute;
