@@ -1869,6 +1869,8 @@ tr:has(.sqm--log):hover {
   border-radius: 20px;
   width: 20px;
   height: 20px;
+  padding: 0;
+  border-color: transparent;
 }
 #sequra-page .sqm--log-details::before {
   font-family: "sq-icons";

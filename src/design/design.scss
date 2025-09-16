@@ -167,6 +167,8 @@ tr:has(.sqm--log):hover {
     border-radius: 20px;
     width: 20px;
     height: 20px;
+    padding: 0;
+    border-color: transparent;
     &::before {
       @include sq-font-icon(zoom-in, 14px);
     }
