@@ -1840,6 +1840,102 @@
   margin-top: 20px;
 }
 
+tr:has(.sqm--log):hover {
+  background: #f4f4f4;
+}
+
+.sqm--log {
+  font-family: monospace;
+  font-size: 12px;
+}
+.sqm--log-info {
+  color: #2196f3;
+}
+.sqm--log-warning {
+  color: #ff9800;
+}
+.sqm--log-error {
+  color: #f44336;
+}
+.sqm--log-debug {
+  color: #000;
+}
+
+.sq-datatable__top {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  font-size: 15px;
+  align-items: center;
+}
+.sq-datatable__bottom {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 15px;
+  align-items: center;
+}
+.sq-datatable__info {
+  color: #686565;
+}
+.sq-datatable__pagination {
+  justify-self: flex-end;
+}
+.sq-datatable__pagination-list {
+  display: flex;
+  margin-left: auto;
+  margin-right: 0;
+}
+.sq-datatable__pagination-list .datatable-pagination-list-item .datatable-pagination-list-item-link {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 2rem;
+  color: #000;
+  transition: all 0.15s;
+  margin: 0 0.25rem;
+  cursor: pointer;
+}
+.sq-datatable__pagination-list .datatable-pagination-list-item.sq-datatable__active .datatable-pagination-list-item-link, .sq-datatable__pagination-list .datatable-pagination-list-item:hover:not(.datatable-disabled) .datatable-pagination-list-item-link {
+  background-color: #000;
+  color: #fff;
+}
+.sq-datatable__pagination-list .datatable-pagination-list-item.datatable-disabled .datatable-pagination-list-item-link {
+  color: #686565;
+  cursor: not-allowed;
+}
+.sq-datatable__search {
+  justify-self: flex-end;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.sq-datatable__selector {
+  padding: 8px 16px !important;
+  color: #000 !important;
+  border: 1px solid #dce0e5 !important;
+  border-radius: 6px !important;
+  min-width: 80px !important;
+  outline-color: transparent !important;
+}
+.sq-datatable__selector:focus, .sq-datatable__selector:hover, .sq-datatable__selector:active {
+  border-color: #6fcf97 !important;
+  box-shadow: none !important;
+}
+.sq-datatable__input {
+  padding: 8px 16px !important;
+  color: #000 !important;
+  border: 1px solid #dce0e5 !important;
+  border-radius: 6px !important;
+  min-width: 300px !important;
+  outline-color: transparent !important;
+}
+.sq-datatable__input:focus, .sq-datatable__input:hover, .sq-datatable__input:active {
+  border-color: #6fcf97 !important;
+  box-shadow: none !important;
+}
+
 #sequra-page .sq-table-container {
   overflow-x: auto;
   width: 100%;

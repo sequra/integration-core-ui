@@ -135,3 +135,123 @@
 #sequra-page .sqp-flash-message-wrapper + * {
   margin-top: 20px;
 }
+
+// Begin: DataTable ------
+
+tr:has(.sqm--log):hover {
+  background: #f4f4f4;
+}
+
+.sqm--log {
+  font-family: monospace;
+  font-size: 12px;
+
+  &-info {
+    color: #2196f3;
+  }
+  &-warning {
+    color: #ff9800;
+  }
+  &-error {
+    color: #f44336;
+  }
+  &-debug {
+    color: #000;
+  }
+}
+
+.sq-datatable {
+  &__wrapper {
+  }
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    font-size: 15px;
+    align-items: center;
+  }
+  &__container {
+  }
+  &__bottom {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 15px;
+    align-items: center;
+  }
+  &__info {
+    color: #686565;
+  }
+  &__pagination {
+    justify-self: flex-end;
+  }
+  &__pagination-list {
+    display: flex;
+    margin-left: auto;
+    margin-right: 0;
+
+    .datatable-pagination-list-item {
+      .datatable-pagination-list-item-link {
+        width: 2rem;
+        height: 2rem;
+        border-radius: 2rem;
+        color: #000;
+        transition: all 0.15s;
+        margin: 0 0.25rem;
+        cursor: pointer;
+      }
+      &.sq-datatable__active,
+      &:hover:not(.datatable-disabled) {
+        .datatable-pagination-list-item-link {
+          background-color: #000;
+          color: #fff;
+        }
+      }
+      &.datatable-disabled {
+        .datatable-pagination-list-item-link {
+          color: #686565;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+  &__search {
+    justify-self: flex-end;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  &__selector {
+    padding: 8px 16px !important;
+    color: #000 !important;
+    border: 1px solid #dce0e5 !important;
+    border-radius: 6px !important;
+    min-width: 80px !important;
+    outline-color: transparent !important;
+    &:focus,
+    &:hover,
+    &:active {
+      border-color: #6fcf97 !important;
+      box-shadow: none !important;
+    }
+  }
+
+  &__input {
+    padding: 8px 16px !important;
+    color: #000 !important;
+    border: 1px solid #dce0e5 !important;
+    border-radius: 6px !important;
+    min-width: 300px !important;
+    outline-color: transparent !important;
+    &:focus,
+    &:hover,
+    &:active {
+      border-color: #6fcf97 !important;
+      box-shadow: none !important;
+    }
+  }
+}
+// End: DataTable ------
