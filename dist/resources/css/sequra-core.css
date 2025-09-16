@@ -1517,6 +1517,8 @@
   color: #000;
   border: 1px solid #dce0e5;
   border-radius: 6px;
+  margin-left: 0;
+  margin-right: 0;
 }
 #sequra-page .sq-table .sq-table__body {
   display: grid;
