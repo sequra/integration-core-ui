@@ -131,7 +131,7 @@
   @include sq-settings-sidebar;
 }
 
-#sequra-page * + .sqp-flash-message-wrapper, 
+#sequra-page * + .sqp-flash-message-wrapper,
 #sequra-page .sqp-flash-message-wrapper + * {
   margin-top: 20px;
 }
@@ -157,6 +157,33 @@ tr:has(.sqm--log):hover {
   }
   &-debug {
     color: #000;
+  }
+  &-details {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 6px;
+    background: #fff;
+    border-radius: 20px;
+    width: 20px;
+    height: 20px;
+    &::before {
+      font-family: "sq-icons";
+      content: "\e909";
+      line-height: 1;
+      font-weight: 500;
+      font-size: 14px;
+      color: #000;
+    }
+    > span {
+      display: none;
+    }
+    &.sqm--log-details-open {
+      background: #000;
+      &::before {
+        color: #fff;
+      }
+    }
   }
 }
 
@@ -224,11 +251,11 @@ tr:has(.sqm--log):hover {
     gap: 1rem;
 
     .sq-field-wrapper {
-      margin-bottom: 0!important;
+      margin-bottom: 0 !important;
     }
 
-    .sq-button{
-      padding: 8px 24px!important;
+    .sq-button {
+      padding: 8px 24px !important;
     }
   }
 
