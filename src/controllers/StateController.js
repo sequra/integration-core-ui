@@ -81,6 +81,7 @@ SequraFE.appPages = {
      * @property {SellingCountry[] | null} sellingCountries
      * @property {DeploymentSettings[] | null} deploymentsSettings
      * @property {DeploymentSettings[] | null} notConnectedDeployments
+     * @property {LogsSettings | null} logsSettings
      * @property {Category[] | null} shopCategories
      */
 
@@ -89,6 +90,12 @@ SequraFE.appPages = {
      * @property {string} id
      * @property {string} name
      * @property {boolean} [active]
+     */
+
+    /**
+     * @typedef {Object} LogsSettings
+     * @property {boolean} enabled
+     * @property {int} level
      */
 
     /**
@@ -109,19 +116,26 @@ SequraFE.appPages = {
         /**
          * @type {DataStore}
          */
-        let dataStore = {
-            version: null,
-            stores: null,
-            connectionSettings: null,
-            countrySettings: null,
-            deploymentsSettings: null,
-            notConnectedDeployments: null,
-            generalSettings: null,
-            widgetSettings: null,
-            paymentMethods: null,
-            sellingCountries: null,
-            shopCategories: null
-        };
+        let dataStore;
+
+        const clearDataStore = () => {
+            dataStore = {
+                version: null,
+                stores: null,
+                connectionSettings: null,
+                notConnectedDeployments: null,
+                deploymentsSettings: null,
+                countrySettings: null,
+                generalSettings: null,
+                widgetSettings: null,
+                paymentMethods: null,
+                sellingCountries: null,
+                shopCategories: null,
+                logsSettings: null
+            };
+        }
+
+        clearDataStore();
 
         /**
          * Main entry point for the application.
@@ -181,7 +195,7 @@ SequraFE.appPages = {
                 api.get(configuration.pageConfiguration.onboarding.getDeploymentsUrl.replace('{storeId}', this.getStoreId()), null, SequraFE.customHeader),
                 api.get(configuration.pageConfiguration.onboarding.getNotConnectedDeploymentsUrl.replace('{storeId}', this.getStoreId()), null, SequraFE.customHeader),
                 api.get(configuration.pageConfiguration.advanced.saveLogsSettingsUrl.replace('{storeId}', this.getStoreId()), null, SequraFE.customHeader),
-            ]).then(([versionRes, storesRes, connectionSettingsRes, countrySettingsRes, widgetSettingsRes, deploymentsSettingsRes, notConnectedDeployments]) => {
+            ]).then(([versionRes, storesRes, connectionSettingsRes, countrySettingsRes, widgetSettingsRes, deploymentsSettingsRes, notConnectedDeployments, logsSettingsRes]) => {
                 dataStore.version = versionRes;
                 dataStore.stores = storesRes;
                 dataStore.connectionSettings = connectionSettingsRes;
@@ -447,22 +461,6 @@ SequraFE.appPages = {
             if (Object.keys(dataStore).includes(key)) {
                 dataStore[key] = value;
             }
-        }
-
-        const clearDataStore = () => {
-            dataStore = {
-                version: null,
-                stores: null,
-                connectionSettings: null,
-                notConnectedDeployments: null,
-                deploymentsSettings: null,
-                countrySettings: null,
-                generalSettings: null,
-                widgetSettings: null,
-                paymentMethods: null,
-                sellingCountries: null,
-                shopCategories: null
-            };
         }
     }
 

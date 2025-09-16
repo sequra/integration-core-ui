@@ -75,10 +75,8 @@ if (!window.SequraFE) {
                     .then(logsRes => {
                         SequraFE.state.setData('logs', logsRes)
                         logs = logsRes;
-
-                    }).catch(error => {
-                        console.error(error);
                     })
+                    .catch(error => console.error(error))
                     .finally(() => {
                         initializePage();
                         utilities.hideLoader()
