@@ -1872,11 +1872,10 @@ tr:has(.sqm--log):hover {
 }
 .sqm--log-details::before {
   font-family: "sq-icons";
-  content: "\e909";
+  content: "\e91b";
   line-height: 1;
   font-weight: 500;
   font-size: 14px;
-  color: #000;
 }
 .sqm--log-details > span {
   display: none;
