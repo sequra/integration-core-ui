@@ -102,6 +102,7 @@
     .sq-table__row-field-wrapper {
       display: grid;
       gap: 4px;
+      margin-bottom: 0;
 
       &--grow {
         flex-grow: 1;

@@ -1486,6 +1486,7 @@
 #sequra-page .sq-table .sq-table__row .sq-table__row-field-wrapper {
   display: grid;
   gap: 4px;
+  margin-bottom: 0;
 }
 #sequra-page .sq-table .sq-table__row .sq-table__row-field-wrapper--grow {
   flex-grow: 1;
