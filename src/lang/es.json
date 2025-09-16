@@ -14,6 +14,7 @@
     "merchant": "Comerciante:",
     "settings": "Ajustes",
     "paymentMethods": "Métodos de pago",
+    "advanced": "Avanzado",
     "changesSaved": "Cambios guardados exitosamente.",
     "noItemsAvailable": "No hay elementos disponibles",
     "mode": {
