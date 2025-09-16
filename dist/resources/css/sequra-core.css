@@ -1914,6 +1914,9 @@ tr:has(.sqm--log):hover {
 .sq-datatable__search .sq-field-wrapper {
   margin-bottom: 0 !important;
 }
+.sq-datatable__search .sq-button {
+  padding: 8px 24px !important;
+}
 .sq-datatable__selector {
   padding: 8px 16px !important;
   color: #000 !important;
