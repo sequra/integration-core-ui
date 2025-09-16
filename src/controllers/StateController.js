@@ -13,7 +13,8 @@ SequraFE.flags = {
 SequraFE.appStates = {
     ONBOARDING: 'onboarding',
     SETTINGS: 'settings',
-    PAYMENT: 'payment'
+    PAYMENT: 'payment',
+    ADVANCED: 'advanced'
 };
 
 SequraFE.appPages = {
@@ -31,6 +32,9 @@ SequraFE.appPages = {
     },
     PAYMENT: {
         METHODS: 'methods'
+    },
+    ADVANCED: {
+        DEBUG: 'debug'
     }
 };
 
@@ -176,6 +180,7 @@ SequraFE.appPages = {
                 api.get(configuration.pageConfiguration.onboarding.getWidgetSettingsUrl.replace('{storeId}', this.getStoreId()), null, SequraFE.customHeader),
                 api.get(configuration.pageConfiguration.onboarding.getDeploymentsUrl.replace('{storeId}', this.getStoreId()), null, SequraFE.customHeader),
                 api.get(configuration.pageConfiguration.onboarding.getNotConnectedDeploymentsUrl.replace('{storeId}', this.getStoreId()), null, SequraFE.customHeader),
+                api.get(configuration.pageConfiguration.advanced.saveLogsSettingsUrl.replace('{storeId}', this.getStoreId()), null, SequraFE.customHeader),
             ]).then(([versionRes, storesRes, connectionSettingsRes, countrySettingsRes, widgetSettingsRes, deploymentsSettingsRes, notConnectedDeployments]) => {
                 dataStore.version = versionRes;
                 dataStore.stores = storesRes;
@@ -184,6 +189,7 @@ SequraFE.appPages = {
                 dataStore.widgetSettings = widgetSettingsRes;
                 dataStore.deploymentsSettings = deploymentsSettingsRes;
                 dataStore.notConnectedDeployments = notConnectedDeployments;
+                dataStore.logsSettings = logsSettingsRes;
 
                 return api.get(configuration.stateUrl.replace('{storeId}', this.getStoreId()), null, SequraFE.customHeader);
             }).then((stateRes) => {
@@ -195,6 +201,11 @@ SequraFE.appPages = {
                 if (stateRes.state === SequraFE.appStates.ONBOARDING) {
                     this.goToState(SequraFE.appStates.ONBOARDING + '-' + page, null, true);
 
+                    return;
+                }
+
+                if (SequraFE.pages?.advanced?.includes(page)) {
+                    this.goToState(SequraFE.appStates.ADVANCED + '-' + page, null, true)
                     return;
                 }
 
