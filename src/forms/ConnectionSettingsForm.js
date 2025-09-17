@@ -600,8 +600,8 @@ if (!window.SequraFE) {
                             }
                         },
                         {
-                            // type: 'danger',
-                            buttonType: 'danger',
+                            type: 'danger',
+                            // buttonType: 'danger',
                             label: 'general.confirm',
                             onClick: () => {
                                 modal.close();
