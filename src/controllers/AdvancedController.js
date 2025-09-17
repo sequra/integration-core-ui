@@ -367,6 +367,7 @@ if (!window.SequraFE) {
                     className: "sq-modal",
                     content: [generator.createElement('p', '', "debug.log.removeModal.message")],
                     footer: true,
+                    canClose: false,
                     buttons: [
                         {
                             type: 'default',

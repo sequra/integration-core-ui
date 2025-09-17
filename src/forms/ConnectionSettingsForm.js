@@ -590,6 +590,7 @@ if (!window.SequraFE) {
                     className: `sq-modal sqv--connection-modal`,
                     content: [generator.createElement('p', '', `connection.disconnect.message`)],
                     footer: true,
+                    canClose: false,
                     buttons: [
                         {
                             type: 'secondary',
@@ -627,6 +628,7 @@ if (!window.SequraFE) {
                     className: `sq-modal sqv--connection-modal`,
                     content: [generator.createElement('p', '', `connection.modal.message`)],
                     footer: true,
+                    canClose: false,
                     buttons: [
                         {
                             type: 'secondary',

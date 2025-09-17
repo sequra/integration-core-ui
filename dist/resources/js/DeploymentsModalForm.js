@@ -214,6 +214,7 @@ window.SequraFE.showDeploymentsModal = function (
             className: 'sq-modal',
             content: [content],
             footer: true,
+            canClose: false,
             buttons: [
                 {
                     type: 'secondary',
