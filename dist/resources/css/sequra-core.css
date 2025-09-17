@@ -225,6 +225,13 @@
   display: flex;
   margin-right: 6px;
   color: #686565;
+  position: absolute;
+  top: calc(100% + 15px);
+  left: 0;
+  transition: color 0.2s;
+}
+#sequra-page .sq-support-link:hover {
+  color: #000;
 }
 #sequra-page .sq-support-link::before {
   font-family: "sq-icons";
@@ -411,6 +418,13 @@
   display: flex;
   margin-right: 6px;
   color: #686565;
+  position: absolute;
+  top: calc(100% + 15px);
+  left: 0;
+  transition: color 0.2s;
+}
+#sequra-page .sq-support-link:hover {
+  color: #000;
 }
 #sequra-page .sq-support-link::before {
   font-family: "sq-icons";

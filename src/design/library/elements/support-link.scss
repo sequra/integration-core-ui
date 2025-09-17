@@ -2,6 +2,13 @@
   display: flex;
   margin-right: 6px;
   color: #686565;
+  position: absolute;
+  top: calc(100% + 15px);
+  left: 0;
+  transition: color 0.2s;
+  &:hover {
+    color: #000;
+  }
   &::before {
     @include sq-font-icon(contact-support, 20px);
   }
