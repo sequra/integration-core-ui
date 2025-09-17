@@ -293,6 +293,7 @@ if (!window.SequraFE) {
                         }
                     ),
                     generator.createElement('div', 'sq-page-content', '', null, [getSidebarRow()]),
+                    generator.createSupportLink()
                 ]))
         }
 

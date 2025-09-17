@@ -258,6 +258,7 @@ if (!window.SequraFE) {
                         ]) : [],
                         getSetupWizardRow()
                     ]),
+                    generator.createSupportLink()
                 ])
             )
         }

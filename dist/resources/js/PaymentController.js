@@ -143,6 +143,7 @@ if (!window.SequraFE) {
                             ])
                         ])
                     ]),
+                    generator.createSupportLink()
                 ]))
         }
 

@@ -1,9 +1,8 @@
 #sequra-page .sq-support-link {
   display: flex;
-  margin-right: 6px;
   color: #686565;
   position: absolute;
-  top: calc(100% + 15px);
+  top: calc(100% + 32px);
   left: 0;
   transition: color 0.2s;
   &:hover {
