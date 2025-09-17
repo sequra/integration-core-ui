@@ -221,6 +221,19 @@
   font-weight: 600;
 }
 
+#sequra-page .sq-support-link {
+  display: flex;
+  margin-right: 6px;
+  color: #686565;
+}
+#sequra-page .sq-support-link::before {
+  font-family: "sq-icons";
+  content: "\e91c";
+  line-height: 1;
+  font-weight: 500;
+  font-size: 20px;
+}
+
 #sequra-page #sq-page-wrapper {
   min-height: 100vh;
   padding: 30px 20px 60px 30px;
@@ -392,6 +405,19 @@
 }
 #sequra-page table tr th {
   font-weight: 600;
+}
+
+#sequra-page .sq-support-link {
+  display: flex;
+  margin-right: 6px;
+  color: #686565;
+}
+#sequra-page .sq-support-link::before {
+  font-family: "sq-icons";
+  content: "\e91c";
+  line-height: 1;
+  font-weight: 500;
+  font-size: 20px;
 }
 
 /**

@@ -1,21 +1,8 @@
-.sq-support-link {
-  position: absolute;
-  bottom: 2rem;
-
-  .sq-support-icon {
-    width: 25px;
-    margin-right: 6px;
-    vertical-align: middle;
-  }
-
-  .sq-support-link-label {
-    vertical-align: middle;
-  }
-}
-
-.sqv--settings {
-  .sq-support-link {
-    position: fixed;
-    bottom: 2rem;
+#sequra-page .sq-support-link {
+  display: flex;
+  margin-right: 6px;
+  color: #686565;
+  &::before {
+    @include sq-font-icon(contact-support, 20px);
   }
 }
