@@ -194,7 +194,7 @@ SequraFE.appPages = {
                 api.get(configuration.pageConfiguration.onboarding.getWidgetSettingsUrl.replace('{storeId}', this.getStoreId()), null, SequraFE.customHeader),
                 api.get(configuration.pageConfiguration.onboarding.getDeploymentsUrl.replace('{storeId}', this.getStoreId()), null, SequraFE.customHeader),
                 api.get(configuration.pageConfiguration.onboarding.getNotConnectedDeploymentsUrl.replace('{storeId}', this.getStoreId()), null, SequraFE.customHeader),
-                api.get(configuration.pageConfiguration.advanced.saveLogsSettingsUrl.replace('{storeId}', this.getStoreId()), null, SequraFE.customHeader),
+                api.get(configuration.pageConfiguration.advanced.getLogsSettingsUrl.replace('{storeId}', this.getStoreId()), null, SequraFE.customHeader),
             ]).then(([versionRes, storesRes, connectionSettingsRes, countrySettingsRes, widgetSettingsRes, deploymentsSettingsRes, notConnectedDeployments, logsSettingsRes]) => {
                 dataStore.version = versionRes;
                 dataStore.stores = storesRes;
