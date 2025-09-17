@@ -406,7 +406,7 @@ if (!window.SequraFE) {
                         initializeDataTable();
                     }).catch(error => {
                         console.error(error);
-                        showFlashMessage('advanced.errors.failedToRemoveLog', 'error');
+                        showFlashMessage('general.errors.failedToRemoveLog', 'error');
                     })
                     .finally(() => utilities.hideLoader());
             });
