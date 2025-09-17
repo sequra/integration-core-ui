@@ -2181,7 +2181,7 @@ tr:has(.sqm--log):hover {
   gap: 10px;
 }
 #sequra-page .sq-modal .sqp-modal-content .sqv--deployments {
-  padding-left: 0;
-  padding-right: 0;
-  padding-bottom: 0;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  padding-bottom: 0 !important;
 }
