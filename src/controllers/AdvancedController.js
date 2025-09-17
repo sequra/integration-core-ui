@@ -399,7 +399,7 @@ if (!window.SequraFE) {
                 }
 
                 utilities.showLoader();
-                api.delete(configuration.removeLogsUrl, null, SequraFE.customHeader)
+                api.delete(configuration.removeLogsUrl, null, null, SequraFE.customHeader)
                     .then(_ => {
                         logs = [];
                         SequraFE.state.setData('logs', logs)
