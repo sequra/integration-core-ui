@@ -362,15 +362,15 @@
     },
     "enabledForServices": {
       "label": "Habilitado para serviços",
-      "description": "Seu contrato deve permitir a venda de serviços. Somente um produto pode ser comprado por vez."
+      "description": "Seu contrato deve permitir a venda de serviços. "
     },
     "allowFirstServicePaymentDelay": {
       "label": "Permitir atraso no primeiro pagamento do serviço",
-      "description": "Não habilitar exceto se indicado pelo seQura."
+      "description": ""
     },
     "allowServiceRegistrationItems": {
       "label": "Permitir itens de registro",
-      "description": "Permite configurar uma parte do preço do produto a ser paga antecipadamente como registro. Não habilitar exceto se indicado pelo seQura."
+      "description": "Permite configurar uma parte do preço do produto a ser paga antecipadamente como registro. "
     },
     "defaultServicesEndDate": {
       "label": "Data de término dos serviços padrão",
