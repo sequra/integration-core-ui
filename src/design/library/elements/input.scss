@@ -163,6 +163,10 @@
   input:checked + .sqp-toggle-round:before {
     transform: translateX(17px);
   }
+
+  input:disabled + .sqp-toggle-round:before {
+    opacity: 0.5;
+  }
 }
 
 //noinspection SassScssResolvedByNameOnly

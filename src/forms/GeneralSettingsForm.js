@@ -78,9 +78,9 @@ if (!window.SequraFE) {
             allowedIPAddresses: [],
             excludedCategories: [],
             excludedProducts: [],
-            enabledForServices: false,
-            allowFirstServicePaymentDelay: false,
-            allowServiceRegistrationItems: false,
+            enabledForServices: [],
+            allowFirstServicePaymentDelay: [],
+            allowServiceRegistrationItems: [],
             defaultServicesEndDate: 'P1Y'
         };
 
@@ -188,27 +188,46 @@ if (!window.SequraFE) {
                 );
 
                 if (isServiceSellingAllowed) {
+
+                    const countriesString = countries => {
+                        // input is like ['ES', 'PT']
+                        // output is like 'Spain and Portugal' or 'Spain, France, and Portugal'
+                        let countriesString = '';
+                        const translate = SequraFE.translationService.translate;
+                        for (let i = 0; i < countries.length; i++) {
+                            const country = '<strong>' + translate('countries.' + countries[i] + '.label') + '</strong>';
+                            if(i === 0) {
+                                countriesString += country;
+                            } else if (i === countries.length - 1) {
+                                countriesString += translate('general.and') + country;
+                            } else {
+                                countriesString += ', ' + country;
+                            }
+                        }
+                        return countriesString ? translate('countries.enabledCountries').replace('{countries}', countriesString) : '';
+                    }
+                    const descriptionWithCountries = (description, countries) => SequraFE.translationService.translate(description) + countriesString(countries);
+                    
                     pageInnerContent?.append(
                         generator.createToggleField({
-                            value: changedGeneralSettings.enabledForServices,
+                            value: changedGeneralSettings.enabledForServices.length > 0,
+                            disabled: 'disabled',
                             label: 'generalSettings.enabledForServices.label',
-                            description: 'generalSettings.enabledForServices.description',
-                            onChange: handleEnabledForServicesChange
+                            description: descriptionWithCountries('generalSettings.enabledForServices.description', changedGeneralSettings.enabledForServices)
                         }),
                         generator.createToggleField({
-                            // className: 'sq-log-settings-toggle',
                             className: 'sq-service-related-field',
-                            value: changedGeneralSettings.allowFirstServicePaymentDelay,
+                            disabled: 'disabled',
+                            value: changedGeneralSettings.allowFirstServicePaymentDelay.length > 0,
                             label: 'generalSettings.allowFirstServicePaymentDelay.label',
-                            description: 'generalSettings.allowFirstServicePaymentDelay.description',
-                            onChange: (value) => handleGeneralSettingsChange('allowFirstServicePaymentDelay', value)
+                            description: descriptionWithCountries('generalSettings.allowFirstServicePaymentDelay.description', changedGeneralSettings.allowFirstServicePaymentDelay)
                         }),
                         generator.createToggleField({
                             className: 'sq-service-related-field',
-                            value: changedGeneralSettings.allowServiceRegistrationItems,
+                            disabled: 'disabled',
+                            value: changedGeneralSettings.allowServiceRegistrationItems.length > 0,
                             label: 'generalSettings.allowServiceRegistrationItems.label',
-                            description: 'generalSettings.allowServiceRegistrationItems.description',
-                            onChange: (value) => handleGeneralSettingsChange('allowServiceRegistrationItems', value)
+                            description: descriptionWithCountries('generalSettings.allowServiceRegistrationItems.description', changedGeneralSettings.allowServiceRegistrationItems)
                         }),
                         generator.createTextField({
                             value: changedGeneralSettings.defaultServicesEndDate,
@@ -375,22 +394,12 @@ if (!window.SequraFE) {
             const selector = '.sq-field-wrapper:has(.sq-service-related-field),.sq-field-wrapper.sq-service-related-field'
             const hiddenClass = 'sqs--hidden';
             document.querySelectorAll(selector).forEach((el) => {
-                if (changedGeneralSettings.enabledForServices) {
+                if (changedGeneralSettings.enabledForServices.length > 0) {
                     el.classList.remove(hiddenClass)
                 } else {
                     el.classList.add(hiddenClass)
                 }
             });
-        }
-
-        /**
-         * Handles enabledForServices changes.
-         * 
-         * @param value
-         */
-        const handleEnabledForServicesChange = (value) => {
-            handleGeneralSettingsChange('enabledForServices', value)
-            showOrHideServiceRelatedFields();
         }
 
         const areIPAddressesValid = () => {

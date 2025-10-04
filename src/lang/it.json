@@ -232,7 +232,8 @@
     "PE": {
       "label": "Perù",
       "description": "Inserisci l'ID commerciante SeQura da utilizzare per i clienti peruviani."
-    }
+    },
+    "enabledCountries": "Attivato per {countries}."
   },
   "widgets": {
     "title": {
