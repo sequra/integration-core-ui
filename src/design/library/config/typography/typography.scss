@@ -13,7 +13,7 @@ $sq-font-size--input-error: $sq-font-size--small;
 
 
 //noinspection SassScssResolvedByNameOnly
-h2 {
+#sequra-page h2 {
   @include font-weight--semi-bold;
 
   font-size: $sq-font-size--page-title;

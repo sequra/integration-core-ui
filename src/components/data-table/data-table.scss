@@ -1,5 +1,5 @@
 //noinspection SassScssResolvedByNameOnly
-.sq-table-container {
+#sequra-page .sq-table-container {
   overflow-x: auto;
   width: 100%;
   margin: 0;
@@ -56,6 +56,51 @@
     .sqp-payment-method-description {
       font-size: $sq-font-size--small;
       margin: 0;
+    }
+  }
+
+  .sqp-details {
+    background-color: #f3f6f9;
+    .sq-link-button {
+      color: #0075ff;
+      text-decoration: none;
+      display: flex;
+
+      &::after {
+        font-family: "sq-icons";
+        content: "\e916";
+        line-height: 1;
+        font-weight: 500;
+        font-size: 6px;
+        padding: 5px 0 0 4px;
+      }
+    }
+
+    &-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    &-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+    }
+
+    &-info {
+      display: flex;
+      gap: 5px;
+    }
+
+    &-message {
+      white-space: normal;
+      text-align: justify;
+    }
+
+    &-label {
+      font-weight: 700;
     }
   }
 }

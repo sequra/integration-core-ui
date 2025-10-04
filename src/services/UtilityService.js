@@ -94,6 +94,32 @@ if (!window.SequraFE) {
 
             return parent;
         };
+
+        /**
+         * Returns the menu item array for page navigation.
+         *
+         * @param {string} activePage
+         * @return {Array<{label: string, href: string, isActive: boolean}>}
+         */
+        this.getMenuItems = (activePage) => {
+            return SequraFE.isPromotional ? [] : [
+                {
+                    label: 'general.paymentMethods',
+                    href: window.location.href.split('#')[0] + '#payment',
+                    isActive: activePage === SequraFE.appStates.PAYMENT
+                },
+                {
+                    label: 'general.settings',
+                    href: window.location.href.split('#')[0] + '#settings',
+                    isActive: activePage === SequraFE.appStates.SETTINGS
+                },
+                {
+                    label: 'general.advanced',
+                    href: window.location.href.split('#')[0] + '#advanced',
+                    isActive: activePage === SequraFE.appStates.ADVANCED
+                }
+            ];
+        };
     }
 
     SequraFE.utilities = new UtilityService();

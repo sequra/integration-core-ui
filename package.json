@@ -12,6 +12,10 @@
     "build-dist-css": "sass --no-source-map src/components/index.scss dist/resources/css/sequra-core.css",
     "dist": "mkdir -p \"./dist/resources/js\" && npm run build-dist-css && npm run copy-dist-js && npm run copy-dist-assets && cp ./test/index.html ./dist"
   },
+  "dependencies": {
+    "json-formatter-js": "^2.5.23",
+    "simple-datatables": "^10.0.0"
+  },
   "devDependencies": {
     "concurrently": "^7.6.0",
     "eslint": "^8.31.0",

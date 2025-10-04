@@ -496,7 +496,7 @@ if (!window.SequraFE) {
         const connect = () => {
             utilities.showLoader();
 
-            api.post(configuration.connectUrl, changedSettings)
+            api.post(configuration.connectUrl, changedSettings, SequraFE.customHeader)
                 .then((result) => {
 
                     if (!areCredentialsValid(result)) {
@@ -547,7 +547,7 @@ if (!window.SequraFE) {
 
                 utilities.showLoader();
 
-                api.post(configuration.disconnectUrl, createPayload())
+                api.post(configuration.disconnectUrl, createPayload(), SequraFE.customHeader)
                     .then(() => SequraFE.state.display())
                     .finally(utilities.hideLoader);
             })
@@ -590,6 +590,7 @@ if (!window.SequraFE) {
                     className: `sq-modal sqv--connection-modal`,
                     content: [generator.createElement('p', '', `connection.disconnect.message`)],
                     footer: true,
+                    canClose: false,
                     buttons: [
                         {
                             type: 'secondary',
@@ -600,7 +601,8 @@ if (!window.SequraFE) {
                             }
                         },
                         {
-                            type: 'primary',
+                            type: 'danger',
+                            // buttonType: 'danger',
                             label: 'general.confirm',
                             onClick: () => {
                                 modal.close();
@@ -626,6 +628,7 @@ if (!window.SequraFE) {
                     className: `sq-modal sqv--connection-modal`,
                     content: [generator.createElement('p', '', `connection.modal.message`)],
                     footer: true,
+                    canClose: false,
                     buttons: [
                         {
                             type: 'secondary',
