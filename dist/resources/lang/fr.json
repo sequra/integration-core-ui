@@ -232,7 +232,8 @@
     "PE": {
       "label": "Pérou",
       "description": "Veuillez saisir l'ID commerçant SeQura à utiliser pour les clients péruviens."
-    }
+    },
+    "enabledCountries": "Activé pour {countries}."
   },
   "widgets": {
     "title": {
