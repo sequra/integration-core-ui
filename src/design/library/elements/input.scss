@@ -164,8 +164,9 @@
     transform: translateX(17px);
   }
 
-  input:disabled + .sqp-toggle-round:before {
-    opacity: 0.5;
+  input:disabled + .sqp-toggle-round {
+    opacity: 0.35;
+    cursor: not-allowed;
   }
 }
 
