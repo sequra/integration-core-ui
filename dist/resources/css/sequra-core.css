@@ -1228,8 +1228,9 @@
 #sequra-page .sq-toggle input:checked + .sqp-toggle-round:before {
   transform: translateX(17px);
 }
-#sequra-page .sq-toggle input:disabled + .sqp-toggle-round:before {
-  opacity: 0.5;
+#sequra-page .sq-toggle input:disabled + .sqp-toggle-round {
+  opacity: 0.35;
+  cursor: not-allowed;
 }
 
 #sequra-page .sq-checkbox {
