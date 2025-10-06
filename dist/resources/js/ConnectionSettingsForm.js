@@ -536,8 +536,7 @@ if (!window.SequraFE) {
                             SequraFE.state.setData('generalSettings', generalSettings);
                         }).catch(() => {
                               SequraFE.responseService.errorHandler({ errorCode: 'general.errors.backgroundDataFetchFailure' }).catch(e => console.error(e));
-                        });
-                        utilities.hideLoader();
+                        }).finally(() => utilities.hideLoader());
                     }
                 });
         }
