@@ -43,6 +43,7 @@ if (!window.SequraFE) {
      * }} data
      * @param {{
      * saveGeneralSettingsUrl: string,
+     * getGeneralSettingsUrl: string,
      * saveCountrySettingsUrl: string,
      * validateConnectionDataUrl: string,
      * page: string,
@@ -459,10 +460,15 @@ if (!window.SequraFE) {
             hasCountryConfigurationChanged &&
                 promises.push(api.post(configuration.saveCountrySettingsUrl, changedCountryConfiguration, SequraFE.customHeader));
 
+            // If some data was changed we need to refresh the general settings data by doing a GET.
+            haveGeneralSettingsChanged || hasCountryConfigurationChanged &&
+                promises.push(api.get(configuration.getGeneralSettingsUrl, null, SequraFE.customHeader));
+
             Promise.all(promises)
-                .then(() => {
+                .then((responses) => {
                     disableFooter(true);
-                    activeGeneralSettings = utilities.cloneObject(changedGeneralSettings);
+                    
+                    activeGeneralSettings = responses[responses.length - 1];
                     activeCountryConfiguration = changedCountryConfiguration.map((utilities.cloneObject))
 
                     configuration.appState === SequraFE.appStates.SETTINGS &&
