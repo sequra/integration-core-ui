@@ -374,7 +374,7 @@ if (!window.SequraFE) {
                     document.querySelector(`[name="${name}-input"]`),
                     'validation.requiredField'
                 );
-
+                
                 const current = getSettingsForActiveDeployment(changedSettings);
                 if (current) current[name] = value;
             }
@@ -531,6 +531,12 @@ if (!window.SequraFE) {
                         SequraFE.state.setCredentialsChanged();
                         SequraFE.state.goToState(SequraFE.appStates.ONBOARDING);
                     } else {
+                        // Reload GeneralSettings data.
+                        api.get(configuration.getGeneralSettingsUrl, null, SequraFE.customHeader).then(generalSettings => {
+                            SequraFE.state.setData('generalSettings', generalSettings);
+                        }).catch(() => {
+                              SequraFE.responseService.errorHandler({ errorCode: 'general.errors.backgroundDataFetchFailure' }).catch(e => console.error(e));
+                        });
                         utilities.hideLoader();
                     }
                 });
