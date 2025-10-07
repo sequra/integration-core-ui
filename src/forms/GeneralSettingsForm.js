@@ -460,16 +460,15 @@ if (!window.SequraFE) {
             hasCountryConfigurationChanged &&
                 promises.push(api.post(configuration.saveCountrySettingsUrl, changedCountryConfiguration, SequraFE.customHeader));
 
-            if (promises.length) {
-                // If some data was changed we need to refresh the general settings data by doing a GET.
-                promises.push(api.get(configuration.getGeneralSettingsUrl, null, SequraFE.customHeader));
-            }
-
             Promise.all(promises)
-                .then((responses) => {
+                .then(async () => {
                     disableFooter(true);
-
-                    activeGeneralSettings = responses[responses.length - 1];
+                    try {
+                        activeGeneralSettings = await api.get(configuration.getGeneralSettingsUrl, null, SequraFE.customHeader);
+                    } catch (error) {
+                        activeGeneralSettings = utilities.cloneObject(changedGeneralSettings);
+                        SequraFE.responseService.errorHandler({ errorCode: 'general.errors.backgroundDataFetchFailure' }).catch(e => console.error(e));
+                    }
                     activeCountryConfiguration = changedCountryConfiguration.map((utilities.cloneObject))
 
                     configuration.appState === SequraFE.appStates.SETTINGS &&
