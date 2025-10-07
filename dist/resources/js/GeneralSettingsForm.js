@@ -197,7 +197,7 @@ if (!window.SequraFE) {
                         const translate = SequraFE.translationService.translate;
                         for (let i = 0; i < countries.length; i++) {
                             const country = '<strong>' + translate('countries.' + countries[i] + '.label') + '</strong>';
-                            if(i === 0) {
+                            if (i === 0) {
                                 countriesString += country;
                             } else if (i === countries.length - 1) {
                                 countriesString += translate('general.and') + country;
@@ -208,7 +208,7 @@ if (!window.SequraFE) {
                         return countriesString ? translate('countries.enabledCountries').replace('{countries}', countriesString) : '';
                     }
                     const descriptionWithCountries = (description, countries) => SequraFE.translationService.translate(description) + countriesString(countries);
-                    
+
                     pageInnerContent?.append(
                         generator.createToggleField({
                             value: changedGeneralSettings.enabledForServices.length > 0,
@@ -253,7 +253,7 @@ if (!window.SequraFE) {
                     onChange: handleCountryChange
                 })
             );
-            
+
             renderCountries();
             data.sellingCountries.length !== 0 && renderControls();
         }
@@ -460,14 +460,15 @@ if (!window.SequraFE) {
             hasCountryConfigurationChanged &&
                 promises.push(api.post(configuration.saveCountrySettingsUrl, changedCountryConfiguration, SequraFE.customHeader));
 
-            // If some data was changed we need to refresh the general settings data by doing a GET.
-            haveGeneralSettingsChanged || hasCountryConfigurationChanged &&
+            if (promises.length) {
+                // If some data was changed we need to refresh the general settings data by doing a GET.
                 promises.push(api.get(configuration.getGeneralSettingsUrl, null, SequraFE.customHeader));
+            }
 
             Promise.all(promises)
                 .then((responses) => {
                     disableFooter(true);
-                    
+
                     activeGeneralSettings = responses[responses.length - 1];
                     activeCountryConfiguration = changedCountryConfiguration.map((utilities.cloneObject))
 
