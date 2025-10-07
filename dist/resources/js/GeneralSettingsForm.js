@@ -202,19 +202,19 @@ if (!window.SequraFE) {
                             className: classNameEnabledForService,
                             disabled: 'disabled',
                             label: 'generalSettings.enabledForServices.label',
-                            description: ''
+                            description: 'generalSettings.enabledForServices.description'
                         }),
                         generator.createToggleField({
                             className: `${classNameServiceRelatedField} ${classNameAllowFirstServicePaymentDelay}`,
                             disabled: 'disabled',
                             label: 'generalSettings.allowFirstServicePaymentDelay.label',
-                            description: ''
+                            description: 'generalSettings.allowFirstServicePaymentDelay.description'
                         }),
                         generator.createToggleField({
                             className: `${classNameServiceRelatedField} ${classNameAllowServiceRegistrationItems}`,
                             disabled: 'disabled',
                             label: 'generalSettings.allowServiceRegistrationItems.label',
-                            description: ''
+                            description: 'generalSettings.allowServiceRegistrationItems.description'
                         }),
                         generator.createTextField({
                             className: `sq-text-input ${classNameServiceRelatedField} ${classNameDefaultServicesEndDate}`,
