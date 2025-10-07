@@ -57,6 +57,13 @@ if (!window.SequraFE) {
             validationService: validator,
             utilities
         } = SequraFE;
+
+        const classNameServiceRelatedField = 'sq-service-related-field';
+        const classNameEnabledForService = 'sq-field-enabled-for-services';
+        const classNameAllowFirstServicePaymentDelay = 'sq-field-allow-first-service-payment-delay';
+        const classNameAllowServiceRegistrationItems = 'sq-field-allow-service-registration-items';
+        const classNameDefaultServicesEndDate = 'sq-default-services-end-date';
+
         /** @type AjaxServiceType */
         const api = SequraFE.ajaxService;
         /** @type GeneralSettings */
@@ -190,49 +197,24 @@ if (!window.SequraFE) {
 
                 if (isServiceSellingAllowed) {
 
-                    const countriesString = countries => {
-                        // input is like ['ES', 'PT']
-                        // output is like 'Spain and Portugal' or 'Spain, France, and Portugal'
-                        let countriesString = '';
-                        const translate = SequraFE.translationService.translate;
-                        for (let i = 0; i < countries.length; i++) {
-                            const country = '<strong>' + translate('countries.' + countries[i] + '.label') + '</strong>';
-                            if (i === 0) {
-                                countriesString += country;
-                            } else if (i === countries.length - 1) {
-                                countriesString += translate('general.and') + country;
-                            } else {
-                                countriesString += ', ' + country;
-                            }
-                        }
-                        return countriesString ? translate('countries.enabledCountries').replace('{countries}', countriesString) : '';
-                    }
-                    const descriptionWithCountries = (description, countries) => SequraFE.translationService.translate(description) + countriesString(countries);
-
                     pageInnerContent?.append(
                         generator.createToggleField({
-                            value: changedGeneralSettings.enabledForServices.length > 0,
+                            className: classNameEnabledForService,
                             disabled: 'disabled',
-                            label: 'generalSettings.enabledForServices.label',
-                            description: descriptionWithCountries('generalSettings.enabledForServices.description', changedGeneralSettings.enabledForServices)
+                            label: 'generalSettings.enabledForServices.label'
                         }),
                         generator.createToggleField({
-                            className: 'sq-service-related-field',
+                            className: `${classNameServiceRelatedField} ${classNameAllowFirstServicePaymentDelay}`,
                             disabled: 'disabled',
-                            value: changedGeneralSettings.allowFirstServicePaymentDelay.length > 0,
-                            label: 'generalSettings.allowFirstServicePaymentDelay.label',
-                            description: descriptionWithCountries('generalSettings.allowFirstServicePaymentDelay.description', changedGeneralSettings.allowFirstServicePaymentDelay)
+                            label: 'generalSettings.allowFirstServicePaymentDelay.label'
                         }),
                         generator.createToggleField({
-                            className: 'sq-service-related-field',
+                            className: `${classNameServiceRelatedField} ${classNameAllowServiceRegistrationItems}`,
                             disabled: 'disabled',
-                            value: changedGeneralSettings.allowServiceRegistrationItems.length > 0,
-                            label: 'generalSettings.allowServiceRegistrationItems.label',
-                            description: descriptionWithCountries('generalSettings.allowServiceRegistrationItems.description', changedGeneralSettings.allowServiceRegistrationItems)
+                            label: 'generalSettings.allowServiceRegistrationItems.label'
                         }),
                         generator.createTextField({
-                            value: changedGeneralSettings.defaultServicesEndDate,
-                            className: 'sq-text-input sq-default-services-end-date sq-service-related-field',
+                            className: `sq-text-input ${classNameServiceRelatedField} ${classNameDefaultServicesEndDate}`,
                             label: 'generalSettings.defaultServicesEndDate.label',
                             description: 'generalSettings.defaultServicesEndDate.description',
                             onChange: (value) => handleGeneralSettingsChange('defaultServicesEndDate', value)
@@ -392,6 +374,38 @@ if (!window.SequraFE) {
         }
 
         const showOrHideServiceRelatedFields = () => {
+            if (!SequraFE.flags.isServiceSellingAllowed) {
+                return;
+            }
+            // Update the values and descriptions of the fields.
+            const countriesString = countries => {
+                // input is like ['ES', 'PT']
+                // output is like 'Spain and Portugal' or 'Spain, France, and Portugal'
+                let countriesString = '';
+                const translate = SequraFE.translationService.translate;
+                for (let i = 0; i < countries.length; i++) {
+                    const country = '<strong>' + translate('countries.' + countries[i] + '.label') + '</strong>';
+                    if (i === 0) {
+                        countriesString += country;
+                    } else if (i === countries.length - 1) {
+                        countriesString += translate('general.and') + country;
+                    } else {
+                        countriesString += ', ' + country;
+                    }
+                }
+                return countriesString ? translate('countries.enabledCountries').replace('{countries}', countriesString) : '';
+            }
+            const descriptionWithCountries = (description, countries) => SequraFE.translationService.translate(description) + countriesString(countries);
+            
+            document.querySelector(`.${classNameEnabledForService} input`).checked = changedGeneralSettings.enabledForServices.length > 0;
+            document.querySelector(`.${classNameEnabledForService} .sqp-field-subtitle`).innerHTML = descriptionWithCountries('generalSettings.enabledForServices.description', changedGeneralSettings.enabledForServices);
+            document.querySelector(`.${classNameAllowFirstServicePaymentDelay} input`).checked = changedGeneralSettings.allowFirstServicePaymentDelay.length > 0;
+            document.querySelector(`.${classNameAllowFirstServicePaymentDelay} .sqp-field-subtitle`).innerHTML = descriptionWithCountries('generalSettings.allowFirstServicePaymentDelay.description', changedGeneralSettings.allowFirstServicePaymentDelay);
+            document.querySelector(`.${classNameAllowServiceRegistrationItems} input`).checked = changedGeneralSettings.allowServiceRegistrationItems.length > 0;
+            document.querySelector(`.${classNameAllowServiceRegistrationItems} .sqp-field-subtitle`).innerHTML = descriptionWithCountries('generalSettings.allowServiceRegistrationItems.description', changedGeneralSettings.allowServiceRegistrationItems);
+            document.querySelector(`.${classNameDefaultServicesEndDate} input`).value = changedGeneralSettings.defaultServicesEndDate;
+
+            // Update the visibility of the fields.
             const selector = '.sq-field-wrapper:has(.sq-service-related-field),.sq-field-wrapper.sq-service-related-field'
             const hiddenClass = 'sqs--hidden';
             document.querySelectorAll(selector).forEach((el) => {
@@ -465,6 +479,11 @@ if (!window.SequraFE) {
                     disableFooter(true);
                     try {
                         activeGeneralSettings = await api.get(configuration.getGeneralSettingsUrl, null, SequraFE.customHeader);
+                        if (JSON.stringify(activeGeneralSettings) !== JSON.stringify(changedGeneralSettings)) {
+                            changedGeneralSettings = utilities.cloneObject(activeGeneralSettings);
+                            // Update the service components in the form.
+                            showOrHideServiceRelatedFields();
+                        }
                     } catch (error) {
                         activeGeneralSettings = utilities.cloneObject(changedGeneralSettings);
                         SequraFE.responseService.errorHandler({ errorCode: 'general.errors.backgroundDataFetchFailure' }).catch(e => console.error(e));
