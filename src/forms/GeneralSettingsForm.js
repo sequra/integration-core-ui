@@ -406,7 +406,7 @@ if (!window.SequraFE) {
             document.querySelector(`.${classNameAllowFirstServicePaymentDelay} .sqp-field-subtitle`).innerHTML = descriptionWithCountries('generalSettings.allowFirstServicePaymentDelay.description', changedGeneralSettings.allowFirstServicePaymentDelay);
             document.querySelector(`.${classNameAllowServiceRegistrationItems} input`).checked = changedGeneralSettings.allowServiceRegistrationItems.length > 0;
             document.querySelector(`.${classNameAllowServiceRegistrationItems} .sqp-field-subtitle`).innerHTML = descriptionWithCountries('generalSettings.allowServiceRegistrationItems.description', changedGeneralSettings.allowServiceRegistrationItems);
-            document.querySelector(`.${classNameDefaultServicesEndDate} input`).value = changedGeneralSettings.defaultServicesEndDate;
+            document.querySelector(`.${classNameDefaultServicesEndDate}`).value = changedGeneralSettings.defaultServicesEndDate;
 
             // Update the visibility of the fields.
             const selector = '.sq-field-wrapper:has(.sq-service-related-field),.sq-field-wrapper.sq-service-related-field'
