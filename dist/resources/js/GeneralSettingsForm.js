@@ -399,7 +399,7 @@ if (!window.SequraFE) {
                 return countriesString ? translate('countries.enabledCountries').replace('{countries}', countriesString) : '';
             }
             const descriptionWithCountries = (description, countries) => SequraFE.translationService.translate(description) + countriesString(countries);
-            
+
             document.querySelector(`.${classNameEnabledForService} input`).checked = changedGeneralSettings.enabledForServices.length > 0;
             document.querySelector(`.${classNameEnabledForService} .sqp-field-subtitle`).innerHTML = descriptionWithCountries('generalSettings.enabledForServices.description', changedGeneralSettings.enabledForServices);
             document.querySelector(`.${classNameAllowFirstServicePaymentDelay} input`).checked = changedGeneralSettings.allowFirstServicePaymentDelay.length > 0;
@@ -480,16 +480,20 @@ if (!window.SequraFE) {
             Promise.all(promises)
                 .then(async () => {
                     disableFooter(true);
-                    try {
-                        activeGeneralSettings = await api.get(configuration.getGeneralSettingsUrl, null, SequraFE.customHeader);
-                        if (JSON.stringify(activeGeneralSettings) !== JSON.stringify(changedGeneralSettings)) {
-                            changedGeneralSettings = utilities.cloneObject(activeGeneralSettings);
-                            // Update the service components in the form.
-                            showOrHideServiceRelatedFields();
-                        }
-                    } catch (error) {
+                    if (configuration.appState === SequraFE.appStates.ONBOARDING) {
                         activeGeneralSettings = utilities.cloneObject(changedGeneralSettings);
-                        SequraFE.responseService.errorHandler({ errorCode: 'general.errors.backgroundDataFetchFailure' }).catch(e => console.error(e));
+                    } else {
+                        try {
+                            activeGeneralSettings = await api.get(configuration.getGeneralSettingsUrl, null, SequraFE.customHeader);
+                            if (JSON.stringify(activeGeneralSettings) !== JSON.stringify(changedGeneralSettings)) {
+                                changedGeneralSettings = utilities.cloneObject(activeGeneralSettings);
+                                // Update the service components in the form.
+                                showOrHideServiceRelatedFields();
+                            }
+                        } catch (error) {
+                            activeGeneralSettings = utilities.cloneObject(changedGeneralSettings);
+                            SequraFE.responseService.errorHandler({ errorCode: 'general.errors.backgroundDataFetchFailure' }).catch(e => console.error(e));
+                        }
                     }
                     activeCountryConfiguration = changedCountryConfiguration.map((utilities.cloneObject))
 
