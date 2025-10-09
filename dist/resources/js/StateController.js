@@ -250,10 +250,17 @@ SequraFE.appPages = {
             let [controllerName, page] = state.split('-');
 
             if (controllerName === SequraFE.appStates.ONBOARDING) {
+
+                // To skip Widgets Onboarding we need to make sure that Widgets are configured (styles set and at least one display option enabled)
+                const areWidgetsConfigured = dataStore.widgetSettings?.widgetStyles !== undefined
+                    && (dataStore.widgetSettings?.displayWidgetOnProductPage
+                        || dataStore.widgetSettings?.showInstallmentAmountInCartPage
+                        || dataStore.widgetSettings?.showInstallmentAmountInProductListing
+                    );
                 if (
                     dataStore.connectionSettings?.connectionData?.every(c => c.username && c.password) &&
                     dataStore.countrySettings?.length &&
-                    dataStore.widgetSettings?.widgetStyles !== undefined &&
+                    areWidgetsConfigured &&
                     !SequraFE.state.getCredentialsChanged()
                 ) {
                     currentState.split('-')[0] === SequraFE.appStates.ONBOARDING ?
