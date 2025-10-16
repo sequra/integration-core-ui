@@ -3,7 +3,7 @@ if (!window.SequraFE) {
 }
 
 if ('undefined' === typeof SequraFE.regex){
-    console.error('SequraFE.regex is not defined. Please provide the regex definitions before loading the ValidationService.');
+    throw new Error('SequraFE.regex is not defined. Please provide the regex definitions before loading the ValidationService.');
 }
 
 (function () {
