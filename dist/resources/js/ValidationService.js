@@ -2,7 +2,7 @@ if (!window.SequraFE) {
     window.SequraFE = {};
 }
 
-if ('undefined' === typeof SequraFE.regex){
+if (typeof SequraFE.regex === 'undefined'){
     throw new Error('SequraFE.regex is not defined. Please provide the regex definitions before loading the ValidationService.');
 }
 
