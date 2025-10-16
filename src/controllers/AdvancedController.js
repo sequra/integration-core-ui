@@ -327,7 +327,7 @@ if (!window.SequraFE) {
                     SequraFE.state.setData('logsSettings', logsSettings);
                 }).catch(error => {
                     console.error(error);
-                    document.querySelector('.sq-log-settings-toggle input').checked = !value;
+                    document.querySelector('.sq-log-settings-toggle input').checked = !settings.isEnabled;
                     showFlashMessage('general.errors.unknown', 'error');
                 })
                 .finally(() => utilities.hideLoader());
