@@ -199,7 +199,6 @@ if (!window.SequraFE) {
             container.style.display = btn.classList.contains('sqm--log-details-open') ? 'block' : 'none';
 
             if (!container.firstChild) {
-                // debugger
                 const json = JSON.parse(logList[btn.getAttribute('data-index')].context);
                 const formatter = new JSONFormatter(json, 0);
                 container.appendChild(formatter.render());
