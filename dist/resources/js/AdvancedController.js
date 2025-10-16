@@ -199,7 +199,12 @@ if (!window.SequraFE) {
             container.style.display = btn.classList.contains('sqm--log-details-open') ? 'block' : 'none';
 
             if (!container.firstChild) {
-                const json = JSON.parse(logList[btn.getAttribute('data-index')].context);
+                let json = '';
+                try {
+                    json = JSON.parse(logList[btn.getAttribute('data-index')].context);
+                } catch (e) {
+                    json = 'Error parsing log content: ' + e.message;
+                }
                 const formatter = new JSONFormatter(json, 0);
                 container.appendChild(formatter.render());
             }
