@@ -200,19 +200,19 @@ if (!window.SequraFE) {
                     pageInnerContent?.append(
                         generator.createToggleField({
                             className: classNameEnabledForService,
-                            disabled: 'disabled',
+                            disabled: true,
                             label: 'generalSettings.enabledForServices.label',
                             description: 'generalSettings.enabledForServices.description'
                         }),
                         generator.createToggleField({
                             className: `${classNameServiceRelatedField} ${classNameAllowFirstServicePaymentDelay}`,
-                            disabled: 'disabled',
+                            disabled: true,
                             label: 'generalSettings.allowFirstServicePaymentDelay.label',
                             description: 'generalSettings.allowFirstServicePaymentDelay.description'
                         }),
                         generator.createToggleField({
                             className: `${classNameServiceRelatedField} ${classNameAllowServiceRegistrationItems}`,
-                            disabled: 'disabled',
+                            disabled: true,
                             label: 'generalSettings.allowServiceRegistrationItems.label',
                             description: 'generalSettings.allowServiceRegistrationItems.description'
                         }),
