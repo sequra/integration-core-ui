@@ -242,7 +242,7 @@ if ('undefined' === typeof SequraFE.regex){
     const validateIpAddress = (str) => {
         const regex = new RegExp(SequraFE.regex.ip);
         return regex.test(str);
-    }
+    };
 
     /**
      * Validates the provided JSON string and marks field invalid if the JSON is invalid.
