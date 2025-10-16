@@ -7,7 +7,7 @@ SequraFE.flags = {
     isShowCheckoutAsHostedPageFieldVisible: true,
     configurableSelectorsForMiniWidgets: false,
     isServiceSellingAllowed: false,
-    ...(typeof SequraFE.flags === 'undefined' ? {} : SequraFE.flags)
+    ...(SequraFE.flags || {})
 }
 
 SequraFE.appStates = {
