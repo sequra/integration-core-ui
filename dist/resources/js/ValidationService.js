@@ -365,6 +365,6 @@ if (typeof SequraFE.regex === 'undefined'){
         validateRequiredField,
         validateDateOrDuration,
         validateIpAddress,
-        handleValidationErrors,
+        handleValidationErrors
     };
 })();
