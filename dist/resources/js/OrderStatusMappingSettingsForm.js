@@ -59,7 +59,7 @@ if (!window.SequraFE) {
             utilities.showLoader();
 
             if (!activeSettings) {
-                activeSettings = data?.orderStatusSettings ? data.orderStatusSettings.map((utilities.cloneObject)) : utilities.cloneObject(defaultFormData);
+                activeSettings = data?.orderStatusSettings ? data.orderStatusSettings.map(utilities.cloneObject) : utilities.cloneObject(defaultFormData);
             }
 
             changedSettings = utilities.cloneObject(activeSettings);
