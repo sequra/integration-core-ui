@@ -400,13 +400,34 @@ if (!window.SequraFE) {
             }
             const descriptionWithCountries = (description, countries) => SequraFE.translationService.translate(description) + countriesString(countries);
 
-            document.querySelector(`.${classNameEnabledForService} input`).checked = changedGeneralSettings.enabledForServices.length > 0;
-            document.querySelector(`.${classNameEnabledForService} .sqp-field-subtitle`).innerHTML = descriptionWithCountries('generalSettings.enabledForServices.description', changedGeneralSettings.enabledForServices);
-            document.querySelector(`.${classNameAllowFirstServicePaymentDelay} input`).checked = changedGeneralSettings.allowFirstServicePaymentDelay.length > 0;
-            document.querySelector(`.${classNameAllowFirstServicePaymentDelay} .sqp-field-subtitle`).innerHTML = descriptionWithCountries('generalSettings.allowFirstServicePaymentDelay.description', changedGeneralSettings.allowFirstServicePaymentDelay);
-            document.querySelector(`.${classNameAllowServiceRegistrationItems} input`).checked = changedGeneralSettings.allowServiceRegistrationItems.length > 0;
-            document.querySelector(`.${classNameAllowServiceRegistrationItems} .sqp-field-subtitle`).innerHTML = descriptionWithCountries('generalSettings.allowServiceRegistrationItems.description', changedGeneralSettings.allowServiceRegistrationItems);
-            document.querySelector(`.${classNameDefaultServicesEndDate}`).value = changedGeneralSettings.defaultServicesEndDate;
+            const enabledForServiceInput = document.querySelector(`.${classNameEnabledForService} input`);
+            if (enabledForServiceInput) {
+                enabledForServiceInput.checked = changedGeneralSettings.enabledForServices.length > 0;
+            }
+            const enabledForServiceSubtitle = document.querySelector(`.${classNameEnabledForService} .sqp-field-subtitle`);
+            if (enabledForServiceSubtitle) {
+                enabledForServiceSubtitle.innerHTML = descriptionWithCountries('generalSettings.enabledForServices.description', changedGeneralSettings.enabledForServices);
+            }
+            const allowFirstServicePaymentDelayInput = document.querySelector(`.${classNameAllowFirstServicePaymentDelay} input`);
+            if (allowFirstServicePaymentDelayInput) {
+                allowFirstServicePaymentDelayInput.checked = changedGeneralSettings.allowFirstServicePaymentDelay.length > 0;
+            }
+            const allowFirstServicePaymentDelaySubtitle = document.querySelector(`.${classNameAllowFirstServicePaymentDelay} .sqp-field-subtitle`);
+            if (allowFirstServicePaymentDelaySubtitle) {
+                allowFirstServicePaymentDelaySubtitle.innerHTML = descriptionWithCountries('generalSettings.allowFirstServicePaymentDelay.description', changedGeneralSettings.allowFirstServicePaymentDelay);
+            }
+            const allowServiceRegistrationItemsInput = document.querySelector(`.${classNameAllowServiceRegistrationItems} input`);
+            if (allowServiceRegistrationItemsInput) {
+                allowServiceRegistrationItemsInput.checked = changedGeneralSettings.allowServiceRegistrationItems.length > 0;
+            }
+            const allowServiceRegistrationItemsSubtitle = document.querySelector(`.${classNameAllowServiceRegistrationItems} .sqp-field-subtitle`);
+            if (allowServiceRegistrationItemsSubtitle) {
+                allowServiceRegistrationItemsSubtitle.innerHTML = descriptionWithCountries('generalSettings.allowServiceRegistrationItems.description', changedGeneralSettings.allowServiceRegistrationItems);
+            }
+            const defaultServicesEndDateInput = document.querySelector(`.${classNameDefaultServicesEndDate}`);
+            if (defaultServicesEndDateInput) {
+                defaultServicesEndDateInput.value = changedGeneralSettings.defaultServicesEndDate;
+            }
 
             // Update the visibility of the fields.
             const selector = '.sq-field-wrapper:has(.sq-service-related-field), .sq-field-wrapper.sq-service-related-field'
