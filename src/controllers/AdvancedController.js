@@ -18,7 +18,7 @@ if (!window.SequraFE) {
     /**
      * @typedef LogSettings
      * @property {boolean} isEnabled
-     * @property {int} level
+     * @property {number} level
      */
 
     /**
