@@ -18,7 +18,7 @@ if (!window.SequraFE) {
     /**
      * @typedef LogSettings
      * @property {boolean} isEnabled
-     * @property {int} level
+     * @property {number} level
      */
 
     /**
@@ -322,7 +322,7 @@ if (!window.SequraFE) {
 
         /**
          * Save logs settings.
-         * @param {LogSettings} settings 
+         * @param {LogSettings} settings
          */
         const saveLogsSettings = (settings) => {
             utilities.showLoader();
