@@ -22,7 +22,7 @@ if (!window.SequraFE) {
      */
 
     /**
-     * Handles payment methods page logic.
+     * Handles debug logs page logic.
      *
      * @param {{
      * getLogsUrl: string,
