@@ -6,3 +6,5 @@ node_modules
 test/resources/*
 !test/resources/**/.gitkeep
 !test/resources/favicon.ico
+
+.DS_Store
