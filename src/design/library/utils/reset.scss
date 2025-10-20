@@ -1,134 +1,176 @@
 // reset browser styles
-html, body {
+#sequra-page {
   margin: 0;
   padding: 0;
   width: 100%;
   min-height: 100%;
   max-height: 100%;
-  background-color: white;
+  font-weight: 400;
   // noinspection CssUnknownProperty
   text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
-}
 
-// cursor
-button, a {
-  cursor: pointer;
-}
-
-/*
-  description: 'Remove default browser button styles.'
-*/
-button {
-  background: transparent;
-
-  border: 0;
-  padding: 0;
-
-  font: inherit;
-  color: inherit;
-  text-decoration: inherit;
-  text-transform: inherit;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-// text-inherit
-input, textarea, select, button, a {
-  font-size: inherit;
-  font-family: inherit;
-  line-height: inherit;
-  font-weight: inherit;
-  text-decoration: inherit;
-  text-transform: inherit;
-}
-
-// outline
-button, a, ul, li, div, tr, input, textarea {
-  outline: none;
-  box-sizing: border-box;
-
-  &:focus,
-  &:hover {
-    outline: none;
+  // cursor
+  button,
+  a {
+    cursor: pointer;
   }
-}
 
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  padding-inline-start: 0;
+  /*
+  description: 'Remove default browser button styles.'
+  */
+  button {
+    background: transparent;
 
-  > li {
+    border: 0;
+    padding: 0;
+
+    font: inherit;
+    color: inherit;
+    text-decoration: inherit;
+    text-transform: inherit;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  // text-inherit
+  input,
+  textarea,
+  select,
+  button,
+  a {
+    font-size: inherit;
+    font-family: inherit;
+    line-height: inherit;
+    font-weight: inherit;
+    text-decoration: inherit;
+    text-transform: inherit;
+  }
+
+  // outline
+  button,
+  a,
+  ul,
+  li,
+  div,
+  tr,
+  input,
+  textarea {
+    outline: none;
+    box-sizing: border-box;
+
+    &:focus,
+    &:hover {
+      outline: none;
+    }
+  }
+
+  ul {
+    list-style-type: none;
     margin: 0;
     padding: 0;
-  }
-}
+    padding-inline-start: 0;
 
-/*
+    > li {
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  /*
   description:
     'Fix placeholder styles (https://css-tricks.com/almanac/selectors/p/placeholder/).',
     '(default placeholder opacity)'
 */
-input {
-  // It is important to separate different declerations for placeholder !
-  &::placeholder {
-    opacity: 1;
+  input {
+    // It is important to separate different declerations for placeholder !
+    &::placeholder {
+      opacity: 1;
+    }
+
+    &::-ms-input-placeholder {
+      opacity: 1;
+    }
+
+    &:-ms-input-placeholder {
+      opacity: 1;
+    }
   }
 
-  &::-ms-input-placeholder {
-    opacity: 1;
+  // block elements box-size
+  // https://developer.mozilla.org/en-US/docs/Web/HTML/Block-level_elements
+  //  https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Introduction_to_the_CSS_box_model
+  //
+  div,
+  p,
+  pre,
+  table,
+  form,
+  fieldset,
+  main,
+  header,
+  footer,
+  nav,
+  section,
+  ul,
+  li,
+  ol,
+  dl,
+  dt,
+  dd,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  hr,
+  article,
+  aside,
+  details,
+  dialog,
+  figcaption,
+  figure {
+    box-sizing: border-box;
   }
 
-  &:-ms-input-placeholder {
-    opacity: 1;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    margin: 0;
+    padding: 0;
+    text-decoration: inherit;
+    text-transform: inherit;
   }
-}
 
-// block elements box-size
-// https://developer.mozilla.org/en-US/docs/Web/HTML/Block-level_elements
-//  https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Introduction_to_the_CSS_box_model
-//
-div, p, pre, table,
-form, fieldset,
-main, header, footer, nav, section,
-ul, li, ol, dl, dt, dd,
-h1, h2, h3, h4, h5, h6,
-hr,
-article, aside, details, dialog, figcaption, figure {
-  box-sizing: border-box;
-}
+  p a {
+    font-weight: normal;
+  }
 
-h1, h2, h3, h4, h5, h6, p {
-  margin: 0;
-  padding: 0;
-  font-weight: 400;
-  text-decoration: inherit;
-  text-transform: inherit;
-}
-
-p a {
-  font-weight: normal;
-}
-
-//button pointer events on span
-button[disabled] {
-  pointer-events: none;
-
-  > * {
+  //button pointer events on span
+  button[disabled] {
     pointer-events: none;
-  }
-}
 
-// Mac bold font rendering fix
-*, *:before, *:after {
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: geometricPrecision;
+    > * {
+      pointer-events: none;
+    }
+  }
+
+  // Mac bold font rendering fix
+  *,
+  *:before,
+  *:after {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: geometricPrecision;
+  }
 }

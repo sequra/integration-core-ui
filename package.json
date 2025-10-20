@@ -2,26 +2,19 @@
   "name": "sequra-core-admin-fe",
   "version": "1.0.0",
   "scripts": {
-    "build-test-css": "sass --no-source-map ./test/index.scss ./test/resources/css/design-demo.css",
-    "copy-test-js": "mkdir -p \"./test/resources/js\" && cp ./src/services/* ./src/components/**/*.js ./src/forms/*.js ./src/controllers/*.js ./test/resources/js",
-    "copy-test-assets": "cp -r ./src/design/assets ./src/lang ./test/resources",
-    "build-test": "npm run build-test-css && npm run copy-test-js && npm run copy-test-assets",
-    "start": "concurrently \"nodemon --exec 'npm run build-test'\" \"nodemon ./test/app.js\"",
     "copy-dist-js": "cp ./src/services/* ./src/components/**/*.js ./src/controllers/*.js ./src/forms/*.js ./dist/resources/js",
     "copy-dist-assets": "cp -r ./src/design/assets ./src/lang ./dist/resources",
     "build-dist-css": "sass --no-source-map src/components/index.scss dist/resources/css/sequra-core.css",
     "dist": "mkdir -p \"./dist/resources/js\" && npm run build-dist-css && npm run copy-dist-js && npm run copy-dist-assets && cp ./test/index.html ./dist"
   },
+  "dependencies": {
+    "json-formatter-js": "^2.5.23",
+    "simple-datatables": "^10.0.0"
+  },
   "devDependencies": {
-    "concurrently": "^7.6.0",
-    "eslint": "^8.31.0",
-    "express": "^4.18.2",
-    "live-server": "^1.2.0",
-    "nodemon": "^3.1.10",
-    "open": "^8.4.0",
-    "prettier": "^2.8.1",
-    "sass": "^1.57.1",
-    "serve": "^10.0.2"
+    "eslint": "^9.0.0",
+    "prettier": "^3.6.2",
+    "sass": "^1.93.2"
   },
   "files": [
     "src",

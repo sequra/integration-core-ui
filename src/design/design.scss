@@ -14,103 +14,103 @@
 
 @include sq-config-icon-font-faces();
 
-.sq-button {
+#sequra-page .sq-button {
   @include sq-button;
 }
 
-.sq-store-switcher {
+#sequra-page .sq-store-switcher {
   @include sq-store-switcher;
 }
 
-.sq-page-header {
+#sequra-page .sq-page-header {
   @include sq-page-header;
 }
 
-.sqp-page-heading {
+#sequra-page .sqp-page-heading {
   @include sqp-page-heading;
 }
 
-.sq-single-select-dropdown {
+#sequra-page .sq-single-select-dropdown {
   @include sq-dropdown;
 }
 
-.sq-multi-item-selector {
+#sequra-page .sq-multi-item-selector {
   @include sq-multi-item-select;
 }
 
-.sq-text-input {
+#sequra-page .sq-text-input {
   @include sq-input-field;
 }
 
-.sq-text-area {
+#sequra-page .sq-text-area {
   @include input-text-area;
 }
 
-.sq-password {
+#sequra-page .sq-password {
   @include input-password;
 }
 
-.sq-radio-input {
+#sequra-page .sq-radio-input {
   @include sq-radio-field;
 }
 
-.sq-radio-input-group {
+#sequra-page .sq-radio-input-group {
   display: flex;
   align-items: center;
   gap: 20px;
 }
 
-.sq-loader {
+#sequra-page .sq-loader {
   @include sq-loader;
 }
 
-.sq-toggle {
+#sequra-page .sq-toggle {
   @include sq-toggle;
 }
 
-.sq-checkbox {
+#sequra-page .sq-checkbox {
   @include sq-checkbox;
 }
 
-.sq-field-wrapper {
+#sequra-page .sq-field-wrapper {
   @include sq-field-wrapper;
 }
 
-.sq-country-field-wrapper {
+#sequra-page .sq-country-field-wrapper {
   @include sq-country-field;
 }
 
-.sq-data-frame {
+#sequra-page .sq-data-frame {
   @include sq-data-frame;
 }
 
-.sq-heading-wrapper {
+#sequra-page .sq-heading-wrapper {
   @include sq-heading-wrapper;
 }
 
-.sq-table{
+#sequra-page .sq-table {
   @include sq-table;
 }
 
-.sq-alert {
+#sequra-page .sq-alert {
   @include sq-alert;
 }
 
-.sq-page-footer {
+#sequra-page .sq-page-footer {
   @include sq-page-footer;
 }
 
-.sqs--hidden {
+#sequra-page .sqs--hidden {
   // the only place to have !important. This is so we don't need to repeat this class in each component that could have
   // the hidden state.
   display: none !important;
 }
 
-.sq-version-badge {
+#sequra-page .sq-version-badge {
   @include sq-version-badge;
 }
 
-.sq-page-loader {
+#sequra-page .sq-page-loader {
   position: fixed;
   z-index: 500;
   background-color: $sq-color--background-popup;
@@ -123,14 +123,167 @@
   bottom: 0;
 }
 
-.sq-wizard-sidebar {
+#sequra-page .sq-wizard-sidebar {
   @include sq-wizard-sidebar;
 }
 
-.sq-settings-sidebar {
+#sequra-page .sq-settings-sidebar {
   @include sq-settings-sidebar;
 }
 
-* + .sqp-flash-message-wrapper, .sqp-flash-message-wrapper + * {
+#sequra-page * + .sqp-flash-message-wrapper,
+#sequra-page .sqp-flash-message-wrapper + * {
   margin-top: 20px;
 }
+
+// Begin: DataTable ------
+
+tr:has(.sqm--log):hover {
+  background: #f4f4f4;
+}
+
+#sequra-page .sqm--log {
+  font-family: monospace;
+  font-size: 12px;
+
+  &-info {
+    color: #2196f3;
+  }
+  &-warning {
+    color: #ff9800;
+  }
+  &-error {
+    color: #f44336;
+  }
+  &-debug {
+    color: #000;
+  }
+  &-details {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 6px;
+    background: #fff;
+    border-radius: 20px;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    border-color: transparent;
+    &::before {
+      @include sq-font-icon(zoom-in, 14px);
+    }
+    > span {
+      display: none;
+    }
+    &.sqm--log-details-open {
+      background: #000;
+      &::before {
+        color: #fff;
+      }
+    }
+  }
+}
+
+#sequra-page .sq-datatable {
+  &__wrapper {
+  }
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    font-size: 15px;
+    align-items: center;
+  }
+  &__container {
+  }
+  &__bottom {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 15px;
+    align-items: center;
+  }
+  &__info {
+    color: #686565;
+  }
+  &__pagination {
+    justify-self: flex-end;
+  }
+  &__pagination-list {
+    display: flex;
+    margin-left: auto;
+    margin-right: 0;
+
+    .datatable-pagination-list-item {
+      .datatable-pagination-list-item-link {
+        width: 2rem;
+        height: 2rem;
+        border-radius: 2rem;
+        color: #000;
+        transition: all 0.15s;
+        margin: 0 0.25rem;
+        cursor: pointer;
+      }
+      &.sq-datatable__active,
+      &:hover:not(.datatable-disabled) {
+        .datatable-pagination-list-item-link {
+          background-color: #000;
+          color: #fff;
+        }
+      }
+      &.datatable-disabled {
+        .datatable-pagination-list-item-link {
+          color: #686565;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+  &__search {
+    justify-self: flex-end;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .sq-field-wrapper {
+      margin-bottom: 0 !important;
+    }
+
+    .sq-button {
+      padding: 8px 24px !important;
+    }
+  }
+
+  &__selector {
+    padding: 8px 16px !important;
+    color: #000 !important;
+    border: 1px solid #dce0e5 !important;
+    border-radius: 6px !important;
+    min-width: 80px !important;
+    outline-color: transparent !important;
+    &:focus,
+    &:hover,
+    &:active {
+      border-color: #6fcf97 !important;
+      box-shadow: none !important;
+    }
+  }
+
+  &__input {
+    padding: 8px 16px !important;
+    color: #000 !important;
+    border: 1px solid #dce0e5 !important;
+    border-radius: 6px !important;
+    min-width: 300px !important;
+    outline-color: transparent !important;
+    &:focus,
+    &:hover,
+    &:active {
+      border-color: #6fcf97 !important;
+      box-shadow: none !important;
+    }
+  }
+}
+// End: DataTable ------

@@ -35,6 +35,7 @@
     }
 
     &:before {
+      box-sizing: border-box;
       position: absolute;
       top: 5px;
       left: -22px;
@@ -58,10 +59,12 @@
       }
 
       &:before {
+        box-sizing: border-box;
         background: $sq-color--primary;
       }
 
       &:after {
+        box-sizing: border-box;
         position: absolute;
         top: 12px;
         left: -17px;
@@ -79,11 +82,13 @@
       }
 
       &:before {
+        box-sizing: border-box;
         z-index: 4;
         background: $sq-color--primary;
       }
 
       &:after {
+        box-sizing: border-box;
         position: absolute;
         top: 3px;
         left: -24px;
