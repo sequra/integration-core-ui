@@ -18,8 +18,17 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
+      
+      - name: Cache NPM dependencies
+        uses: actions/cache@v4
+        id: cache-npm
+        with:
+          path: |
+            node_modules
+          key: npm-${{ hashFiles('package-lock.json') }}
 
       - name: Install dependencies
+        if: steps.cache-npm.outputs.cache-hit != 'true'
         run: npm ci
 
       - name: Build dist
