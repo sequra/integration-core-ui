@@ -374,7 +374,6 @@ if (!window.SequraFE) {
                     document.querySelector(`[name="${name}-input"]`),
                     'validation.requiredField'
                 );
-                
                 const current = getSettingsForActiveDeployment(changedSettings);
                 if (current) current[name] = value;
             }
