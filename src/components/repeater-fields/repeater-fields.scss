@@ -131,6 +131,9 @@
       background-size: 16px 16px;
       cursor: pointer;
       vertical-align: middle;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     .sq-table__row-field {
@@ -140,6 +143,7 @@
       border-radius: 6px;
       margin-left: 0;
       margin-right: 0;
+      width: 90%;
     }
   }
 
