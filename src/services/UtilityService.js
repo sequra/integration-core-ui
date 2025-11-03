@@ -58,7 +58,7 @@ if (!window.SequraFE) {
             const saveButton = document.querySelector('.sq-page-footer .sqp-actions .sqp-save');
             const cancelButton = document.querySelector('.sq-page-footer .sqp-actions .sqp-cancel');
 
-            if(saveButton && cancelButton){
+            if (saveButton && cancelButton) {
                 saveButton.disabled = disable;
                 cancelButton.disabled = disable;
             }
