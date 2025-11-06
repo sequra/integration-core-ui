@@ -1561,6 +1561,9 @@
   background-size: 16px 16px;
   cursor: pointer;
   vertical-align: middle;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 #sequra-page .sq-table .sq-table__row .sq-table__row-field {
   padding: 6px 16px;
@@ -1569,6 +1572,7 @@
   border-radius: 6px;
   margin-left: 0;
   margin-right: 0;
+  width: 90%;
 }
 #sequra-page .sq-table .sq-table__body {
   display: grid;

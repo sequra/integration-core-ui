@@ -310,7 +310,7 @@ if (typeof SequraFE.regex === 'undefined'){
                 'validation.invalidJSON'
             ) && isValid;
 
-            isPaymentMethodValid = allowedPaymentMethods.some(pm => pm.product === location.product)
+            let isPaymentMethodValid = allowedPaymentMethods.some(pm => pm.product === location.product)
                 && value.filter(l => l.product === location.product).length === 1;
 
             isValid = validateField(
