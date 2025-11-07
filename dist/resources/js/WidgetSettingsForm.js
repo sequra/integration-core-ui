@@ -12,7 +12,7 @@ if (!window.SequraFE) {
 
     /**
      * @typedef Category
-     * @property {CategoryPaymentMethod[]} paymentMethods
+     * @property {CategoryPaymentMethod[]} categoryPaymentMethods
      */
 
     /**
@@ -52,15 +52,15 @@ if (!window.SequraFE) {
      * widgetSettings: WidgetSettings,
      * connectionSettings: ConnectionSettings,
      * countrySettings: CountrySettings[],
-     * paymentMethods: PaymentMethod[],
      * allAvailablePaymentMethods: Category[],
      * }} data
      * @param {{
      * saveWidgetSettingsUrl: string,
-     * getPaymentMethodsUrl: string,
      * getAllPaymentMethodsUrl: string,
      * page: string,
-     * appState: string
+     * appState: string,
+     * configurableSelectorsForMiniWidgets: string,
+     * isPaymentApp: string
      * }} configuration
      * @constructor
      */
@@ -74,18 +74,17 @@ if (!window.SequraFE) {
             utilities
         } = SequraFE;
 
-        const { configurableSelectorsForMiniWidgets } = SequraFE.flags;
+        const configurableSelectorsForMiniWidgets =
+            configuration.configurableSelectorsForMiniWidgets === "true" ??
+            SequraFE.flags.configurableSelectorsForMiniWidgets;
+        const isPaymentApp = configuration.isPaymentApp === "true" ?? SequraFE.flags.isPaymentApp;
 
         /** @type WidgetSettings */
         let activeSettings;
         /** @type WidgetSettings */
         let changedSettings;
-        /** @type string[] */
-        let paymentMethodIds;
         /** @type {Category[]} */
         let allAvailablePaymentMethods = data.allAvailablePaymentMethods;
-        /** @type {CategoryPaymentMethod[]} */
-        let payNowPaymentMethods = allAvailablePaymentMethods.pay_now ?? [];
         /** @type {CategoryPaymentMethod[]} */
         let payLaterPaymentMethods = allAvailablePaymentMethods.pay_later ?? [];
         /** @type {CategoryPaymentMethod[]} */
@@ -123,7 +122,6 @@ if (!window.SequraFE) {
                 }
             }
 
-            paymentMethodIds = data.paymentMethods?.map((paymentMethod) => paymentMethod.product);
             changedSettings = utilities.cloneObject(activeSettings)
             initForm();
 
@@ -423,7 +421,7 @@ if (!window.SequraFE) {
 
                         return `<option key="${idx}" data-product="${pm.product}"${selected}>${pm.title}</option>`;
                     }).join('') : ''
-                        }
+                    }
                         </select>
                     </div>
                    `
@@ -438,7 +436,7 @@ if (!window.SequraFE) {
                         const dataset = select.selectedIndex === -1 ? null : select.options[select.selectedIndex].dataset;
 
                         const product = dataset && 'undefined' !== typeof dataset.product ? dataset.product : null;
-                        customLocations.push({ selForTarget, product, widgetStyles, displayWidget });
+                        customLocations.push({selForTarget, product, widgetStyles, displayWidget});
                     });
                     handleChange('customLocations', customLocations)
                 },
@@ -524,10 +522,16 @@ if (!window.SequraFE) {
             api.post(configuration.saveWidgetSettingsUrl, changedSettings, SequraFE.customHeader)
                 .then(() => {
                     if (configuration.appState === SequraFE.appStates.ONBOARDING) {
-                        const index = SequraFE.pages.onboarding.indexOf(SequraFE.appPages.ONBOARDING.WIDGETS)
-                        SequraFE.pages.onboarding.length > index + 1 ?
-                            window.location.hash = configuration.appState + '-' + SequraFE.pages.onboarding[index + 1] :
+                        const index = SequraFE.pages.onboarding.indexOf(SequraFE.appPages.ONBOARDING.WIDGETS);
+
+                        const nextPageExists = SequraFE.pages.onboarding.length > index + 1;
+                        if (nextPageExists) {
+                            window.location.hash = configuration.appState + '-' + SequraFE.pages.onboarding[index + 1];
+                        } else if (isPaymentApp) {
                             window.location.hash = SequraFE.appStates.PAYMENT + '-' + SequraFE.appPages.PAYMENT.METHODS;
+                        } else {
+                            window.location.hash = SequraFE.appStates.SETTINGS + '-' + SequraFE.appPages.SETTINGS.WIDGET;
+                        }
                     }
 
                     activeSettings = utilities.cloneObject(changedSettings);

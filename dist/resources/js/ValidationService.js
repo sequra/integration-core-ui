@@ -2,8 +2,11 @@ if (!window.SequraFE) {
     window.SequraFE = {};
 }
 
-if (typeof SequraFE.regex === 'undefined'){
-    throw new Error('SequraFE.regex is not defined. Please provide the regex definitions before loading the ValidationService.');
+if (typeof SequraFE.regex === 'undefined') {
+    SequraFE.regex = {
+        email: '/^(([^<>()\\[\\]\\\\.,;:\\s@"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@"]+)*)|(".+"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$/',
+        url: '/(https?:\\/\\/)([\\w\\-])+\\.([a-zA-Z]{2,63})([\\/\\w-]*)*\\/?\\??([^#\\n\\r]*)?#?([^\\n\\r]*)/m'
+    }
 }
 
 (function () {
@@ -14,7 +17,7 @@ if (typeof SequraFE.regex === 'undefined'){
      * @property {string} message The error message.
      */
 
-     /**
+    /**
      * @typedef CategoryPaymentMethod
      * @property {string|null} category
      * @property {string|null} product
@@ -283,8 +286,9 @@ if (typeof SequraFE.regex === 'undefined'){
 
     /**
      * Validates custom locations.
-     * @param {Array<HTMLElement>} element Each element in the array should be the details element containing the custom location data. 
-     * @param {Array<Object>} value 
+     * @param {Array<HTMLElement>} element Each element in the array should be the details element containing the
+     *     custom location data.
+     * @param {Array<Object>} value
      * @param {string} value[].selForTarget CSS selector for the target element.
      * @param {string} value[].widgetStyles JSON string representing the styles for the widget.
      * @param {string} value[].product Product name.
@@ -324,22 +328,28 @@ if (typeof SequraFE.regex === 'undefined'){
     }
 
     /**
-    * Validates related fields and disables the footer if any of them is invalid.
-    * @param {string} parentField The parent field name that controls the visibility of related fields. 
-    * @param {Array<Object>} fieldsRelationships An array of objects containing the relationships between fields.
-    * @param {string} fieldsRelationships[].parentField The parent field name that controls the visibility of related fields.
-    * @param {Array<string>} fieldsRelationships[].requiredFields An array of field names that are required when the parent field is shown.
-    * @param {Array<string>} fieldsRelationships[].fields An array of field names that are related to the parent field.
-    * @param {boolean} show Whether to show or hide the related fields.
-    * @return {boolean} Returns true if all related fields are valid, false otherwise.
-    */
+     * Validates related fields and disables the footer if any of them is invalid.
+     * @param {string} parentField The parent field name that controls the visibility of related fields.
+     * @param {Array<Object>} fieldsRelationships An array of objects containing the relationships between fields.
+     * @param {string} fieldsRelationships[].parentField The parent field name that controls the visibility of related
+     *     fields.
+     * @param {Array<string>} fieldsRelationships[].requiredFields An array of field names that are required when the
+     *     parent field is shown.
+     * @param {Array<string>} fieldsRelationships[].fields An array of field names that are related to the parent
+     *     field.
+     * @param {boolean} show Whether to show or hide the related fields.
+     * @return {boolean} Returns true if all related fields are valid, false otherwise.
+     */
     const validateRelatedFields = (parentField, fieldsRelationships, show) => {
         if (!show) {
             return true;
         }
 
         let isValid = true;
-        const { requiredFields, fields } = fieldsRelationships.find(group => group.parentField === parentField) || { requiredFields: [], fields: [] };
+        const {
+            requiredFields,
+            fields
+        } = fieldsRelationships.find(group => group.parentField === parentField) || { requiredFields: [], fields: [] };
         for (let i = 0; i < fields.length; i++) {
             isValid = validateCssSelector(
                 document.querySelector(`[name="${fields[i]}"]`),
