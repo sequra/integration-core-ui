@@ -502,15 +502,6 @@ if (!window.SequraFE) {
         }
 
         /**
-         * Re-renders the form.
-         */
-        const refreshForm = () => {
-            document.querySelector('.sq-content-inner')?.remove();
-            configuration.appState !== SequraFE.appStates.ONBOARDING && document.querySelector('.sq-page-footer').remove();
-            initForm();
-        }
-
-        /**
          * Handles the saving of the form.
          */
         const handleSave = () => {
