@@ -1,6 +1,6 @@
 {
   "name": "sequra-core-admin-fe",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "scripts": {
     "copy-dist-js": "cp ./src/services/* ./src/components/**/*.js ./src/controllers/*.js ./src/forms/*.js ./dist/resources/js",
     "copy-dist-assets": "cp -r ./src/design/assets ./src/lang ./dist/resources",
