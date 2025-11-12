@@ -60,7 +60,6 @@ if (!window.SequraFE) {
      * page: string,
      * appState: string,
      * configurableSelectorsForMiniWidgets: string,
-     * isPaymentApp: string
      * }} configuration
      * @constructor
      */
@@ -74,7 +73,7 @@ if (!window.SequraFE) {
             utilities
         } = SequraFE;
 
-        const { configurableSelectorsForMiniWidgets, isPaymentApp } = SequraFE.flags;
+        const { configurableSelectorsForMiniWidgets } = SequraFE.flags;
 
         /** @type WidgetSettings */
         let activeSettings;
@@ -515,7 +514,7 @@ if (!window.SequraFE) {
                         const nextPageExists = SequraFE.pages.onboarding.length > index + 1;
                         if (nextPageExists) {
                             window.location.hash = configuration.appState + '-' + SequraFE.pages.onboarding[index + 1];
-                        } else if (isPaymentApp) {
+                        } else if (!SequraFE.isPromotional) {
                             window.location.hash = SequraFE.appStates.PAYMENT + '-' + SequraFE.appPages.PAYMENT.METHODS;
                         } else {
                             window.location.hash = SequraFE.appStates.SETTINGS + '-' + SequraFE.appPages.SETTINGS.WIDGET;
