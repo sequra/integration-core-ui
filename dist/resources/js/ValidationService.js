@@ -2,11 +2,8 @@ if (!window.SequraFE) {
     window.SequraFE = {};
 }
 
-if (typeof SequraFE.regex === 'undefined') {
-    SequraFE.regex = {
-        email: '/^(([^<>()\\[\\]\\\\.,;:\\s@"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@"]+)*)|(".+"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$/',
-        url: '/(https?:\\/\\/)([\\w\\-])+\\.([a-zA-Z]{2,63})([\\/\\w-]*)*\\/?\\??([^#\\n\\r]*)?#?([^\\n\\r]*)/m'
-    };
+if (typeof SequraFE.regex === 'undefined'){
+    throw new Error('SequraFE.regex is not defined. Please provide the regex definitions before loading the ValidationService.');
 }
 
 (function () {
@@ -346,10 +343,7 @@ if (typeof SequraFE.regex === 'undefined') {
         }
 
         let isValid = true;
-        const {
-            requiredFields,
-            fields
-        } = fieldsRelationships.find(group => group.parentField === parentField) || { requiredFields: [], fields: [] };
+        const { requiredFields, fields } = fieldsRelationships.find(group => group.parentField === parentField) || { requiredFields: [], fields: [] };
         for (let i = 0; i < fields.length; i++) {
             isValid = validateCssSelector(
                 document.querySelector(`[name="${fields[i]}"]`),

@@ -9,7 +9,7 @@ SequraFE.flags = {
     isServiceSellingAllowed: false,
     isPaymentApp: true,
     ...(SequraFE.flags || {})
-}
+};
 
 SequraFE.appStates = {
     ONBOARDING: 'onboarding',

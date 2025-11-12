@@ -74,10 +74,7 @@ if (!window.SequraFE) {
             utilities
         } = SequraFE;
 
-        const configurableSelectorsForMiniWidgets =
-            configuration.configurableSelectorsForMiniWidgets === "true" ??
-            SequraFE.flags.configurableSelectorsForMiniWidgets;
-        const isPaymentApp = configuration.isPaymentApp === "true" ?? SequraFE.flags.isPaymentApp;
+        const { configurableSelectorsForMiniWidgets, isPaymentApp } = SequraFE.flags;
 
         /** @type WidgetSettings */
         let activeSettings;
@@ -436,7 +433,7 @@ if (!window.SequraFE) {
                         const dataset = select.selectedIndex === -1 ? null : select.options[select.selectedIndex].dataset;
 
                         const product = dataset && 'undefined' !== typeof dataset.product ? dataset.product : null;
-                        customLocations.push({selForTarget, product, widgetStyles, displayWidget});
+                        customLocations.push({ selForTarget, product, widgetStyles, displayWidget });
                     });
                     handleChange('customLocations', customLocations)
                 },

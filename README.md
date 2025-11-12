@@ -50,3 +50,33 @@ After adding the dependency, install or update the project's packages using the 
 The package will be placed in the ```node_modules``` directory.
 
 Each SeQura integration includes specific instructions in its README file that should be followed to correctly import and place the CORE UI resources.
+
+
+# ``SequraFE.flags``
+
+The ``SequraFE.flags`` object defines several configuration options that control how the integration behaves across different configurations, environments, and contexts.
+
+```js
+SequraFE.flags = {
+    isShowCheckoutAsHostedPageFieldVisible: true,
+    configurableSelectorsForMiniWidgets: false,
+    isServiceSellingAllowed: false,
+    isPaymentApp: true,
+    ...(SequraFE.flags || {})
+};
+```
+
+These flags can be overridden in the integration that imports ``sequra-core-admin-fe`` library.
+
+## `isPaymentApp` ##
+
+This flag indicates whether the integration is running as a **payment app** or as a **marketing app**.  
+It determines which integration page is displayed after the onboarding process is completed.
+
+**Type:** `boolean`  
+**Default:** `true`
+
+**Purpose:**
+- `true`: The integration behaves as a **payment app** and displays the **payment methods page** after onboarding.
+- `false`: The integration behaves as a **marketing app** and displays the **widget configuration page** after onboarding.
+
