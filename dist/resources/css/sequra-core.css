@@ -11,18 +11,15 @@
   -webkit-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
-  /*
-  description: 'Remove default browser button styles.'
-  */
-  /*
-    description:
-      'Fix placeholder styles (https://css-tricks.com/almanac/selectors/p/placeholder/).',
-      '(default placeholder opacity)'
-  */
 }
 #sequra-page button,
 #sequra-page a {
   cursor: pointer;
+}
+#sequra-page {
+  /*
+  description: 'Remove default browser button styles.'
+  */
 }
 #sequra-page button {
   background: transparent;
@@ -86,6 +83,13 @@
 #sequra-page ul > li {
   margin: 0;
   padding: 0;
+}
+#sequra-page {
+  /*
+    description:
+      'Fix placeholder styles (https://css-tricks.com/almanac/selectors/p/placeholder/).',
+      '(default placeholder opacity)'
+  */
 }
 #sequra-page input::placeholder {
   opacity: 1;
@@ -157,7 +161,8 @@
   text-rendering: geometricPrecision;
 }
 
-/* @doc(group) { name: 'sass-extend', title: 'Sass extend' } */ /* @doc(group) { name: 'helpers', title: 'Helpers'} */
+/* @doc(group) { name: 'sass-extend', title: 'Sass extend' } */
+/* @doc(group) { name: 'helpers', title: 'Helpers'} */
 /* @doc(function) {
   description: 'Concatenate strings',
   return: 'string that is joined from items',
@@ -812,17 +817,6 @@
 #sequra-page .sq-multi-item-selector {
   position: relative;
   border-radius: 6px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-wrap: wrap;
-  column-gap: 8px;
-  row-gap: 8px;
-  padding: 8px 16px;
-  background: #fff;
-  border: 1px solid #E5E5E5;
-  cursor: pointer;
-  min-height: 40px;
 }
 #sequra-page .sq-multi-item-selector .sqp-dropdown-button {
   width: 100%;
@@ -945,6 +939,19 @@
 }
 #sequra-page .sq-multi-item-selector.sqs--error .sqp-dropdown-button {
   border: 1px solid #EF4444;
+}
+#sequra-page .sq-multi-item-selector {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  column-gap: 8px;
+  row-gap: 8px;
+  padding: 8px 16px;
+  background: #fff;
+  border: 1px solid #E5E5E5;
+  cursor: pointer;
+  min-height: 40px;
 }
 #sequra-page .sq-multi-item-selector .sq-single-select-dropdown {
   display: none;
@@ -1075,8 +1082,6 @@
   color: #000;
   border: 1px solid #E5E5E5;
   border-radius: 6px;
-  padding-right: 41px;
-  width: 100%;
 }
 #sequra-page .sq-password input:focus, #sequra-page .sq-password input:active {
   border-color: #21CFAC;
@@ -1092,6 +1097,10 @@
 }
 #sequra-page .sq-password input:-ms-input-placeholder {
   color: #737373;
+}
+#sequra-page .sq-password input {
+  padding-right: 41px;
+  width: 100%;
 }
 #sequra-page .sq-password span {
   cursor: pointer;
