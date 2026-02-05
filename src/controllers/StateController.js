@@ -7,6 +7,7 @@ SequraFE.flags = {
     isShowCheckoutAsHostedPageFieldVisible: true,
     configurableSelectorsForMiniWidgets: false,
     isServiceSellingAllowed: false,
+    isAltPriceSelectorVisible: false,
     ...(SequraFE.flags || {})
 };
 
