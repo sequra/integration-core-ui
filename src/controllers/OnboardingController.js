@@ -102,7 +102,10 @@ if (!window.SequraFE) {
             }
 
             promises
-                .then((array) => renderer(...array))
+                .then((array) => {
+                    debugger;
+                    return renderer(...array)
+                })
                 .catch((error) => {
                     console.error('Error occurred while rendering the page: ', error);
                 })
