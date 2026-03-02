@@ -79,6 +79,7 @@ SequraFE.appPages = {
      * @property {GeneralSettings | null} generalSettings
      * @property {WidgetSettings | null} widgetSettings
      * @property {PaymentMethod[] | null} paymentMethods
+     * @property {object | null} allAvailablePaymentMethods
      * @property {SellingCountry[] | null} sellingCountries
      * @property {DeploymentSettings[] | null} deploymentsSettings
      * @property {DeploymentSettings[] | null} notConnectedDeployments
@@ -130,6 +131,7 @@ SequraFE.appPages = {
                 generalSettings: null,
                 widgetSettings: null,
                 paymentMethods: null,
+                allAvailablePaymentMethods: null,
                 sellingCountries: null,
                 shopCategories: null,
                 logsSettings: null
@@ -409,6 +411,7 @@ SequraFE.appPages = {
          */
         this.setCredentialsChanged = () => {
             SequraFE.state.setData('paymentMethods', null);
+            SequraFE.state.setData('allAvailablePaymentMethods', null);
             localStorage.setItem('sq-password-changed', '1');
         }
 
