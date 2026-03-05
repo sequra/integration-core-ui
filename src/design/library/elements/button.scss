@@ -1,4 +1,5 @@
 //noinspection SassScssResolvedByNameOnly
+// Button styles following Telar Design System hierarchy
 @mixin sq-button() {
   @include font-weight--semi-bold();
   position: relative;
@@ -10,7 +11,7 @@
   transition: all .2s;
 
   border: 1px solid;
-  border-radius: 4px;
+  border-radius: 8px;  // Telar radius-md
 
   &:focus {
     outline: none;
@@ -24,53 +25,71 @@
     padding: 10px 16px;
   }
 
+  // Primary button: green.300 background, grey.1000 text (Telar hierarchy)
   &.sqt--primary {
     background-color: $sq-color--primary;
     border-color: $sq-color--primary;
-    color: $sq-color--white;
+    color: $sq-color--grey-1000;
 
     &:hover, &:focus {
-      background-color: $sq-color--white;
-      color: $sq-color--primary;
+      background-color: $sq-color--primary-pressed;
+      border-color: $sq-color--primary-pressed;
+    }
+
+    &:active {
+      background-color: $sq-color--green-400;
+      border-color: $sq-color--green-400;
     }
   }
 
+  // Secondary button: white background, grey.1000 text, grey border (Telar hierarchy)
   &.sqt--secondary {
-    border: 1px solid $sq-color--primary;
+    border: 1px solid $sq-color--grey-200;
     background-color: $sq-color--white;
-    color: $sq-color--primary;
+    color: $sq-color--grey-1000;
 
     &:hover {
-      background-color: $sq-color--primary;
-      color: $sq-color--white;
+      background-color: $sq-color--grey-100;
+      border-color: $sq-color--grey-300;
+    }
+
+    &:active {
+      background-color: $sq-color--grey-200;
     }
   }
 
+  // Tertiary/Cancel button: transparent, minimal style
   &.sqt--cancel {
-    border-color: $sq-color--grey-20;
-    color: $sq-color--grey-60;
+    border-color: $sq-color--grey-200;
+    background-color: transparent;
+    color: $sq-color--grey-1000;
 
     &:hover {
-      background-color: $sq-color--grey-20;
+      background-color: $sq-color--grey-100;
+    }
+
+    &:active {
+      background-color: $sq-color--grey-200;
     }
   }
 
+  // Destructive button: red.600 background, white text (Telar hierarchy)
   &.sqt--danger {
     color: $sq-color--white;
-    background-color: $sq-color--danger;
-    border-color: $sq-color--danger;
+    background-color: $sq-color--red-600;
+    border-color: $sq-color--red-600;
 
     &:hover,
     &:focus {
-      background-color: lighten($sq-color--danger, 5%);
-      border-color: lighten($sq-color--danger, 5%);
+      background-color: $sq-color--red-700;
+      border-color: $sq-color--red-700;
     }
   }
 
   &.sqs--disabled, &:disabled {
-    background-color: $sq-color--grey-20;
+    background-color: $sq-color--grey-200;
     border-color: transparent;
-    color: $sq-color--grey-30;
+    color: $sq-color--grey-400;
     pointer-events: none;
   }
 }

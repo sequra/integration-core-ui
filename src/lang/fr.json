@@ -1,132 +1,132 @@
 {
   "general": {
     "save": "Enregistrer",
-    "saveChanges": "Enregistrer les modifications",
+    "saveChanges": "Enregistrer",
     "cancel": "Annuler",
     "disconnect": "Déconnecter",
     "confirm": "Confirmer",
     "continue": "Continuer",
     "search": "Rechercher...",
-    "selectStore": "Sélectionner le magasin :",
-    "selectStorePlaceholder": "Sélectionner le magasin",
-    "switchStore": "Changer de magasin :",
+    "selectStore": "Sélectionne une boutique :",
+    "selectStorePlaceholder": "Sélectionne une boutique",
+    "switchStore": "Changer de boutique :",
     "downloadNewVersion": "Télécharger la nouvelle version",
-    "merchant": "Commerçant :",
+    "merchant": "Commerce :",
     "settings": "Paramètres",
     "paymentMethods": "Méthodes de paiement",
     "advanced": "Avancé",
-    "changesSaved": "Modifications enregistrées avec succès.",
+    "changesSaved": "Modifications enregistrées.",
     "noItemsAvailable": "Aucun élément disponible",
     "and": " et ",
     "mode": {
-      "test": "Mode Sandbox",
-      "live": "Mode Live"
+      "test": "Mode sandbox",
+      "live": "Mode live"
     },
     "errors": {
-      "InvalidOperationException": "Une erreur s'est produite côté serveur. Veuillez vérifier les données et réessayer.",
-      "unknown": "Une erreur inconnue s'est produite. Veuillez réessayer plus tard.",
-      "backgroundDataFetchFailure": "Une erreur s'est produite lors de l'actualisation des données en arrière-plan. Veuillez recharger la page pour voir les dernières données.",
-      "empty": "Le paramètre ne peut pas être vide.",
-      "saveEntityFailed": "Échec de l'enregistrement de l'entité car %s",
-      "getEntityFailed": "Échec de la récupération de l'entité car %s",
-      "failedToRetrieveStores": "Échec de la récupération des magasins.",
-      "failedToRetrieveOrderStatuses": "Échec de la récupération des statuts de commande.",
+      "InvalidOperationException": "Quelque chose n'a pas fonctionné. Vérifie les données et réessaie.",
+      "unknown": "Quelque chose n'a pas fonctionné. Réessaie dans quelques minutes.",
+      "backgroundDataFetchFailure": "Impossible d'actualiser les données. Recharge la page pour voir les dernières informations.",
+      "empty": "Ce champ ne peut pas être vide.",
+      "saveEntityFailed": "Impossible d'enregistrer : %s",
+      "getEntityFailed": "Impossible de récupérer : %s",
+      "failedToRetrieveStores": "Impossible de charger les boutiques.",
+      "failedToRetrieveOrderStatuses": "Impossible de charger les statuts de commande.",
       "stores": {
-        "failed": "Échec de la récupération des magasins.",
-        "invalidIdAndStatus": "L'ID et le nom du statut sont invalides."
+        "failed": "Impossible de charger les boutiques.",
+        "invalidIdAndStatus": "L'ID et le nom du statut ne sont pas valides."
       },
       "version": {
-        "failed": "Échec de la récupération de la version."
+        "failed": "Impossible d'obtenir la version."
       },
       "connection": {
-        "invalidUsernameOrPassword": "Nom d'utilisateur ou mot de passe invalide. Vérifiez vos identifiants de connexion.",
-        "invalidUsernameOrPasswordForDeployment": "Nom d'utilisateur ou mot de passe invalide. Vérifiez vos identifiants de connexion pour %s.",
-        "invalidMerchantId": "ID commerçant invalide.",
-        "invalidEnvironment": "Environnement invalide.",
-        "emptyStoreId": "ID de magasin vide.",
-        "invalidMode": "Mode invalide.",
-        "emptyData": "Données de connexion vides.",
+        "invalidUsernameOrPassword": "Identifiant ou mot de passe incorrect. Vérifie tes identifiants.",
+        "invalidUsernameOrPasswordForDeployment": "Identifiant ou mot de passe incorrect. Vérifie tes identifiants pour %s.",
+        "invalidMerchantId": "ID commerce non valide.",
+        "invalidEnvironment": "Environnement non valide.",
+        "emptyStoreId": "L'ID boutique est manquant.",
+        "invalidMode": "Mode non valide.",
+        "emptyData": "Les données de connexion sont manquantes.",
         "settingsNotFound": "Paramètres de connexion introuvables.",
-        "invalidRoles": "L'utilisateur n'a pas tous les rôles nécessaires.",
+        "invalidRoles": "Ton compte n'a pas les permissions nécessaires.",
         "invalidSettings": "Les paramètres de connexion ne sont pas valides.",
-        "credentialsDoNotExist": "Les détails des identifiants API n'existent pas.",
-        "testKeyChanged": "La clé API de test a été modifiée.",
-        "liveKeyChanged": "La clé API live a été modifiée.",
-        "testMerchantIdChanged": "L'ID commerçant de test a été modifiée.",
-        "liveMerchantIdChanged": "L'ID commerçant live a été modifiée.",
-        "companyLevelKey": "La clé API n'est pas au niveau commerçant.",
+        "credentialsDoNotExist": "Les identifiants API n'existent pas.",
+        "testKeyChanged": "La clé API de test a changé.",
+        "liveKeyChanged": "La clé API live a changé.",
+        "testMerchantIdChanged": "L'ID commerce de test a changé.",
+        "liveMerchantIdChanged": "L'ID commerce live a changé.",
+        "companyLevelKey": "La clé API n'est pas au niveau commerce.",
         "invalidKey": "La clé API n'est pas valide.",
-        "originFailed": "Échec de l'ajout de l'origine autorisée",
-        "clientKeyGenerationFailed": "Échec de la génération de la clé client."
+        "originFailed": "Impossible d'ajouter l'origine autorisée.",
+        "clientKeyGenerationFailed": "Impossible de générer la clé client."
       },
       "countries": {
-        "noCountries": "Votre magasin n'a actuellement aucun des pays de vente pris en charge par SeQura actifs. Pour traiter les paiements avec les méthodes de paiement SeQura, veuillez vous assurer d'avoir au moins un pays pris en charge dans votre magasin. Pour plus d'informations, veuillez contacter le support SeQura.",
-        "empty": "Le paramètre de configuration du pays ne peut pas être une chaîne vide.",
-        "countryCode": "Code pays invalide dans la configuration du pays.",
-        "sellingCountries": "Échec de la récupération des pays de vente."
+        "noCountries": "Ta boutique n'a aucun pays de vente compatible avec seQura actif. Pour utiliser les méthodes de paiement seQura, active au moins un pays compatible. Contacte le support si tu as besoin d'aide.",
+        "empty": "Le pays ne peut pas être vide.",
+        "countryCode": "Le code pays n'est pas valide.",
+        "sellingCountries": "Impossible de charger les pays de vente."
       },
       "payments": {
-        "requiredFieldsError": "Les champs id et code de la méthode sont obligatoires.",
-        "notConfigured": "La méthode de paiement avec l'ID %s n'est pas configurée.",
-        "emptyDataError": "Données de méthode de paiement vides.",
-        "failedToRetrieveMethods": "Échec de la récupération des méthodes de paiement.",
-        "saveFailed": "Échec de l'enregistrement de la méthode de paiement.",
-        "updateFailed": "Échec de la mise à jour de la méthode de paiement.",
-        "deleteFailed": "Échec de la suppression de la méthode de paiement.",
-        "failedToRetrieveMethodssequra": "Échec de la récupération des méthodes de paiement de SeQura."
+        "requiredFieldsError": "L'ID et le code de la méthode sont obligatoires.",
+        "notConfigured": "La méthode de paiement %s n'est pas configurée.",
+        "emptyDataError": "Les données de la méthode de paiement sont manquantes.",
+        "failedToRetrieveMethods": "Impossible de charger les méthodes de paiement.",
+        "saveFailed": "Impossible d'enregistrer la méthode de paiement.",
+        "updateFailed": "Impossible de mettre à jour la méthode de paiement.",
+        "deleteFailed": "Impossible de supprimer la méthode de paiement.",
+        "failedToRetrieveMethodssequra": "Impossible de charger les méthodes de paiement seQura."
       },
       "generalSettings": {
-        "captureDelayError": "Le nombre de jours de délai de capture doit être compris entre 1 et 7.",
-        "retentionPeriodError": "Le nombre minimum de jours de rétention est de 60.",
-        "categories": "Échec de la récupération des catégories."
+        "captureDelayError": "Le délai de capture doit être entre 1 et 7 jours.",
+        "retentionPeriodError": "La période de rétention minimum est de 60 jours.",
+        "categories": "Impossible de charger les catégories."
       },
       "webhooks": {
-        "merchantError": "Commerçant avec l'ID %s introuvable.",
-        "failedToRegisterWebhook": "Échec de l'enregistrement du webhook.",
-        "hmacError": "Erreur lors de la génération du HMAC."
+        "merchantError": "Commerce avec l'ID %s introuvable.",
+        "failedToRegisterWebhook": "Impossible d'enregistrer le webhook.",
+        "hmacError": "Impossible de générer le HMAC."
       },
-      "failedToRetrieveLog": "Échec de la récupération du contenu du journal.",
-      "failedToRemoveLog": "Échec de la suppression du contenu du journal."
+      "failedToRetrieveLog": "Impossible de charger le journal.",
+      "failedToRemoveLog": "Impossible de supprimer le journal."
     }
   },
   "sidebar": {
     "generalSettings": "Paramètres généraux",
-    "connectionSettings": "Paramètres de connexion",
-    "orderStatusSettings": "Paramètres du statut de commande",
-    "widgetSettings": "Paramètres des widgets",
-    "stepOneLabel": "Installer l'intégration e-commerce",
-    "stepOneDescription": "Votre intégration est prête pour la connexion.",
-    "stepTwoLabel": "Connecter l'intégration",
-    "stepDeployments": "Sélectionner les cibles de déploiement",
-    "stepThreeLabel": "Configurer les pays de vente",
-    "stepFourLabel": "Configurer les widgets",
-    "stepFiveLabel": "Commencez à vendre avec SeQura"
+    "connectionSettings": "Connexion",
+    "orderStatusSettings": "Statuts de commande",
+    "widgetSettings": "Widgets",
+    "stepOneLabel": "Installe l'intégration",
+    "stepOneDescription": "Ton intégration est prête.",
+    "stepTwoLabel": "Connecte ton compte",
+    "stepDeployments": "Sélectionne les cibles",
+    "stepThreeLabel": "Configure les pays",
+    "stepFourLabel": "Configure les widgets",
+    "stepFiveLabel": "Commence à vendre avec seQura"
   },
   "validation": {
     "requiredField": "Ce champ est obligatoire.",
     "invalidField": "Ce champ n'est pas valide.",
-    "invalidIPAddress": "Ce champ doit contenir uniquement des adresses IP valides.",
-    "invalidJSON": "Ce champ doit être un JSON valide.",
-    "invalidEmail": "Ce champ doit être un e-mail valide.",
-    "maxLength": "Le champ ne peut pas comporter plus de %s caractères.",
-    "numeric": "La valeur doit être un nombre valide avec un maximum de deux décimales.",
+    "invalidIPAddress": "Entre des adresses IP valides.",
+    "invalidJSON": "Le format JSON n'est pas valide.",
+    "invalidEmail": "Entre un email valide.",
+    "maxLength": "Maximum %s caractères.",
+    "numeric": "Entre un nombre valide (maximum 2 décimales).",
     "greaterThanZero": "La valeur doit être supérieure à 0.",
-    "nonNegative": "Le champ ne peut pas avoir une valeur négative.",
-    "numberOfDecimalPlaces": "Le champ doit comporter 2 décimales.",
-    "integer": "Le champ doit être un entier.",
-    "invalidUrl": "Le champ doit être une URL valide.",
-    "invalidFieldValue": "Le champ doit être défini sur \"%s\".",
-    "invalidMaxValue": "La valeur maximale autorisée est %s.",
-    "invalidImageType": "Veuillez fournir un fichier dans l'un des types d'image pris en charge (PNG, JPG, SVG).",
-    "invalidImageSize": "Le fichier sélectionné dépasse la limite de 10 Mo.",
-    "invalidTimeDuration": "Ce champ doit contenir uniquement des dates au format 2017-08-31 ou des durées comme P3M15D (3 mois et 15 jours). Vérifiez la norme ISO 8601."
+    "nonNegative": "La valeur ne peut pas être négative.",
+    "numberOfDecimalPlaces": "Utilise 2 décimales.",
+    "integer": "Entre un nombre entier.",
+    "invalidUrl": "Entre une URL valide.",
+    "invalidFieldValue": "La valeur doit être \"%s\".",
+    "invalidMaxValue": "La valeur maximum est %s.",
+    "invalidImageType": "Utilise un format d'image compatible (PNG, JPG, SVG).",
+    "invalidImageSize": "Le fichier dépasse la limite de 10 Mo.",
+    "invalidTimeDuration": "Utilise le format date (2017-08-31) ou durée (P3M15D = 3 mois et 15 jours). Voir ISO 8601."
   },
   "payments": {
     "title": "Méthodes de paiement",
-    "description": "Voir quelles options de paiement SeQura sont disponibles pour chaque pays.",
+    "description": "Consulte les options de paiement seQura disponibles dans chaque pays.",
     "countries": {
       "label": "Pays",
-      "description": "Sélectionnez le pays du client"
+      "description": "Sélectionne le pays du client"
     },
     "paymentMethods": "Méthodes de paiement",
     "minimumAmount": "Montant minimum",
@@ -136,7 +136,7 @@
   },
   "debug": {
     "title": "Activer les journaux",
-    "description": "Aide à diagnostiquer les problèmes avec l'intégration SeQura",
+    "description": "T'aide à diagnostiquer les problèmes avec l'intégration seQura",
     "noLogs": "Aucun journal disponible",
     "log": {
       "severity": "Gravité",
@@ -144,10 +144,10 @@
       "datetime": "Date et heure",
       "removeModal": {
         "title": "Supprimer les journaux",
-        "message": "Es-tu sûr de vouloir effacer les journaux ? Tu ne pourras pas les récupérer."
+        "message": "Supprimer les journaux ? Cette action est irréversible."
       },
-      "minLevel": "Niveau de gravité minimal",
-      "minLevelDescription": "Définir le niveau de gravité minimal des journaux à écrire dans le fichier de journalisation."
+      "minLevel": "Niveau de gravité minimum",
+      "minLevelDescription": "Définis le niveau de gravité minimum pour les journaux."
     },
     "reload": "Recharger",
     "remove": "Supprimer"
@@ -155,11 +155,11 @@
   "connection": {
     "title": {
       "onboarding": "Commencer",
-      "settings": "Paramètres de connexion"
+      "settings": "Connexion"
     },
     "description": {
-      "onboarding": "Assurez-vous d'être connecté au portail commerçant car vous devrez copier plusieurs paramètres depuis celui-ci pour remplir les informations suivantes. Si vous n'avez pas de compte, contactez-nous ",
-      "settings": "Configurez votre compte SeQura et choisissez l'environnement pour commencer à traiter les paiements. Si vous n'avez pas de compte, contactez-nous ",
+      "onboarding": "Tu dois copier quelques informations du portail commerçant. Si tu n'as pas de compte, écris-nous ",
+      "settings": "Configure ton compte seQura et choisis l'environnement. Si tu n'as pas de compte, écris-nous ",
       "endLink": "ici"
     },
     "environment": {
@@ -170,215 +170,215 @@
       }
     },
     "deployments": {
-      "manage": "Gérer les cibles de déploiement"
+      "manage": "Gérer les cibles"
     },
     "username": {
-      "label": "Nom d'utilisateur",
-      "description": "Vous pouvez trouver votre nom d'utilisateur dans l'e-mail envoyé par SeQura."
+      "label": "Identifiant",
+      "description": "Tu le trouveras dans l'email que nous t'avons envoyé."
     },
     "password": {
       "label": "Mot de passe",
-      "description": "Vous pouvez trouver votre mot de passe dans l'e-mail envoyé par SeQura."
+      "description": "Tu le trouveras dans l'email que nous t'avons envoyé."
     },
     "sendStatisticalData": {
       "description": {
-        "text": "Je souhaite contribuer aux produits SeQura en envoyant des données statistiques ",
-        "endLink": "(info)"
+        "text": "Je veux aider à améliorer seQura en envoyant des données d'utilisation ",
+        "endLink": "(plus d'info)"
       }
     },
     "modal": {
       "title": "Changer d'environnement ?",
-      "message": "Êtes-vous sûr de vouloir changer d'environnement ? Cela supprimera tous les paramètres configurés sur l'environnement actuel et vous reconnectera au nouvel environnement sélectionné."
+      "message": "Tes paramètres actuels seront supprimés et tu seras connecté au nouvel environnement."
     },
     "disconnect": {
       "title": "Déconnecter",
-      "message": "Êtes-vous sûr de vouloir vous déconnecter ?"
+      "message": "Tu es sûr de vouloir te déconnecter ?"
     }
   },
   "deployments": {
-    "title": "Sélectionner les cibles de déploiement",
-    "description": "Veuillez sélectionner les cibles de déploiement pour lesquelles vous souhaitez proposer les méthodes de paiement SeQura",
+    "title": "Sélectionne les cibles",
+    "description": "Choisis les cibles où tu veux proposer les méthodes de paiement seQura.",
     "selector": {
-      "label": "Dans quelles cibles de déploiement souhaitez-vous proposer les méthodes de paiement SeQura ?",
-      "description": "Chaque cible de déploiement dessert un groupe de pays différent."
+      "label": "Dans quelles cibles veux-tu proposer seQura ?",
+      "description": "Chaque cible dessert un groupe de pays différent."
     }
   },
   "countries": {
     "title": "Pays de vente",
-    "description": "Veuillez sélectionner les pays dans lesquels vous souhaitez proposer les méthodes de paiement SeQura.",
+    "description": "Choisis dans quels pays tu veux proposer les méthodes de paiement seQura.",
     "selector": {
-      "label": "Dans quels pays souhaitez-vous proposer les méthodes de paiement SeQura ?",
-      "description": "Veuillez sélectionner les pays où les méthodes de paiement SeQura doivent être disponibles. Pour activer des pays de vente supplémentaires, veuillez nous contacter <a class='sq-link-button' href='https://www.sequra.com/fr/contact' target='_blank'><span>ici</span></a>."
+      "label": "Dans quels pays veux-tu proposer seQura ?",
+      "description": "Sélectionne les pays où les méthodes de paiement seront disponibles. Pour activer plus de pays, <a class='sq-link-button' href='https://www.sequra.com/fr/contact' target='_blank'><span>écris-nous</span></a>."
     },
     "ES": {
       "label": "Espagne",
-      "description": "Veuillez saisir l'ID commerçant SeQura à utiliser pour les clients espagnols."
+      "description": "Entre l'ID commerce seQura pour les clients en Espagne."
     },
     "FR": {
       "label": "France",
-      "description": "Veuillez saisir l'ID commerçant SeQura à utiliser pour les clients français."
+      "description": "Entre l'ID commerce seQura pour les clients en France."
     },
     "CO": {
       "label": "Colombie",
-      "description": "Veuillez saisir l'ID commerçant SeQura à utiliser pour les clients colombiens."
+      "description": "Entre l'ID commerce seQura pour les clients en Colombie."
     },
     "IT": {
       "label": "Italie",
-      "description": "Veuillez saisir l'ID commerçant SeQura à utiliser pour les clients italiens."
+      "description": "Entre l'ID commerce seQura pour les clients en Italie."
     },
     "PT": {
       "label": "Portugal",
-      "description": "Veuillez saisir l'ID commerçant SeQura à utiliser pour les clients portugais."
+      "description": "Entre l'ID commerce seQura pour les clients au Portugal."
     },
     "PE": {
       "label": "Pérou",
-      "description": "Veuillez saisir l'ID commerçant SeQura à utiliser pour les clients péruviens."
+      "description": "Entre l'ID commerce seQura pour les clients au Pérou."
     },
-    "enabledCountries": "Activé pour {countries}."
+    "enabledCountries": "Actif pour {countries}."
   },
   "widgets": {
     "title": {
       "onboarding": "Widgets promotionnels",
-      "settings": "Paramètres des widgets promotionnels"
+      "settings": "Widgets promotionnels"
     },
-    "description": "Les composants promotionnels permettent d'afficher des widgets promotionnels et des pop-ups éducatifs qui montrent et expliquent quels produits SeQura le client propose et comment ils fonctionnent, ce qui aidera la boutique à augmenter la valeur moyenne des commandes et les taux de conversion.",
+    "description": "Les widgets montrent les options de paiement seQura et comment elles fonctionnent. Ils aident à augmenter le panier moyen et la conversion.",
     "displayOnProductPage": {
       "label": "Afficher le widget sur la page produit",
-      "description": "Indiquez si l'icône du mode de paiement doit être affichée aux clients lors du paiement."
+      "description": "Affiche l'icône de la méthode de paiement sur la page produit."
     },
     "configurator": {
-      "label": "Configurateur de widget",
+      "label": "Configurateur de widgets",
       "description": {
-        "start": "Veuillez vous rendre sur le ",
-        "link": "lien suivant",
-        "end": " pour configurer les styles du widget."
+        "start": "Pour personnaliser les styles, va au ",
+        "link": "configurateur",
+        "end": "."
       }
     },
     "showInProductListing": {
-      "label": "Afficher le montant de la mensualité dans la liste des produits",
-      "description": "Afficher le montant de la mensualité sur la page de liste des produits"
+      "label": "Afficher la mensualité dans la liste de produits",
+      "description": "Affiche le montant de la mensualité dans la liste de produits."
     },
     "showInCartPage": {
-      "label": "Afficher le montant de la mensualité sur la page du panier",
-      "description": "Afficher le montant de la mensualité pour le montant actuel du panier sur la page du panier"
+      "label": "Afficher la mensualité dans le panier",
+      "description": "Affiche le montant de la mensualité sur la page du panier."
     },
     "messageBelowLimit": {
-      "label": "Message en dessous de la limite",
-      "description": "Description du message en dessous de la limite"
+      "label": "Message sous la limite",
+      "description": "Texte affiché quand le montant est inférieur au minimum."
     },
     "productPriceSelector": {
       "label": "Sélecteur de prix",
-      "description": "Définissez un sélecteur CSS pour récupérer le prix du produit"
+      "description": "Sélecteur CSS pour obtenir le prix du produit."
     },
     "altProductPriceSelector": {
       "label": "Sélecteur de prix alternatif",
-      "description": "Un sélecteur CSS alternatif pour récupérer le prix du produit pour des mises en page spéciales de la page produit. Ex : produits variables"
+      "description": "Sélecteur CSS pour les mises en page spéciales (ex : produits variables)."
     },
     "altProductPriceTriggerSelector": {
-      "label": "Sélecteur pour la détection de prix alternatif",
-      "description": "Un sélecteur CSS qui pointe vers un élément qui, lorsqu'il est présent, indique que le sélecteur de prix alternatif doit être utilisé"
+      "label": "Déclencheur de prix alternatif",
+      "description": "Sélecteur CSS qui indique quand utiliser le sélecteur de prix alternatif."
     },
     "defaultProductLocationSelector": {
-      "label": "Sélecteur d'emplacement par défaut du widget",
-      "description": "Sélecteur CSS pour définir l'élément conteneur par défaut du widget"
+      "label": "Emplacement du widget",
+      "description": "Sélecteur CSS du conteneur du widget."
     },
     "locations": {
       "headerTitle": "Personnaliser les widgets",
-      "headerDescription": "Définir une configuration alternative par mode de paiement",
-      "addRow": "Ajouter nouveau",
+      "headerDescription": "Configure chaque méthode de paiement séparément.",
+      "addRow": "Ajouter",
       "removeRow": "Supprimer",
-      "paymentMethod": "Mode de paiement",
+      "paymentMethod": "Méthode de paiement",
       "selector": "Sélecteur CSS d'emplacement",
-      "leaveEmptyToUseDefault": "Laisser vide pour utiliser la valeur par défaut",
+      "leaveEmptyToUseDefault": "Laisse vide pour utiliser la valeur par défaut",
       "showWidget": "Afficher le widget"
     },
     "cartPriceSelector": {
       "label": "Sélecteur de prix du panier",
-      "description": "Définissez un sélecteur CSS pour récupérer le prix total du panier"
+      "description": "Sélecteur CSS pour obtenir le total du panier."
     },
     "cartLocationSelector": {
-      "label": "Sélecteur d'emplacement du widget du panier",
-      "description": "Sélecteur CSS pour définir l'élément conteneur du widget du panier"
+      "label": "Emplacement du widget panier",
+      "description": "Sélecteur CSS du conteneur du widget dans le panier."
     },
     "widgetOnCartPage": {
-      "label": "Sélectionnez le mode de paiement",
-      "description": "Choisissez le mode de paiement à afficher comme widget sur la page du panier"
+      "label": "Méthode de paiement à afficher",
+      "description": "Choisis quelle méthode de paiement afficher dans le panier."
     },
     "listingPriceSelector": {
-      "label": "Sélecteur de prix dans la liste des produits",
-      "description": "Définissez un sélecteur CSS pour récupérer le prix du produit dans la liste"
+      "label": "Sélecteur de prix dans la liste",
+      "description": "Sélecteur CSS pour obtenir le prix dans la liste de produits."
     },
     "listingLocationSelector": {
-      "label": "Sélecteur d'emplacement du widget dans la liste des produits",
-      "description": "Sélecteur CSS pour définir l'élément conteneur du widget dans la liste des produits"
+      "label": "Emplacement du widget dans la liste",
+      "description": "Sélecteur CSS du conteneur du widget dans la liste de produits."
     },
     "widgetOnListingPage": {
-      "label": "Sélectionnez le mode de paiement",
-      "description": "Choisissez le mode de paiement à afficher comme mini-widget sur la page de liste des produits"
+      "label": "Méthode de paiement à afficher",
+      "description": "Choisis quelle méthode de paiement afficher dans la liste de produits."
     }
   },
   "orderStatusSettings": {
-    "title": "Paramètres du statut de commande",
-    "description": "Définissez comment les statuts seQura sont associés aux statuts de commande de {shopName}. Les valeurs par défaut devraient convenir dans la plupart des cas, modifiez-les donc avec précaution.",
+    "title": "Statuts de commande",
+    "description": "Définis comment les statuts seQura correspondent à ceux de {shopName}. Les valeurs par défaut fonctionnent dans la plupart des cas.",
     "paid": {
       "label": "Payé",
-      "description": "Lorsqu'un paiement a le statut Payé."
+      "description": "Quand le paiement est complété."
     },
     "inReview": {
       "label": "En révision",
-      "description": "Lorsqu'un paiement a le statut En révision."
+      "description": "Quand le paiement est en attente de révision."
     },
     "cancelled": {
       "label": "Annulé",
-      "description": "Lorsqu'un paiement a le statut Annulé."
+      "description": "Quand le paiement est annulé."
     },
     "shipped": {
       "label": "Expédié",
       "description": "Lorsqu'un paiement a le statut Expédié."
     },
     "informCancellations": {
-      "label": "Informer des annulations à SeQura",
-      "description": "Lors de l'annulation d'une commande payée dans {{shopName}}, vous tenterez d'annuler la commande chez SeQura."
+      "label": "Informer seQura des annulations",
+      "description": "Quand tu annules une commande dans {{shopName}}, on essaiera de l'annuler aussi dans seQura."
     }
   },
   "generalSettings": {
     "title": "Paramètres généraux",
-    "description": "Contrôlez les paramètres principaux de la façon dont SeQura fonctionne dans votre boutique",
+    "description": "Configure comment seQura fonctionne dans ta boutique.",
     "showCheckoutAsHostedPage": {
-      "label": "Afficher le paiement SeQura comme page hébergée",
-      "description": "Indiquez si le paiement SeQura doit être affiché comme page hébergée ou popup."
+      "label": "Afficher le checkout seQura en pleine page",
+      "description": "Le checkout s'ouvre dans une page complète au lieu d'un popup."
     },
     "sendOrderReports": {
-      "label": "Envoyer périodiquement les rapports de commandes à SeQura",
-      "description": "Indiquez si l'intégration doit envoyer périodiquement des rapports de commandes au système SeQura."
+      "label": "Envoyer les rapports de commandes à seQura",
+      "description": "Envoie des rapports périodiques de commandes à seQura."
     },
     "allowedIPAddresses": {
       "label": "Adresses IP autorisées",
-      "description": "Définissez quelles adresses IP pourront voir les services SeQura (c'est-à-dire que seuls les utilisateurs dont les IP sont dans ce champ pourront utiliser SeQura)."
+      "description": "Seules ces IPs pourront voir et utiliser seQura."
     },
     "excludedCategories": {
       "label": "Catégories exclues",
-      "description": "Les catégories de la boutique dans ce champ ne pourront pas être achetées avec les méthodes de paiement SeQura."
+      "description": "Ces catégories ne pourront pas être achetées avec seQura."
     },
     "excludedProducts": {
       "label": "Produits exclus",
-      "description": "Les produits de la boutique dans ce champ ne pourront pas être achetés avec les méthodes de paiement SeQura. Veuillez saisir un SKU valide pour chaque produit que vous souhaitez exclure."
+      "description": "Ces produits ne pourront pas être achetés avec seQura. Entre un SKU par produit."
     },
     "enabledForServices": {
-      "label": "Activé pour les services",
-      "description": "Votre contrat doit permettre la vente de services. "
+      "label": "Activer pour les services",
+      "description": "Ton contrat doit permettre la vente de services."
     },
     "allowFirstServicePaymentDelay": {
-      "label": "Autoriser le délai du premier paiement de service",
-      "description": ""
+      "label": "Permettre un délai pour le premier paiement de service",
+      "description": "Permet de retarder le premier paiement d'un service."
     },
     "allowServiceRegistrationItems": {
-      "label": "Autoriser les articles d'inscription",
-      "description": "Permet de configurer une partie du prix du produit à payer à l'avance en tant qu'inscription. "
+      "label": "Permettre les articles d'inscription",
+      "description": "Permet de facturer une partie du prix comme inscription anticipée."
     },
     "defaultServicesEndDate": {
-      "label": "Date de fin des services par défaut",
-      "description": "Dates au format 2017-08-31, durée au format P3M15D (3 mois et 15 jours). Valeur par défaut pour tous les produits."
+      "label": "Date de fin des services",
+      "description": "Format : date (2017-08-31) ou durée (P3M15D = 3 mois et 15 jours)."
     }
   },
   "supportLink": {
