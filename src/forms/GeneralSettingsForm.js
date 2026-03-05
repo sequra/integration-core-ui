@@ -397,7 +397,7 @@ if (!window.SequraFE) {
                     }
                 }
                 return countriesString ? translate('countries.enabledCountries').replace('{countries}', countriesString) : '';
-            }
+            };
             const descriptionWithCountries = (description, countries) => SequraFE.translationService.translate(description) + countriesString(countries);
 
             const enabledForServiceInput = document.querySelector(`.${classNameEnabledForService} input`);
@@ -430,7 +430,7 @@ if (!window.SequraFE) {
             }
 
             // Update the visibility of the fields.
-            const selector = '.sq-field-wrapper:has(.sq-service-related-field), .sq-field-wrapper.sq-service-related-field'
+            const selector = '.sq-field-wrapper:has(.sq-service-related-field), .sq-field-wrapper.sq-service-related-field';
             const hiddenClass = 'sqs--hidden';
             document.querySelectorAll(selector).forEach((el) => {
                 if (changedGeneralSettings.enabledForServices.length > 0) {

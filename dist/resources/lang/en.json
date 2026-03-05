@@ -193,6 +193,11 @@
     "disconnect": {
       "title": "Disconnect",
       "message": "Are you sure you want to disconnect?"
+    },
+    "webhookReRegistration": {
+      "title": "Re-register webhooks",
+      "successMessage": "Webhooks were re-registered successfully.",
+      "errorMessage": "Webhooks were not re-registered successfully."
     }
   },
   "deployments": {
