@@ -8,3 +8,8 @@ test/resources/*
 !test/resources/favicon.ico
 
 .DS_Store
+# LLM tooling files (managed by sequcli)
+llm-tooling
+CLAUDE.md
+.claude/
+.mcp.json
