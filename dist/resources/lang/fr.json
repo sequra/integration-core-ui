@@ -100,7 +100,8 @@
     "stepDeployments": "Sélectionner les cibles de déploiement",
     "stepThreeLabel": "Configurer les pays de vente",
     "stepFourLabel": "Configurer les widgets",
-    "stepFiveLabel": "Commencez à vendre avec SeQura"
+    "stepFiveLabel": "Commencez à vendre avec SeQura",
+    "affiliateSettings": "Affiliation"
   },
   "validation": {
     "requiredField": "Ce champ est obligatoire.",
@@ -389,5 +390,25 @@
   "supportLink": {
     "label": "Besoin d'aide ?",
     "link": "https://sqra.es/supportfr"
+  },
+  "affiliate": {
+    "title": "Affiliation",
+    "description": "Configurez le suivi d'affiliation seQura pour cette boutique.",
+    "enable": {
+      "label": "Activer le suivi d'affiliation",
+      "description": "Activer le suivi des conversions d'affiliation seQura."
+    },
+    "offerId": {
+      "label": "Offer ID",
+      "description": "L'Offer ID d'affiliation seQura.",
+      "placeholder": "Saisissez votre Offer ID",
+      "invalidFormat": "L'Offer ID doit être numérique (max 4 chiffres)."
+    },
+    "securityToken": {
+      "label": "Security Token",
+      "description": "Le Security Token d'affiliation seQura.",
+      "placeholder": "Saisissez votre Security Token",
+      "invalidFormat": "Le Security Token ne peut contenir que des caractères alphanumériques."
+    }
   }
 }

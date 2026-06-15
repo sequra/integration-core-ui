@@ -29,7 +29,8 @@ SequraFE.appPages = {
         GENERAL: 'general',
         CONNECTION: 'connection',
         ORDER_STATUS: 'order_status',
-        WIDGET: 'widget'
+        WIDGET: 'widget',
+        AFFILIATE: 'affiliate'
     },
     PAYMENT: {
         METHODS: 'methods'
