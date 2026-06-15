@@ -19,6 +19,8 @@ if (!window.SequraFE) {
      * getAllAvailablePaymentMethodsUrl: string,
      * validateConnectionDataUrl: string,
      * disconnectUrl: string,
+     * getAffiliateSettingsUrl: string,
+     * saveAffiliateSettingsUrl: string,
      * page: string
      * }} configuration
      * @constructor
@@ -100,6 +102,12 @@ if (!window.SequraFE) {
                         SequraFE.state.getData('allAvailablePaymentMethods') ?? api.get(configuration.getAllAvailablePaymentMethodsUrl, null, SequraFE.customHeader),
                     ])
                     break;
+                case SequraFE.appPages.SETTINGS.AFFILIATE:
+                    renderer = renderAffiliateSettingsForm;
+                    promises = Promise.all([
+                        api.get(configuration.getAffiliateSettingsUrl, null, SequraFE.customHeader)
+                    ])
+                    break;
                 default:
                     renderer = renderGeneralSettingsForm;
                     promises = Promise.all([
@@ -173,6 +181,21 @@ if (!window.SequraFE) {
             const form = formFactory.getInstance(
                 'widgetSettings',
                 {widgetSettings, connectionSettings, countrySettings, paymentMethods, allAvailablePaymentMethods},
+                {...configuration, appState: SequraFE.appStates.SETTINGS}
+            );
+
+            form?.render();
+        }
+
+        /**
+         * Renders the affiliate settings form.
+         *
+         * @param affiliateSettings
+         */
+        const renderAffiliateSettingsForm = (affiliateSettings) => {
+            const form = formFactory.getInstance(
+                'affiliateSettings',
+                {affiliateSettings},
                 {...configuration, appState: SequraFE.appStates.SETTINGS}
             );
 
@@ -259,6 +282,13 @@ if (!window.SequraFE) {
                             href: '#settings-widget',
                             icon: 'widget',
                             isActive: activePage === SequraFE.appPages.SETTINGS.WIDGET
+                        }
+                    case SequraFE.appPages.SETTINGS.AFFILIATE:
+                        return {
+                            label: 'sidebar.affiliateSettings',
+                            href: '#settings-affiliate',
+                            icon: 'affiliate',
+                            isActive: activePage === SequraFE.appPages.SETTINGS.AFFILIATE
                         }
                 }
             });
