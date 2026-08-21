@@ -533,7 +533,6 @@ if (!window.SequraFE) {
 
                         if (SequraFE.state.areSellingCountriesConfiguredInPortal()) {
                             result?.portalUrl && window.open(result.portalUrl, '_blank');
-                            SequraFE.state.setData('connectionSettings', utilities.cloneObject(changedSettings));
                             SequraFE.state.display();
 
                             return;
