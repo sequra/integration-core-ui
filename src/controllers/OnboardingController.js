@@ -92,7 +92,7 @@ if (!window.SequraFE) {
                 case SequraFE.appPages.ONBOARDING.DEPLOYMENTS:
                     renderer = renderDeploymentsSettingForm;
                     promises = Promise.all([
-                        SequraFE.state.getData('deploymentsSettings') ?? api.get(configuration.getDeploymentSettingsUrl, null, SequraFE.customHeader)
+                        SequraFE.state.getData('deploymentsSettings') ?? api.get(configuration.getDeploymentsUrl, null, SequraFE.customHeader)
                     ]);
                     break;
 
@@ -267,7 +267,7 @@ if (!window.SequraFE) {
                     generator.createElement('main', 'sq-content', '', null, [
                         generator.createElement('div', 'sqp-content-header', '', null, [
                             generator.createElementFromHTML(SequraFE.imagesProvider.logo || ''),
-                            stores.length <= 1 ? [] : generator.createStoreSwitcher({
+                            (!SequraFE.flags.isStoreSwitcherVisible || stores.length <= 1) ? [] : generator.createStoreSwitcher({
                                 label: 'general.selectStore',
                                 value: currentStoreId,
                                 options: stores.map((store) => ({

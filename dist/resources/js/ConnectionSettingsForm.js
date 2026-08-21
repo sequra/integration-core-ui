@@ -531,6 +531,14 @@ if (!window.SequraFE) {
                             SequraFE.state.setCredentialsChanged();
                         }
 
+                        if (SequraFE.state.areSellingCountriesConfiguredInPortal()) {
+                            result?.portalUrl && window.open(result.portalUrl, '_blank');
+                            SequraFE.state.setData('connectionSettings', utilities.cloneObject(changedSettings));
+                            SequraFE.state.display();
+
+                            return;
+                        }
+
                         const index = SequraFE.pages.onboarding.indexOf(SequraFE.appPages.ONBOARDING.CONNECT)
                         SequraFE.pages.onboarding.length > index + 1 ?
                             window.location.hash = configuration.appState + '-' + SequraFE.pages.onboarding[index + 1] :

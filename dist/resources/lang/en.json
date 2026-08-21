@@ -132,7 +132,8 @@
     "minimumAmount": "Minimum amount",
     "maximumAmount": "Maximum amount",
     "availableFrom": "Available from",
-    "availableTo": "Available to"
+    "availableTo": "Available to",
+    "portalLink": "Manage your configuration in the seQura portal"
   },
   "debug": {
     "title": "Enable logs",
@@ -239,7 +240,14 @@
       "label": "Peru",
       "description": "Please enter SeQura merchant ID that should be used for Peruvian customers."
     },
-    "enabledCountries": "Enabled for {countries}."
+    "enabledCountries": "Enabled for {countries}.",
+    "pending": {
+      "title": "Waiting for the selling countries",
+      "description": "The seQura portal opens on the Store integrations page. Open the integration of this store, enable the countries where seQura should be available and save. This page continues on its own as soon as that configuration is saved.",
+      "warning": "seQura cannot be used yet: the selling countries are not configured.",
+      "openPortal": "Open the seQura portal",
+      "refresh": "Refresh"
+    }
   },
   "widgets": {
     "title": {

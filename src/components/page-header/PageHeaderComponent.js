@@ -81,7 +81,7 @@ if (!window.SequraFE.components) {
             )
         ]);
 
-        const storeSwitcher = stores.length <= 1 ? [] : generator.createStoreSwitcher({
+        const storeSwitcher = (!SequraFE.flags.isStoreSwitcherVisible || stores.length <= 1) ? [] : generator.createStoreSwitcher({
             label: 'general.switchStore',
             value: activeStore,
             options: stores,

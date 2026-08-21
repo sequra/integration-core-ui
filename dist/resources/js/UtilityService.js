@@ -108,29 +108,30 @@ if (!String.prototype.sqReplaceUrlPlaceholder) {
         };
 
         /**
-         * Returns the menu item array for page navigation.
+         * Returns the menu item array for page navigation, listing only the
+         * pages the store offers.
          *
          * @param {string} activePage
          * @return {Array<{label: string, href: string, isActive: boolean}>}
          */
         this.getMenuItems = (activePage) => {
-            return SequraFE.isPromotional ? [] : [
-                {
-                    label: 'general.paymentMethods',
-                    href: window.location.href.split('#')[0] + '#payment',
-                    isActive: activePage === SequraFE.appStates.PAYMENT
-                },
-                {
-                    label: 'general.settings',
-                    href: window.location.href.split('#')[0] + '#settings',
-                    isActive: activePage === SequraFE.appStates.SETTINGS
-                },
-                {
-                    label: 'general.advanced',
-                    href: window.location.href.split('#')[0] + '#advanced',
-                    isActive: activePage === SequraFE.appStates.ADVANCED
-                }
+            if (SequraFE.isPromotional) {
+                return [];
+            }
+
+            const items = [
+                {state: SequraFE.appStates.PAYMENT, label: 'general.paymentMethods'},
+                {state: SequraFE.appStates.SETTINGS, label: 'general.settings'},
+                {state: SequraFE.appStates.ADVANCED, label: 'general.advanced'}
             ];
+
+            return items
+                .filter((item) => SequraFE.pages?.[item.state]?.length)
+                .map((item) => ({
+                    label: item.label,
+                    href: window.location.href.split('#')[0] + '#' + item.state,
+                    isActive: activePage === item.state
+                }));
         };
     }
 

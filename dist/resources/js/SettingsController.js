@@ -77,7 +77,7 @@ if (!window.SequraFE) {
                     renderer = renderConnectionSettingsForm;
                     promises = Promise.all([
                         SequraFE.state.getData('notConnectedDeployments') ?? api.get(
-                            configuration.pageConfiguration.onboarding.getNotConnectedDeploymentsUrl.sqReplaceUrlPlaceholder(
+                            configuration.getNotConnectedDeploymentsUrl.sqReplaceUrlPlaceholder(
                                 '{storeId}', SequraFE.state.getStoreId()
                             ),
                             null,

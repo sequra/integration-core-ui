@@ -70,7 +70,13 @@ if (!window.SequraFE) {
 
             Promise.all([
                 sellingCountries ? [] : api.get(configuration.getSellingCountriesUrl, null, SequraFE.customHeader),
-                paymentMethods ? [] : api.get(configuration.getPaymentMethodsUrl.sqReplaceUrlPlaceholder('{merchantId}', countryConfiguration[0].merchantId), null, SequraFE.customHeader),
+                paymentMethods || !countryConfiguration?.length ? [] : api.get(
+                    configuration.getPaymentMethodsUrl.sqReplaceUrlPlaceholder(
+                        '{merchantId}', countryConfiguration[0].merchantId
+                    ),
+                    null,
+                    SequraFE.customHeader
+                ),
             ]).then(([sellingCountriesRes, paymentMethodsRes]) => {
                 if (sellingCountriesRes.length !== 0) {
                     sellingCountries = sellingCountriesRes;
@@ -123,7 +129,13 @@ if (!window.SequraFE) {
                                             title: 'payments.title',
                                             text: 'payments.description'
                                         }),
-                                        sellingCountries.length > 0 ? generator.createDropdownField({
+                                        connectionSettings.portalUrl ? generator.createButtonLink({
+                                            className: 'sq-link-button',
+                                            text: 'payments.portalLink',
+                                            href: connectionSettings.portalUrl,
+                                            openInNewTab: true
+                                        }) : [],
+                                        sellingCountries.length > 0 && countryConfiguration.length > 0 ? generator.createDropdownField({
                                             className: 'sqm--table-dropdown',
                                             label: 'payments.countries.label',
                                             description: 'payments.countries.description',
@@ -132,7 +144,8 @@ if (!window.SequraFE) {
                                                 return {
                                                     label: sellingCountries.find((country) =>
                                                         countrySetting.countryCode === country.code
-                                                    ).name, value: countrySetting.merchantId
+                                                    )?.name ?? countrySetting.countryCode,
+                                                    value: countrySetting.merchantId
                                                 }
                                             }),
                                             onChange: handleCountryChange
