@@ -593,7 +593,7 @@ if (!window.SequraFE) {
 
             api.post(configuration.reRegisterUrl, createReRegisterPayload(), SequraFE.customHeader)
                 .then((response) => {
-                    if (response.isSuccessful) {
+                    if (response.success) {
                         SequraFE.responseService.successHandler(
                             {successMessage: 'connection.webhookReRegistration.successMessage'}
                         )
