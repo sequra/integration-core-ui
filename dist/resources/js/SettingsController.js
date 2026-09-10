@@ -289,6 +289,7 @@ if (!window.SequraFE) {
                                     SequraFE.state.display();
                                 }
                             },
+                            portalUrl: connectionSettings?.portalUrl,
                             menuItems: SequraFE.utilities.getMenuItems(SequraFE.appStates.SETTINGS)
                         }
                     ),
@@ -298,8 +299,13 @@ if (!window.SequraFE) {
         }
 
         const getSidebarRow = () => {
+            const links = getLinkConfiguration();
+
+            // One destination is not a navigation - the same rule the top menu follows. A
+            // store that keeps a single settings page in the shop, the rest being the seQura
+            // portal's, gives that page the whole row.
             return generator.createElement('div', 'sq-content-row', '', null, [
-                generator.createSettingsSidebar({links: getLinkConfiguration()}),
+                links.length < 2 ? [] : generator.createSettingsSidebar({links}),
                 generator.createElement('main', 'sq-content')
             ]);
         }

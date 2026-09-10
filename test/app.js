@@ -44,7 +44,6 @@ const getPage = (pageName) => {
             'OrderStatusMappingSettingsForm',
             'StateController',
             'OnboardingController',
-            'PaymentController',
             'SettingsController'
         ]
             .map((script) => `<script src="/js/${script}.js"></script>`)

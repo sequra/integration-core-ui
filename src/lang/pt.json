@@ -13,7 +13,6 @@
     "downloadNewVersion": "Descarregar nova versão",
     "merchant": "Comerciante:",
     "settings": "Definições",
-    "paymentMethods": "Métodos de pagamento",
     "advanced": "Avançado",
     "changesSaved": "Alterações guardadas com sucesso.",
     "noItemsAvailable": "Nenhum item disponível",
@@ -121,19 +120,6 @@
     "paymentMethodUnavailable": "Método de pagamento indisponível.",
     "storeUnavailable": "Loja indisponível.",
     "invalidTimeDuration": "Este campo deve conter apenas datas como 2017-08-31 ou durações como P3M15D (3 meses e 15 dias). Verifique o formato ISO 8601"
-  },
-  "payments": {
-    "title": "Métodos de pagamento",
-    "description": "Veja quais opções de pagamento seQura estão disponíveis para cada país.",
-    "countries": {
-      "label": "Países",
-      "description": "Selecionar país do cliente"
-    },
-    "paymentMethods": "Métodos de pagamento",
-    "minimumAmount": "Montante mínimo",
-    "maximumAmount": "Montante máximo",
-    "availableFrom": "Disponível a partir de",
-    "availableTo": "Disponível até"
   },
   "debug": {
     "title": "Habilitar registros",

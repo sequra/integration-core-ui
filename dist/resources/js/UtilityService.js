@@ -120,18 +120,24 @@ if (!String.prototype.sqReplaceUrlPlaceholder) {
             }
 
             const items = [
-                {state: SequraFE.appStates.PAYMENT, label: 'general.paymentMethods'},
                 {state: SequraFE.appStates.SETTINGS, label: 'general.settings'},
                 {state: SequraFE.appStates.ADVANCED, label: 'general.advanced'}
             ];
 
-            return items
-                .filter((item) => SequraFE.pages?.[item.state]?.length)
-                .map((item) => ({
-                    label: item.label,
-                    href: window.location.href.split('#')[0] + '#' + item.state,
-                    isActive: activePage === item.state
-                }));
+            const offered = items.filter((item) => SequraFE.pages?.[item.state]?.length);
+
+            // One destination is not a navigation: a store that keeps a single section in
+            // the shop - the rest being the seQura portal's - shows its page without a menu
+            // bar above it that leads nowhere else.
+            if (offered.length < 2) {
+                return [];
+            }
+
+            return offered.map((item) => ({
+                label: item.label,
+                href: window.location.href.split('#')[0] + '#' + item.state,
+                isActive: activePage === item.state
+            }));
         };
     }
 

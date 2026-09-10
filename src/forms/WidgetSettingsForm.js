@@ -517,7 +517,7 @@ if (!window.SequraFE) {
                         if (nextPageExists) {
                             window.location.hash = configuration.appState + '-' + SequraFE.pages.onboarding[index + 1];
                         } else if (!SequraFE.isPromotional) {
-                            window.location.hash = SequraFE.appStates.PAYMENT + '-' + SequraFE.appPages.PAYMENT.METHODS;
+                            window.location.hash = SequraFE.appStates.SETTINGS;
                         } else {
                             window.location.hash = SequraFE.appStates.SETTINGS + '-' + SequraFE.appPages.SETTINGS.WIDGET;
                         }

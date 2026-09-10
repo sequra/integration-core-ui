@@ -55,13 +55,6 @@
                 getOrderStatusMappingSettingsUrl: baseApiUrl + '/order-status-settings',
                 saveOrderStatusMappingSettingsUrl: baseApiUrl + '/order-status-settings',
                 disconnectUrl: baseApiUrl + '/disconnect'
-            },
-            payment: {
-                getPaymentMethodsUrl: baseApiUrl + '/payment-methods',
-                getSellingCountriesUrl: baseApiUrl + '/selling-countries',
-                getCountrySettingsUrl: baseApiUrl + '/country-configuration',
-                getConnectionDataUrl: baseApiUrl + '/connection',
-                validateConnectionDataUrl: baseApiUrl + '/connection-validation',
             }
         };
 
@@ -78,11 +71,12 @@
 
         SequraFE.pages = {
             onboarding: ['connect','countries', 'widgets'],
-            settings: ['general','connection','order_status','widget'],
-            payment: ['methods']
+            settings: ['general','connection','order_status','widget']
         }
 
-        SequraFE.isPromotional = !SequraFE.pages.payment || SequraFE.pages.payment.length === 0;
+        // Stated rather than derived: with no payment methods page in the toolkit there is
+        // nothing left to infer it from, and every consumer says what it is.
+        SequraFE.isPromotional = false;
 
         SequraFE.state.display();
         SequraFE.utilities.hideLoader();

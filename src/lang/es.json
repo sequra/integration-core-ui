@@ -13,7 +13,6 @@
     "downloadNewVersion": "Descargar nueva versión",
     "merchant": "Comerciante:",
     "settings": "Ajustes",
-    "paymentMethods": "Métodos de pago",
     "advanced": "Avanzado",
     "changesSaved": "Cambios guardados exitosamente.",
     "noItemsAvailable": "No hay elementos disponibles",
@@ -119,19 +118,6 @@
     "invalidImageType": "Por favor, proporciona un archivo en uno de los tipos de imagen admitidos (PNG, JPG, SVG).",
     "invalidImageSize": "El archivo seleccionado supera el límite de 10 MB.",
     "invalidTimeDuration": "Este campo debe contener fechas como 2017-08-31 o una duración como P3M15D (3 meses y 15 días). Revisa el formato ISO 8601."
-  },
-  "payments": {
-    "title": "Métodos de pago",
-    "description": "Descripción de los métodos de pago",
-    "countries": {
-      "label": "Países",
-      "description": "Selecciona el país del cliente"
-    },
-    "paymentMethods": "Métodos de pago",
-    "minimumAmount": "Importe mínimo",
-    "maximumAmount": "Importe máximo",
-    "availableFrom": "Disponible desde",
-    "availableTo": "Disponible hasta"
   },
   "debug": {
     "title": "Habilitar registros",

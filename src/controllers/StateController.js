@@ -15,7 +15,6 @@ SequraFE.flags = {
 SequraFE.appStates = {
     ONBOARDING: 'onboarding',
     SETTINGS: 'settings',
-    PAYMENT: 'payment',
     ADVANCED: 'advanced'
 };
 
@@ -31,9 +30,6 @@ SequraFE.appPages = {
         CONNECTION: 'connection',
         ORDER_STATUS: 'order_status',
         WIDGET: 'widget'
-    },
-    PAYMENT: {
-        METHODS: 'methods'
     },
     ADVANCED: {
         DEBUG: 'debug'
@@ -436,8 +432,8 @@ SequraFE.appPages = {
                 return;
             }
 
-            if (!page || SequraFE.pages.payment?.includes(page)) {
-                this.goToState(SequraFE.appStates.PAYMENT + '-' + SequraFE.appPages.PAYMENT.METHODS, null, true)
+            if (!page) {
+                this.goToState(SequraFE.appStates.SETTINGS, null, true)
 
                 return;
             }
@@ -472,9 +468,7 @@ SequraFE.appPages = {
                         || currentState.split('-')[0] === SequraFE.appStates.ONBOARDING;
 
                     this.goToState(
-                        isLeavingOnboarding ?
-                            SequraFE.appStates.PAYMENT + '-' + SequraFE.appPages.PAYMENT.METHODS :
-                            currentState,
+                        isLeavingOnboarding ? SequraFE.appStates.SETTINGS : currentState,
                         null,
                         true
                     );

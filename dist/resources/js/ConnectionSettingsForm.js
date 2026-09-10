@@ -541,7 +541,7 @@ if (!window.SequraFE) {
                         const index = SequraFE.pages.onboarding.indexOf(SequraFE.appPages.ONBOARDING.CONNECT)
                         SequraFE.pages.onboarding.length > index + 1 ?
                             window.location.hash = configuration.appState + '-' + SequraFE.pages.onboarding[index + 1] :
-                            window.location.hash = SequraFE.appStates.PAYMENT + '-' + SequraFE.appPages.PAYMENT.METHODS;
+                            window.location.hash = SequraFE.appStates.SETTINGS;
                     }
 
                     activeSettings = utilities.cloneObject(changedSettings);

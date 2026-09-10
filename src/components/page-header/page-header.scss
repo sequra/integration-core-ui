@@ -49,6 +49,25 @@
       align-items: center;
       column-gap: 16px;
 
+      .sqp-portal-link {
+        display: inline-flex;
+        align-items: center;
+        column-gap: 6px;
+        font-size: 14px;
+        color: $sq-color--blue-400;
+        text-decoration: none;
+
+        &:hover,
+        &:focus {
+          color: $sq-color--blue-40;
+          text-decoration: underline;
+        }
+
+        .sqp-external-icon {
+          flex: none;
+        }
+      }
+
       .sqp-merchant {
         display: flex;
         column-gap: 4px;

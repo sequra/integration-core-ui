@@ -13,7 +13,6 @@
     "downloadNewVersion": "Scarica nuova versione",
     "merchant": "Commerciante:",
     "settings": "Impostazioni",
-    "paymentMethods": "Metodi di pagamento",
     "advanced": "Avanzato",
     "changesSaved": "Modifiche salvate con successo.",
     "noItemsAvailable": "Nessun elemento disponibile",
@@ -120,19 +119,6 @@
     "invalidImageType": "Fornire un file in uno dei tipi di immagine supportati (PNG, JPG, SVG).",
     "invalidImageSize": "Il file selezionato supera il limite di 10MB.",
     "invalidTimeDuration": "Questo campo deve contenere solo date come 2017-08-31 o durate come P3M15D (3 mesi e 15 giorni). Controlla ISO 8601."
-  },
-  "payments": {
-    "title": "Metodi di pagamento",
-    "description": "Vedi quali opzioni di pagamento SeQura sono disponibili per ogni paese. Se non hai un account, contattaci ",
-    "countries": {
-      "label": "Paesi",
-      "description": "Seleziona il paese del cliente"
-    },
-    "paymentMethods": "Metodi di pagamento",
-    "minimumAmount": "Importo minimo",
-    "maximumAmount": "Importo massimo",
-    "availableFrom": "Disponibile da",
-    "availableTo": "Disponibile fino a"
   },
   "debug": {
     "title": "Abilita registri",

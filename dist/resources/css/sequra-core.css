@@ -309,35 +309,6 @@
   max-width: 660px;
   box-shadow: none;
 }
-#sequra-page #sq-page-wrapper .sq-page-content-wrapper.sqv--payments .sq-content-inner {
-  padding: 44px 36px 36px;
-}
-#sequra-page #sq-page-wrapper .sq-page-content-wrapper.sqv--payments .sq-content-inner .sq-table-heading {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  column-gap: 36px;
-}
-@media (max-width: 1023.98px) {
-  #sequra-page #sq-page-wrapper .sq-page-content-wrapper.sqv--payments .sq-content-inner .sq-table-heading {
-    flex-direction: column;
-    align-items: flex-start;
-    row-gap: 8px;
-  }
-}
-#sequra-page #sq-page-wrapper .sq-page-content-wrapper.sqv--payments .sq-content-inner .sq-table-heading .sqp-page-heading {
-  max-width: 800px;
-  width: 100%;
-}
-#sequra-page #sq-page-wrapper .sq-page-content-wrapper.sqv--payments .sq-content-inner .sq-table-heading .sqm--table-dropdown {
-  max-width: 344px;
-}
-#sequra-page #sq-page-wrapper .sq-page-content-wrapper.sqv--payments .sq-content-inner .sq-table-heading .sqm--table-dropdown .sqp-field-title {
-  color: #00C2A3;
-}
-#sequra-page #sq-page-wrapper .sq-page-content-wrapper.sqv--payments .sq-content-inner .sq-table-heading .sqm--table-dropdown .sqp-field-subtitle {
-  color: #b1aeba;
-}
 #sequra-page #sq-page-wrapper .sq-page-content-wrapper.sqv--settings .sq-content-inner {
   max-width: 835px;
   width: 100%;
@@ -577,6 +548,21 @@
   display: flex;
   align-items: center;
   column-gap: 16px;
+}
+#sequra-page .sq-page-header .sqp-header-bottom .sqp-header-merchant .sqp-portal-link {
+  display: inline-flex;
+  align-items: center;
+  column-gap: 6px;
+  font-size: 14px;
+  color: #0075ff;
+  text-decoration: none;
+}
+#sequra-page .sq-page-header .sqp-header-bottom .sqp-header-merchant .sqp-portal-link:hover, #sequra-page .sq-page-header .sqp-header-bottom .sqp-header-merchant .sqp-portal-link:focus {
+  color: #0066ff;
+  text-decoration: underline;
+}
+#sequra-page .sq-page-header .sqp-header-bottom .sqp-header-merchant .sqp-portal-link .sqp-external-icon {
+  flex: none;
 }
 #sequra-page .sq-page-header .sqp-header-bottom .sqp-header-merchant .sqp-merchant {
   display: flex;
@@ -2056,30 +2042,6 @@ tr:has(.sqm--log):hover {
   display: inline-flex;
   align-items: center;
   column-gap: 8px;
-}
-#sequra-page .sq-table-container .sqp-payment-method-header-cell {
-  width: 50%;
-}
-#sequra-page .sq-table-container .sqp-payment-method-cell {
-  display: flex;
-  align-items: center;
-  column-gap: 8px;
-}
-#sequra-page .sq-table-container .sqp-payment-method-cell svg {
-  flex-shrink: 0;
-}
-#sequra-page .sq-table-container .sqp-payment-method-cell .sqp-payment-method-image {
-  width: 52px;
-  height: 52px;
-}
-#sequra-page .sq-table-container .sqp-payment-method-cell .sqp-payment-method-title {
-  font-weight: 700;
-  margin: 0 0 3px;
-  font-size: 13px;
-}
-#sequra-page .sq-table-container .sqp-payment-method-cell .sqp-payment-method-description {
-  font-size: 13px;
-  margin: 0;
 }
 #sequra-page .sq-table-container .sqp-details {
   background-color: #f3f6f9;
