@@ -4,35 +4,22 @@ if (!window.SequraFE) {
 
 // Define the supported configuration capabilities.
 SequraFE.flags = {
-    isShowCheckoutAsHostedPageFieldVisible: true,
-    configurableSelectorsForMiniWidgets: false,
-    isServiceSellingAllowed: false,
-    isAltPriceSelectorVisible: false,
     isStoreSwitcherVisible: true,
     ...(SequraFE.flags || {})
 };
 
 SequraFE.appStates = {
     ONBOARDING: 'onboarding',
-    SETTINGS: 'settings',
-    ADVANCED: 'advanced'
+    SETTINGS: 'settings'
 };
 
 SequraFE.appPages = {
     ONBOARDING: {
         CONNECT: 'connect',
-        DEPLOYMENTS: 'deployments',
-        COUNTRIES: 'countries',
-        WIDGETS: 'widgets'
+        DEPLOYMENTS: 'deployments'
     },
     SETTINGS: {
-        GENERAL: 'general',
-        CONNECTION: 'connection',
-        ORDER_STATUS: 'order_status',
-        WIDGET: 'widget'
-    },
-    ADVANCED: {
-        DEBUG: 'debug'
+        CONNECTION: 'connection'
     }
 };
 
@@ -50,7 +37,6 @@ SequraFE.appPages = {
      * @property {string} currentStoreUrl
      * @property {string} getConnectionDataUrl
      * @property {string} versionUrl
-     * @property {string} shopNameUrl
      * @property {Record<string, any>} pageConfiguration
      * @property {string} [getDeploymentsUrl]
      * @property {string} [sellingCountriesConfiguredUrl] Endpoint telling whether the selling
@@ -66,25 +52,12 @@ SequraFE.appPages = {
      */
 
     /**
-     * @typedef ShopName
-     * @property {string} shopName
-     */
-
-    /**
      * @typedef DataStore
      * @property {Version | null} version
      * @property {Store[] | null} stores
      * @property {ConnectionSettings | null} connectionSettings
-     * @property {CountrySettings | null} countrySettings
-     * @property {GeneralSettings | null} generalSettings
-     * @property {WidgetSettings | null} widgetSettings
-     * @property {PaymentMethod[] | null} paymentMethods
-     * @property {object | null} allAvailablePaymentMethods
-     * @property {SellingCountry[] | null} sellingCountries
      * @property {DeploymentSettings[] | null} deploymentsSettings
      * @property {DeploymentSettings[] | null} notConnectedDeployments
-     * @property {LogsSettings | null} logsSettings
-     * @property {Category[] | null} shopCategories
      */
 
     /**
@@ -92,12 +65,6 @@ SequraFE.appPages = {
      * @property {string} id
      * @property {string} name
      * @property {boolean} [active]
-     */
-
-    /**
-     * @typedef {Object} LogsSettings
-     * @property {boolean} enabled
-     * @property {int} level
      */
 
     /**
@@ -141,15 +108,7 @@ SequraFE.appPages = {
                 stores: null,
                 connectionSettings: null,
                 notConnectedDeployments: null,
-                deploymentsSettings: null,
-                countrySettings: null,
-                generalSettings: null,
-                widgetSettings: null,
-                paymentMethods: null,
-                allAvailablePaymentMethods: null,
-                sellingCountries: null,
-                shopCategories: null,
-                logsSettings: null
+                deploymentsSettings: null
             };
         }
 
@@ -317,15 +276,6 @@ SequraFE.appPages = {
                         || Boolean(dataStore.connectionSettings?.connectionData?.length);
                 case SequraFE.appPages.ONBOARDING.CONNECT:
                     return Boolean(dataStore.connectionSettings?.connectionData?.every((c) => c.username && c.password));
-                case SequraFE.appPages.ONBOARDING.COUNTRIES:
-                    return Boolean(dataStore.countrySettings?.length) && !SequraFE.state.getCredentialsChanged();
-                case SequraFE.appPages.ONBOARDING.WIDGETS:
-                    return dataStore.widgetSettings?.widgetStyles !== undefined
-                        && Boolean(
-                            dataStore.widgetSettings?.displayWidgetOnProductPage
-                            || dataStore.widgetSettings?.showInstallmentAmountInCartPage
-                            || dataStore.widgetSettings?.showInstallmentAmountInProductListing
-                        );
                 default:
                     return true;
             }
@@ -339,14 +289,12 @@ SequraFE.appPages = {
         const pendingOnboardingPage = () => onboardingPages().find((page) => !isOnboardingPageComplete(page));
 
         /**
-         * Tells whether the selling countries are configured in the SeQura portal instead of
-         * in the store: the store then offers no countries page and names the endpoint that
-         * reports the state of that configuration.
+         * Tells whether the store names the endpoint that reports whether the selling
+         * countries have been configured in the SeQura portal.
          *
          * @returns {boolean}
          */
-        const areSellingCountriesConfiguredInPortal = () => Boolean(configuration.sellingCountriesConfiguredUrl)
-            && !onboardingPages().includes(SequraFE.appPages.ONBOARDING.COUNTRIES);
+        const areSellingCountriesConfiguredInPortal = () => Boolean(configuration.sellingCountriesConfiguredUrl);
 
         this.areSellingCountriesConfiguredInPortal = areSellingCountriesConfiguredInPortal;
 
@@ -371,24 +319,17 @@ SequraFE.appPages = {
             utilities.showLoader();
 
             const onboardingConfiguration = configuration.pageConfiguration.onboarding;
-            const advancedConfiguration = configuration.pageConfiguration.advanced;
 
             return Promise.all([
                 getConfigured(configuration.versionUrl),
                 getConfigured(configuration.storesUrl),
                 getConfigured(onboardingConfiguration.getConnectionDataUrl),
-                getConfigured(onboardingConfiguration.getCountrySettingsUrl),
-                getConfigured(onboardingConfiguration.getWidgetSettingsUrl),
                 getConfigured(onboardingConfiguration.getDeploymentsUrl),
-                getConfigured(advancedConfiguration && advancedConfiguration.getLogsSettingsUrl),
-            ]).then(([versionRes, storesRes, connectionSettingsRes, countrySettingsRes, widgetSettingsRes, deploymentsSettingsRes, logsSettingsRes]) => {
+            ]).then(([versionRes, storesRes, connectionSettingsRes, deploymentsSettingsRes]) => {
                 dataStore.version = versionRes;
                 dataStore.stores = storesRes;
                 dataStore.connectionSettings = connectionSettingsRes;
-                dataStore.countrySettings = countrySettingsRes;
-                dataStore.widgetSettings = widgetSettingsRes;
                 dataStore.deploymentsSettings = deploymentsSettingsRes;
-                dataStore.logsSettings = logsSettingsRes;
 
                 return Promise.all([
                     api.get(configuration.stateUrl.sqReplaceUrlPlaceholder('{storeId}', this.getStoreId()), null, SequraFE.customHeader),
@@ -422,12 +363,6 @@ SequraFE.appPages = {
 
             if (stateRes.state === SequraFE.appStates.ONBOARDING) {
                 this.goToState(SequraFE.appStates.ONBOARDING + '-' + page, null, true);
-
-                return;
-            }
-
-            if (SequraFE.pages?.advanced?.includes(page)) {
-                this.goToState(SequraFE.appStates.ADVANCED + '-' + page, null, true)
 
                 return;
             }
@@ -582,8 +517,6 @@ SequraFE.appPages = {
          * Sets the credentials changed flag to local storage.
          */
         this.setCredentialsChanged = () => {
-            SequraFE.state.setData('paymentMethods', null);
-            SequraFE.state.setData('allAvailablePaymentMethods', null);
             localStorage.setItem('sq-password-changed', '1');
         }
 
@@ -621,15 +554,6 @@ SequraFE.appPages = {
          */
         this.getStoreId = () => {
             return sessionStorage.getItem('sq-active-store-id');
-        };
-
-        /**
-         * Returns a getVersion promise.
-         *
-         * @returns {Promise<ShopName>}
-         */
-        this.getShopName = () => {
-            return api.get(configuration.shopNameUrl.sqReplaceUrlPlaceholder('{storeId}', this.getStoreId()), null, SequraFE.customHeader);
         };
 
         this.getData = (key) => {

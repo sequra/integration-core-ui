@@ -550,21 +550,14 @@ if (!window.SequraFE) {
 
                     disableFooter(true);
 
-                    if ( configuration.appState === SequraFE.appStates.SETTINGS) {
-                        if(navigateToOnboarding){
-                            SequraFE.state.setCredentialsChanged();
-                            SequraFE.state.goToState(SequraFE.appStates.ONBOARDING);
-                            return;
-                        }
-                        // Reload GeneralSettings data.
-                        api.get(configuration.getGeneralSettingsUrl, null, SequraFE.customHeader).then(generalSettings => {
-                            SequraFE.state.setData('generalSettings', generalSettings);
-                        }).catch(() => {
-                              SequraFE.responseService.errorHandler({ errorCode: 'general.errors.backgroundDataFetchFailure' }).catch(e => console.error(e));
-                        }).finally(() => utilities.hideLoader());
-                    } else {
-                      utilities.hideLoader();
+                    if (configuration.appState === SequraFE.appStates.SETTINGS && navigateToOnboarding) {
+                        SequraFE.state.setCredentialsChanged();
+                        SequraFE.state.goToState(SequraFE.appStates.ONBOARDING);
+
+                        return;
                     }
+
+                    utilities.hideLoader();
                 });
         }
 

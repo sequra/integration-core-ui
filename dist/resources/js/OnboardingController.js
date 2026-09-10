@@ -10,14 +10,7 @@ if (!window.SequraFE) {
      * validateConnectionDataUrl: string,
      * getConnectionDataUrl: string,
      * connectUrl: string,
-     * getSellingCountriesUrl: string,
-     * getCountrySettingsUrl: string,
-     * saveCountrySettingsUrl: string,
-     * getWidgetSettingsUrl: string,
-     * saveWidgetSettingsUrl: string,
-     * getPaymentMethodsUrl: string,
-     * getAllAvailablePaymentMethodsUrl: string,
-     * configurableSelectorsForMiniWidgets: string
+     * getDeploymentsUrl: string,
      * page: string}} configuration
      * @constructor
      */
@@ -37,12 +30,8 @@ if (!window.SequraFE) {
         let version;
         /** @type Store[] */
         let stores;
-        /** @type CountrySettings[] **/
-        let countrySettings;
         /** @type ConnectionSettings **/
         let connectionSettings;
-        /** @type WidgetSettings **/
-        let widgetSettings;
         /** @type DeploymentSettings[] **/
         let deploymentsSettings;
 
@@ -58,8 +47,6 @@ if (!window.SequraFE) {
             stores = SequraFE.state.getData('stores');
             version = SequraFE.state.getData('version');
             connectionSettings = SequraFE.state.getData('connectionSettings');
-            countrySettings = SequraFE.state.getData('countrySettings');
-            widgetSettings = SequraFE.state.getData('widgetSettings');
             deploymentsSettings = SequraFE.state.getData('deploymentsSettings');
 
             initializePage();
@@ -76,19 +63,6 @@ if (!window.SequraFE) {
             let promises;
 
             switch (page) {
-                case SequraFE.appPages.ONBOARDING.COUNTRIES:
-                    renderer = renderCountrySettingsForm;
-                    promises = Promise.all([
-                        SequraFE.state.getData('sellingCountries') ?? api.get(configuration.getSellingCountriesUrl, null, SequraFE.customHeader)
-                    ])
-                    break;
-                case SequraFE.appPages.ONBOARDING.WIDGETS:
-                    renderer = renderWidgetSettingsForm;
-                    promises = Promise.all([
-                        SequraFE.state.getData('allAvailablePaymentMethods') ?? api.get(configuration.getAllAvailablePaymentMethodsUrl, null, SequraFE.customHeader),
-                    ])
-                    break;
-
                 case SequraFE.appPages.ONBOARDING.DEPLOYMENTS:
                     renderer = renderDeploymentsSettingForm;
                     promises = Promise.all([
@@ -109,25 +83,6 @@ if (!window.SequraFE) {
                 .finally(() => utilities.hideLoader());
         };
 
-        /**
-         * Renders the country settings form.
-         *
-         * @param sellingCountries
-         */
-        const renderCountrySettingsForm = (sellingCountries) => {
-            if (!SequraFE.state.getData('sellingCountries')) {
-                SequraFE.state.setData('sellingCountries', sellingCountries)
-            }
-
-            const form = formFactory.getInstance(
-                'generalSettings',
-                {countrySettings, sellingCountries, connectionSettings},
-                {...configuration, appState: SequraFE.appStates.ONBOARDING}
-            );
-
-            form?.render();
-        }
-
         const renderDeploymentsSettingForm = (deploymentsSettings) => {
             if (!SequraFE.state.getData('deploymentsSettings')) {
                 SequraFE.state.setData('deploymentsSettings', deploymentsSettings);
@@ -141,25 +96,6 @@ if (!window.SequraFE) {
 
             form?.render();
         };
-
-        /**
-         * Renders the widgets settings form.
-         *
-         * @param allAvailablePaymentMethods
-         */
-        const renderWidgetSettingsForm = (allAvailablePaymentMethods) => {
-            if (!SequraFE.state.getData('allAvailablePaymentMethods')) {
-                SequraFE.state.setData('allAvailablePaymentMethods', allAvailablePaymentMethods)
-            }
-
-            const form = formFactory.getInstance(
-                'widgetSettings',
-                {widgetSettings, connectionSettings, countrySettings, allAvailablePaymentMethods},
-                {...configuration, appState: SequraFE.appStates.ONBOARDING}
-            );
-
-            form?.render();
-        }
 
         /**
          * Renders the connection settings form.
@@ -212,22 +148,6 @@ if (!window.SequraFE) {
                             isCompleted: SequraFE.pages.onboarding.indexOf(SequraFE.state.getPage()) >
                                 SequraFE.pages.onboarding.indexOf(SequraFE.appPages.ONBOARDING.CONNECT),
                             isActive: activePage === SequraFE.appPages.ONBOARDING.CONNECT
-                        }
-                    case SequraFE.appPages.ONBOARDING.COUNTRIES:
-                        return {
-                            label: 'sidebar.stepThreeLabel',
-                            href: '#onboarding-countries',
-                            isCompleted: SequraFE.pages.onboarding.indexOf(SequraFE.state.getPage()) >
-                                SequraFE.pages.onboarding.indexOf(SequraFE.appPages.ONBOARDING.COUNTRIES),
-                            isActive: activePage === SequraFE.appPages.ONBOARDING.COUNTRIES
-                        }
-                    case SequraFE.appPages.ONBOARDING.WIDGETS:
-                        return {
-                            label: 'sidebar.stepFourLabel',
-                            href: '#onboarding-widgets',
-                            isCompleted: SequraFE.pages.onboarding.indexOf(SequraFE.state.getPage()) >
-                                SequraFE.pages.onboarding.indexOf(SequraFE.appPages.ONBOARDING.WIDGETS),
-                            isActive: activePage === SequraFE.appPages.ONBOARDING.WIDGETS
                         }
                 }
             });

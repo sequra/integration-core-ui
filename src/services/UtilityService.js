@@ -120,8 +120,7 @@ if (!String.prototype.sqReplaceUrlPlaceholder) {
             }
 
             const items = [
-                {state: SequraFE.appStates.SETTINGS, label: 'general.settings'},
-                {state: SequraFE.appStates.ADVANCED, label: 'general.advanced'}
+                {state: SequraFE.appStates.SETTINGS, label: 'general.settings'}
             ];
 
             const offered = items.filter((item) => SequraFE.pages?.[item.state]?.length);

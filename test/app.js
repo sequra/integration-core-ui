@@ -38,10 +38,8 @@ const getPage = (pageName) => {
             'DataTableComponent',
             'PageHeaderComponent',
             'ConnectionSettingsForm',
-            'CountryConfigurationForm',
-            'WidgetSettingsForm',
-            'GeneralSettingsForm',
-            'OrderStatusMappingSettingsForm',
+            'DeploymentsSettingsForm',
+            'DeploymentsModalForm',
             'StateController',
             'OnboardingController',
             'SettingsController'

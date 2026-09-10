@@ -8,7 +8,6 @@
 @import "../components/page-header/page-header";
 @import "../components/multi-item-selector/multi-item-selector";
 @import "../components/dropdown/dropdown";
-@import "../components/repeater-fields/repeater-fields";
 
 @include config-font-faces();
 
@@ -40,10 +39,6 @@
 
 #sequra-page .sq-text-input {
   @include sq-input-field;
-}
-
-#sequra-page .sq-text-area {
-  @include input-text-area;
 }
 
 #sequra-page .sq-password {
@@ -86,10 +81,6 @@
 
 #sequra-page .sq-heading-wrapper {
   @include sq-heading-wrapper;
-}
-
-#sequra-page .sq-table {
-  @include sq-table;
 }
 
 #sequra-page .sq-alert {
@@ -137,52 +128,6 @@
 }
 
 // Begin: DataTable ------
-
-tr:has(.sqm--log):hover {
-  background: #f4f4f4;
-}
-
-#sequra-page .sqm--log {
-  font-family: monospace;
-  font-size: 12px;
-
-  &-info {
-    color: #2196f3;
-  }
-  &-warning {
-    color: #ff9800;
-  }
-  &-error {
-    color: #f44336;
-  }
-  &-debug {
-    color: #000;
-  }
-  &-details {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: 6px;
-    background: #fff;
-    border-radius: 20px;
-    width: 20px;
-    height: 20px;
-    padding: 0;
-    border-color: transparent;
-    &::before {
-      @include sq-font-icon(zoom-in, 14px);
-    }
-    > span {
-      display: none;
-    }
-    &.sqm--log-details-open {
-      background: #000;
-      &::before {
-        color: #fff;
-      }
-    }
-  }
-}
 
 #sequra-page .sq-datatable {
   &__wrapper {
