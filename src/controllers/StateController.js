@@ -248,7 +248,7 @@ SequraFE.appPages = {
             stopWatchingSellingCountries();
             sellingCountriesWatcher = setInterval(() => {
                 fetchSellingCountriesConfigured().then((configured) => {
-                    configured !== false && this.display();
+                    configured === true && this.display();
                 });
             }, SELLING_COUNTRIES_POLL_INTERVAL);
         };
