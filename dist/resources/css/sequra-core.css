@@ -554,12 +554,11 @@
   align-items: center;
   column-gap: 6px;
   font-size: 14px;
-  color: #0075ff;
-  text-decoration: none;
+  color: #00C2A3;
+  text-decoration: underline;
 }
 #sequra-page .sq-page-header .sqp-header-bottom .sqp-header-merchant .sqp-portal-link:hover, #sequra-page .sq-page-header .sqp-header-bottom .sqp-header-merchant .sqp-portal-link:focus {
-  color: #0066ff;
-  text-decoration: underline;
+  color: #119C6E;
 }
 #sequra-page .sq-page-header .sqp-header-bottom .sqp-header-merchant .sqp-portal-link .sqp-external-icon {
   flex: none;

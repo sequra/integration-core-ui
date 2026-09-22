@@ -49,18 +49,19 @@
       align-items: center;
       column-gap: 16px;
 
+      // Styled like the other links of the page (the "here" of the connection
+      // description is `.sq-link-button`): the primary green, underlined.
       .sqp-portal-link {
         display: inline-flex;
         align-items: center;
         column-gap: 6px;
         font-size: 14px;
-        color: $sq-color--blue-400;
-        text-decoration: none;
+        color: $sq-color--primary;
+        text-decoration: underline;
 
         &:hover,
         &:focus {
-          color: $sq-color--blue-40;
-          text-decoration: underline;
+          color: $sq-color-green--dark;
         }
 
         .sqp-external-icon {
