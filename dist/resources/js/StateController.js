@@ -458,7 +458,11 @@ SequraFE.appPages = {
 
             let [controllerName, page] = state.split('-');
             if (!Object.values(SequraFE.appStates).includes(controllerName)) {
+                // A state the application does not know, such as a bookmark of a page that
+                // is gone: start over and let the restart pick the page.
                 SequraFE.state.display();
+
+                return;
             }
 
             if (!page || !SequraFE.pages[controllerName]?.includes(page)) {
