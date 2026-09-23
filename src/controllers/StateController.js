@@ -253,7 +253,9 @@ SequraFE.appPages = {
             stopWatchingSellingCountries();
             sellingCountriesWatcher = setInterval(() => {
                 fetchSellingCountriesConfigured().then((configured) => {
-                    configured === true && this.display();
+                    // A check that was in flight when the merchant left the page must not
+                    // pull them back out of the page they went to.
+                    sellingCountriesWatcher !== null && configured === true && this.display();
                 });
             }, SELLING_COUNTRIES_POLL_INTERVAL);
         };
