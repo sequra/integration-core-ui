@@ -522,15 +522,6 @@ if (!window.SequraFE) {
                     }
 
                     if (configuration.appState === SequraFE.appStates.ONBOARDING) {
-                        const currentConnection = getSettingsForActiveDeployment(activeSettings);
-                        if (
-                            currentConnection &&
-                            currentConnection.username &&
-                            currentConnection.username.length !== 0
-                        ) {
-                            SequraFE.state.setCredentialsChanged();
-                        }
-
                         if (SequraFE.state.areSellingCountriesConfiguredInPortal()) {
                             result?.portalUrl && window.open(result.portalUrl, '_blank');
                             SequraFE.state.display();

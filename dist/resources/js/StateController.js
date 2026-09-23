@@ -177,9 +177,14 @@ SequraFE.appPages = {
          *
          * @returns {Promise<boolean | null>}
          */
-        const fetchSellingCountriesConfigured = () => getConfigured(configuration.sellingCountriesConfiguredUrl)
-            .then((response) => (response && typeof response.configured === 'boolean' ? response.configured : null))
-            .catch(() => null);
+        const fetchSellingCountriesConfigured = () => !configuration.sellingCountriesConfiguredUrl
+            ? Promise.resolve(null)
+            : api.getInBackground(
+                configuration.sellingCountriesConfiguredUrl.sqReplaceUrlPlaceholder('{storeId}', this.getStoreId()),
+                SequraFE.customHeader
+            )
+                .then((response) => (response && typeof response.configured === 'boolean' ? response.configured : null))
+                .catch(() => null);
 
         /**
          * Shows that the integration is waiting for the merchant to enable the selling
@@ -275,7 +280,8 @@ SequraFE.appPages = {
                     return Boolean(dataStore.deploymentsSettings?.some((deployment) => deployment.active === true))
                         || Boolean(dataStore.connectionSettings?.connectionData?.length);
                 case SequraFE.appPages.ONBOARDING.CONNECT:
-                    return Boolean(dataStore.connectionSettings?.connectionData?.every((c) => c.username && c.password));
+                    return Boolean(dataStore.connectionSettings?.connectionData?.length)
+                        && dataStore.connectionSettings.connectionData.every((c) => c.username && c.password);
                 default:
                     return true;
             }
@@ -396,7 +402,9 @@ SequraFE.appPages = {
             const pendingPage = pendingOnboardingPage();
 
             if (controllerName === SequraFE.appStates.ONBOARDING) {
-                if (!pendingPage) {
+                const mustReconnect = SequraFE.state.getCredentialsChanged();
+
+                if (!pendingPage && !mustReconnect) {
                     // Onboarding is done: back to the page the merchant was on, or to the
                     // first page of the configured application when there was none.
                     const isLeavingOnboarding = !currentState
@@ -411,9 +419,14 @@ SequraFE.appPages = {
                     return;
                 }
 
+                const resumePage = pendingPage ?? SequraFE.appPages.ONBOARDING.CONNECT;
                 const requestedIndex = onboardingPages().indexOf(page);
-                if (requestedIndex === -1 || requestedIndex > onboardingPages().indexOf(pendingPage)) {
-                    page = pendingPage;
+                if (requestedIndex === -1 || requestedIndex > onboardingPages().indexOf(resumePage)) {
+                    page = resumePage;
+                }
+
+                if (page === SequraFE.appPages.ONBOARDING.CONNECT) {
+                    SequraFE.state.removeCredentialsChanged();
                 }
 
                 displayPage(controllerName + '-' + page, additionalConfig);

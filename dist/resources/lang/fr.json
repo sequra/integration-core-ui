@@ -1,5 +1,6 @@
 {
   "general": {
+    "viewInPortal": "Voir l'intégration dans le Merchant Portal",
     "save": "Enregistrer",
     "saveChanges": "Enregistrer les modifications",
     "cancel": "Annuler",
@@ -161,6 +162,13 @@
     }
   },
   "countries": {
+    "pending": {
+      "title": "En attente des pays de vente",
+      "description": "Le portail seQura s'ouvre sur la page Store integrations. Ouvrez l'intégration de cette boutique, activez les pays où seQura doit être disponible et enregistrez. Cette page continue d'elle-même dès que cette configuration est enregistrée.",
+      "warning": "seQura ne peut pas encore être utilisé : les pays de vente ne sont pas configurés.",
+      "openPortal": "Ouvrir le portail seQura",
+      "refresh": "Actualiser"
+    },
     "ES": {
       "label": "Espagne",
       "description": "Veuillez saisir l'ID commerçant SeQura à utiliser pour les clients espagnols."
