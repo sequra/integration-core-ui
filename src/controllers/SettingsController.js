@@ -52,14 +52,19 @@ if (!window.SequraFE) {
             utilities.showLoader();
 
             const cached = SequraFE.state.getData('notConnectedDeployments');
+            // The store id is already filled in: the state controller resolves every URL of
+            // the page configuration before handing it to a controller.
+            const url = configuration.getNotConnectedDeploymentsUrl;
 
-            (cached ? Promise.resolve(cached) : api.get(
-                configuration.getNotConnectedDeploymentsUrl.sqReplaceUrlPlaceholder(
-                    '{storeId}', SequraFE.state.getStoreId()
-                ),
-                null,
-                SequraFE.customHeader
-            ))
+            if (!cached && !url) {
+                // A store that does not say where the deployments are still gets its
+                // connection page; only the manage-deployments button has nothing to offer.
+                console.error(
+                    'SequraFE: pageConfiguration.settings.getNotConnectedDeploymentsUrl is not configured'
+                );
+            }
+
+            (cached ? Promise.resolve(cached) : url ? api.get(url, null, SequraFE.customHeader) : Promise.resolve([]))
                 .then(renderConnectionSettingsForm)
                 .catch((error) => {
                     console.error('Error occurred while rendering the page: ', error);
