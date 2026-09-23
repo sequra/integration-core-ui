@@ -107,7 +107,7 @@ if (!window.SequraFE) {
                             isActive: activePage === SequraFE.appPages.SETTINGS.CONNECTION
                         }
                 }
-            });
+            }).filter(Boolean);
         }
 
         /**
