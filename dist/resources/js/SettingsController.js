@@ -59,7 +59,12 @@ if (!window.SequraFE) {
                 ),
                 null,
                 SequraFE.customHeader
-            )).then(renderConnectionSettingsForm)
+            ))
+                .then(renderConnectionSettingsForm)
+                .catch((error) => {
+                    console.error('Error occurred while rendering the page: ', error);
+                })
+                .finally(() => utilities.hideLoader());
         };
 
         /**
