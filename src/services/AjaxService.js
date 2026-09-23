@@ -61,6 +61,16 @@ if (!window.SequraFE.customHeader) {
          */
         const get = (url, errorCallback, customHeader = {}) => call('GET', url, null, errorCallback, customHeader);
 
+        /**
+         * Performs a GET ajax request that never touches the application state: a 401/403 does not go
+         * through the unauthorized handler and no error message is shown. Any non-OK response rejects
+         * the returned promise, so the caller decides what a failure means. Meant for background
+         * checks such as polling.
+         *
+         * @param {string} url The URL to call.
+         * @param {Record<string, string>?} customHeader
+         * @returns {Promise<any>}
+         */
         const getInBackground = (url, customHeader = {}) =>
             call('GET', url, null, () => Promise.reject(), customHeader, false);
 
