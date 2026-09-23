@@ -297,14 +297,13 @@ SequraFE.appPages = {
         const pendingOnboardingPage = () => onboardingPages().find((page) => !isOnboardingPageComplete(page));
 
         /**
-         * Tells whether the store names the endpoint that reports whether the selling
-         * countries have been configured in the SeQura portal.
+         * Tells whether the store leaves the selling countries to the SeQura portal, which
+         * it does by naming the endpoint that reports whether they have been configured.
+         * Whether they actually are is what fetchSellingCountriesConfigured answers.
          *
          * @returns {boolean}
          */
-        const areSellingCountriesConfiguredInPortal = () => Boolean(configuration.sellingCountriesConfiguredUrl);
-
-        this.areSellingCountriesConfiguredInPortal = areSellingCountriesConfiguredInPortal;
+        this.delegatesSellingCountriesToPortal = () => Boolean(configuration.sellingCountriesConfiguredUrl);
 
         /**
          * Requests one of the URLs the store configured the application with,
@@ -341,7 +340,7 @@ SequraFE.appPages = {
 
                 return Promise.all([
                     api.get(configuration.stateUrl.sqReplaceUrlPlaceholder('{storeId}', this.getStoreId()), null, SequraFE.customHeader),
-                    areSellingCountriesConfiguredInPortal() ? fetchSellingCountriesConfigured() : Promise.resolve(null)
+                    fetchSellingCountriesConfigured()
                 ]);
             }).then(([stateRes, sellingCountriesConfigured]) => {
                 if (SequraFE.state.getCredentialsChanged()) {
