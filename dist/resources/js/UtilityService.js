@@ -108,36 +108,16 @@ if (!String.prototype.sqReplaceUrlPlaceholder) {
         };
 
         /**
-         * Returns the menu item array for page navigation, listing only the
-         * pages the store offers.
+         * Returns the menu item array for the page header navigation.
+         *
+         * The toolkit offers a single section, the settings, and one destination is not a
+         * navigation: the page shows without a menu bar above it that leads nowhere else. A
+         * store that adds sections of its own supplies its own menu items to the page header.
          *
          * @param {string} activePage
          * @return {Array<{label: string, href: string, isActive: boolean}>}
          */
-        this.getMenuItems = (activePage) => {
-            if (SequraFE.isPromotional) {
-                return [];
-            }
-
-            const items = [
-                {state: SequraFE.appStates.SETTINGS, label: 'general.settings'}
-            ];
-
-            const offered = items.filter((item) => SequraFE.pages?.[item.state]?.length);
-
-            // One destination is not a navigation: a store that keeps a single section in
-            // the shop - the rest being the seQura portal's - shows its page without a menu
-            // bar above it that leads nowhere else.
-            if (offered.length < 2) {
-                return [];
-            }
-
-            return offered.map((item) => ({
-                label: item.label,
-                href: window.location.href.split('#')[0] + '#' + item.state,
-                isActive: activePage === item.state
-            }));
-        };
+        this.getMenuItems = (activePage) => [];
     }
 
     SequraFE.utilities = new UtilityService();
