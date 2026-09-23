@@ -188,7 +188,7 @@ if (!window.SequraFE) {
                                     notConnectedDeployments = notConnectedDeployments.filter(
                                         d => d.id !== activatedDeployment.id
                                     );
-                                    SequraFE.state.setData('notConnectedDeployments', activeSettings);
+                                    SequraFE.state.setData('notConnectedDeployments', notConnectedDeployments);
                                 }
 
                                 const pageContent = document.querySelector('.sq-content');
