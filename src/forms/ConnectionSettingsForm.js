@@ -522,8 +522,10 @@ if (!window.SequraFE) {
                     }
 
                     if (configuration.appState === SequraFE.appStates.ONBOARDING) {
-                        if (SequraFE.state.areSellingCountriesConfiguredInPortal()) {
-                            result?.portalUrl && window.open(result.portalUrl, '_blank');
+                        if (SequraFE.state.delegatesSellingCountriesToPortal()) {
+                            // The reload decides what comes next: the pending page, which
+                            // offers the portal, when the countries still have to be
+                            // configured there, and the settings otherwise.
                             SequraFE.state.display();
 
                             return;
