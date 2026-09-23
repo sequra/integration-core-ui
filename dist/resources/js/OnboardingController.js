@@ -150,7 +150,7 @@ if (!window.SequraFE) {
                             isActive: activePage === SequraFE.appPages.ONBOARDING.CONNECT
                         }
                 }
-            });
+            }).filter(Boolean);
 
             return [firstStep, ...pageSteps, lastStep]
         }
