@@ -1,5 +1,6 @@
 {
   "general": {
+    "viewInPortal": "Ver a integração no Merchant Portal",
     "save": "Guardar",
     "saveChanges": "Guardar alterações",
     "cancel": "Cancelar",
@@ -84,6 +85,8 @@
     "stepOneLabel": "Instalar integração ecommerce",
     "stepOneDescription": "A sua integração está pronta para ligação.",
     "stepTwoLabel": "Ligar integração",
+    "stepDeployments": "Selecionar os destinos de implementação",
+    "stepFiveLabel": "Comece a vender com SeQura",
     "stepTwoDescription": "Estabeleça a ligação entre a sua loja e o SeQura."
   },
   "validation": {
@@ -160,6 +163,13 @@
     }
   },
   "countries": {
+    "pending": {
+      "title": "À espera dos países de venda",
+      "description": "O portal seQura abre na página Store integrations. Abra a integração desta loja, ative os países onde o seQura deve estar disponível e guarde. Esta página continua sozinha assim que essa configuração for guardada.",
+      "warning": "O seQura ainda não pode ser utilizado: os países de venda não estão configurados.",
+      "openPortal": "Abrir o portal seQura",
+      "refresh": "Atualizar"
+    },
     "ES": {
       "label": "Espanha",
       "description": "Por favor, insira o ID de comerciante SeQura que deve ser usado para clientes espanhóis."

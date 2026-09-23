@@ -30,7 +30,7 @@ if (!window.SequraFE.customHeader) {
          * @param {(error: Record<string, any>) => Promise<void>?} errorCallback
          * @returns {Record<string, any>}
          */
-        const handleResponse = (response, errorCallback) => {
+        const handleResponse = (response, errorCallback, redirectOnUnauthorized = true) => {
             if (!errorCallback) {
                 errorCallback = SequraFE.responseService.errorHandler;
             }
@@ -40,7 +40,7 @@ if (!window.SequraFE.customHeader) {
                     return response.json();
                 }
 
-                if (response.status === 401 || response.status === 403) {
+                if (redirectOnUnauthorized && (response.status === 401 || response.status === 403)) {
                     return response.json().then(SequraFE.responseService.unauthorizedHandler);
                 }
 
@@ -60,6 +60,9 @@ if (!window.SequraFE.customHeader) {
          * @param {Record<string, string>?} customHeader
          */
         const get = (url, errorCallback, customHeader = {}) => call('GET', url, null, errorCallback, customHeader);
+
+        const getInBackground = (url, customHeader = {}) =>
+            call('GET', url, null, () => Promise.reject(), customHeader, false);
 
         /**
          * Performs POST ajax request.
@@ -102,7 +105,7 @@ if (!window.SequraFE.customHeader) {
          * @param {Record<string, string>?} customHeader
          * @returns {Promise<Record<string, any>>}
          */
-        const call = (method, url, data, errorCallback, customHeader) => {
+        const call = (method, url, data, errorCallback, customHeader, redirectOnUnauthorized = true) => {
             const callUUID = SequraFE.StateUUIDService.getStateUUID();
 
             return new Promise((resolve, reject) => {
@@ -131,13 +134,14 @@ if (!window.SequraFE.customHeader) {
                         return;
                     }
 
-                    handleResponse(response, errorCallback).then(resolve).catch(reject);
+                    handleResponse(response, errorCallback, redirectOnUnauthorized).then(resolve).catch(reject);
                 }).catch(reject);
             });
         };
 
         return {
             get,
+            getInBackground,
             post,
             put,
             delete: del,
