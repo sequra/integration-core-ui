@@ -126,6 +126,13 @@ if (!window.SequraFE.components) {
 
     SequraFE.components.PageHeader = {
         /** @param {PageHeaderConfiguration} config */
-        create: (config) => new PageHeaderComponent(config)
+        create: (config) => new PageHeaderComponent(config),
+        setPortalUrl: (portalUrl) => {
+            const link = document.querySelector('.sqp-portal-link');
+            if (!link) return;
+
+            link.style.display = portalUrl ? '' : 'none';
+            if (portalUrl) link.href = portalUrl;
+        }
     };
 })();

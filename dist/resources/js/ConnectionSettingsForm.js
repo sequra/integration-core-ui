@@ -87,6 +87,10 @@ if (!window.SequraFE) {
             if (passwordInput) passwordInput.value = getSettingsForActiveDeployment(changedSettings).password ?? '';
         };
 
+        const showActiveDeploymentPortalUrl = () => {
+            SequraFE.components.PageHeader.setPortalUrl(activeSettings?.portalUrls?.[activeDeploymentId]);
+        };
+
         const updateDeploymentMenuActiveState = () => {
             const menuWrapper = document.querySelector('.sqp-menu-items-deployments');
             if (!menuWrapper) return;
@@ -124,6 +128,7 @@ if (!window.SequraFE) {
 
             initSettings();
             initForm();
+            showActiveDeploymentPortalUrl();
 
             if (!notConnectedDeployments || notConnectedDeployments.length === 0) {
                 hideMenageButton();
@@ -233,6 +238,7 @@ if (!window.SequraFE) {
                                 activeDeploymentId = deployment.id;
                                 updateFormFields();
                                 updateDeploymentMenuActiveState();
+                                showActiveDeploymentPortalUrl();
                                 disableFooter(false);
                             }
                         });
