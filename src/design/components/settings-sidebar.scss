@@ -53,27 +53,9 @@
         transition: color .2s;
       }
 
-      &.sqm--general {
-        &:before {
-          @include sq-font-icon(general-settings);
-        }
-      }
-
       &.sqm--connection {
         &:before {
           @include sq-font-icon(connection);
-        }
-      }
-
-      &.sqm--order {
-        &:before {
-          @include sq-font-icon(order-status);
-        }
-      }
-
-      &.sqm--widget {
-        &:before {
-          @include sq-font-icon(widget-settings);
         }
       }
     }

@@ -4,38 +4,22 @@ if (!window.SequraFE) {
 
 // Define the supported configuration capabilities.
 SequraFE.flags = {
-    isShowCheckoutAsHostedPageFieldVisible: true,
-    configurableSelectorsForMiniWidgets: false,
-    isServiceSellingAllowed: false,
-    isAltPriceSelectorVisible: false,
+    isStoreSwitcherVisible: true,
     ...(SequraFE.flags || {})
 };
 
 SequraFE.appStates = {
     ONBOARDING: 'onboarding',
-    SETTINGS: 'settings',
-    PAYMENT: 'payment',
-    ADVANCED: 'advanced'
+    SETTINGS: 'settings'
 };
 
 SequraFE.appPages = {
     ONBOARDING: {
         CONNECT: 'connect',
-        DEPLOYMENTS: 'deployments',
-        COUNTRIES: 'countries',
-        WIDGETS: 'widgets'
+        DEPLOYMENTS: 'deployments'
     },
     SETTINGS: {
-        GENERAL: 'general',
-        CONNECTION: 'connection',
-        ORDER_STATUS: 'order_status',
-        WIDGET: 'widget'
-    },
-    PAYMENT: {
-        METHODS: 'methods'
-    },
-    ADVANCED: {
-        DEBUG: 'debug'
+        CONNECTION: 'connection'
     }
 };
 
@@ -53,7 +37,6 @@ SequraFE.appPages = {
      * @property {string} currentStoreUrl
      * @property {string} getConnectionDataUrl
      * @property {string} versionUrl
-     * @property {string} shopNameUrl
      * @property {Record<string, any>} pageConfiguration
      * @property {string} [getDeploymentsUrl]
      */
@@ -66,25 +49,12 @@ SequraFE.appPages = {
      */
 
     /**
-     * @typedef ShopName
-     * @property {string} shopName
-     */
-
-    /**
      * @typedef DataStore
      * @property {Version | null} version
      * @property {Store[] | null} stores
      * @property {ConnectionSettings | null} connectionSettings
-     * @property {CountrySettings | null} countrySettings
-     * @property {GeneralSettings | null} generalSettings
-     * @property {WidgetSettings | null} widgetSettings
-     * @property {PaymentMethod[] | null} paymentMethods
-     * @property {object | null} allAvailablePaymentMethods
-     * @property {SellingCountry[] | null} sellingCountries
      * @property {DeploymentSettings[] | null} deploymentsSettings
      * @property {DeploymentSettings[] | null} notConnectedDeployments
-     * @property {LogsSettings | null} logsSettings
-     * @property {Category[] | null} shopCategories
      */
 
     /**
@@ -92,12 +62,6 @@ SequraFE.appPages = {
      * @property {string} id
      * @property {string} name
      * @property {boolean} [active]
-     */
-
-    /**
-     * @typedef {Object} LogsSettings
-     * @property {boolean} enabled
-     * @property {int} level
      */
 
     /**
@@ -126,15 +90,7 @@ SequraFE.appPages = {
                 stores: null,
                 connectionSettings: null,
                 notConnectedDeployments: null,
-                deploymentsSettings: null,
-                countrySettings: null,
-                generalSettings: null,
-                widgetSettings: null,
-                paymentMethods: null,
-                allAvailablePaymentMethods: null,
-                sellingCountries: null,
-                shopCategories: null,
-                logsSettings: null
+                deploymentsSettings: null
             };
         }
 
@@ -184,29 +140,73 @@ SequraFE.appPages = {
         };
 
         /**
-         * Opens a specific page based on the current state.
+         * Onboarding pages the store offers, in the order they are walked through.
+         *
+         * @returns {string[]}
+         */
+        const onboardingPages = () => SequraFE.pages?.onboarding ?? [];
+
+        /**
+         * Tells whether the configuration an onboarding page asks for is already there.
+         *
+         * @param {string} page
+         * @returns {boolean}
+         */
+        const isOnboardingPageComplete = (page) => {
+            switch (page) {
+                case SequraFE.appPages.ONBOARDING.DEPLOYMENTS:
+                    // `active` is the selection the deployments form keeps for the current
+                    // page session; a connected deployment settles the step across reloads,
+                    // because the API reports deployments without a selection.
+                    return Boolean(dataStore.deploymentsSettings?.some((deployment) => deployment.active === true))
+                        || Boolean(dataStore.connectionSettings?.connectionData?.length);
+                case SequraFE.appPages.ONBOARDING.CONNECT:
+                    return Boolean(dataStore.connectionSettings?.connectionData?.length)
+                        && dataStore.connectionSettings.connectionData.every((c) => c.username && c.password);
+                default:
+                    return true;
+            }
+        };
+
+        /**
+         * Returns the first onboarding page of the store that is not done yet.
+         *
+         * @returns {string | undefined}
+         */
+        const pendingOnboardingPage = () => onboardingPages().find((page) => !isOnboardingPageComplete(page));
+
+        /**
+         * Requests one of the URLs the store configured the application with,
+         * resolving to null for a page the store does not offer.
+         *
+         * @param {string | undefined | null} url
+         * @returns {Promise<any>}
+         */
+        const getConfigured = (url) => url
+            ? api.get(url.sqReplaceUrlPlaceholder('{storeId}', this.getStoreId()), null, SequraFE.customHeader)
+            : Promise.resolve(null);
+
+        /**
+         * Opens the page the state of the integration asks for, after loading the data
+         * every page needs.
+         *
+         * @returns {Promise<void>}
          */
         const displayPageBasedOnState = () => {
             utilities.showLoader();
 
+            const onboardingConfiguration = configuration.pageConfiguration.onboarding;
+
             return Promise.all([
-                api.get(configuration.versionUrl.sqReplaceUrlPlaceholder('{storeId}', this.getStoreId()), null, SequraFE.customHeader),
-                api.get(configuration.storesUrl.sqReplaceUrlPlaceholder('{storeId}', this.getStoreId()), null, SequraFE.customHeader),
-                api.get(configuration.pageConfiguration.onboarding.getConnectionDataUrl.sqReplaceUrlPlaceholder('{storeId}', this.getStoreId()), null, SequraFE.customHeader),
-                api.get(configuration.pageConfiguration.onboarding.getCountrySettingsUrl.sqReplaceUrlPlaceholder('{storeId}', this.getStoreId()), null, SequraFE.customHeader),
-                api.get(configuration.pageConfiguration.onboarding.getWidgetSettingsUrl.sqReplaceUrlPlaceholder('{storeId}', this.getStoreId()), null, SequraFE.customHeader),
-                api.get(configuration.pageConfiguration.onboarding.getDeploymentsUrl.sqReplaceUrlPlaceholder('{storeId}', this.getStoreId()), null, SequraFE.customHeader),
-                api.get(configuration.pageConfiguration.onboarding.getNotConnectedDeploymentsUrl.sqReplaceUrlPlaceholder('{storeId}', this.getStoreId()), null, SequraFE.customHeader),
-                api.get(configuration.pageConfiguration.advanced.getLogsSettingsUrl.sqReplaceUrlPlaceholder('{storeId}', this.getStoreId()), null, SequraFE.customHeader),
-            ]).then(([versionRes, storesRes, connectionSettingsRes, countrySettingsRes, widgetSettingsRes, deploymentsSettingsRes, notConnectedDeployments, logsSettingsRes]) => {
+                getConfigured(configuration.versionUrl),
+                getConfigured(configuration.storesUrl),
+                getConfigured(onboardingConfiguration.getConnectionDataUrl),
+                getConfigured(onboardingConfiguration.getDeploymentsUrl),
+            ]).then(([versionRes, storesRes, connectionSettingsRes, deploymentsSettingsRes]) => {
                 dataStore.version = versionRes;
                 dataStore.stores = storesRes;
                 dataStore.connectionSettings = connectionSettingsRes;
-                dataStore.countrySettings = countrySettingsRes;
-                dataStore.widgetSettings = widgetSettingsRes;
                 dataStore.deploymentsSettings = deploymentsSettingsRes;
-                dataStore.notConnectedDeployments = notConnectedDeployments;
-                dataStore.logsSettings = logsSettingsRes;
 
                 return api.get(configuration.stateUrl.sqReplaceUrlPlaceholder('{storeId}', this.getStoreId()), null, SequraFE.customHeader);
             }).then((stateRes) => {
@@ -214,27 +214,34 @@ SequraFE.appPages = {
                     SequraFE.state.removeCredentialsChanged();
                 }
 
-                const page = this.getPage();
-                if (stateRes.state === SequraFE.appStates.ONBOARDING) {
-                    this.goToState(SequraFE.appStates.ONBOARDING + '-' + page, null, true);
-
-                    return;
-                }
-
-                if (SequraFE.pages?.advanced?.includes(page)) {
-                    this.goToState(SequraFE.appStates.ADVANCED + '-' + page, null, true)
-                    return;
-                }
-
-                if (!page || SequraFE.pages.payment?.includes(page)) {
-                    this.goToState(SequraFE.appStates.PAYMENT + '-' + SequraFE.appPages.PAYMENT.METHODS, null, true)
-
-                    return;
-                }
-
-                this.goToState(SequraFE.appStates.SETTINGS + '-' + page, null, true);
+                routeToState(stateRes);
             }).catch(() => {
             });
+        };
+
+        /**
+         * Opens the page the state of the integration asks for.
+         *
+         * @param {{state: string}} stateRes
+         *
+         * @returns {void}
+         */
+        const routeToState = (stateRes) => {
+            const page = this.getPage();
+
+            if (stateRes.state === SequraFE.appStates.ONBOARDING) {
+                this.goToState(SequraFE.appStates.ONBOARDING + '-' + page, null, true);
+
+                return;
+            }
+
+            if (!page) {
+                this.goToState(SequraFE.appStates.SETTINGS, null, true)
+
+                return;
+            }
+
+            this.goToState(SequraFE.appStates.SETTINGS + '-' + page, null, true);
         };
 
         /**
@@ -252,65 +259,36 @@ SequraFE.appPages = {
             utilities.showLoader();
             let [controllerName, page] = state.split('-');
 
-            if (controllerName === SequraFE.appStates.ONBOARDING) {
+            // Only the onboarding pages the store offers are walked through, in their order,
+            // and a page is shown once every page before it is done.
+            const pendingPage = pendingOnboardingPage();
 
-                // To skip Widgets Onboarding we need to make sure that Widgets are configured (styles set and at least one display option enabled)
-                const areWidgetsConfigured = dataStore.widgetSettings?.widgetStyles !== undefined
-                    && (dataStore.widgetSettings?.displayWidgetOnProductPage
-                        || dataStore.widgetSettings?.showInstallmentAmountInCartPage
-                        || dataStore.widgetSettings?.showInstallmentAmountInProductListing
+            if (controllerName === SequraFE.appStates.ONBOARDING) {
+                const mustReconnect = SequraFE.state.getCredentialsChanged();
+
+                if (!pendingPage && !mustReconnect) {
+                    // Onboarding is done: back to the page the merchant was on, or to the
+                    // first page of the configured application when there was none.
+                    const isLeavingOnboarding = !currentState
+                        || currentState.split('-')[0] === SequraFE.appStates.ONBOARDING;
+
+                    this.goToState(
+                        isLeavingOnboarding ? SequraFE.appStates.SETTINGS : currentState,
+                        null,
+                        true
                     );
-                if (
-                    dataStore.connectionSettings?.connectionData?.every(c => c.username && c.password) &&
-                    dataStore.countrySettings?.length &&
-                    areWidgetsConfigured &&
-                    !SequraFE.state.getCredentialsChanged()
-                ) {
-                    currentState.split('-')[0] === SequraFE.appStates.ONBOARDING ?
-                        this.goToState(SequraFE.appStates.PAYMENT + '-' + SequraFE.appPages.PAYMENT.METHODS) :
-                        this.goToState(currentState, null, true);
 
                     return;
                 }
 
-                if (!page) {
-                    page = SequraFE.appPages.ONBOARDING.CONNECT;
+                const resumePage = pendingPage ?? SequraFE.appPages.ONBOARDING.CONNECT;
+                const requestedIndex = onboardingPages().indexOf(page);
+                if (requestedIndex === -1 || requestedIndex > onboardingPages().indexOf(resumePage)) {
+                    page = resumePage;
                 }
 
-                switch (page) {
-                    case SequraFE.appPages.ONBOARDING.COUNTRIES:
-                        if (!dataStore.connectionSettings?.connectionData?.every(c => c.username)) {
-                            page = SequraFE.appPages.ONBOARDING.CONNECT;
-                        }
-
-                        if (!dataStore.deploymentsSettings?.some(deployment => deployment.active === true)) {
-                            page = SequraFE.appPages.DEPLOYMENTS;
-                        }
-
-                        break;
-                    case SequraFE.appPages.ONBOARDING.DEPLOYMENTS:
-                        page = SequraFE.appPages.ONBOARDING.DEPLOYMENTS;
-                        break;
-                    case SequraFE.appPages.ONBOARDING.WIDGETS:
-                        if (dataStore.countrySettings?.length === 0 || SequraFE.state.getCredentialsChanged()) {
-                            page = SequraFE.appPages.ONBOARDING.COUNTRIES;
-                        }
-
-                        if (!dataStore.connectionSettings?.connectionData?.every(c => c.username)) {
-                            page = SequraFE.appPages.ONBOARDING.CONNECT;
-                        }
-
-                        if (!dataStore.deploymentsSettings?.some(deployment => deployment.active === true)) {
-                            page = SequraFE.appPages.DEPLOYMENTS;
-                        }
-
-                        break;
-                    default:
-                        page = SequraFE.appPages.ONBOARDING.CONNECT;
-
-                        if (!dataStore.deploymentsSettings?.some(deployment => deployment.active === true)) {
-                            page = SequraFE.appPages.DEPLOYMENTS;
-                        }
+                if (page === SequraFE.appPages.ONBOARDING.CONNECT) {
+                    SequraFE.state.removeCredentialsChanged();
                 }
 
                 displayPage(controllerName + '-' + page, additionalConfig);
@@ -318,16 +296,18 @@ SequraFE.appPages = {
                 return;
             }
 
-            if (!dataStore.connectionSettings?.connectionData?.every(c => c.username && c.password) || SequraFE.state.getCredentialsChanged()) {
+            if (
+                SequraFE.state.getCredentialsChanged()
+                && onboardingPages().includes(SequraFE.appPages.ONBOARDING.CONNECT)
+            ) {
                 this.goToState(SequraFE.appStates.ONBOARDING + '-' + SequraFE.appPages.ONBOARDING.CONNECT, additionalConfig, true);
+
                 return;
             }
-            if (dataStore.countrySettings?.length === 0) {
-                this.goToState(SequraFE.appStates.ONBOARDING + '-' + SequraFE.appPages.ONBOARDING.COUNTRIES, additionalConfig, true);
-                return;
-            }
-            if ('undefined' === typeof dataStore.widgetSettings?.widgetStyles) {
-                this.goToState(SequraFE.appStates.ONBOARDING + '-' + SequraFE.appPages.ONBOARDING.WIDGETS, additionalConfig, true);
+
+            if (pendingPage) {
+                this.goToState(SequraFE.appStates.ONBOARDING + '-' + pendingPage, additionalConfig, true);
+
                 return;
             }
 
@@ -337,7 +317,11 @@ SequraFE.appPages = {
         const displayPage = (state, additionalConfig = null) => {
             let [controllerName, page] = state.split('-');
             if (!Object.values(SequraFE.appStates).includes(controllerName)) {
+                // A state the application does not know, such as a bookmark of a page that
+                // is gone: start over and let the restart pick the page.
                 SequraFE.state.display();
+
+                return;
             }
 
             if (!page || !SequraFE.pages[controllerName]?.includes(page)) {
@@ -410,8 +394,6 @@ SequraFE.appPages = {
          * Sets the credentials changed flag to local storage.
          */
         this.setCredentialsChanged = () => {
-            SequraFE.state.setData('paymentMethods', null);
-            SequraFE.state.setData('allAvailablePaymentMethods', null);
             localStorage.setItem('sq-password-changed', '1');
         }
 
@@ -449,15 +431,6 @@ SequraFE.appPages = {
          */
         this.getStoreId = () => {
             return sessionStorage.getItem('sq-active-store-id');
-        };
-
-        /**
-         * Returns a getVersion promise.
-         *
-         * @returns {Promise<ShopName>}
-         */
-        this.getShopName = () => {
-            return api.get(configuration.shopNameUrl.sqReplaceUrlPlaceholder('{storeId}', this.getStoreId()), null, SequraFE.customHeader);
         };
 
         this.getData = (key) => {

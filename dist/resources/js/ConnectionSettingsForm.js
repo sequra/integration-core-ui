@@ -14,7 +14,6 @@ if (!window.SequraFE) {
     /**
      * @typedef ConnectionSettings
      * @property {'live' | 'sandbox'} environment
-     * @property {boolean} sendStatisticalData
      * @property {ConnectionsData[]} connectionData
      */
 
@@ -62,7 +61,6 @@ if (!window.SequraFE) {
         /** @type ConnectionSettings */
         const defaultFormData = {
             environment: 'sandbox',
-            sendStatisticalData: true,
             connectionData: activeDeployments.map(deployment => ({
                 username: '',
                 password: '',
@@ -87,6 +85,10 @@ if (!window.SequraFE) {
 
             const passwordInput = document.querySelector('[name="password-input"]');
             if (passwordInput) passwordInput.value = getSettingsForActiveDeployment(changedSettings).password ?? '';
+        };
+
+        const showActiveDeploymentPortalUrl = () => {
+            SequraFE.components.PageHeader.setPortalUrl(activeSettings?.portalUrls?.[activeDeploymentId]);
         };
 
         const updateDeploymentMenuActiveState = () => {
@@ -126,6 +128,7 @@ if (!window.SequraFE) {
 
             initSettings();
             initForm();
+            showActiveDeploymentPortalUrl();
 
             if (!notConnectedDeployments || notConnectedDeployments.length === 0) {
                 hideMenageButton();
@@ -188,7 +191,7 @@ if (!window.SequraFE) {
                                     notConnectedDeployments = notConnectedDeployments.filter(
                                         d => d.id !== activatedDeployment.id
                                     );
-                                    SequraFE.state.setData('notConnectedDeployments', activeSettings);
+                                    SequraFE.state.setData('notConnectedDeployments', notConnectedDeployments);
                                 }
 
                                 const pageContent = document.querySelector('.sq-content');
@@ -235,6 +238,7 @@ if (!window.SequraFE) {
                                 activeDeploymentId = deployment.id;
                                 updateFormFields();
                                 updateDeploymentMenuActiveState();
+                                showActiveDeploymentPortalUrl();
                                 disableFooter(false);
                             }
                         });
@@ -274,7 +278,7 @@ if (!window.SequraFE) {
                 generator.createButtonLink({
                     className: 'sq-link-button',
                     text: 'connection.description.endLink',
-                    href: 'https://en.sequra.com/',
+                    href: SequraFE.translationService.translate('storesLink.link'),
                     openInNewTab: true
                 })
             );
@@ -291,26 +295,11 @@ if (!window.SequraFE) {
 
             if (configuration.appState === SequraFE.appStates.ONBOARDING) {
                 pageInnerContent?.append(
-                    SequraFE.isPromotional ? [] : generator.createCheckboxField({
-                        className: 'sq-statistics',
-                        value: changedSettings.sendStatisticalData,
-                        description: 'connection.sendStatisticalData.description.text',
-                        onChange: (value) => handleChange('sendStatisticalData', value)
-                    }),
                     generator.createButtonField({
-                        className: 'sqm--block',
+                        className: 'sqm--block sqm--bellow-frame',
                         buttonType: 'primary',
                         buttonLabel: 'general.continue',
                         onClick: handleSave
-                    })
-                );
-
-                !SequraFE.isPromotional && document.querySelector('.sq-statistics .sqp-field-subtitle').append(
-                    generator.createButtonLink({
-                        className: 'sq-info-button',
-                        text: 'connection.sendStatisticalData.description.endLink',
-                        href: 'https://en.sequra.com/',
-                        openInNewTab: true
                     })
                 );
 
@@ -399,10 +388,6 @@ if (!window.SequraFE) {
                 changedSettings.environment = value;
             }
 
-            if (name === 'sendStatisticalData') {
-                changedSettings.sendStatisticalData = value;
-            }
-
             disableFooter(false);
         };
 
@@ -438,10 +423,7 @@ if (!window.SequraFE) {
         }
 
         const hasChange = () => {
-            if (
-                changedSettings.environment !== activeSettings.environment ||
-                changedSettings.sendStatisticalData !== activeSettings.sendStatisticalData
-            ) {
+            if (changedSettings.environment !== activeSettings.environment) {
                 return true;
             }
 
@@ -522,19 +504,14 @@ if (!window.SequraFE) {
                     }
 
                     if (configuration.appState === SequraFE.appStates.ONBOARDING) {
-                        const currentConnection = getSettingsForActiveDeployment(activeSettings);
-                        if (
-                            currentConnection &&
-                            currentConnection.username &&
-                            currentConnection.username.length !== 0
-                        ) {
-                            SequraFE.state.setCredentialsChanged();
+                        const index = SequraFE.pages.onboarding.indexOf(SequraFE.appPages.ONBOARDING.CONNECT)
+                        if (SequraFE.pages.onboarding.length <= index + 1) {
+                            SequraFE.state.display();
+
+                            return;
                         }
 
-                        const index = SequraFE.pages.onboarding.indexOf(SequraFE.appPages.ONBOARDING.CONNECT)
-                        SequraFE.pages.onboarding.length > index + 1 ?
-                            window.location.hash = configuration.appState + '-' + SequraFE.pages.onboarding[index + 1] :
-                            window.location.hash = SequraFE.appStates.PAYMENT + '-' + SequraFE.appPages.PAYMENT.METHODS;
+                        window.location.hash = configuration.appState + '-' + SequraFE.pages.onboarding[index + 1];
                     }
 
                     activeSettings = utilities.cloneObject(changedSettings);
@@ -543,21 +520,14 @@ if (!window.SequraFE) {
 
                     disableFooter(true);
 
-                    if ( configuration.appState === SequraFE.appStates.SETTINGS) {
-                        if(navigateToOnboarding){
-                            SequraFE.state.setCredentialsChanged();
-                            SequraFE.state.goToState(SequraFE.appStates.ONBOARDING);
-                            return;
-                        }
-                        // Reload GeneralSettings data.
-                        api.get(configuration.getGeneralSettingsUrl, null, SequraFE.customHeader).then(generalSettings => {
-                            SequraFE.state.setData('generalSettings', generalSettings);
-                        }).catch(() => {
-                              SequraFE.responseService.errorHandler({ errorCode: 'general.errors.backgroundDataFetchFailure' }).catch(e => console.error(e));
-                        }).finally(() => utilities.hideLoader());
-                    } else {
-                      utilities.hideLoader();
+                    if (configuration.appState === SequraFE.appStates.SETTINGS && navigateToOnboarding) {
+                        SequraFE.state.setCredentialsChanged();
+                        SequraFE.state.goToState(SequraFE.appStates.ONBOARDING);
+
+                        return;
                     }
+
+                    utilities.hideLoader();
                 });
         }
 
@@ -586,7 +556,7 @@ if (!window.SequraFE) {
 
             api.post(configuration.reRegisterUrl, createReRegisterPayload(), SequraFE.customHeader)
                 .then((response) => {
-                    if (response.isSuccessful) {
+                    if (response.success) {
                         SequraFE.responseService.successHandler(
                             {successMessage: 'connection.webhookReRegistration.successMessage'}
                         )
