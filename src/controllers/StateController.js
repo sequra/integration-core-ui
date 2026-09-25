@@ -39,9 +39,6 @@ SequraFE.appPages = {
      * @property {string} versionUrl
      * @property {Record<string, any>} pageConfiguration
      * @property {string} [getDeploymentsUrl]
-     * @property {string} [sellingCountriesConfiguredUrl] Endpoint telling whether the selling
-     * countries have been configured. Set it when the countries are configured outside of the
-     * store, in the SeQura portal.
      */
 
     /**
@@ -83,21 +80,6 @@ SequraFE.appPages = {
         let previousState = '';
 
         /**
-         * How often the store is asked whether the selling countries have been configured in
-         * the SeQura portal, in milliseconds.
-         *
-         * @type {number}
-         */
-        const SELLING_COUNTRIES_POLL_INTERVAL = 5000;
-
-        /**
-         * Handle of the interval that watches for that configuration.
-         *
-         * @type {number | null}
-         */
-        let sellingCountriesWatcher = null;
-
-        /**
          * @type {DataStore}
          */
         let dataStore;
@@ -120,7 +102,6 @@ SequraFE.appPages = {
          */
         this.display = () => {
             utilities.showLoader();
-            stopWatchingSellingCountries();
             clearDataStore();
             templateService.clearMainPage();
 
@@ -156,108 +137,6 @@ SequraFE.appPages = {
         const updateStateOnHashChange = () => {
             const state = window.location.hash.substring(1);
             state && this.goToState(state);
-        };
-
-        /**
-         * Stops watching for the selling countries configuration.
-         *
-         * @returns {void}
-         */
-        const stopWatchingSellingCountries = () => {
-            if (sellingCountriesWatcher !== null) {
-                clearInterval(sellingCountriesWatcher);
-                sellingCountriesWatcher = null;
-            }
-        };
-
-        /**
-         * Asks the store whether the selling countries have been configured, resolving to
-         * null when the store could not answer: an unreachable check must not be read as
-         * a configuration that is missing.
-         *
-         * @returns {Promise<boolean | null>}
-         */
-        const fetchSellingCountriesConfigured = () => !configuration.sellingCountriesConfiguredUrl
-            ? Promise.resolve(null)
-            : api.getInBackground(
-                configuration.sellingCountriesConfiguredUrl.sqReplaceUrlPlaceholder('{storeId}', this.getStoreId()),
-                SequraFE.customHeader
-            )
-                .then((response) => (response && typeof response.configured === 'boolean' ? response.configured : null))
-                .catch(() => null);
-
-        /**
-         * Shows that the integration is waiting for the merchant to enable the selling
-         * countries in the SeQura portal, and keeps checking until they have. The page offers
-         * the portal itself and a manual refresh so the merchant never has to wait for a
-         * check to come around.
-         *
-         * @returns {void}
-         */
-        const displayPendingSellingCountriesPage = () => {
-            const generator = SequraFE.elementGenerator;
-            const portalUrl = dataStore.connectionSettings?.portalUrl;
-            const settingsPage = (SequraFE.pages?.settings ?? []).includes(SequraFE.appPages.SETTINGS.CONNECTION) ?
-                SequraFE.appPages.SETTINGS.CONNECTION :
-                (SequraFE.pages?.settings ?? [])[0];
-
-            currentState = '';
-            templateService.clearMainPage();
-            templateService.getMainPage().append(
-                generator.createElement('div', 'sq-page-content-wrapper sqv--settings', '', null, [
-                    generator.createElement('div', 'sq-page-content', '', null, [
-                        generator.createElement('div', 'sq-content-row', '', null, [
-                            generator.createElement('main', 'sq-content', '', null, [
-                                generator.createElement('div', 'sq-content-inner', '', null, [
-                                    generator.createFlashMessage('countries.pending.warning', 'warning'),
-                                    generator.createPageHeading({
-                                        title: 'countries.pending.title',
-                                        text: 'countries.pending.description'
-                                    }),
-                                    generator.createLoader({ type: 'large' })
-                                ]),
-                                generator.createElement('div', 'sq-page-footer', '', null, [
-                                    generator.createElement('div', 'sqp-actions', '', null, [
-                                        // Waiting for the portal must not lock the merchant
-                                        // out of the connection itself.
-                                        settingsPage ? generator.createButton({
-                                            type: 'cancel',
-                                            size: 'medium',
-                                            label: 'sidebar.connectionSettings',
-                                            onClick: () => this.goToState(
-                                                SequraFE.appStates.SETTINGS + '-' + settingsPage
-                                            )
-                                        }) : [],
-                                        generator.createButton({
-                                            type: 'cancel',
-                                            size: 'medium',
-                                            label: 'countries.pending.refresh',
-                                            onClick: () => this.display()
-                                        }),
-                                        portalUrl ? generator.createButton({
-                                            type: 'primary',
-                                            size: 'medium',
-                                            label: 'countries.pending.openPortal',
-                                            onClick: () => window.open(portalUrl, '_blank')
-                                        }) : []
-                                    ])
-                                ])
-                            ])
-                        ])
-                    ])
-                ])
-            );
-
-            utilities.hideLoader();
-
-            stopWatchingSellingCountries();
-            sellingCountriesWatcher = setInterval(() => {
-                fetchSellingCountriesConfigured().then((configured) => {
-                    // A check that was in flight when the merchant left the page must not
-                    // pull them back out of the page they went to.
-                    sellingCountriesWatcher !== null && configured === true && this.display();
-                });
-            }, SELLING_COUNTRIES_POLL_INTERVAL);
         };
 
         /**
@@ -297,15 +176,6 @@ SequraFE.appPages = {
         const pendingOnboardingPage = () => onboardingPages().find((page) => !isOnboardingPageComplete(page));
 
         /**
-         * Tells whether the store leaves the selling countries to the SeQura portal, which
-         * it does by naming the endpoint that reports whether they have been configured.
-         * Whether they actually are is what fetchSellingCountriesConfigured answers.
-         *
-         * @returns {boolean}
-         */
-        this.delegatesSellingCountriesToPortal = () => Boolean(configuration.sellingCountriesConfiguredUrl);
-
-        /**
          * Requests one of the URLs the store configured the application with,
          * resolving to null for a page the store does not offer.
          *
@@ -338,19 +208,10 @@ SequraFE.appPages = {
                 dataStore.connectionSettings = connectionSettingsRes;
                 dataStore.deploymentsSettings = deploymentsSettingsRes;
 
-                return Promise.all([
-                    api.get(configuration.stateUrl.sqReplaceUrlPlaceholder('{storeId}', this.getStoreId()), null, SequraFE.customHeader),
-                    fetchSellingCountriesConfigured()
-                ]);
-            }).then(([stateRes, sellingCountriesConfigured]) => {
+                return api.get(configuration.stateUrl.sqReplaceUrlPlaceholder('{storeId}', this.getStoreId()), null, SequraFE.customHeader);
+            }).then((stateRes) => {
                 if (SequraFE.state.getCredentialsChanged()) {
                     SequraFE.state.removeCredentialsChanged();
-                }
-
-                if (sellingCountriesConfigured === false && isOnboardingPageComplete(SequraFE.appPages.ONBOARDING.CONNECT)) {
-                    displayPendingSellingCountriesPage();
-
-                    return;
                 }
 
                 routeToState(stateRes);
@@ -454,8 +315,6 @@ SequraFE.appPages = {
         };
 
         const displayPage = (state, additionalConfig = null) => {
-            stopWatchingSellingCountries();
-
             let [controllerName, page] = state.split('-');
             if (!Object.values(SequraFE.appStates).includes(controllerName)) {
                 // A state the application does not know, such as a bookmark of a page that

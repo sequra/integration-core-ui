@@ -179,13 +179,6 @@
     "PE": {
       "label": "Peru",
       "description": "Please enter SeQura merchant ID that should be used for Peruvian customers."
-    },
-    "pending": {
-      "title": "Waiting for the selling countries",
-      "description": "The seQura portal opens on the Store integrations page. Open the integration of this store, enable the countries where seQura should be available and save. This page continues on its own as soon as that configuration is saved.",
-      "warning": "seQura cannot be used yet: the selling countries are not configured.",
-      "openPortal": "Open the seQura portal",
-      "refresh": "Refresh"
     }
   },
   "supportLink": {

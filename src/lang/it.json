@@ -157,13 +157,6 @@
     }
   },
   "countries": {
-    "pending": {
-      "title": "In attesa dei paesi di vendita",
-      "description": "Il portale seQura si apre sulla pagina Store integrations. Apri l'integrazione di questo negozio, attiva i paesi in cui seQura deve essere disponibile e salva. Questa pagina prosegue da sola non appena tale configurazione viene salvata.",
-      "warning": "seQura non può ancora essere utilizzato: i paesi di vendita non sono configurati.",
-      "openPortal": "Apri il portale seQura",
-      "refresh": "Aggiorna"
-    },
     "ES": {
       "label": "Spagna",
       "description": "Inserisci l'ID commerciante SeQura da utilizzare per i clienti spagnoli."

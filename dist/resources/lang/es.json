@@ -156,13 +156,6 @@
     }
   },
   "countries": {
-    "pending": {
-      "title": "Esperando los países de venta",
-      "description": "El portal de seQura se abre en la página Store integrations. Abre la integración de esta tienda, activa los países donde seQura debe estar disponible y guarda. Esta página continúa sola en cuanto se guarde esa configuración.",
-      "warning": "seQura aún no se puede utilizar: los países de venta no están configurados.",
-      "openPortal": "Abrir el portal de seQura",
-      "refresh": "Actualizar"
-    },
     "ES": {
       "label": "España",
       "description": "Por favor, introduce la ID de comerciante de SeQura que se debe utilizar para los clientes españoles."

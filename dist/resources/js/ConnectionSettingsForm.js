@@ -498,19 +498,14 @@ if (!window.SequraFE) {
                     }
 
                     if (configuration.appState === SequraFE.appStates.ONBOARDING) {
-                        if (SequraFE.state.delegatesSellingCountriesToPortal()) {
-                            // The reload decides what comes next: the pending page, which
-                            // offers the portal, when the countries still have to be
-                            // configured there, and the settings otherwise.
+                        const index = SequraFE.pages.onboarding.indexOf(SequraFE.appPages.ONBOARDING.CONNECT)
+                        if (SequraFE.pages.onboarding.length <= index + 1) {
                             SequraFE.state.display();
 
                             return;
                         }
 
-                        const index = SequraFE.pages.onboarding.indexOf(SequraFE.appPages.ONBOARDING.CONNECT)
-                        SequraFE.pages.onboarding.length > index + 1 ?
-                            window.location.hash = configuration.appState + '-' + SequraFE.pages.onboarding[index + 1] :
-                            window.location.hash = SequraFE.appStates.SETTINGS;
+                        window.location.hash = configuration.appState + '-' + SequraFE.pages.onboarding[index + 1];
                     }
 
                     activeSettings = utilities.cloneObject(changedSettings);
