@@ -134,12 +134,6 @@
       "label": "Palavra-passe",
       "description": "Pode encontrar a sua palavra-passe no email enviado pelo SeQura."
     },
-    "sendStatisticalData": {
-      "description": {
-        "text": "Quero contribuir para os produtos SeQura enviando dados estatísticos ",
-        "endLink": "(info)"
-      }
-    },
     "modal": {
       "title": "Alterar o ambiente?",
       "message": "Tem a certeza de que quer alterar o ambiente? Isto irá remover todas as definições configuradas no ambiente atual e reconectá-lo ao ambiente recém-selecionado."
@@ -197,6 +191,9 @@
   },
   "supportLink": {
     "label": "Precisa de ajuda?",
-    "link": "https://sqra.es/supportpt"
+    "link": "https://www.sequra.com/pt/shoppers/contato"
+  },
+  "storesLink": {
+    "link": "https://www.sequra.com/pt/lojas"
   }
 }

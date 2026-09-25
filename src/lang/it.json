@@ -134,12 +134,6 @@
       "label": "Password",
       "description": "Puoi trovare la tua password nell'email inviata da SeQura."
     },
-    "sendStatisticalData": {
-      "description": {
-        "text": "Voglio contribuire ai prodotti SeQura inviando dati statistici ",
-        "endLink": "(info)"
-      }
-    },
     "modal": {
       "title": "Cambiare ambiente?",
       "message": "Sei sicuro di voler cambiare ambiente? Questo rimuoverà tutte le impostazioni configurate sull'ambiente attuale e ti riconnetterà al nuovo ambiente selezionato."
@@ -197,6 +191,9 @@
   },
   "supportLink": {
     "label": "Hai bisogno di aiuto?",
-    "link": "https://sqra.es/supportit"
+    "link": "https://www.sequra.com/it/shoppers/contattami"
+  },
+  "storesLink": {
+    "link": "https://www.sequra.com/it/negozi"
   }
 }

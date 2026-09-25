@@ -14,7 +14,6 @@ if (!window.SequraFE) {
     /**
      * @typedef ConnectionSettings
      * @property {'live' | 'sandbox'} environment
-     * @property {boolean} sendStatisticalData
      * @property {ConnectionsData[]} connectionData
      */
 
@@ -62,7 +61,6 @@ if (!window.SequraFE) {
         /** @type ConnectionSettings */
         const defaultFormData = {
             environment: 'sandbox',
-            sendStatisticalData: true,
             connectionData: activeDeployments.map(deployment => ({
                 username: '',
                 password: '',
@@ -274,7 +272,7 @@ if (!window.SequraFE) {
                 generator.createButtonLink({
                     className: 'sq-link-button',
                     text: 'connection.description.endLink',
-                    href: 'https://en.sequra.com/',
+                    href: SequraFE.translationService.translate('storesLink.link'),
                     openInNewTab: true
                 })
             );
@@ -291,26 +289,11 @@ if (!window.SequraFE) {
 
             if (configuration.appState === SequraFE.appStates.ONBOARDING) {
                 pageInnerContent?.append(
-                    SequraFE.isPromotional ? [] : generator.createCheckboxField({
-                        className: 'sq-statistics',
-                        value: changedSettings.sendStatisticalData,
-                        description: 'connection.sendStatisticalData.description.text',
-                        onChange: (value) => handleChange('sendStatisticalData', value)
-                    }),
                     generator.createButtonField({
-                        className: 'sqm--block',
+                        className: 'sqm--block sqm--bellow-frame',
                         buttonType: 'primary',
                         buttonLabel: 'general.continue',
                         onClick: handleSave
-                    })
-                );
-
-                !SequraFE.isPromotional && document.querySelector('.sq-statistics .sqp-field-subtitle').append(
-                    generator.createButtonLink({
-                        className: 'sq-info-button',
-                        text: 'connection.sendStatisticalData.description.endLink',
-                        href: 'https://en.sequra.com/',
-                        openInNewTab: true
                     })
                 );
 
@@ -399,10 +382,6 @@ if (!window.SequraFE) {
                 changedSettings.environment = value;
             }
 
-            if (name === 'sendStatisticalData') {
-                changedSettings.sendStatisticalData = value;
-            }
-
             disableFooter(false);
         };
 
@@ -438,10 +417,7 @@ if (!window.SequraFE) {
         }
 
         const hasChange = () => {
-            if (
-                changedSettings.environment !== activeSettings.environment ||
-                changedSettings.sendStatisticalData !== activeSettings.sendStatisticalData
-            ) {
+            if (changedSettings.environment !== activeSettings.environment) {
                 return true;
             }
 
