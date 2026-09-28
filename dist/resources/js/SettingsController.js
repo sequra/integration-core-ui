@@ -8,15 +8,7 @@ if (!window.SequraFE) {
      *
      * @param {{
      * getConnectionDataUrl: string,
-     * getWidgetSettingsUrl: string,
-     * getGeneralSettingsUrl: string,
-     * getOrderStatusMappingSettingsUrl: string,
-     * getShopOrderStatusesUrl: string,
-     * getShopCategoriesUrl: string,
-     * getSellingCountriesUrl: string,
-     * getCountrySettingsUrl: string,
-     * getPaymentMethodsUrl: string,
-     * getAllAvailablePaymentMethodsUrl: string,
+     * getNotConnectedDeploymentsUrl: string,
      * validateConnectionDataUrl: string,
      * disconnectUrl: string,
      * page: string
@@ -33,12 +25,8 @@ if (!window.SequraFE) {
         let version;
         /** @type Store[] */
         let stores;
-        /** @type CountrySettings[] **/
-        let countrySettings;
         /** @type ConnectionSettings **/
         let connectionSettings;
-        /** @type WidgetSettings **/
-        let widgetSettings;
 
         /**
          * Displays page content.
@@ -52,67 +40,36 @@ if (!window.SequraFE) {
             stores = SequraFE.state.getData('stores');
             version = SequraFE.state.getData('version');
             connectionSettings = SequraFE.state.getData('connectionSettings');
-            countrySettings = SequraFE.state.getData('countrySettings');
-            widgetSettings = SequraFE.state.getData('widgetSettings');
 
             initializePage();
             renderPage();
         };
 
         /**
-         * Handles rendering of a form based on state.
+         * Renders the connection settings page.
          */
         const renderPage = () => {
             utilities.showLoader();
-            let page = SequraFE.state.getPage();
-            let renderer;
-            let promises;
 
-            if (!SequraFE.pages.settings.includes(page)) {
-                page = SequraFE.pages.settings[0];
+            const cached = SequraFE.state.getData('notConnectedDeployments');
+            // The store id is already filled in: the state controller resolves every URL of
+            // the page configuration before handing it to a controller.
+            const url = configuration.getNotConnectedDeploymentsUrl;
+
+            if (!cached && !url) {
+                // A store that does not say where the deployments are still gets its
+                // connection page; only the manage-deployments button has nothing to offer.
+                console.error(
+                    'SequraFE: pageConfiguration.settings.getNotConnectedDeploymentsUrl is not configured'
+                );
             }
 
-            switch (page) {
-                case SequraFE.appPages.SETTINGS.CONNECTION:
-                    renderer = renderConnectionSettingsForm;
-                    promises = Promise.all([
-                        SequraFE.state.getData('notConnectedDeployments') ?? api.get(
-                            configuration.pageConfiguration.onboarding.getNotConnectedDeploymentsUrl.sqReplaceUrlPlaceholder(
-                                '{storeId}', SequraFE.state.getStoreId()
-                            ),
-                            null,
-                            SequraFE.customHeader
-                        ),
-                    ])
-                    break;
-                case SequraFE.appPages.SETTINGS.ORDER_STATUS:
-                    renderer = renderOrderStatusMappingSettingsForm;
-                    promises = Promise.all([
-                        api.get(configuration.getOrderStatusMappingSettingsUrl, null, SequraFE.customHeader),
-                        api.get(configuration.getShopOrderStatusesUrl, null, SequraFE.customHeader),
-                        SequraFE.state.getShopName()
-                    ])
-                    break;
-                case SequraFE.appPages.SETTINGS.WIDGET:
-                    renderer = renderWidgetSettingsForm;
-                    promises = Promise.all([
-                        SequraFE.state.getData('paymentMethods') ?? api.get(configuration.getPaymentMethodsUrl.sqReplaceUrlPlaceholder('{merchantId}', countrySettings[0].merchantId), null, SequraFE.customHeader),
-                        SequraFE.state.getData('allAvailablePaymentMethods') ?? api.get(configuration.getAllAvailablePaymentMethodsUrl, null, SequraFE.customHeader),
-                    ])
-                    break;
-                default:
-                    renderer = renderGeneralSettingsForm;
-                    promises = Promise.all([
-                        SequraFE.isPromotional ? [] :
-                            SequraFE.state.getData('generalSettings') ?? api.get(configuration.getGeneralSettingsUrl, null, SequraFE.customHeader),
-                        SequraFE.isPromotional ? [] :
-                            SequraFE.state.getData('shopCategories') ?? api.get(configuration.getShopCategoriesUrl, null, SequraFE.customHeader),
-                        SequraFE.state.getData('sellingCountries') ?? api.get(configuration.getSellingCountriesUrl, null, SequraFE.customHeader),
-                    ])
-            }
-
-            promises
-                .then((array) => renderer(...array))
+            (cached ? Promise.resolve(cached) : url ? api.get(url, null, SequraFE.customHeader) : Promise.resolve([]))
+                .then(renderConnectionSettingsForm)
+                .catch((error) => {
+                    console.error('Error occurred while rendering the page: ', error);
+                })
+                .finally(() => utilities.hideLoader());
         };
 
         /**
@@ -131,96 +88,11 @@ if (!window.SequraFE) {
 
             const form = formFactory.getInstance(
                 'connectionSettings',
-                {connectionSettings, countrySettings, activeDeploymentsIds, notConnectedDeployments},
+                {connectionSettings, activeDeploymentsIds, notConnectedDeployments},
                 {...configuration, appState: SequraFE.appStates.SETTINGS}
             );
 
             form?.render();
-        }
-
-        /**
-         * Renders the order status mappings settings form.
-         *
-         * @param orderStatusSettings
-         * @param shopOrderStatuses
-         * @param shopName
-         */
-        const renderOrderStatusMappingSettingsForm = (orderStatusSettings, shopOrderStatuses, shopName) => {
-            const form = formFactory.getInstance(
-                'orderStatusMappingSettings',
-                {orderStatusSettings, shopOrderStatuses, shopName: shopName.shopName},
-                {...configuration}
-            );
-
-            form?.render();
-        }
-
-        /**
-         * Renders the widget settings form.
-         *
-         * @param paymentMethods
-         * @param allAvailablePaymentMethods
-         */
-        const renderWidgetSettingsForm = (paymentMethods, allAvailablePaymentMethods) => {
-            if (!SequraFE.state.getData('paymentMethods')) {
-                SequraFE.state.setData('paymentMethods', paymentMethods)
-            }
-
-            if (!SequraFE.state.getData('allAvailablePaymentMethods')) {
-                SequraFE.state.setData('allAvailablePaymentMethods', allAvailablePaymentMethods)
-            }
-
-            const form = formFactory.getInstance(
-                'widgetSettings',
-                {widgetSettings, connectionSettings, countrySettings, paymentMethods, allAvailablePaymentMethods},
-                {...configuration, appState: SequraFE.appStates.SETTINGS}
-            );
-
-            form?.render();
-        }
-
-        /**
-         * Renders the general settings form.
-         *
-         * @param generalSettings
-         * @param shopCategories
-         * @param sellingCountries
-         */
-        const renderGeneralSettingsForm = (
-            generalSettings,
-            shopCategories,
-            sellingCountries,
-        ) => {
-            saveFetchedDataToDataStore(generalSettings, shopCategories, sellingCountries);
-
-            const form = formFactory.getInstance(
-                'generalSettings',
-                {generalSettings, shopCategories, sellingCountries, connectionSettings, countrySettings},
-                {...configuration, appState: SequraFE.appStates.SETTINGS}
-            );
-
-            form?.render();
-        }
-
-        /**
-         * Saves data to data store if fetched on render.
-         *
-         * @param generalSettings
-         * @param shopCategories
-         * @param sellingCountries
-         */
-        const saveFetchedDataToDataStore = (generalSettings, shopCategories, sellingCountries) => {
-            if (!SequraFE.state.getData('generalSettings')) {
-                SequraFE.state.setData('generalSettings', generalSettings)
-            }
-
-            if (!SequraFE.state.getData('shopCategories')) {
-                SequraFE.state.setData('shopCategories', shopCategories)
-            }
-
-            if (!SequraFE.state.getData('sellingCountries')) {
-                SequraFE.state.setData('sellingCountries', sellingCountries)
-            }
         }
 
         /**
@@ -232,13 +104,6 @@ if (!window.SequraFE) {
             return SequraFE.pages.settings.map((link) => {
                 const activePage = SequraFE.state.getPage() ?? SequraFE.pages.settings[0]
                 switch (link) {
-                    case SequraFE.appPages.SETTINGS.GENERAL:
-                        return {
-                            label: 'sidebar.generalSettings',
-                            href: '#settings-general',
-                            icon: 'general',
-                            isActive: activePage === SequraFE.appPages.SETTINGS.GENERAL
-                        }
                     case SequraFE.appPages.SETTINGS.CONNECTION:
                         return {
                             label: 'sidebar.connectionSettings',
@@ -246,22 +111,8 @@ if (!window.SequraFE) {
                             icon: 'connection',
                             isActive: activePage === SequraFE.appPages.SETTINGS.CONNECTION
                         }
-                    case SequraFE.appPages.SETTINGS.ORDER_STATUS:
-                        return {
-                            label: 'sidebar.orderStatusSettings',
-                            href: '#settings-order_status',
-                            icon: 'order',
-                            isActive: activePage === SequraFE.appPages.SETTINGS.ORDER_STATUS
-                        }
-                    case SequraFE.appPages.SETTINGS.WIDGET:
-                        return {
-                            label: 'sidebar.widgetSettings',
-                            href: '#settings-widget',
-                            icon: 'widget',
-                            isActive: activePage === SequraFE.appPages.SETTINGS.WIDGET
-                        }
                 }
-            });
+            }).filter(Boolean);
         }
 
         /**
@@ -289,6 +140,7 @@ if (!window.SequraFE) {
                                     SequraFE.state.display();
                                 }
                             },
+                            portalUrl: connectionSettings?.portalUrl,
                             menuItems: SequraFE.utilities.getMenuItems(SequraFE.appStates.SETTINGS)
                         }
                     ),
@@ -298,8 +150,13 @@ if (!window.SequraFE) {
         }
 
         const getSidebarRow = () => {
+            const links = getLinkConfiguration();
+
+            // One destination is not a navigation - the same rule the top menu follows. A
+            // store that keeps a single settings page in the shop, the rest being the seQura
+            // portal's, gives that page the whole row.
             return generator.createElement('div', 'sq-content-row', '', null, [
-                generator.createSettingsSidebar({links: getLinkConfiguration()}),
+                links.length < 2 ? [] : generator.createSettingsSidebar({links}),
                 generator.createElement('main', 'sq-content')
             ]);
         }

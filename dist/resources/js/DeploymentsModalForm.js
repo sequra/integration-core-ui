@@ -164,7 +164,7 @@ window.SequraFE.showDeploymentsModal = function (
                     confirmed: true,
                     selectedDeploymentId: activeDeploymentId,
                     hasChanges,
-                    updatedSettings: changedSettings,
+                    updatedSettings: { ...changedSettings, portalUrls: result.portalUrls },
                     activatedDeployment: notConnectedDeployments.find(deployment => deployment.id === activeDeploymentId)
                 });
             } catch (error) {
