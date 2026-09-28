@@ -64,7 +64,7 @@
         "sellingCountries": "No se pudieron recuperar los países de venta."
       },
       "payments": {
-        "requiredFieldsError": "Method id and code fields are required.",
+        "requiredFieldsError": "Los campos ID del método y código son obligatorios.",
         "notConfigured": "El método de pago con ID %s no está configurado.",
         "emptyDataError": "Datos del método de pago vacíos.",
         "failedToRetrieveMethods": "Error al recuperar los métodos de pago.",
@@ -112,7 +112,7 @@
     },
     "description": {
       "onboarding": "Asegúrate de estar conectado al portal del comerciante, ya que necesitas copiar varias configuraciones desde allí para completar la siguiente información. Si no tienes una cuenta, contáctanos ",
-      "settings": "Descripción de las configuraciones",
+      "settings": "Configura tu cuenta de seQura y elige el entorno para empezar a procesar pagos. Si no tienes una cuenta, contáctanos ",
       "endLink": "aquí"
     },
     "environment": {

@@ -113,7 +113,7 @@
     },
     "description": {
       "onboarding": "Assicurati di essere collegato al portale commerciante perché devi copiare diverse impostazioni da lì per compilare le seguenti informazioni. Se non hai un account, contattaci ",
-      "settings": "Configura il tuo account SeQura e scegli l'ambiente per iniziare a elaborare i pagamenti. ",
+      "settings": "Configura il tuo account SeQura e scegli l'ambiente per iniziare a elaborare i pagamenti. Se non hai un account, contattaci ",
       "endLink": "qui"
     },
     "environment": {

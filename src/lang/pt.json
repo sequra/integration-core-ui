@@ -102,6 +102,9 @@
     "integer": "O campo deve ser um número inteiro.",
     "invalidUrl": "O campo deve ser um URL válido.",
     "invalidFieldValue": "O campo deve ser definido como \"%s\".",
+    "invalidMaxValue": "O valor máximo permitido é %s.",
+    "invalidImageType": "Forneça um ficheiro num dos tipos de imagem suportados (PNG, JPG, SVG).",
+    "invalidImageSize": "O ficheiro selecionado excede o limite de 10 MB.",
     "acceptableRange": "O valor deve estar entre %d e %d.",
     "paymentMethodUnavailable": "Método de pagamento indisponível.",
     "storeUnavailable": "Loja indisponível."

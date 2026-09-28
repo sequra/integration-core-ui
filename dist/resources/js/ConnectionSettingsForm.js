@@ -311,7 +311,7 @@ if (!window.SequraFE) {
                 size: 'medium',
                 className: '',
                 onClick: handleReRegister,
-                label: 'Re-register webhooks'
+                label: 'connection.webhookReRegistration.title'
             })
 
             const disconnectionButton = generator.createButton({
