@@ -142,6 +142,8 @@
       "title": "Disconnetti",
       "message": "Sei sicuro di volerti disconnettere?"
     },
+    "successMessage": "Connessione stabilita con successo.",
+    "successMessageForDeployment": "Connessione a %s stabilita con successo.",
     "webhookReRegistration": {
       "title": "Registrare nuovamente i webhook",
       "successMessage": "I webhook sono stati registrati nuovamente con successo.",

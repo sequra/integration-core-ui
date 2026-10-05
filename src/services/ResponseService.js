@@ -57,6 +57,21 @@ if (!window.SequraFE) {
             }
         };
 
+        let deferredSuccessMessage = null;
+
+        this.deferSuccessMessage = (successMessage) => {
+            deferredSuccessMessage = successMessage;
+        };
+
+        this.showDeferredSuccessMessage = () => {
+            if (!deferredSuccessMessage) {
+                return;
+            }
+
+            this.successHandler({successMessage: deferredSuccessMessage});
+            deferredSuccessMessage = null;
+        };
+
         /**
          * Handles unauthorized response.
          *

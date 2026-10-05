@@ -135,6 +135,7 @@ if (!window.SequraFE) {
             }
 
             disableFooter(true);
+            SequraFE.responseService.showDeferredSuccessMessage();
             utilities.hideLoader();
         }
 
@@ -199,6 +200,7 @@ if (!window.SequraFE) {
                                     pageContent.removeChild(pageContent.firstChild);
                                 }
 
+                                SequraFE.responseService.deferSuccessMessage(connectionSuccessMessage(updatedSettings.portalUrls));
                                 this.render();
                             }
                         });
@@ -456,12 +458,12 @@ if (!window.SequraFE) {
             return result.isValid || result.reason.includes('merchantId');
         }
 
-        const sanitizeDeploymentTargetsErrorReason = (reason) => {
+        const formatDeploymentNames = (deploymentIds) => {
             const namesMap = {
                 'sequra': 'seQura',
                 'svea': 'SVEA'
             }
-            const deployments = (reason.split('/')[1] || '').split(',').filter(Boolean).map(name => {
+            const deployments = deploymentIds.filter(Boolean).map(name => {
                 name = name.trim();
                 return namesMap[name] || name;
             });
@@ -469,6 +471,16 @@ if (!window.SequraFE) {
                 return deployments.slice(0, -1).join(', ') + SequraFE.translationService.translate('general.and') + deployments.slice(-1);
             }
             return deployments[0];
+        }
+
+        const sanitizeDeploymentTargetsErrorReason = (reason) => {
+            return formatDeploymentNames((reason.split('/')[1] || '').split(','));
+        }
+
+        const connectionSuccessMessage = (portalUrls) => {
+            const deployments = formatDeploymentNames(Object.keys(portalUrls || {}));
+
+            return deployments ? `connection.successMessageForDeployment|${deployments}` : 'connection.successMessage';
         }
 
         /**
@@ -506,6 +518,7 @@ if (!window.SequraFE) {
                     if (configuration.appState === SequraFE.appStates.ONBOARDING) {
                         const index = SequraFE.pages.onboarding.indexOf(SequraFE.appPages.ONBOARDING.CONNECT)
                         if (SequraFE.pages.onboarding.length <= index + 1) {
+                            SequraFE.responseService.deferSuccessMessage(connectionSuccessMessage(result.portalUrls));
                             SequraFE.state.display();
 
                             return;
@@ -525,6 +538,12 @@ if (!window.SequraFE) {
                         SequraFE.state.goToState(SequraFE.appStates.ONBOARDING);
 
                         return;
+                    }
+
+                    if (configuration.appState === SequraFE.appStates.SETTINGS) {
+                        SequraFE.responseService.successHandler(
+                            {successMessage: connectionSuccessMessage(result.portalUrls)}
+                        );
                     }
 
                     utilities.hideLoader();
