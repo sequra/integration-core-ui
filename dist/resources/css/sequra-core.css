@@ -1938,3 +1938,6 @@
   padding-right: 0 !important;
   padding-bottom: 0 !important;
 }
+#sequra-page .sq-modal .sqp-modal-content .sqv--deployments .sq-field-wrapper .items {
+  max-width: none;
+}
