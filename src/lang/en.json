@@ -140,6 +140,8 @@
       "title": "Disconnect",
       "message": "Are you sure you want to disconnect?"
     },
+    "successMessage": "Connected successfully.",
+    "successMessageForDeployment": "Connected to %s successfully.",
     "webhookReRegistration": {
       "title": "Re-register webhooks",
       "successMessage": "Webhooks were re-registered successfully.",

@@ -144,6 +144,8 @@
       "title": "Desconectar",
       "message": "Tem a certeza de que se quer desconectar?"
     },
+    "successMessage": "Ligação estabelecida com sucesso.",
+    "successMessageForDeployment": "Ligação ao %s estabelecida com sucesso.",
     "webhookReRegistration": {
       "title": "Registrar novamente os webhooks",
       "successMessage": "Os webhooks foram registrados novamente com sucesso.",
