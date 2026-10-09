@@ -536,7 +536,8 @@ if (!window.SequraFE) {
                         {successMessage: connectionSuccessMessage(result.portalUrls)}
                     );
                     utilities.hideLoader();
-                });
+                })
+                .catch(handleRequestFailure);
         }
 
         /**
@@ -550,6 +551,21 @@ if (!window.SequraFE) {
             settings.connectionData = settings.connectionData.filter(c => c.username && c.password);
 
             return settings;
+        }
+
+        /**
+         * Hides the loader of a failed request. AjaxService already reported the failed
+         * response, but not a request that never got one.
+         *
+         * @param {any} error
+         */
+        const handleRequestFailure = (error) => {
+            if (error instanceof Error) {
+                console.error('SequraFE: request failed', error);
+                SequraFE.responseService.errorHandler({ errorCode: 'general.errors.unknown' }).catch(() => { });
+            }
+
+            utilities.hideLoader();
         }
 
         /**
@@ -589,13 +605,7 @@ if (!window.SequraFE) {
                     }
 
                 })
-                .catch((error) => {
-                    const errorMessage = String(error && error.message ? error.message : error);
-                    SequraFE.responseService.errorHandler(
-                        {errorMessage: errorMessage}
-                    ).catch(() => {
-                    });
-                })
+                .catch(handleRequestFailure)
                 .finally(utilities.hideLoader);
         }
 
