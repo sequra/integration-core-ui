@@ -70,6 +70,22 @@ if (!window.SequraFE.components) {
                 : ''
         ]);
 
+        // Where the merchant configures everything the shop does not keep. It sits with
+        // the mode badge rather than on a page of its own, so it is offered wherever the
+        // merchant happens to be. A store that is not connected yet has no integration
+        // to look at, but the link is still built so a later connection can reveal it.
+        const portalLink = generator.createElement(
+            'a',
+            'sqp-portal-link',
+            '',
+            { href: portalUrl || '#', target: '_blank', rel: 'noopener noreferrer' },
+            [
+                generator.createElement('span', '', 'general.viewInPortal'),
+                generator.createElementFromHTML(EXTERNAL_LINK_ICON)
+            ]
+        );
+        if (!portalUrl) portalLink.style.display = 'none';
+
         let controls = [];
         if (menuItems.length) {
             controls = generator.createElement('div', 'sqp-menu-items');
@@ -95,20 +111,7 @@ if (!window.SequraFE.components) {
                 'general.mode.' + mode.toLowerCase(),
                 null
             ),
-            // Where the merchant configures everything the shop does not keep. It sits with
-            // the mode badge rather than on a page of its own, so it is offered wherever the
-            // merchant happens to be. A store that is not connected yet has no integration
-            // to look at.
-            portalUrl ? generator.createElement(
-                'a',
-                'sqp-portal-link',
-                '',
-                { href: portalUrl, target: '_blank', rel: 'noopener noreferrer' },
-                [
-                    generator.createElement('span', '', 'general.viewInPortal'),
-                    generator.createElementFromHTML(EXTERNAL_LINK_ICON)
-                ]
-            ) : []
+            portalLink
         ]);
 
         const storeSwitcher = (!SequraFE.flags.isStoreSwitcherVisible || stores.length <= 1) ? [] : generator.createStoreSwitcher({
