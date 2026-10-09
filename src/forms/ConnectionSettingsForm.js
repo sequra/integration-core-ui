@@ -505,32 +505,51 @@ if (!window.SequraFE) {
                         return;
                     }
 
-                    if (configuration.appState === SequraFE.appStates.ONBOARDING) {
-                        const index = SequraFE.pages.onboarding.indexOf(SequraFE.appPages.ONBOARDING.CONNECT)
-                        if (SequraFE.pages.onboarding.length <= index + 1) {
-                            SequraFE.responseService.deferSuccessMessage(connectionSuccessMessage(result.portalUrls));
-                            SequraFE.state.display();
+                    if (
+                        configuration.appState === SequraFE.appStates.ONBOARDING
+                        && SequraFE.pages.onboarding.indexOf(SequraFE.appPages.ONBOARDING.CONNECT) === SequraFE.pages.onboarding.length - 1
+                    ) {
+                        SequraFE.responseService.deferSuccessMessage(connectionSuccessMessage(result.portalUrls));
+                        SequraFE.state.display();
 
-                            return;
-                        }
-
-                        window.location.hash = configuration.appState + '-' + SequraFE.pages.onboarding[index + 1];
+                        return;
                     }
 
-                    activeSettings = utilities.cloneObject(changedSettings);
+                    activeSettings = {
+                        ...connectedSettings(),
+                        portalUrls: result.portalUrls ?? activeSettings.portalUrls
+                    };
+                    changedSettings = utilities.cloneObject(activeSettings);
 
                     SequraFE.state.setData('connectionSettings', activeSettings);
 
-                    disableFooter(true);
+                    if (configuration.appState === SequraFE.appStates.ONBOARDING) {
+                        const index = SequraFE.pages.onboarding.indexOf(SequraFE.appPages.ONBOARDING.CONNECT);
+                        window.location.hash = configuration.appState + '-' + SequraFE.pages.onboarding[index + 1];
 
-                    if (configuration.appState === SequraFE.appStates.SETTINGS) {
-                        SequraFE.responseService.successHandler(
-                            {successMessage: connectionSuccessMessage(result.portalUrls)}
-                        );
+                        return;
                     }
 
+                    disableFooter(true);
+                    showActiveDeploymentPortalUrl();
+                    SequraFE.responseService.successHandler(
+                        {successMessage: connectionSuccessMessage(result.portalUrls)}
+                    );
                     utilities.hideLoader();
                 });
+        }
+
+        /**
+         * Returns the changed settings without the selected deployments the merchant left
+         * without credentials, which the backend does not connect.
+         *
+         * @returns {ConnectionSettings}
+         */
+        const connectedSettings = () => {
+            const settings = utilities.cloneObject(changedSettings);
+            settings.connectionData = settings.connectionData.filter(c => c.username && c.password);
+
+            return settings;
         }
 
         /**
