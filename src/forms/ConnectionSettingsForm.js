@@ -87,10 +87,12 @@ if (!window.SequraFE) {
         };
 
         const showActiveDeploymentPortalUrl = () => {
-            // A backend that only knows the store's portal URL sends no per-deployment ones.
+            // A backend that only knows the store's portal URL sends no per-deployment ones,
+            // or an empty list of them (PHP serializes an empty map as `[]`).
             const portalUrls = activeSettings?.portalUrls;
+            const hasDeploymentUrls = portalUrls && Object.keys(portalUrls).length > 0;
             SequraFE.components.PageHeader.setPortalUrl(
-                portalUrls ? portalUrls[activeDeploymentId] : activeSettings?.portalUrl
+                hasDeploymentUrls ? portalUrls[activeDeploymentId] : activeSettings?.portalUrl
             );
         };
 
