@@ -45,7 +45,6 @@ if (!window.SequraFE) {
             components
         } = SequraFE;
 
-        let navigateToOnboarding = false;
         /** @type ConnectionSettings */
         let activeSettings = null;
         /** @type ConnectionSettings */
@@ -445,19 +444,6 @@ if (!window.SequraFE) {
             return false;
         };
 
-        /**
-         * Returns true if username and password are valid.
-         *
-         * @param {{isValid: boolean, reason: string|null}} result
-         */
-        const areCredentialsValid = (result) => {
-            if (!result.isValid && result.reason.includes('merchantId')) {
-                navigateToOnboarding = true;
-            }
-
-            return result.isValid || result.reason.includes('merchantId');
-        }
-
         const formatDeploymentNames = (deploymentIds) => {
             const namesMap = {
                 'sequra': 'seQura',
@@ -487,7 +473,11 @@ if (!window.SequraFE) {
          * Handle connection validation error.
          */
         const handleValidationError = (result = null) => {
-            if (result && typeof result.reason === 'string' && result.reason.includes('deployment')) {
+            if (result?.reason === 'merchantId') {
+                SequraFE.responseService.errorHandler(
+                    { errorCode: 'general.errors.connection.invalidMerchantId' }
+                ).catch(() => { });
+            } else if (result && typeof result.reason === 'string' && result.reason.includes('deployment')) {
                 const deployment = sanitizeDeploymentTargetsErrorReason(result.reason);
                 const errorKey = 'general.errors.connection.invalidUsernameOrPasswordForDeployment';
 
@@ -508,8 +498,8 @@ if (!window.SequraFE) {
 
             api.post(configuration.connectUrl, changedSettings, SequraFE.customHeader)
                 .then((result) => {
-
-                    if (!areCredentialsValid(result)) {
+                    // The backend does not save a connection whose merchant it cannot find.
+                    if (!result.isValid) {
                         handleValidationError(result);
 
                         return;
@@ -532,13 +522,6 @@ if (!window.SequraFE) {
                     SequraFE.state.setData('connectionSettings', activeSettings);
 
                     disableFooter(true);
-
-                    if (configuration.appState === SequraFE.appStates.SETTINGS && navigateToOnboarding) {
-                        SequraFE.state.setCredentialsChanged();
-                        SequraFE.state.goToState(SequraFE.appStates.ONBOARDING);
-
-                        return;
-                    }
 
                     if (configuration.appState === SequraFE.appStates.SETTINGS) {
                         SequraFE.responseService.successHandler(
