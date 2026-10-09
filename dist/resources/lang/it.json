@@ -86,8 +86,7 @@
     "stepOneLabel": "Installa integrazione e-commerce",
     "stepOneDescription": "La tua integrazione è pronta per la connessione.",
     "stepTwoLabel": "Connetti integrazione",
-    "stepDeployments": "Seleziona target di distribuzione",
-    "stepFiveLabel": "Inizia a vendere con SeQura"
+    "stepDeployments": "Seleziona target di distribuzione"
   },
   "validation": {
     "requiredField": "Questo campo è obbligatorio.",

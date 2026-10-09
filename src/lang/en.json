@@ -85,8 +85,7 @@
     "stepOneLabel": "Install ecommerce integration",
     "stepOneDescription": "Your integration is ready for connection.",
     "stepTwoLabel": "Connect integration",
-    "stepDeployments": "Select Deployment Targets",
-    "stepFiveLabel": "Start selling with SeQura"
+    "stepDeployments": "Select Deployment Targets"
   },
   "validation": {
     "requiredField": "This field is required.",

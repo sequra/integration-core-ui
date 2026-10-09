@@ -85,8 +85,7 @@
     "stepOneLabel": "Instalar integración de comercio electrónico",
     "stepDeployments": "Selecciona las Instancias de Despliegue",
     "stepOneDescription": "Tu integración está lista para la conexión.",
-    "stepTwoLabel": "Conectar integración",
-    "stepFiveLabel": "Comienza a vender con SeQura"
+    "stepTwoLabel": "Conectar integración"
   },
   "validation": {
     "requiredField": "Este campo es obligatorio.",

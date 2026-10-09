@@ -123,11 +123,6 @@ if (!window.SequraFE) {
                 isCompleted: true
             };
 
-            const lastStep = {
-                label: 'sidebar.stepFiveLabel',
-                href: '#',
-            }
-
             const pageSteps = SequraFE.pages.onboarding.map((page) => {
                 const activePage = SequraFE.state.getPage() ?? SequraFE.pages.settings[0];
 
@@ -152,7 +147,7 @@ if (!window.SequraFE) {
                 }
             }).filter(Boolean);
 
-            return [firstStep, ...pageSteps, lastStep]
+            return [firstStep, ...pageSteps]
         }
 
         /**
