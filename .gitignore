@@ -8,3 +8,4 @@ test/resources/*
 !test/resources/favicon.ico
 
 .DS_Store
+.idea

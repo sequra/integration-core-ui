@@ -84,10 +84,16 @@
       gap: 10px;
     }
 
-    .sqv--deployments{
-      padding-left: 0!important;
-      padding-right: 0!important;
-      padding-bottom: 0!important;
+    .sqv--deployments {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      padding-bottom: 0 !important;
+
+      // The deployment tabs span the inputs below them: the 300px cap of the
+      // connection page's tab strip ends short of the modal's input edge.
+      .sq-field-wrapper .items {
+        max-width: none;
+      }
     }
   }
 }

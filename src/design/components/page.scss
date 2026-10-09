@@ -73,42 +73,6 @@
       }
     }
 
-    &.sqv--payments {
-      .sq-content-inner {
-        padding: 44px 36px 36px;
-
-        .sq-table-heading {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          column-gap: 36px;
-
-          @include sq-screen--narrow-medium {
-            flex-direction: column;
-            align-items: flex-start;
-            row-gap: 8px;
-          }
-
-          .sqp-page-heading {
-            max-width: 800px;
-            width: 100%;
-          }
-
-          .sqm--table-dropdown {
-            max-width: 344px;
-
-            .sqp-field-title {
-              color: $sq-color--primary;
-            }
-
-            .sqp-field-subtitle {
-              color: #b1aeba;
-            }
-          }
-        }
-      }
-    }
-
     &.sqv--settings {
       .sq-content-inner {
         max-width: 835px;

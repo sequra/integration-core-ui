@@ -29,36 +29,6 @@
     }
   }
 
-  .sqp-payment-method-header-cell {
-    width: 50%;
-  }
-
-  .sqp-payment-method-cell {
-    display: flex;
-    align-items: center;
-    column-gap: 8px;
-
-    svg {
-      flex-shrink: 0;
-    }
-
-    .sqp-payment-method-image {
-      width: 52px;
-      height: 52px;
-    }
-
-    .sqp-payment-method-title {
-      @include font-weight--bold;
-      margin: 0 0 3px;
-      font-size: $sq-font-size--small;
-    }
-
-    .sqp-payment-method-description {
-      font-size: $sq-font-size--small;
-      margin: 0;
-    }
-  }
-
   .sqp-details {
     background-color: #f3f6f9;
     .sq-link-button {
