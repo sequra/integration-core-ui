@@ -196,6 +196,13 @@ SequraFE.appPages = {
             utilities.showLoader();
 
             const onboardingConfiguration = configuration.pageConfiguration.onboarding;
+            // Without these the application cannot tell whether the store is connected.
+            ['getConnectionDataUrl', 'getDeploymentsUrl']
+                .filter((key) => !onboardingConfiguration?.[key])
+                .forEach((key) => console.error(`SequraFE: pageConfiguration.onboarding.${key} is not configured`));
+            if (!onboardingPages().includes(SequraFE.appPages.ONBOARDING.CONNECT)) {
+                console.error('SequraFE: pages.onboarding does not include the connect page');
+            }
 
             return Promise.all([
                 getConfigured(configuration.versionUrl),
@@ -215,7 +222,13 @@ SequraFE.appPages = {
                 }
 
                 routeToState(stateRes);
-            }).catch(() => {
+            }).catch((error) => {
+                // Failed responses were already reported by AjaxService; anything else is a bug.
+                if (error instanceof Error) {
+                    console.error('SequraFE: failed to open the page', error);
+                }
+
+                utilities.hideLoader();
             });
         };
 

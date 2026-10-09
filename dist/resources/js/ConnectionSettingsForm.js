@@ -45,7 +45,6 @@ if (!window.SequraFE) {
             components
         } = SequraFE;
 
-        let navigateToOnboarding = false;
         /** @type ConnectionSettings */
         let activeSettings = null;
         /** @type ConnectionSettings */
@@ -88,7 +87,11 @@ if (!window.SequraFE) {
         };
 
         const showActiveDeploymentPortalUrl = () => {
-            SequraFE.components.PageHeader.setPortalUrl(activeSettings?.portalUrls?.[activeDeploymentId]);
+            // A backend that only knows the store's portal URL sends no per-deployment ones.
+            const portalUrls = activeSettings?.portalUrls;
+            SequraFE.components.PageHeader.setPortalUrl(
+                portalUrls ? portalUrls[activeDeploymentId] : activeSettings?.portalUrl
+            );
         };
 
         const updateDeploymentMenuActiveState = () => {
@@ -445,19 +448,6 @@ if (!window.SequraFE) {
             return false;
         };
 
-        /**
-         * Returns true if username and password are valid.
-         *
-         * @param {{isValid: boolean, reason: string|null}} result
-         */
-        const areCredentialsValid = (result) => {
-            if (!result.isValid && result.reason.includes('merchantId')) {
-                navigateToOnboarding = true;
-            }
-
-            return result.isValid || result.reason.includes('merchantId');
-        }
-
         const formatDeploymentNames = (deploymentIds) => {
             const namesMap = {
                 'sequra': 'seQura',
@@ -487,7 +477,11 @@ if (!window.SequraFE) {
          * Handle connection validation error.
          */
         const handleValidationError = (result = null) => {
-            if (result && typeof result.reason === 'string' && result.reason.includes('deployment')) {
+            if (result?.reason === 'merchantId') {
+                SequraFE.responseService.errorHandler(
+                    { errorCode: 'general.errors.connection.invalidMerchantId' }
+                ).catch(() => { });
+            } else if (result && typeof result.reason === 'string' && result.reason.includes('deployment')) {
                 const deployment = sanitizeDeploymentTargetsErrorReason(result.reason);
                 const errorKey = 'general.errors.connection.invalidUsernameOrPasswordForDeployment';
 
@@ -508,46 +502,74 @@ if (!window.SequraFE) {
 
             api.post(configuration.connectUrl, changedSettings, SequraFE.customHeader)
                 .then((result) => {
-
-                    if (!areCredentialsValid(result)) {
+                    // The backend does not save a connection whose merchant it cannot find.
+                    if (!result.isValid) {
                         handleValidationError(result);
 
                         return;
                     }
 
-                    if (configuration.appState === SequraFE.appStates.ONBOARDING) {
-                        const index = SequraFE.pages.onboarding.indexOf(SequraFE.appPages.ONBOARDING.CONNECT)
-                        if (SequraFE.pages.onboarding.length <= index + 1) {
-                            SequraFE.responseService.deferSuccessMessage(connectionSuccessMessage(result.portalUrls));
-                            SequraFE.state.display();
-
-                            return;
-                        }
-
-                        window.location.hash = configuration.appState + '-' + SequraFE.pages.onboarding[index + 1];
-                    }
-
-                    activeSettings = utilities.cloneObject(changedSettings);
-
-                    SequraFE.state.setData('connectionSettings', activeSettings);
-
-                    disableFooter(true);
-
-                    if (configuration.appState === SequraFE.appStates.SETTINGS && navigateToOnboarding) {
-                        SequraFE.state.setCredentialsChanged();
-                        SequraFE.state.goToState(SequraFE.appStates.ONBOARDING);
+                    if (
+                        configuration.appState === SequraFE.appStates.ONBOARDING
+                        && SequraFE.pages.onboarding.indexOf(SequraFE.appPages.ONBOARDING.CONNECT) === SequraFE.pages.onboarding.length - 1
+                    ) {
+                        SequraFE.responseService.deferSuccessMessage(connectionSuccessMessage(result.portalUrls));
+                        SequraFE.state.display();
 
                         return;
                     }
 
-                    if (configuration.appState === SequraFE.appStates.SETTINGS) {
-                        SequraFE.responseService.successHandler(
-                            {successMessage: connectionSuccessMessage(result.portalUrls)}
-                        );
+                    activeSettings = {
+                        ...connectedSettings(),
+                        portalUrls: result.portalUrls ?? activeSettings.portalUrls
+                    };
+                    changedSettings = utilities.cloneObject(activeSettings);
+
+                    SequraFE.state.setData('connectionSettings', activeSettings);
+
+                    if (configuration.appState === SequraFE.appStates.ONBOARDING) {
+                        const index = SequraFE.pages.onboarding.indexOf(SequraFE.appPages.ONBOARDING.CONNECT);
+                        window.location.hash = configuration.appState + '-' + SequraFE.pages.onboarding[index + 1];
+
+                        return;
                     }
 
+                    disableFooter(true);
+                    showActiveDeploymentPortalUrl();
+                    SequraFE.responseService.successHandler(
+                        {successMessage: connectionSuccessMessage(result.portalUrls)}
+                    );
                     utilities.hideLoader();
-                });
+                })
+                .catch(handleRequestFailure);
+        }
+
+        /**
+         * Returns the changed settings without the selected deployments the merchant left
+         * without credentials, which the backend does not connect.
+         *
+         * @returns {ConnectionSettings}
+         */
+        const connectedSettings = () => {
+            const settings = utilities.cloneObject(changedSettings);
+            settings.connectionData = settings.connectionData.filter(c => c.username && c.password);
+
+            return settings;
+        }
+
+        /**
+         * Hides the loader of a failed request. AjaxService already reported the failed
+         * response, but not a request that never got one.
+         *
+         * @param {any} error
+         */
+        const handleRequestFailure = (error) => {
+            if (error instanceof Error) {
+                console.error('SequraFE: request failed', error);
+                SequraFE.responseService.errorHandler({ errorCode: 'general.errors.unknown' }).catch(() => { });
+            }
+
+            utilities.hideLoader();
         }
 
         /**
@@ -587,13 +609,7 @@ if (!window.SequraFE) {
                     }
 
                 })
-                .catch((error) => {
-                    const errorMessage = String(error && error.message ? error.message : error);
-                    SequraFE.responseService.errorHandler(
-                        {errorMessage: errorMessage}
-                    ).catch(() => {
-                    });
-                })
+                .catch(handleRequestFailure)
                 .finally(utilities.hideLoader);
         }
 

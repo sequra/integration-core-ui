@@ -103,11 +103,33 @@ if (!window.SequraFE) {
         const renderConnectionSettingsForm = () => {
             const form = formFactory.getInstance(
                 'connectionSettings',
-                {connectionSettings},
+                {connectionSettings, activeDeploymentsIds: getActiveDeploymentsIds()},
                 {...configuration, appState: SequraFE.appStates.ONBOARDING}
             );
 
             form?.render();
+        }
+
+        /**
+         * Returns the deployments the connection form asks credentials for.
+         *
+         * @returns {string[]}
+         */
+        const getActiveDeploymentsIds = () => {
+            const connectedIds = (connectionSettings?.connectionData || [])
+                .map(connection => connection.deployment)
+                .filter(Boolean);
+            if (connectedIds.length > 0) {
+                // A connected store sent back here to reconnect: the `active` selection only
+                // lives for the page session that made it, so it is gone after a reload.
+                return connectedIds;
+            }
+
+            const deployments = SequraFE.state.getData('deploymentsSettings') || [];
+            const selectedIds = deployments.filter(deployment => deployment.active).map(deployment => deployment.id);
+
+            // Without a deployments page in the onboarding there is no selection to honour.
+            return selectedIds.length > 0 ? selectedIds : deployments.map(deployment => deployment.id);
         }
 
         /**
