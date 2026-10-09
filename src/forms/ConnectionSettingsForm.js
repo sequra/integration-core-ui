@@ -87,7 +87,11 @@ if (!window.SequraFE) {
         };
 
         const showActiveDeploymentPortalUrl = () => {
-            SequraFE.components.PageHeader.setPortalUrl(activeSettings?.portalUrls?.[activeDeploymentId]);
+            // A backend that only knows the store's portal URL sends no per-deployment ones.
+            const portalUrls = activeSettings?.portalUrls;
+            SequraFE.components.PageHeader.setPortalUrl(
+                portalUrls ? portalUrls[activeDeploymentId] : activeSettings?.portalUrl
+            );
         };
 
         const updateDeploymentMenuActiveState = () => {
