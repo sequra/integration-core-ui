@@ -523,7 +523,8 @@ if (!window.SequraFE) {
 
                     activeSettings = {
                         ...connectedSettings(),
-                        portalUrls: result.portalUrls ?? activeSettings.portalUrls
+                        portalUrls: result.portalUrls ?? activeSettings.portalUrls,
+                        portalUrl: result.portalUrl ?? activeSettings.portalUrl
                     };
                     changedSettings = utilities.cloneObject(activeSettings);
 
