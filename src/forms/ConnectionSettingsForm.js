@@ -520,9 +520,10 @@ if (!window.SequraFE) {
                     // leaving it set would send the merchant back to the connect page again.
                     SequraFE.state.removeCredentialsChanged();
 
+                    const onboardingPages = SequraFE.state.getOnboardingPages();
                     if (
                         configuration.appState === SequraFE.appStates.ONBOARDING
-                        && SequraFE.pages.onboarding.indexOf(SequraFE.appPages.ONBOARDING.CONNECT) === SequraFE.pages.onboarding.length - 1
+                        && onboardingPages.indexOf(SequraFE.appPages.ONBOARDING.CONNECT) === onboardingPages.length - 1
                     ) {
                         SequraFE.state.display({successMessage: connectionSuccessMessage(result.portalUrls)});
 
@@ -539,8 +540,8 @@ if (!window.SequraFE) {
                     SequraFE.state.setData('connectionSettings', activeSettings);
 
                     if (configuration.appState === SequraFE.appStates.ONBOARDING) {
-                        const index = SequraFE.pages.onboarding.indexOf(SequraFE.appPages.ONBOARDING.CONNECT);
-                        window.location.hash = configuration.appState + '-' + SequraFE.pages.onboarding[index + 1];
+                        const index = onboardingPages.indexOf(SequraFE.appPages.ONBOARDING.CONNECT);
+                        window.location.hash = configuration.appState + '-' + onboardingPages[index + 1];
 
                         return;
                     }

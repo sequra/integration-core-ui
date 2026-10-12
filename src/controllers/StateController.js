@@ -147,11 +147,15 @@ SequraFE.appPages = {
         };
 
         /**
-         * Onboarding pages the store offers, in the order they are walked through.
+         * Onboarding pages the store offers that the application can show, in the order they
+         * are walked through.
          *
          * @returns {string[]}
          */
-        const onboardingPages = () => SequraFE.pages?.onboarding ?? [];
+        const onboardingPages = () => (SequraFE.pages?.onboarding ?? [])
+            .filter((page) => Object.values(SequraFE.appPages.ONBOARDING).includes(page));
+
+        this.getOnboardingPages = onboardingPages;
 
         /**
          * Tells whether the configuration an onboarding page asks for is already there.
@@ -209,6 +213,10 @@ SequraFE.appPages = {
                 .forEach((key) => console.error(`SequraFE: pageConfiguration.onboarding.${key} is not configured`));
             if (!onboardingPages().includes(SequraFE.appPages.ONBOARDING.CONNECT)) {
                 console.error('SequraFE: pages.onboarding does not include the connect page');
+            }
+            const unsupportedPages = (SequraFE.pages?.onboarding ?? []).filter((page) => !onboardingPages().includes(page));
+            if (unsupportedPages.length) {
+                console.error(`SequraFE: pages.onboarding lists pages the application cannot show: ${unsupportedPages.join(', ')}`);
             }
 
             return Promise.all([

@@ -145,7 +145,8 @@ if (!window.SequraFE) {
                 isCompleted: true
             };
 
-            const pageSteps = SequraFE.pages.onboarding.map((page) => {
+            const onboardingPages = SequraFE.state.getOnboardingPages();
+            const pageSteps = onboardingPages.map((page) => {
                 const activePage = SequraFE.state.getPage() ?? SequraFE.pages.settings[0];
 
                 switch (page) {
@@ -153,8 +154,8 @@ if (!window.SequraFE) {
                         return {
                             label: 'sidebar.stepDeployments',
                             href: '#onboarding-deployments',
-                            isCompleted: SequraFE.pages.onboarding.indexOf(SequraFE.state.getPage()) >
-                                SequraFE.pages.onboarding.indexOf(SequraFE.appPages.ONBOARDING.DEPLOYMENTS),
+                            isCompleted: onboardingPages.indexOf(SequraFE.state.getPage()) >
+                                onboardingPages.indexOf(SequraFE.appPages.ONBOARDING.DEPLOYMENTS),
                             isActive: activePage === SequraFE.appPages.ONBOARDING.DEPLOYMENTS
                         }
 
@@ -162,8 +163,8 @@ if (!window.SequraFE) {
                         return {
                             label: 'sidebar.stepTwoLabel',
                             href: '#onboarding-connect',
-                            isCompleted: SequraFE.pages.onboarding.indexOf(SequraFE.state.getPage()) >
-                                SequraFE.pages.onboarding.indexOf(SequraFE.appPages.ONBOARDING.CONNECT),
+                            isCompleted: onboardingPages.indexOf(SequraFE.state.getPage()) >
+                                onboardingPages.indexOf(SequraFE.appPages.ONBOARDING.CONNECT),
                             isActive: activePage === SequraFE.appPages.ONBOARDING.CONNECT
                         }
                 }
