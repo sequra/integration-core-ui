@@ -140,7 +140,10 @@ if (!window.SequraFE) {
             }
 
             disableFooter(true);
-            SequraFE.responseService.showDeferredSuccessMessage();
+            if (data.successMessage) {
+                SequraFE.responseService.successHandler({successMessage: data.successMessage});
+                data.successMessage = null;
+            }
             utilities.hideLoader();
         }
 
@@ -205,8 +208,10 @@ if (!window.SequraFE) {
                                     pageContent.removeChild(pageContent.firstChild);
                                 }
 
-                                SequraFE.responseService.deferSuccessMessage(connectionSuccessMessage(updatedSettings.portalUrls));
                                 this.render();
+                                SequraFE.responseService.successHandler(
+                                    {successMessage: connectionSuccessMessage(updatedSettings.portalUrls)}
+                                );
                             }
                         });
                     }
@@ -515,8 +520,7 @@ if (!window.SequraFE) {
                         configuration.appState === SequraFE.appStates.ONBOARDING
                         && SequraFE.pages.onboarding.indexOf(SequraFE.appPages.ONBOARDING.CONNECT) === SequraFE.pages.onboarding.length - 1
                     ) {
-                        SequraFE.responseService.deferSuccessMessage(connectionSuccessMessage(result.portalUrls));
-                        SequraFE.state.display();
+                        SequraFE.state.display({successMessage: connectionSuccessMessage(result.portalUrls)});
 
                         return;
                     }

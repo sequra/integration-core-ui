@@ -27,15 +27,18 @@ if (!window.SequraFE) {
         let stores;
         /** @type ConnectionSettings **/
         let connectionSettings;
+        /** @type string | null */
+        let successMessage;
 
         /**
          * Displays page content.
          *
-         * @param {{ state?: string, storeId: string }} config
+         * @param {{ state?: string, storeId: string, successMessage?: string | null }} config
          */
-        this.display = ({storeId}) => {
+        this.display = ({storeId, successMessage: message = null}) => {
             utilities.showLoader();
             currentStoreId = storeId;
+            successMessage = message;
             templateService.clearMainPage();
             stores = SequraFE.state.getData('stores');
             version = SequraFE.state.getData('version');
@@ -88,7 +91,7 @@ if (!window.SequraFE) {
 
             const form = formFactory.getInstance(
                 'connectionSettings',
-                {connectionSettings, activeDeploymentsIds, notConnectedDeployments},
+                {connectionSettings, activeDeploymentsIds, notConnectedDeployments, successMessage},
                 {...configuration, appState: SequraFE.appStates.SETTINGS}
             );
 

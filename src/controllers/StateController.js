@@ -78,6 +78,8 @@ SequraFE.appPages = {
 
         let currentState = '';
         let previousState = '';
+        /** @type {string | null} */
+        let pendingSuccessMessage = null;
 
         /**
          * @type {DataStore}
@@ -99,9 +101,14 @@ SequraFE.appPages = {
         /**
          * Main entry point for the application.
          * Determines the current state and runs the start controller.
+         *
+         * @param {{ successMessage?: string }} [options] A message for the page this restart opens.
          */
-        this.display = () => {
+        this.display = (options = {}) => {
             utilities.showLoader();
+            // Only the page this restart opens gets the message, so it cannot surface later on
+            // an unrelated page or store when the restart fails or lands elsewhere.
+            pendingSuccessMessage = options?.successMessage ?? null;
             clearDataStore();
             templateService.clearMainPage();
 
@@ -342,7 +349,8 @@ SequraFE.appPages = {
                 state = page ? controllerName + '-' + page : controllerName;
             }
 
-            const config = { storeId: this.getStoreId(), ...(additionalConfig || {}) };
+            const config = { storeId: this.getStoreId(), successMessage: pendingSuccessMessage, ...(additionalConfig || {}) };
+            pendingSuccessMessage = null;
             const controller = pageControllerFactory.getInstance(
                 controllerName,
                 getControllerConfiguration(controllerName, page)
