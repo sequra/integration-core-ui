@@ -516,6 +516,10 @@ if (!window.SequraFE) {
                         return;
                     }
 
+                    // Only a successful connection settles a reconnect the store was sent back for;
+                    // leaving it set would send the merchant back to the connect page again.
+                    SequraFE.state.removeCredentialsChanged();
+
                     if (
                         configuration.appState === SequraFE.appStates.ONBOARDING
                         && SequraFE.pages.onboarding.indexOf(SequraFE.appPages.ONBOARDING.CONNECT) === SequraFE.pages.onboarding.length - 1

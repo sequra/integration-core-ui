@@ -307,10 +307,6 @@ SequraFE.appPages = {
                     page = resumePage;
                 }
 
-                if (page === SequraFE.appPages.ONBOARDING.CONNECT) {
-                    SequraFE.state.removeCredentialsChanged();
-                }
-
                 displayPage(controllerName + '-' + page, additionalConfig);
 
                 return;
