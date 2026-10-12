@@ -118,10 +118,11 @@ SequraFE.appPages = {
                 .then(
                     /** @param {Store|Store[]} response */
                     (response) => {
+                        const stores = Array.isArray(response) ? response : null;
                         const loadStore = (store) => {
                             this.setStoreId(store.storeId);
 
-                            return displayPageBasedOnState();
+                            return displayPageBasedOnState(stores);
                         };
 
                         let store = !Array.isArray(response) ?
@@ -201,9 +202,10 @@ SequraFE.appPages = {
          * Opens the page the state of the integration asks for, after loading the data
          * every page needs.
          *
+         * @param {Store[] | null} [stores] The store list, when the caller already has it.
          * @returns {Promise<void>}
          */
-        const displayPageBasedOnState = () => {
+        const displayPageBasedOnState = (stores = null) => {
             utilities.showLoader();
 
             const onboardingConfiguration = configuration.pageConfiguration.onboarding;
@@ -221,17 +223,16 @@ SequraFE.appPages = {
 
             return Promise.all([
                 getConfigured(configuration.versionUrl),
-                getConfigured(configuration.storesUrl),
+                stores ? Promise.resolve(stores) : getConfigured(configuration.storesUrl),
                 getConfigured(onboardingConfiguration.getConnectionDataUrl),
                 getConfigured(onboardingConfiguration.getDeploymentsUrl),
-            ]).then(([versionRes, storesRes, connectionSettingsRes, deploymentsSettingsRes]) => {
+                getConfigured(configuration.stateUrl),
+            ]).then(([versionRes, storesRes, connectionSettingsRes, deploymentsSettingsRes, stateRes]) => {
                 dataStore.version = versionRes;
                 dataStore.stores = storesRes;
                 dataStore.connectionSettings = connectionSettingsRes;
                 dataStore.deploymentsSettings = deploymentsSettingsRes;
 
-                return api.get(configuration.stateUrl.sqReplaceUrlPlaceholder('{storeId}', this.getStoreId()), null, SequraFE.customHeader);
-            }).then((stateRes) => {
                 if (SequraFE.state.getCredentialsChanged()) {
                     SequraFE.state.removeCredentialsChanged();
                 }
