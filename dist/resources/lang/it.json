@@ -14,7 +14,6 @@
     "downloadNewVersion": "Scarica nuova versione",
     "merchant": "Commerciante:",
     "settings": "Impostazioni",
-    "advanced": "Avanzato",
     "changesSaved": "Modifiche salvate con successo.",
     "noItemsAvailable": "Nessun elemento disponibile",
     "and": " e ",
@@ -63,16 +62,6 @@
         "empty": "Il parametro di configurazione del paese non può essere una stringa vuota.",
         "countryCode": "Codice paese non valido nella configurazione del paese.",
         "sellingCountries": "Impossibile recuperare i paesi di vendita."
-      },
-      "payments": {
-        "requiredFieldsError": "I campi ID metodo e codice sono obbligatori.",
-        "notConfigured": "Il metodo di pagamento con ID %s non è configurato.",
-        "emptyDataError": "Dati del metodo di pagamento vuoti.",
-        "failedToRetrieveMethods": "Impossibile recuperare i metodi di pagamento.",
-        "saveFailed": "Impossibile salvare il metodo di pagamento.",
-        "updateFailed": "Impossibile aggiornare il metodo di pagamento.",
-        "deleteFailed": "Impossibile eliminare il metodo di pagamento.",
-        "failedToRetrieveMethodssequra": "Impossibile recuperare i metodi di pagamento da SeQura."
       },
       "webhooks": {
         "merchantError": "Commerciante con ID %s non trovato.",

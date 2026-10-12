@@ -140,7 +140,10 @@ if (!window.SequraFE) {
             }
 
             disableFooter(true);
-            SequraFE.responseService.showDeferredSuccessMessage();
+            if (data.successMessage) {
+                SequraFE.responseService.successHandler({successMessage: data.successMessage});
+                data.successMessage = null;
+            }
             utilities.hideLoader();
         }
 
@@ -205,8 +208,10 @@ if (!window.SequraFE) {
                                     pageContent.removeChild(pageContent.firstChild);
                                 }
 
-                                SequraFE.responseService.deferSuccessMessage(connectionSuccessMessage(updatedSettings.portalUrls));
                                 this.render();
+                                SequraFE.responseService.successHandler(
+                                    {successMessage: connectionSuccessMessage(updatedSettings.portalUrls)}
+                                );
                             }
                         });
                     }
@@ -511,12 +516,16 @@ if (!window.SequraFE) {
                         return;
                     }
 
+                    // Only a successful connection settles a reconnect the store was sent back for;
+                    // leaving it set would send the merchant back to the connect page again.
+                    SequraFE.state.removeCredentialsChanged();
+
+                    const onboardingPages = SequraFE.state.getOnboardingPages();
                     if (
                         configuration.appState === SequraFE.appStates.ONBOARDING
-                        && SequraFE.pages.onboarding.indexOf(SequraFE.appPages.ONBOARDING.CONNECT) === SequraFE.pages.onboarding.length - 1
+                        && onboardingPages.indexOf(SequraFE.appPages.ONBOARDING.CONNECT) === onboardingPages.length - 1
                     ) {
-                        SequraFE.responseService.deferSuccessMessage(connectionSuccessMessage(result.portalUrls));
-                        SequraFE.state.display();
+                        SequraFE.state.display({successMessage: connectionSuccessMessage(result.portalUrls)});
 
                         return;
                     }
@@ -531,8 +540,8 @@ if (!window.SequraFE) {
                     SequraFE.state.setData('connectionSettings', activeSettings);
 
                     if (configuration.appState === SequraFE.appStates.ONBOARDING) {
-                        const index = SequraFE.pages.onboarding.indexOf(SequraFE.appPages.ONBOARDING.CONNECT);
-                        window.location.hash = configuration.appState + '-' + SequraFE.pages.onboarding[index + 1];
+                        const index = onboardingPages.indexOf(SequraFE.appPages.ONBOARDING.CONNECT);
+                        window.location.hash = configuration.appState + '-' + onboardingPages[index + 1];
 
                         return;
                     }

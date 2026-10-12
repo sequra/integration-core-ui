@@ -78,6 +78,8 @@ SequraFE.appPages = {
 
         let currentState = '';
         let previousState = '';
+        /** @type {string | null} */
+        let pendingSuccessMessage = null;
 
         /**
          * @type {DataStore}
@@ -99,9 +101,14 @@ SequraFE.appPages = {
         /**
          * Main entry point for the application.
          * Determines the current state and runs the start controller.
+         *
+         * @param {{ successMessage?: string }} [options] A message for the page this restart opens.
          */
-        this.display = () => {
+        this.display = (options = {}) => {
             utilities.showLoader();
+            // Only the page this restart opens gets the message, so it cannot surface later on
+            // an unrelated page or store when the restart fails or lands elsewhere.
+            pendingSuccessMessage = options?.successMessage ?? null;
             clearDataStore();
             templateService.clearMainPage();
 
@@ -111,10 +118,11 @@ SequraFE.appPages = {
                 .then(
                     /** @param {Store|Store[]} response */
                     (response) => {
+                        const stores = Array.isArray(response) ? response : null;
                         const loadStore = (store) => {
                             this.setStoreId(store.storeId);
 
-                            return displayPageBasedOnState();
+                            return displayPageBasedOnState(stores);
                         };
 
                         let store = !Array.isArray(response) ?
@@ -140,11 +148,15 @@ SequraFE.appPages = {
         };
 
         /**
-         * Onboarding pages the store offers, in the order they are walked through.
+         * Onboarding pages the store offers that the application can show, in the order they
+         * are walked through.
          *
          * @returns {string[]}
          */
-        const onboardingPages = () => SequraFE.pages?.onboarding ?? [];
+        const onboardingPages = () => (SequraFE.pages?.onboarding ?? [])
+            .filter((page) => Object.values(SequraFE.appPages.ONBOARDING).includes(page));
+
+        this.getOnboardingPages = onboardingPages;
 
         /**
          * Tells whether the configuration an onboarding page asks for is already there.
@@ -190,9 +202,10 @@ SequraFE.appPages = {
          * Opens the page the state of the integration asks for, after loading the data
          * every page needs.
          *
+         * @param {Store[] | null} [stores] The store list, when the caller already has it.
          * @returns {Promise<void>}
          */
-        const displayPageBasedOnState = () => {
+        const displayPageBasedOnState = (stores = null) => {
             utilities.showLoader();
 
             const onboardingConfiguration = configuration.pageConfiguration.onboarding;
@@ -203,20 +216,23 @@ SequraFE.appPages = {
             if (!onboardingPages().includes(SequraFE.appPages.ONBOARDING.CONNECT)) {
                 console.error('SequraFE: pages.onboarding does not include the connect page');
             }
+            const unsupportedPages = (SequraFE.pages?.onboarding ?? []).filter((page) => !onboardingPages().includes(page));
+            if (unsupportedPages.length) {
+                console.error(`SequraFE: pages.onboarding lists pages the application cannot show: ${unsupportedPages.join(', ')}`);
+            }
 
             return Promise.all([
                 getConfigured(configuration.versionUrl),
-                getConfigured(configuration.storesUrl),
+                stores ? Promise.resolve(stores) : getConfigured(configuration.storesUrl),
                 getConfigured(onboardingConfiguration.getConnectionDataUrl),
                 getConfigured(onboardingConfiguration.getDeploymentsUrl),
-            ]).then(([versionRes, storesRes, connectionSettingsRes, deploymentsSettingsRes]) => {
+                getConfigured(configuration.stateUrl),
+            ]).then(([versionRes, storesRes, connectionSettingsRes, deploymentsSettingsRes, stateRes]) => {
                 dataStore.version = versionRes;
                 dataStore.stores = storesRes;
                 dataStore.connectionSettings = connectionSettingsRes;
                 dataStore.deploymentsSettings = deploymentsSettingsRes;
 
-                return api.get(configuration.stateUrl.sqReplaceUrlPlaceholder('{storeId}', this.getStoreId()), null, SequraFE.customHeader);
-            }).then((stateRes) => {
                 if (SequraFE.state.getCredentialsChanged()) {
                     SequraFE.state.removeCredentialsChanged();
                 }
@@ -300,10 +316,6 @@ SequraFE.appPages = {
                     page = resumePage;
                 }
 
-                if (page === SequraFE.appPages.ONBOARDING.CONNECT) {
-                    SequraFE.state.removeCredentialsChanged();
-                }
-
                 displayPage(controllerName + '-' + page, additionalConfig);
 
                 return;
@@ -342,7 +354,8 @@ SequraFE.appPages = {
                 state = page ? controllerName + '-' + page : controllerName;
             }
 
-            const config = { storeId: this.getStoreId(), ...(additionalConfig || {}) };
+            const config = { storeId: this.getStoreId(), successMessage: pendingSuccessMessage, ...(additionalConfig || {}) };
+            pendingSuccessMessage = null;
             const controller = pageControllerFactory.getInstance(
                 controllerName,
                 getControllerConfiguration(controllerName, page)
