@@ -35,7 +35,6 @@ const getPage = (pageName) => {
             'ModalComponent',
             'DropdownComponent',
             'MultiItemSelectorComponent',
-            'DataTableComponent',
             'PageHeaderComponent',
             'ConnectionSettingsForm',
             'DeploymentsSettingsForm',

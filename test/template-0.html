@@ -34,8 +34,7 @@
     <section id="loaders"></section>
     <section id="input-fields"></section>
     <section id="modal" class="sq-page-content-wrapper"></section>
-    <section id="table" class="sqm--full-width"></section>
-    <section id="multi-item-selector"></section>
+        <section id="multi-item-selector"></section>
     <section id="multi-input"></section>
     <section id="country-selector"></section>
     <section id="version-badge"></section>
@@ -330,69 +329,6 @@
                     })
                 ]),
             ]))
-
-        const tableSection = document.getElementById('table');
-
-        const paymentMethods = [
-            {
-                name: "Buy now, pay later",
-                description: 'Reduce the uncertainty of online shopping, And pay X days later',
-                image: 'https://picsum.photos/52/52?grayscale',
-                minimumAmount: '1.000,00 EUR',
-                maximumAmount: '5.000,00 EUR',
-                availableFrom: '12/12/2022',
-                availableTo: '12/12/2025',
-            },
-            {
-                name: "Part payment",
-                description: 'Small quotas for the consumer: from 3 to 24 months to increase the average basket and sell more',
-                image: 'https://picsum.photos/52/52?grayscale',
-                minimumAmount: '1.000,00 EUR',
-                maximumAmount: '5.000,00 EUR',
-                availableFrom: '12/12/2022',
-                availableTo: '12/12/2025',
-            }
-        ];
-
-        /** @type TableCell[] */
-        const headers = [
-            {
-                label: 'Payment methods',
-                className: 'sqp-payment-method-header-cell sqm--text-left'
-            },
-            {label: 'Minimum amount'},
-            {label: 'Maximum amount'},
-            {label: 'Available from'},
-            {label: 'Available to'},
-        ];
-
-        /** @type TableCell[][] */
-        const rows = paymentMethods.map((method) => {
-            return [
-                {
-                    className: 'sqp-payment-method-cell sqm--text-left',
-                    renderer: (cell) => {
-                        cell.prepend(
-                            generator.createElement('img', 'sqp-payment-method-image', '', {src: method.image}),
-                            generator.createElement('div', '', '', null, [
-                                generator.createElement('h3', 'sqp-payment-method-title', method.name),
-                                generator.createElement('p', 'sqp-payment-method-description', method.description)
-                            ])
-                        )
-                    }
-                },
-                {label: method.minimumAmount},
-                {label: method.maximumAmount},
-                {label: method.availableFrom},
-                {label: method.availableTo}
-            ];
-        })
-
-
-        tableSection.append(
-            generator.createElement('h1', '', 'Data Table'),
-            components.DataTable.create(headers, rows)
-        );
 
         const multiSelectorSection = document.getElementById('multi-item-selector')
 
