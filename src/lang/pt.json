@@ -63,16 +63,6 @@
         "countryCode": "Código de país inválido na configuração do país.",
         "sellingCountries": "Falha ao obter países de venda."
       },
-      "payments": {
-        "requiredFieldsError": "Os campos ID do método e código são obrigatórios.",
-        "notConfigured": "O método de pagamento com ID %s não está configurado",
-        "emptyDataError": "Dados do método de pagamento vazios.",
-        "failedToRetrieveMethods": "Falha ao obter métodos de pagamento.",
-        "saveFailed": "Falha ao guardar método de pagamento.",
-        "updateFailed": "Falha ao atualizar método de pagamento.",
-        "deleteFailed": "Falha ao eliminar método de pagamento.",
-        "failedToRetrieveMethodssequra": "Falha ao obter métodos de pagamento do sequra."
-      },
       "webhooks": {
         "merchantError": "Comerciante com ID %s não encontrado.",
         "failedToRegisterWebhook": "Falha ao registar webhook.",
@@ -85,8 +75,7 @@
     "stepOneLabel": "Instalar integração ecommerce",
     "stepOneDescription": "A sua integração está pronta para ligação.",
     "stepTwoLabel": "Ligar integração",
-    "stepDeployments": "Selecionar os destinos de implementação",
-    "stepTwoDescription": "Estabeleça a ligação entre a sua loja e o SeQura."
+    "stepDeployments": "Selecionar os destinos de implementação"
   },
   "validation": {
     "requiredField": "Este campo é obrigatório.",
@@ -103,10 +92,7 @@
     "invalidFieldValue": "O campo deve ser definido como \"%s\".",
     "invalidMaxValue": "O valor máximo permitido é %s.",
     "invalidImageType": "Forneça um ficheiro num dos tipos de imagem suportados (PNG, JPG, SVG).",
-    "invalidImageSize": "O ficheiro selecionado excede o limite de 10 MB.",
-    "acceptableRange": "O valor deve estar entre %d e %d.",
-    "paymentMethodUnavailable": "Método de pagamento indisponível.",
-    "storeUnavailable": "Loja indisponível."
+    "invalidImageSize": "O ficheiro selecionado excede o limite de 10 MB."
   },
   "connection": {
     "title": {

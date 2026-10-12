@@ -63,16 +63,6 @@
         "countryCode": "Code pays invalide dans la configuration du pays.",
         "sellingCountries": "Échec de la récupération des pays de vente."
       },
-      "payments": {
-        "requiredFieldsError": "Les champs id et code de la méthode sont obligatoires.",
-        "notConfigured": "La méthode de paiement avec l'ID %s n'est pas configurée.",
-        "emptyDataError": "Données de méthode de paiement vides.",
-        "failedToRetrieveMethods": "Échec de la récupération des méthodes de paiement.",
-        "saveFailed": "Échec de l'enregistrement de la méthode de paiement.",
-        "updateFailed": "Échec de la mise à jour de la méthode de paiement.",
-        "deleteFailed": "Échec de la suppression de la méthode de paiement.",
-        "failedToRetrieveMethodssequra": "Échec de la récupération des méthodes de paiement de SeQura."
-      },
       "webhooks": {
         "merchantError": "Commerçant avec l'ID %s introuvable.",
         "failedToRegisterWebhook": "Échec de l'enregistrement du webhook.",

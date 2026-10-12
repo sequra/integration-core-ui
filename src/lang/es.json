@@ -63,16 +63,6 @@
         "countryCode": "Código de país no válido en la configuración del país.",
         "sellingCountries": "No se pudieron recuperar los países de venta."
       },
-      "payments": {
-        "requiredFieldsError": "Los campos ID del método y código son obligatorios.",
-        "notConfigured": "El método de pago con ID %s no está configurado.",
-        "emptyDataError": "Datos del método de pago vacíos.",
-        "failedToRetrieveMethods": "Error al recuperar los métodos de pago.",
-        "saveFailed": "Error al guardar el método de pago.",
-        "updateFailed": "Error al actualizar el método de pago.",
-        "deleteFailed": "Error al eliminar el método de pago.",
-        "failedToRetrieveMethodssequra": "Error al recuperar los métodos de pago de SeQura."
-      },
       "webhooks": {
         "merchantError": "Comerciante con ID %s no encontrado.",
         "failedToRegisterWebhook": "Error al registrar el webhook.",

@@ -63,16 +63,6 @@
         "countryCode": "Invalid country code in the country configuration.",
         "sellingCountries": "Failed to retrieve selling countries."
       },
-      "payments": {
-        "requiredFieldsError": "Method id and code fields are required.",
-        "notConfigured": "Payment method with id %s is not configured",
-        "emptyDataError": "Empty payment method data.",
-        "failedToRetrieveMethods": "Failed to retrieve payment methods.",
-        "saveFailed": "Failed to save payment method.",
-        "updateFailed": "Failed to update payment method.",
-        "deleteFailed": "Failed to delete payment method.",
-        "failedToRetrieveMethodssequra": "Failed to retrieve payment methods from sequra."
-      },
       "webhooks": {
         "merchantError": "Merchant with id %s not found.",
         "failedToRegisterWebhook": "Failed to register webhook.",
