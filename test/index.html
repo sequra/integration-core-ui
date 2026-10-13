@@ -35,33 +35,15 @@
             getConnectionDataUrl: baseApiUrl + '/connection',
             saveConnectionDataUrl: baseApiUrl + '/connection',
             validateConnectionDataUrl: baseApiUrl + '/connection-validation',
-            getSellingCountriesUrl: baseApiUrl + '/selling-countries',
-            getCountrySettingsUrl: baseApiUrl + '/country-configuration',
-            saveCountrySettingsUrl: baseApiUrl + '/country-configuration',
-            getWidgetSettingsUrl: baseApiUrl + '/widget-settings',
-            saveWidgetSettingsUrl: baseApiUrl + '/widget-settings',
-            getWidgetConfiguratorUrl: baseApiUrl + '/widget-configurator',
-            getPaymentMethodsUrl: baseApiUrl + '/payment-methods',
+            getDeploymentsUrl: baseApiUrl + '/deployments',
         }
 
         const pageConfiguration = {
             onboarding: onboardingPageConfig,
             settings: {
                 ...onboardingPageConfig,
-                getShopCategoriesUrl: baseApiUrl + '/categories',
-                getGeneralSettingsUrl: baseApiUrl + '/general-settings',
-                saveGeneralSettingsUrl: baseApiUrl + '/general-settings',
-                getShopOrderStatusesUrl: baseApiUrl + '/order-statuses',
-                getOrderStatusMappingSettingsUrl: baseApiUrl + '/order-status-settings',
-                saveOrderStatusMappingSettingsUrl: baseApiUrl + '/order-status-settings',
+                getNotConnectedDeploymentsUrl: baseApiUrl + '/deployments/not-connected',
                 disconnectUrl: baseApiUrl + '/disconnect'
-            },
-            payment: {
-                getPaymentMethodsUrl: baseApiUrl + '/payment-methods',
-                getSellingCountriesUrl: baseApiUrl + '/selling-countries',
-                getCountrySettingsUrl: baseApiUrl + '/country-configuration',
-                getConnectionDataUrl: baseApiUrl + '/connection',
-                validateConnectionDataUrl: baseApiUrl + '/connection-validation',
             }
         };
 
@@ -71,18 +53,14 @@
             currentStoreUrl: baseApiUrl + '/stores/current',
             stateUrl: baseApiUrl + '/state',
             versionUrl: baseApiUrl + '/version',
-            shopNameUrl: baseApiUrl + '/shop-name',
             downloadVersionUrl: 'https://logeecom.com/wp-content/uploads/2016/09/logo-white.png',
             pageConfiguration: pageConfiguration
         });
 
         SequraFE.pages = {
-            onboarding: ['connect','countries', 'widgets'],
-            settings: ['general','connection','order_status','widget'],
-            payment: ['methods']
+            onboarding: ['deployments', 'connect'],
+            settings: ['connection']
         }
-
-        SequraFE.isPromotional = !SequraFE.pages.payment || SequraFE.pages.payment.length === 0;
 
         SequraFE.state.display();
         SequraFE.utilities.hideLoader();

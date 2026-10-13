@@ -35,16 +35,12 @@ const getPage = (pageName) => {
             'ModalComponent',
             'DropdownComponent',
             'MultiItemSelectorComponent',
-            'DataTableComponent',
             'PageHeaderComponent',
             'ConnectionSettingsForm',
-            'CountryConfigurationForm',
-            'WidgetSettingsForm',
-            'GeneralSettingsForm',
-            'OrderStatusMappingSettingsForm',
+            'DeploymentsSettingsForm',
+            'DeploymentsModalForm',
             'StateController',
             'OnboardingController',
-            'PaymentController',
             'SettingsController'
         ]
             .map((script) => `<script src="/js/${script}.js"></script>`)

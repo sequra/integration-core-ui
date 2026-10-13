@@ -84,17 +84,7 @@
                                 value: 'store_5'
                             }
                         ],
-                        menuItems: [
-                            {
-                                label: 'general.paymentMethods',
-                                href: '/template-3'
-                            },
-                            {
-                                label: 'general.settings',
-                                href: '#',
-                                isActive: true,
-                            }
-                        ]
+                        menuItems: []
                     }
                 ),
                 generator.createElement('div', 'sq-page-content', '', null, [
@@ -102,26 +92,10 @@
                         generator.createSettingsSidebar({
                             links: [
                                 {
-                                    icon: 'general',
-                                    label: 'sidebar.generalSettings',
-                                    href: '#',
-                                },
-                                {
                                     icon: 'connection',
                                     label: 'sidebar.connectionSettings',
                                     href: '#',
-                                },
-                                {
-                                    icon: 'order',
-                                    label: 'sidebar.orderStatusSettings',
-                                    href: '#',
                                     isActive: true
-
-                                },
-                                {
-                                    icon: 'widget',
-                                    label: 'sidebar.widgetSettings',
-                                    href: '#',
                                 }
                             ]
                         }),
