@@ -233,10 +233,7 @@ SequraFE.appPages = {
                 dataStore.connectionSettings = connectionSettingsRes;
                 dataStore.deploymentsSettings = deploymentsSettingsRes;
 
-                if (SequraFE.state.getCredentialsChanged()) {
-                    SequraFE.state.removeCredentialsChanged();
-                }
-
+                // The reconnect flag outlives reloads: only a successful connection clears it.
                 routeToState(stateRes);
             }).catch((error) => {
                 // Failed responses were already reported by AjaxService; anything else is a bug.
