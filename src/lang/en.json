@@ -100,8 +100,8 @@
       "settings": "Connection settings"
     },
     "description": {
-      "onboarding": "Make sure you're logged in the merchant portal because you need to copy several settings from there to fill in the following information. If you don't have an account, contact us ",
-      "settings": "Set up your seQura account and choose the environment to start processing payments. If you don't have an account, contact us ",
+      "onboarding": "Log in to the Merchant Portal first. You'll copy a few settings from there to fill in the fields below. Don't have an account yet? Create one ",
+      "settings": "Set up your seQura account and choose the environment to start processing payments. Don't have an account yet? Create one ",
       "endLink": "here"
     },
     "environment": {
@@ -176,7 +176,7 @@
     "label": "Need help?",
     "link": "https://www.sequra.com/en/shoppers/contact"
   },
-  "storesLink": {
-    "link": "https://www.sequra.com/en/stores"
+  "signupLink": {
+    "link": "https://portal.sequra.com/signup"
   }
 }

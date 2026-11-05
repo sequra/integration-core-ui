@@ -100,8 +100,8 @@
       "settings": "Paramètres de connexion"
     },
     "description": {
-      "onboarding": "Assurez-vous d'être connecté au portail commerçant car vous devrez copier plusieurs paramètres depuis celui-ci pour remplir les informations suivantes. Si vous n'avez pas de compte, contactez-nous ",
-      "settings": "Configurez votre compte SeQura et choisissez l'environnement pour commencer à traiter les paiements. Si vous n'avez pas de compte, contactez-nous ",
+      "onboarding": "Connectez-vous d'abord au Merchant Portal. Vous y copierez quelques paramètres pour remplir les champs ci-dessous. Pas encore de compte ? Créez-en un ",
+      "settings": "Configurez votre compte seQura et choisissez l'environnement pour commencer à traiter les paiements. Pas encore de compte ? Créez-en un ",
       "endLink": "ici"
     },
     "environment": {
@@ -176,7 +176,7 @@
     "label": "Besoin d'aide ?",
     "link": "https://www.sequra.com/fr/shoppers/contactez-nous"
   },
-  "storesLink": {
-    "link": "https://www.sequra.com/fr/boutiques"
+  "signupLink": {
+    "link": "https://portal.sequra.com/signup"
   }
 }
